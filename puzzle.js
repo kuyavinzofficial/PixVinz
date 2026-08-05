@@ -214,7 +214,7 @@ function selectPiece(index){
             selectedPiece,
             index
         );
-
+playSelect();
 
         allPieces[selectedPiece]
         .classList.remove("selected");
@@ -240,7 +240,7 @@ function swapPieces(a,b){
         return;
 
     }
-
+playExchange();
 
     let temp=pieces[a];
 
@@ -271,7 +271,7 @@ function swapPieces(a,b){
 
 
 // Shuffle
-
+playShuffle();
 function shufflePuzzle(){
 
 
@@ -361,15 +361,9 @@ function checkWin(){
 
 setTimeout(()=>{
 
-    alert(
-    "🎉 Level "+level+" Complete!\n"+stars
-    );
+    playVictory(level);
 
-},300);
-
-
-
-}
+alert("🎉 Level Complete!\n"+stars);
 
 
 
@@ -390,4 +384,4 @@ function backHome(){function playVictorySound(){
 
 
 
-setup();
+setup();startMusic();
