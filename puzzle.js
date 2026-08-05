@@ -1,326 +1,355 @@
-let level =
-Number(localStorage.getItem("level")) || 1;
-
+let level = Number(localStorage.getItem("level")) || 1;
 
 let size;
 
-
-let moves=0;
-
-let seconds=0;
+let moves = 0;
+let seconds = 0;
 
 let timer;
 
+let selected = null;
 
-let selected=null;
 
-
+// Your images (.jpeg)
 let images = [
-"images/level1.jpeg",
-"images/level2.jpeg",
-"images/level3.jpeg",
-"images/level4.jpeg",
-"images/level5.jpeg",
-"images/level6.jpeg",
-"images/level7.jpeg",
-"images/level8.jpeg",
-"images/level9.jpeg",
-"images/level10.jpeg"
 
+    "images/level1.jpeg",
+    "images/level2.jpeg",
+    "images/level3.jpeg",
+    "images/level4.jpeg",
+    "images/level5.jpeg",
+    "images/level6.jpeg",
+    "images/level7.jpeg",
+    "images/level8.jpeg",
+    "images/level9.jpeg",
+    "images/level10.jpeg"
 
 ];
 
 
-
-let pieces=[];
-
+let pieces = [];
 
 
+
+// Start Game
 function setup(){
 
-
-size =
-level < 3 ? 3 :
-level < 5 ? 4 :
-level < 7 ? 5 :
-level < 9 ? 6 : 7;
-
-
-
-document.getElementById("levelTitle")
-.innerHTML=
-"Level "+level;
+    size =
+        level <= 2 ? 3 :
+        level <= 4 ? 4 :
+        level <= 6 ? 5 :
+        level <= 8 ? 6 :
+        7;
 
 
+    document.getElementById("levelTitle").innerHTML =
+        "Level " + level;
 
-startTimer();
+
+    startTimer();
 
 
-createPuzzle();
-
+    createPuzzle();
 
 }
 
 
 
-
+// Timer
 function startTimer(){
 
+    timer = setInterval(function(){
 
-timer=setInterval(()=>{
+        seconds++;
 
+        document.getElementById("timer").innerHTML = seconds;
 
-seconds++;
-
-
-document.getElementById("timer")
-.innerHTML=seconds;
-
-
-
-},1000);
-
+    },1000);
 
 }
 
 
 
-
+// Create Puzzle Pieces
 function createPuzzle(){
 
+    let total = size * size;
 
-let total=size*size;
+
+    pieces = [];
 
 
-for(let i=0;i<total;i++){
+    for(let i=0;i<total;i++){
 
-pieces.push(i);
+        pieces.push(i);
+
+    }
+
+
+    shufflePuzzle();
 
 }
 
 
-shufflePuzzle();
 
-
-}
-
-
-
-
+// Draw Puzzle
 function drawPuzzle(){
 
-
-let board=
-document.getElementById("puzzleBoard");
-
-
-board.style.gridTemplateColumns=
-`repeat(${size},1fr)`;
+    let board =
+    document.getElementById("puzzleBoard");
 
 
-board.innerHTML="";
+    board.innerHTML="";
 
 
-pieces.forEach((piece,index)=>{
+    board.style.gridTemplateColumns =
+    `repeat(${size},1fr)`;
 
 
-let div=document.createElement("div");
-
-
-div.className="piece";
-
-
-div.draggable=true;
-
-
-let pos =
-100/size;
-
-
-let x =
-(piece%size)*pos;
-
-
-let y =
-Math.floor(piece/size)*pos;
+    let image =
+    images[level-1];
 
 
 
-div.style.backgroundImage=
-`url(${images[level-1]})`;
+    pieces.forEach(function(piece,index){
+
+
+        let div =
+        document.createElement("div");
+
+
+        div.className="piece";
+
+
+        div.draggable=true;
 
 
 
-div.style.backgroundSize=
-"100% 100%";
+        let row =
+        Math.floor(piece / size);
+
+
+        let col =
+        piece % size;
 
 
 
-div.style.backgroundPosition=
-`${x}% ${y}%`;
+        div.style.backgroundImage =
+        `url("${image}")`;
 
 
 
-div.dataset.index=index;
+        div.style.backgroundSize =
+        `${size * 100}% ${size * 100}%`;
 
 
 
-div.ondragstart=function(){
-
-selected=index;
-
-};
+        div.style.backgroundPosition =
+        `${(col/(size-1))*100}% ${(row/(size-1))*100}%`;
 
 
 
-div.ondragover=e=>e.preventDefault();
+        div.dataset.index=index;
 
 
 
-div.ondrop=function(){
+        // Drag start
+        div.ondragstart=function(){
 
+            selected=index;
 
-swapPieces(
-selected,
-index
-);
-
-
-};
+        };
 
 
 
-board.appendChild(div);
+        // Allow drop
+        div.ondragover=function(e){
+
+            e.preventDefault();
+
+        };
 
 
 
-});
+        // Drop piece
+        div.ondrop=function(){
+
+            swapPieces(selected,index);
+
+        };
+
+
+
+        board.appendChild(div);
+
+
+    });
 
 
 }
 
 
 
-
+// Swap Pieces
 function swapPieces(a,b){
 
 
-let temp=pieces[a];
+    if(a===b){
 
-pieces[a]=pieces[b];
+        return;
 
-pieces[b]=temp;
-
-
-moves++;
+    }
 
 
-document.getElementById("moves")
-.innerHTML=moves;
+
+    let temp =
+    pieces[a];
 
 
-drawPuzzle();
+    pieces[a]=pieces[b];
 
 
-checkWin();
+    pieces[b]=temp;
+
+
+
+    moves++;
+
+
+    document.getElementById("moves").innerHTML =
+    moves;
+
+
+
+    drawPuzzle();
+
+
+    checkWin();
 
 
 }
 
 
 
-
+// Shuffle
 function shufflePuzzle(){
 
 
-pieces.sort(()=>Math.random()-0.5);
+    pieces.sort(function(){
+
+        return Math.random()-0.5;
+
+    });
 
 
-drawPuzzle();
+    drawPuzzle();
 
 
 }
 
 
 
+// Check Completion
 function checkWin(){
 
 
-for(let i=0;i<pieces.length;i++){
+    for(let i=0;i<pieces.length;i++){
 
 
-if(pieces[i]!=i)
+        if(pieces[i]!==i){
 
-return;
+            return;
+
+        }
+
+    }
+
+
+
+    clearInterval(timer);
+
+
+
+    let stars;
+
+
+
+    if(seconds < 60 && moves < 50){
+
+        stars="⭐⭐⭐";
+
+    }
+
+    else if(seconds < 120){
+
+        stars="⭐⭐";
+
+    }
+
+    else{
+
+        stars="⭐";
+
+    }
+
+
+
+    document.getElementById("stars").innerHTML =
+    stars;
+
+
+
+    // Save completion
+
+    localStorage.setItem(
+        "level"+level,
+        "completed"
+    );
+
+
+
+    // Give coins
+
+    let coins =
+    Number(localStorage.getItem("coins")) || 0;
+
+
+
+    coins += level * 10;
+
+
+
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+
+
+
+    setTimeout(function(){
+
+        alert(
+        "🎉 Level "+level+" Complete!\n"+
+        stars
+        );
+
+
+    },300);
+
 
 
 }
 
 
 
-clearInterval(timer);
-
-
-
-let stars;
-
-
-if(seconds<60 && moves<50)
-
-stars="⭐⭐⭐";
-
-else if(seconds<120)
-
-stars="⭐⭐";
-
-else
-
-stars="⭐";
-
-
-
-document.getElementById("stars")
-.innerHTML=stars;
-
-
-
-localStorage.setItem(
-"level"+level,
-"completed"
-);
-
-
-// Give coins
-
-let coins =
-Number(localStorage.getItem("coins")) || 0;
-
-
-coins += level * 10;
-
-
-localStorage.setItem(
-"coins",
-coins
-);
-
-
-alert(
-"🎉 Level Complete!\n"+stars
-);
-
-
-
-}
-
-
-
+// Back button
 function backHome(){
 
-window.location="index.html";
+    window.location="index.html";
 
 }
 
 
 
+// Start
 setup();
