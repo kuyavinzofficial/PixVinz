@@ -1,212 +1,178 @@
+// ======================================
+// PuzzleMania Script v1.0
+// ======================================
+
 let totalLevels = 10;
+
+
+// ==============================
+// Main Menu
+// ==============================
+
+function startGame(){
+
+    playClick();
+
+    let nextLevel = 1;
+
+    for(let i = 1; i <= totalLevels; i++){
+
+        if(localStorage.getItem("level"+i) === "completed"){
+
+            nextLevel = i + 1;
+
+        }
+
+    }
+
+    if(nextLevel > totalLevels){
+
+        nextLevel = totalLevels;
+
+    }
+
+    localStorage.setItem(
+        "level",
+        nextLevel
+    );
+
+    window.location = "game.html";
+
+}
 
 
 function openLevels(){
 
-window.location="levels.html";
+    playClick();
+
+    window.location = "levels.html";
 
 }
-
 
 
 function backHome(){
 
-window.location="index.html";
+    playClick();
+
+    window.location = "index.html";
 
 }
 
 
 
+// ==============================
+// Load Levels
+// ==============================
 
 function loadLevels(){
 
+    let container =
+    document.getElementById("levelContainer");
 
-let container =
-document.getElementById("levelContainer");
-
-
-let coins =
-Number(localStorage.getItem("coins")) || 0;
+    if(!container) return;
 
 
-document.getElementById("coins")
-.innerHTML=coins;
+    container.innerHTML = "";
 
 
-
-for(let i=1;i<=totalLevels;i++){
-
-
-let button=
-document.createElement("button");
+    let coins =
+    Number(localStorage.getItem("coins")) || 0;
 
 
-button.className="level-card";
+    document.getElementById("coins").innerHTML =
+    coins;
 
 
 
-let unlocked =
-i===1 ||
-localStorage.getItem("level"+(i-1))
-==="completed";
+    for(let i=1;i<=totalLevels;i++){
+
+        let button =
+        document.createElement("button");
 
 
-
-let completed =
-localStorage.getItem("level"+i)
-==="completed";
+        button.className =
+        "level-card";
 
 
-
-if(completed){
-
-button.className+=" completed";
-
-button.innerHTML=
-"⭐ "+i;
+        let unlocked =
+        i===1 ||
+        localStorage.getItem("level"+(i-1))
+        ==="completed";
 
 
-}
-
-else if(unlocked){
-
-button.className+=" unlocked";
-
-button.innerHTML=
-"Level "+i;
+        let completed =
+        localStorage.getItem("level"+i)
+        ==="completed";
 
 
-button.onclick=function(){
+        if(completed){
 
-playLevel(i);
+            button.classList.add("completed");
 
-};
+            button.innerHTML =
+            "⭐ Level " + i;
+
+        }
+
+        else if(unlocked){
+
+            button.classList.add("unlocked");
+
+            button.innerHTML =
+            "Level " + i;
+
+            button.onclick = function(){
+
+                playClick();
+
+                playLevel(i);
+
+            };
+
+        }
+
+        else{
+
+            button.classList.add("locked");
+
+            button.innerHTML =
+            "🔒 Level " + i;
+
+        }
 
 
-}
+        container.appendChild(button);
 
-else{
-
-
-button.className+=" locked";
-
-button.innerHTML=
-"🔒 "+i;
-
-
-}
-
-
-
-container.appendChild(button);
-
-
+    }
 
 }
 
 
 
-}
-
-
+// ==============================
+// Play Level
+// ==============================
 
 function playLevel(level){
 
-localStorage.setItem(
-"level",
-level
-);
+    localStorage.setItem(
+        "level",
+        level
+    );
 
-
-window.location="game.html";
-
-}
-function startGame(){
-
-let nextLevel = 1;
-
-
-// Find the next unlocked level
-
-for(let i = 1; i <= totalLevels; i++){
-
-    if(localStorage.getItem("level"+i) === "completed"){
-
-        nextLevel = i + 1;
-
-    }
+    window.location =
+    "game.html";
 
 }
 
 
-// Prevent going beyond Level 10
 
-if(nextLevel > totalLevels){
+// ==============================
+// Auto Load
+// ==============================
 
-    nextLevel = totalLevels;
+if(window.location.pathname.includes("levels")){
 
-}
-
-
-// Save level
-
-localStorage.setItem(
-    "level",
-    nextLevel
-);
-
-
-// Open game
-
-window.location="game.html";
-
-}
-function startGame(){
-
-let nextLevel = 1;
-
-
-// Find the next unlocked level
-
-for(let i = 1; i <= totalLevels; i++){
-
-    if(localStorage.getItem("level"+i) === "completed"){
-
-        nextLevel = i + 1;
-
-    }
-
-}
-
-
-// Prevent going beyond Level 10
-
-if(nextLevel > totalLevels){
-
-    nextLevel = totalLevels;
-
-}
-
-
-// Save level
-
-localStorage.setItem(
-    "level",
-    nextLevel
-);
-
-
-// Open game
-
-window.location="game.html";
-
-}
-
-
-if(
-window.location.pathname.includes("levels")
-){
-
-loadLevels();
+    loadLevels();
 
 }
