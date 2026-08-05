@@ -79,3 +79,46 @@ button:hover{
     width:120px;
 
 }
+.game{
+
+margin-top:30px;
+
+}
+
+
+#puzzleBoard{
+
+width:330px;
+height:330px;
+
+margin:20px auto;
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:2px;
+
+}
+
+
+
+.piece{
+
+width:108px;
+height:108px;
+
+background-size:330px 330px;
+
+cursor:pointer;
+
+border:1px solid white;
+
+}
+
+
+.selected{
+
+border:3px solid yellow;
+
+}
