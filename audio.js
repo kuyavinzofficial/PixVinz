@@ -80,22 +80,22 @@ function playClick(){
     clickSound.play();
 
 }
-if(!soundEnabled) return;
+
 function playSelect() {
     selectSound.currentTime = 0;
     selectSound.play();
 }
-if(!soundEnabled) return;
+
 function playExchange() {
     exchangeSound.currentTime = 0;
     exchangeSound.play();
 }
-if(!soundEnabled) return;
+
 function playShuffle() {
     shuffleSound.currentTime = 0;
     shuffleSound.play();
 }
-if(!soundEnabled) return;
+
 function playVictory(level) {
     const victory = new Audio("sounds/victory" + level + ".mp3");
     victory.volume = 0.8;
