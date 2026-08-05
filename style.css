@@ -1,1 +1,81 @@
+body{
 
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+
+    background:linear-gradient(135deg,#667eea,#764ba2);
+
+    color:white;
+    text-align:center;
+
+}
+
+
+.menu,
+.levels{
+
+    margin-top:80px;
+
+}
+
+
+h2{
+
+    font-size:45px;
+    text-transform:uppercase;
+
+}
+
+
+button{
+
+    display:block;
+
+    width:250px;
+
+    margin:20px auto;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    background:white;
+
+    color:#764ba2;
+
+}
+
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+.level-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,120px);
+
+    justify-content:center;
+
+    gap:15px;
+
+}
+
+
+.level-grid button{
+
+    width:120px;
+
+}
