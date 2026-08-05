@@ -102,6 +102,11 @@ function drawPuzzle(){
     board.innerHTML="";
 
 
+    // Keep same board size
+    board.style.width="350px";
+    board.style.height="350px";
+
+
     board.style.gridTemplateColumns =
     `repeat(${size},1fr)`;
 
@@ -139,6 +144,8 @@ function drawPuzzle(){
 
 
 
+        // Important:
+        // Image always fills same board
         div.style.backgroundSize =
         `${size * 100}% ${size * 100}%`;
 
@@ -150,6 +157,36 @@ function drawPuzzle(){
 
 
         div.dataset.index=index;
+
+
+
+        div.ondragstart=function(){
+
+            selected=index;
+
+        };
+
+
+        div.ondragover=function(e){
+
+            e.preventDefault();
+
+        };
+
+
+        div.ondrop=function(){
+
+            swapPieces(selected,index);
+
+        };
+
+
+        board.appendChild(div);
+
+
+    });
+
+}
 
 
 
