@@ -373,7 +373,16 @@ setTimeout(()=>{
 
 
 
-function backHome(){
+function backHome(){function playVictorySound(){
+
+    let sound = new Audio(
+        "sounds/victory"+level+".mp3"
+    );
+
+
+    sound.play();
+
+}
 
     window.location="index.html";
 
