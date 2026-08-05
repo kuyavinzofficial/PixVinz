@@ -23,6 +23,8 @@ function backHome(){
 
 function playLevel(level){
 
-    alert("Starting PuzzleMania Level " + level);
+localStorage.setItem("level",level);
+
+window.location="game.html";
 
 }
