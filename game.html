@@ -3,7 +3,7 @@
 
 <head>
 
-<title>PuzzleMania Game</title>
+<title>PuzzleMania</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,17 +19,28 @@
 
 <h1>🧩 PuzzleMania</h1>
 
-<h2 id="levelTitle">
-Level 1
-</h2>
+<h2 id="levelTitle"></h2>
+
+
+<div class="stats">
+
+⏱ Time:
+<span id="timer">0</span>s
+
+<br>
+
+🔄 Moves:
+<span id="moves">0</span>
+
+<br>
+
+⭐ Score:
+<span id="stars">⭐⭐⭐</span>
+
+</div>
 
 
 <div id="puzzleBoard"></div>
-
-
-<p>
-Moves: <span id="moves">0</span>
-</p>
 
 
 <button onclick="shufflePuzzle()">
