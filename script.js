@@ -121,7 +121,46 @@ level
 window.location="game.html";
 
 }
+function startGame(){
 
+let nextLevel = 1;
+
+
+// Find the next unlocked level
+
+for(let i = 1; i <= totalLevels; i++){
+
+    if(localStorage.getItem("level"+i) === "completed"){
+
+        nextLevel = i + 1;
+
+    }
+
+}
+
+
+// Prevent going beyond Level 10
+
+if(nextLevel > totalLevels){
+
+    nextLevel = totalLevels;
+
+}
+
+
+// Save level
+
+localStorage.setItem(
+    "level",
+    nextLevel
+);
+
+
+// Open game
+
+window.location="game.html";
+
+}
 
 
 
