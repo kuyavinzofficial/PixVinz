@@ -1,54 +1,121 @@
-let size = 3;
-
-let moves = 0;
-
-let selected = null;
+let level =
+Number(localStorage.getItem("level")) || 1;
 
 
-let image =
-"images/sample.jpg";
+let size;
+
+
+let moves=0;
+
+let seconds=0;
+
+let timer;
+
+
+let selected=null;
+
+
+let images=[
+
+"images/level1.jpg",
+"images/level2.jpg",
+"images/level3.jpg",
+"images/level4.jpg",
+"images/level5.jpg",
+"images/level6.jpg",
+"images/level7.jpg",
+"images/level8.jpg",
+"images/level9.jpg",
+"images/level10.jpg"
+
+];
+
 
 
 let pieces=[];
 
 
 
-function createPuzzle(){
+function setup(){
 
 
-let board =
-document.getElementById("puzzleBoard");
+size =
+level < 3 ? 3 :
+level < 5 ? 4 :
+level < 7 ? 5 :
+level < 9 ? 6 : 7;
 
 
-board.innerHTML="";
+
+document.getElementById("levelTitle")
+.innerHTML=
+"Level "+level;
 
 
-pieces=[];
+
+startTimer();
 
 
-for(let i=0;i<size*size;i++){
-
-
-pieces.push(i);
+createPuzzle();
 
 
 }
 
+
+
+
+function startTimer(){
+
+
+timer=setInterval(()=>{
+
+
+seconds++;
+
+
+document.getElementById("timer")
+.innerHTML=seconds;
+
+
+
+},1000);
+
+
+}
+
+
+
+
+function createPuzzle(){
+
+
+let total=size*size;
+
+
+for(let i=0;i<total;i++){
+
+pieces.push(i);
+
+}
 
 
 shufflePuzzle();
 
 
-
 }
+
 
 
 
 function drawPuzzle(){
 
 
-let board =
+let board=
 document.getElementById("puzzleBoard");
+
+
+board.style.gridTemplateColumns=
+`repeat(${size},1fr)`;
 
 
 board.innerHTML="";
@@ -63,29 +130,63 @@ let div=document.createElement("div");
 div.className="piece";
 
 
+div.draggable=true;
+
+
+let pos =
+100/size;
+
+
 let x =
-(piece % size)*100;
+(piece%size)*pos;
 
 
 let y =
-Math.floor(piece/size)*100;
+Math.floor(piece/size)*pos;
 
 
 
 div.style.backgroundImage=
-`url(${image})`;
+`url(${images[level-1]})`;
+
+
+
+div.style.backgroundSize=
+"100% 100%";
+
 
 
 div.style.backgroundPosition=
-`-${x}px -${y}px`;
+`${x}% ${y}%`;
 
 
 
-div.onclick=function(){
+div.dataset.index=index;
 
-selectPiece(index);
 
-}
+
+div.ondragstart=function(){
+
+selected=index;
+
+};
+
+
+
+div.ondragover=e=>e.preventDefault();
+
+
+
+div.ondrop=function(){
+
+
+swapPieces(
+selected,
+index
+);
+
+
+};
 
 
 
@@ -98,34 +199,6 @@ board.appendChild(div);
 
 }
 
-
-
-function selectPiece(index){
-
-
-if(selected===null){
-
-selected=index;
-
-document
-.getElementsByClassName("piece")[index]
-.classList.add("selected");
-
-
-}
-
-else{
-
-
-swapPieces(selected,index);
-
-
-selected=null;
-
-
-}
-
-}
 
 
 
@@ -142,8 +215,7 @@ pieces[b]=temp;
 moves++;
 
 
-document
-.getElementById("moves")
+document.getElementById("moves")
 .innerHTML=moves;
 
 
@@ -154,6 +226,7 @@ checkWin();
 
 
 }
+
 
 
 
@@ -184,7 +257,45 @@ return;
 }
 
 
-alert("🎉 Puzzle Completed!");
+
+clearInterval(timer);
+
+
+
+let stars;
+
+
+if(seconds<60 && moves<50)
+
+stars="⭐⭐⭐";
+
+else if(seconds<120)
+
+stars="⭐⭐";
+
+else
+
+stars="⭐";
+
+
+
+document.getElementById("stars")
+.innerHTML=stars;
+
+
+
+localStorage.setItem(
+"level"+level,
+"completed"
+);
+
+
+
+alert(
+"🎉 Level Complete!\n"+stars
+);
+
+
 
 }
 
@@ -198,4 +309,4 @@ window.location="index.html";
 
 
 
-createPuzzle();
+setup();
