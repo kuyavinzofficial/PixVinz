@@ -290,6 +290,20 @@ localStorage.setItem(
 );
 
 
+// Give coins
+
+let coins =
+Number(localStorage.getItem("coins")) || 0;
+
+
+coins += level * 10;
+
+
+localStorage.setItem(
+"coins",
+coins
+);
+
 
 alert(
 "🎉 Level Complete!\n"+stars
