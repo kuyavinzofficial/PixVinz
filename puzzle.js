@@ -7,10 +7,9 @@ let seconds = 0;
 
 let timer;
 
-let selected = null;
+let selectedPiece = null;
 
 
-// Your images (.jpeg)
 let images = [
 
     "images/level1.jpeg",
@@ -30,20 +29,24 @@ let images = [
 let pieces = [];
 
 
+// Setup level difficulty
 
-// Start Game
 function setup(){
 
+
     size =
-        level <= 2 ? 3 :
-        level <= 4 ? 4 :
-        level <= 6 ? 5 :
-        level <= 8 ? 6 :
-        7;
+    level <= 2 ? 3 :
+    level <= 4 ? 4 :
+    level <= 6 ? 5 :
+    level <= 8 ? 6 :
+    level === 9 ? 7 :
+    8;
+
 
 
     document.getElementById("levelTitle").innerHTML =
-        "Level " + level;
+    "Level " + level;
+
 
 
     startTimer();
@@ -51,18 +54,22 @@ function setup(){
 
     createPuzzle();
 
+
 }
 
 
 
 // Timer
+
 function startTimer(){
 
-    timer = setInterval(function(){
+    timer=setInterval(()=>{
 
         seconds++;
 
-        document.getElementById("timer").innerHTML = seconds;
+        document.getElementById("timer").innerHTML =
+        seconds;
+
 
     },1000);
 
@@ -70,13 +77,15 @@ function startTimer(){
 
 
 
-// Create Puzzle Pieces
+// Create pieces
+
 function createPuzzle(){
 
-    let total = size * size;
+
+    let total=size*size;
 
 
-    pieces = [];
+    pieces=[];
 
 
     for(let i=0;i<total;i++){
@@ -88,12 +97,15 @@ function createPuzzle(){
 
     shufflePuzzle();
 
+
 }
 
 
 
-// Draw Puzzle
+// Draw puzzle
+
 function drawPuzzle(){
+
 
     let board =
     document.getElementById("puzzleBoard");
@@ -102,21 +114,23 @@ function drawPuzzle(){
     board.innerHTML="";
 
 
-    // Keep same board size
+    // Fixed size
+
     board.style.width="350px";
+
     board.style.height="350px";
+
+    board.style.maxWidth="90vw";
+
+    board.style.maxHeight="90vw";
 
 
     board.style.gridTemplateColumns =
     `repeat(${size},1fr)`;
 
 
-    let image =
-    images[level-1];
 
-
-
-    pieces.forEach(function(piece,index){
+    pieces.forEach((piece,index)=>{
 
 
         let div =
@@ -126,28 +140,23 @@ function drawPuzzle(){
         div.className="piece";
 
 
-        div.draggable=true;
-
-
 
         let row =
-        Math.floor(piece / size);
+        Math.floor(piece/size);
 
 
         let col =
-        piece % size;
+        piece%size;
 
 
 
         div.style.backgroundImage =
-        `url("${image}")`;
+        `url("${images[level-1]}")`;
 
 
 
-        // Important:
-        // Image always fills same board
         div.style.backgroundSize =
-        `${size * 100}% ${size * 100}%`;
+        `${size*100}% ${size*100}%`;
 
 
 
@@ -156,62 +165,9 @@ function drawPuzzle(){
 
 
 
-        div.dataset.index=index;
+        div.onclick=function(){
 
-
-
-        div.ondragstart=function(){
-
-            selected=index;
-
-        };
-
-
-        div.ondragover=function(e){
-
-            e.preventDefault();
-
-        };
-
-
-        div.ondrop=function(){
-
-            swapPieces(selected,index);
-
-        };
-
-
-        board.appendChild(div);
-
-
-    });
-
-}
-
-
-
-        // Drag start
-        div.ondragstart=function(){
-
-            selected=index;
-
-        };
-
-
-
-        // Allow drop
-        div.ondragover=function(e){
-
-            e.preventDefault();
-
-        };
-
-
-
-        // Drop piece
-        div.ondrop=function(){
-
-            swapPieces(selected,index);
+            selectPiece(index);
 
         };
 
@@ -223,11 +179,59 @@ function drawPuzzle(){
     });
 
 
+
 }
 
 
 
-// Swap Pieces
+// Tap system
+
+function selectPiece(index){
+
+
+
+    let allPieces =
+    document.querySelectorAll(".piece");
+
+
+
+    if(selectedPiece === null){
+
+
+        selectedPiece=index;
+
+
+        allPieces[index]
+        .classList.add("selected");
+
+
+    }
+
+    else{
+
+
+        swapPieces(
+            selectedPiece,
+            index
+        );
+
+
+        allPieces[selectedPiece]
+        .classList.remove("selected");
+
+
+        selectedPiece=null;
+
+
+    }
+
+
+}
+
+
+
+// Swap
+
 function swapPieces(a,b){
 
 
@@ -238,9 +242,7 @@ function swapPieces(a,b){
     }
 
 
-
-    let temp =
-    pieces[a];
+    let temp=pieces[a];
 
 
     pieces[a]=pieces[b];
@@ -253,8 +255,8 @@ function swapPieces(a,b){
     moves++;
 
 
-    document.getElementById("moves").innerHTML =
-    moves;
+    document.getElementById("moves")
+    .innerHTML=moves;
 
 
 
@@ -269,14 +271,11 @@ function swapPieces(a,b){
 
 
 // Shuffle
+
 function shufflePuzzle(){
 
 
-    pieces.sort(function(){
-
-        return Math.random()-0.5;
-
-    });
+    pieces.sort(()=>Math.random()-0.5);
 
 
     drawPuzzle();
@@ -286,7 +285,8 @@ function shufflePuzzle(){
 
 
 
-// Check Completion
+// Check solved
+
 function checkWin(){
 
 
@@ -310,14 +310,13 @@ function checkWin(){
     let stars;
 
 
-
-    if(seconds < 60 && moves < 50){
+    if(seconds<60 && moves<50){
 
         stars="⭐⭐⭐";
 
     }
 
-    else if(seconds < 120){
+    else if(seconds<120){
 
         stars="⭐⭐";
 
@@ -331,12 +330,10 @@ function checkWin(){
 
 
 
-    document.getElementById("stars").innerHTML =
-    stars;
+    document.getElementById("stars")
+    .innerHTML=stars;
 
 
-
-    // Save completion
 
     localStorage.setItem(
         "level"+level,
@@ -345,15 +342,11 @@ function checkWin(){
 
 
 
-    // Give coins
-
     let coins =
     Number(localStorage.getItem("coins")) || 0;
 
 
-
-    coins += level * 10;
-
+    coins += level*10;
 
 
     localStorage.setItem(
@@ -363,13 +356,11 @@ function checkWin(){
 
 
 
-    setTimeout(function(){
+    setTimeout(()=>{
 
         alert(
-        "🎉 Level "+level+" Complete!\n"+
-        stars
+        "🎉 Level Complete!\n"+stars
         );
-
 
     },300);
 
@@ -379,7 +370,6 @@ function checkWin(){
 
 
 
-// Back button
 function backHome(){
 
     window.location="index.html";
@@ -388,5 +378,4 @@ function backHome(){
 
 
 
-// Start
 setup();
