@@ -122,46 +122,31 @@ border:1px solid white;
 border:3px solid yellow;
 
 }
-.game{
+.stats{
 
-margin-top:30px;
+font-size:20px;
 
-}
-
-
-#puzzleBoard{
-
-width:330px;
-height:330px;
-
-margin:20px auto;
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:2px;
+margin:15px;
 
 }
-
 
 
 .piece{
 
-width:108px;
-height:108px;
-
-background-size:330px 330px;
-
-cursor:pointer;
-
-border:1px solid white;
+transition:0.3s;
 
 }
 
 
-.selected{
+.piece:hover{
 
-border:3px solid yellow;
+transform:scale(1.05);
+
+}
+
+
+.dragging{
+
+opacity:0.5;
 
 }
