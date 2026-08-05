@@ -174,6 +174,8 @@ function playLevel(level){
 if(window.location.pathname.includes("levels")){
 
     loadLevels();
+
+}
 // ==============================
 // SETTINGS
 // ==============================
@@ -246,10 +248,7 @@ document.addEventListener("change",function(e){
 
     if(e.target.id==="soundToggle"){
 
-        localStorage.setItem(
-            "sound",
-            e.target.checked ? "on":"off"
-        );
+        setSound(e.target.checked);
 
     }
 
@@ -295,5 +294,4 @@ Made with HTML, CSS & JavaScript
 © 2026`
     );
 
-}
 }
