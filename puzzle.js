@@ -17,16 +17,18 @@ let selected=null;
 
 let images=[
 
-"images/level1.jpg",
-"images/level2.jpg",
-"images/level3.jpg",
-"images/level4.jpg",
-"images/level5.jpg",
-"images/level6.jpg",
-"images/level7.jpg",
-"images/level8.jpg",
-"images/level9.jpg",
-"images/level10.jpg"
+let images = [
+"images/level1.jpeg",
+"images/level2.jpeg",
+"images/level3.jpeg",
+"images/level4.jpeg",
+"images/level5.jpeg",
+"images/level6.jpeg",
+"images/level7.jpeg",
+"images/level8.jpeg",
+"images/level9.jpeg",
+"images/level10.jpeg"
+
 
 ];
 
