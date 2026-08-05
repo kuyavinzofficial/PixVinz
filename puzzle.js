@@ -15,8 +15,6 @@ let timer;
 let selected=null;
 
 
-let images=[
-
 let images = [
 "images/level1.jpeg",
 "images/level2.jpeg",
