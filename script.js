@@ -240,10 +240,7 @@ document.addEventListener("change",function(e){
 
     if(e.target.id==="musicToggle"){
 
-        localStorage.setItem(
-            "music",
-            e.target.checked ? "on":"off"
-        );
+        setMusic(e.target.checked);
 
     }
 
