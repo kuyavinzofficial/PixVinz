@@ -1,16 +1,30 @@
+// ======================================
+// PuzzleMania - puzzle.js
+// Part 1/4
+// ======================================
+
+// Current Level
 let level = Number(localStorage.getItem("level")) || 1;
 
+// Difficulty
 let size;
 
-let moves = 0;
-let seconds = 0;
+if (level <= 2) {
+    size = 3;
+} else if (level <= 4) {
+    size = 4;
+} else if (level <= 6) {
+    size = 5;
+} else if (level <= 8) {
+    size = 6;
+} else if (level == 9) {
+    size = 7;
+} else {
+    size = 8;
+}
 
-let timer;
-
-let selectedPiece = null;
-
-
-let images = [
+// Images
+const images = [
 
     "images/level1.jpeg",
     "images/level2.jpeg",
@@ -25,382 +39,378 @@ let images = [
 
 ];
 
-
+// Variables
 let pieces = [];
+let moves = 0;
+let seconds = 0;
+let timer = null;
+let selectedPiece = null;
 
+// ======================================
+// Setup
+// ======================================
 
-// Setup level difficulty
+function setup() {
 
-function setup(){
+    document.getElementById("levelTitle").textContent =
+        "Level " + level;
 
+    createPieces();
 
-    size =
-    level <= 2 ? 3 :
-    level <= 4 ? 4 :
-    level <= 6 ? 5 :
-    level <= 8 ? 6 :
-    level === 9 ? 7 :
-    8;
-
-
-
-    document.getElementById("levelTitle").innerHTML =
-    "Level " + level;
-
-
-
-    startTimer();
-
-
-    createPuzzle();
-
+    shufflePuzzle();
 
 }
 
-
-
+// ======================================
 // Timer
+// ======================================
 
-function startTimer(){
+function startTimer() {
 
-    timer=setInterval(()=>{
+    clearInterval(timer);
+
+    timer = setInterval(function () {
 
         seconds++;
 
-        document.getElementById("timer").innerHTML =
-        seconds;
+        document.getElementById("timer").textContent =
+            seconds;
 
-
-    },1000);
+    }, 1000);
 
 }
 
+// ======================================
+// Create Pieces
+// ======================================
 
+function createPieces() {
 
-// Create pieces
+    pieces = [];
 
-function createPuzzle(){
-
-
-    let total=size*size;
-
-
-    pieces=[];
-
-
-    for(let i=0;i<total;i++){
+    for (let i = 0; i < size * size; i++) {
 
         pieces.push(i);
 
     }
 
-
-    shufflePuzzle();
-
-
 }
+// ======================================
+// Shuffle Puzzle
+// ======================================
 
+function shufflePuzzle() {
 
+    // Reset game
+    createPieces();
 
-// Draw puzzle
-
-function drawPuzzle(){
-
-
-    let board =
-    document.getElementById("puzzleBoard");
-
-
-    board.innerHTML="";
-
-
-    // Fixed size
-
-    board.style.width="350px";
-
-    board.style.height="350px";
-
-    board.style.maxWidth="90vw";
-
-    board.style.maxHeight="90vw";
-
-
-    board.style.gridTemplateColumns =
-    `repeat(${size},1fr)`;
-
-
-
-    pieces.forEach((piece,index)=>{
-
-
-        let div =
-        document.createElement("div");
-
-
-        div.className="piece";
-
-
-
-        let row =
-        Math.floor(piece/size);
-
-
-        let col =
-        piece%size;
-
-
-
-        div.style.backgroundImage =
-        `url("${images[level-1]}")`;
-
-
-
-        div.style.backgroundSize =
-        `${size*100}% ${size*100}%`;
-
-
-
-        div.style.backgroundPosition =
-        `${(col/(size-1))*100}% ${(row/(size-1))*100}%`;
-
-
-
-        div.onclick=function(){
-
-            selectPiece(index);
-
-        };
-
-
-
-        board.appendChild(div);
-
-
-    });
-
-
-
-}
-
-
-
-// Tap system
-
-function selectPiece(index){
-
-
-
-    let allPieces =
-    document.querySelectorAll(".piece");
-
-
-
-    if(selectedPiece === null){
-
-
-        selectedPiece=index;
-
-
-        allPieces[index]
-        .classList.add("selected");
-
-
-    }
-
-    else{
-
-
-        swapPieces(
-            selectedPiece,
-            index
-        );
-playSelect();
-
-        allPieces[selectedPiece]
-        .classList.remove("selected");
-
-
-        selectedPiece=null;
-
-
-    }
-
-
-}
-
-
-
-// Swap
-
-function swapPieces(a,b){
-
-
-    if(a===b){
-
-        return;
-
-    }
-playExchange();
-
-    let temp=pieces[a];
-
-
-    pieces[a]=pieces[b];
-
-
-    pieces[b]=temp;
-
-
-
-    moves++;
-
-
-    document.getElementById("moves")
-    .innerHTML=moves;
-
-
-
-    drawPuzzle();
-
-
-    checkWin();
-
-
-}
-
-
-
-// Shuffle
-playShuffle();
-
-
-
-    function shufflePuzzle() {
-
+    // Fisher-Yates Shuffle
     for (let i = pieces.length - 1; i > 0; i--) {
 
         const j = Math.floor(Math.random() * (i + 1));
 
         [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+
+    }
+
+    // Prevent solved puzzle
+    let solved = true;
+
+    for (let i = 0; i < pieces.length; i++) {
+
+        if (pieces[i] != i) {
+            solved = false;
+            break;
+        }
+
+    }
+
+    if (solved) {
+
+        [pieces[0], pieces[1]] = [pieces[1], pieces[0]];
+
     }
 
     moves = 0;
     seconds = 0;
+    selectedPiece = null;
 
-    document.getElementById("moves").textContent = moves;
-    document.getElementById("timer").textContent = seconds;
+    document.getElementById("moves").textContent = "0";
+    document.getElementById("timer").textContent = "0";
+    document.getElementById("stars").textContent = "⭐⭐⭐";
 
-    clearInterval(timer);
     startTimer();
 
     drawPuzzle();
+
+    if (typeof playShuffle === "function") {
+        playShuffle();
+    }
+
 }
 
+// ======================================
+// Draw Puzzle
+// ======================================
+
+function drawPuzzle() {
+
+    const board = document.getElementById("puzzleBoard");
+
+    board.innerHTML = "";
+
+    board.style.display = "grid";
+    board.style.gridTemplateColumns = `repeat(${size},1fr)`;
+
+    pieces.forEach(function(piece, index) {
+
+        const tile = document.createElement("div");
+
+        tile.className = "piece";
+
+        const row = Math.floor(piece / size);
+        const col = piece % size;
+
+        tile.style.backgroundImage =
+            `url("${images[level - 1]}")`;
+
+        tile.style.backgroundSize =
+            `${size * 100}% ${size * 100}%`;
+
+        tile.style.backgroundPosition =
+            `${col * 100 / (size - 1)}% ${row * 100 / (size - 1)}%`;
+
+        tile.onclick = function () {
+
+            selectPiece(index);
+
+        };
+
+        board.appendChild(tile);
+
+    });
+
+}
+
+// ======================================
+// Select Piece
+// ======================================
+
+function selectPiece(index) {
+
+    const allPieces = document.querySelectorAll(".piece");
+
+    if (selectedPiece === null) {
+
+        selectedPiece = index;
+
+        allPieces[index].classList.add("selected");
+
+        if (typeof playSelect === "function") {
+            playSelect();
+        }
+
+    } else {
+
+        swapPieces(selectedPiece, index);
+
+    }
+
+}
+
+// ======================================
+// Swap Pieces
+// ======================================
+
+function swapPieces(first, second) {
+
+    const allPieces = document.querySelectorAll(".piece");
+
+    allPieces[first].classList.remove("selected");
+
+    if (first === second) {
+
+        selectedPiece = null;
+        return;
+
+    }
+
+    const temp = pieces[first];
+
+    pieces[first] = pieces[second];
+
+    pieces[second] = temp;
+
+    selectedPiece = null;
+
+    moves++;
+
+    document.getElementById("moves").textContent = moves;
+
+    if (typeof playExchange === "function") {
+        playExchange();
+    }
 
     drawPuzzle();
 
+    checkWin();
 
-}
+            }
+// ======================================
+// Check Win
+// ======================================
 
+function checkWin() {
 
+    // Check if puzzle is solved
+    for (let i = 0; i < pieces.length; i++) {
 
-// Check solved
-
-function checkWin(){
-
-
-    for(let i=0;i<pieces.length;i++){
-
-
-        if(pieces[i]!==i){
-
+        if (pieces[i] !== i) {
             return;
+        }
+
+    }
+
+    // Stop timer
+    clearInterval(timer);
+
+    // Compute stars
+    let stars = "⭐";
+
+    if (seconds < 60 && moves < 50) {
+
+        stars = "⭐⭐⭐";
+
+    } else if (seconds < 120 && moves < 100) {
+
+        stars = "⭐⭐";
+
+    }
+
+    document.getElementById("stars").textContent = stars;
+
+    // Save completed level
+    localStorage.setItem(
+        "level" + level,
+        "completed"
+    );
+
+    // Unlock next level
+    if (level < 10) {
+
+        let unlocked =
+            Number(localStorage.getItem("level")) || 1;
+
+        if (level + 1 > unlocked) {
+
+            localStorage.setItem(
+                "level",
+                level + 1
+            );
 
         }
 
     }
 
-
-
-    clearInterval(timer);
-
-
-
-    let stars;
-
-
-    if(seconds<60 && moves<50){
-
-        stars="⭐⭐⭐";
-
-    }
-
-    else if(seconds<120){
-
-        stars="⭐⭐";
-
-    }
-
-    else{
-
-        stars="⭐";
-
-    }
-
-
-
-    document.getElementById("stars")
-    .innerHTML=stars;
-
-
-
-    localStorage.setItem(
-        "level"+level,
-        "completed"
-    );
-
-
-
+    // Reward coins
     let coins =
-    Number(localStorage.getItem("coins")) || 0;
+        Number(localStorage.getItem("coins")) || 0;
 
-
-    coins += level*10;
-
+    coins += level * 10;
 
     localStorage.setItem(
         "coins",
         coins
     );
 
-
-
-    playVictorySound();
-
-setTimeout(() => {
-
-    playVictory(level);
-
-    alert("🎉 Level Complete!\n" + stars);
-
-    if (level < 10) {
-        localStorage.setItem("level", level + 1);
+    // Play sounds (if available)
+    if (typeof playVictorySound === "function") {
+        playVictorySound();
     }
 
-    backHome();
+    if (typeof playVictory === "function") {
+        playVictory(level);
+    }
 
-}, 500);
+    // Small delay before leaving
+    setTimeout(function () {
 
-}
+        alert(
+            "🎉 LEVEL COMPLETE!\n\n" +
+            "Stars: " + stars +
+            "\nMoves: " + moves +
+            "\nTime: " + seconds + "s" +
+            "\nCoins Earned: +" + (level * 10)
+        );
 
-function playVictorySound() {
-    let sound = new Audio("sounds/victory" + level + ".mp3");
-    sound.play();
-}
+        backHome();
+
+    }, 500);
+
+               }
+// ======================================
+// Back to Menu
+// ======================================
 
 function backHome() {
-    window.location = "index.html";
+
+    window.location.href = "index.html";
+
 }
 
-setup();
-startMusic();
+// ======================================
+// Restart Current Level
+// ======================================
+
+function restartLevel() {
+
+    clearInterval(timer);
+
+    moves = 0;
+    seconds = 0;
+    selectedPiece = null;
+
+    document.getElementById("moves").textContent = "0";
+    document.getElementById("timer").textContent = "0";
+    document.getElementById("stars").textContent = "⭐⭐⭐";
+
+    shufflePuzzle();
+
+}
+
+// ======================================
+// Start Game
+// ======================================
+
+window.onload = function () {
+
+    setup();
+
+    // Start background music if audio.js exists
+    if (typeof startMusic === "function") {
+        startMusic();
+    }
+
+};
+
+// ======================================
+// Keyboard Shortcuts (Optional)
+// ======================================
+
+document.addEventListener("keydown", function (event) {
+
+    // Press R to restart
+    if (event.key === "r" || event.key === "R") {
+
+        restartLevel();
+
+    }
+
+    // Press S to shuffle
+    if (event.key === "s" || event.key === "S") {
+
+        shufflePuzzle();
+
+    }
+
+});
