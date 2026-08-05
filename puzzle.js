@@ -356,13 +356,16 @@ function checkWin(){
 
 
 
-    setTimeout(()=>{
+    playVictorySound();
 
-        alert(
-        "🎉 Level Complete!\n"+stars
-        );
 
-    },300);
+setTimeout(()=>{
+
+    alert(
+    "🎉 Level "+level+" Complete!\n"+stars
+    );
+
+},300);
 
 
 
