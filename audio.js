@@ -1,7 +1,15 @@
 // ==============================
 // PuzzleMania Audio Manager
 // ==============================
+// ==============================
+// User Audio Settings
+// ==============================
 
+let musicEnabled =
+    localStorage.getItem("music") !== "off";
+
+let soundEnabled =
+    localStorage.getItem("sound") !== "off";
 // Background Music
 const bgMusic = new Audio("sounds/bgmusic.mp3");
 bgMusic.loop = true;
@@ -25,47 +33,104 @@ shuffleSound.volume = 0.7;
 // ---------------------------
 
 function startMusic() {
+
+    if(!musicEnabled) return;
+
     bgMusic.play().catch(() => {});
+
 }
 
 function stopMusic() {
     bgMusic.pause();
 }
 
-function toggleMusic() {
-    if (bgMusic.paused) {
+function toggleMusic(){
+
+    musicEnabled = !musicEnabled;
+
+    localStorage.setItem(
+        "music",
+        musicEnabled ? "on" : "off"
+    );
+
+    if(musicEnabled){
+
         startMusic();
-    } else {
-        stopMusic();
+
     }
+
+    else{
+
+        stopMusic();
+
+    }
+
 }
 
 // ---------------------------
 // Sound Effects
 // ---------------------------
 
-function playClick() {
-    clickSound.currentTime = 0;
-    clickSound.play();
-}
+function playClick(){
 
+    if(!soundEnabled) return;
+
+    clickSound.currentTime = 0;
+
+    clickSound.play();
+
+}
+if(!soundEnabled) return;
 function playSelect() {
     selectSound.currentTime = 0;
     selectSound.play();
 }
-
+if(!soundEnabled) return;
 function playExchange() {
     exchangeSound.currentTime = 0;
     exchangeSound.play();
 }
-
+if(!soundEnabled) return;
 function playShuffle() {
     shuffleSound.currentTime = 0;
     shuffleSound.play();
 }
-
+if(!soundEnabled) return;
 function playVictory(level) {
     const victory = new Audio("sounds/victory" + level + ".mp3");
     victory.volume = 0.8;
     victory.play();
+}
+function setMusic(enabled){
+
+    musicEnabled = enabled;
+
+    localStorage.setItem(
+        "music",
+        enabled ? "on" : "off"
+    );
+
+    if(enabled){
+
+        startMusic();
+
+    }
+
+    else{
+
+        stopMusic();
+
+    }
+
+}
+
+function setSound(enabled){
+
+    soundEnabled = enabled;
+
+    localStorage.setItem(
+        "sound",
+        enabled ? "on" : "off"
+    );
+
 }
