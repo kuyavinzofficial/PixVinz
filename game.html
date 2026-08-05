@@ -3,61 +3,56 @@
 
 <head>
 
-<title>PuzzleMania</title>
+    <title>PuzzleMania</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <div class="game">
 
-<h1>🧩 PuzzleMania</h1>
+    <h1>🧩 PuzzleMania</h1>
 
-<h2 id="levelTitle"></h2>
+    <h2 id="levelTitle"></h2>
 
+    <div class="stats">
 
-<div class="stats">
+        ⏱ Time:
+        <span id="timer">0</span>s
 
-⏱ Time:
-<span id="timer">0</span>s
+        <br>
 
-<br>
+        🔄 Moves:
+        <span id="moves">0</span>
 
-🔄 Moves:
-<span id="moves">0</span>
+        <br>
 
-<br>
+        ⭐ Score:
+        <span id="stars">⭐⭐⭐</span>
 
-⭐ Score:
-<span id="stars">⭐⭐⭐</span>
+    </div>
+
+    <div id="puzzleBoard"></div>
+
+    <button onclick="playClick(); shufflePuzzle()">
+        🔀 Shuffle
+    </button>
+
+    <button onclick="playClick(); backHome()">
+        ⬅ Menu
+    </button>
 
 </div>
 
+<!-- Audio Manager MUST load first -->
+<script src="audio.js"></script>
 
-<div id="puzzleBoard"></div>
-
-<button onclick="playClick(); shufflePuzzle()">
-🔀 Shuffle
-</button>
-
-
-<button onclick="playClick(); backHome()">
-⬅ Menu
-</button>
-
-
-</div><script src="audio.js"></script>
+<!-- Puzzle Logic -->
 <script src="puzzle.js"></script>
-
-
-<script src="puzzle.js"></script>
-
 
 </body>
 
