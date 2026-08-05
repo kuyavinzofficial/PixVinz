@@ -1,17 +1,13 @@
-// =======================================
-// PuzzleMania Audio Manager v1.0
-// =======================================
+// ==============================
+// PuzzleMania Audio Manager
+// ==============================
 
-// ---------- Background Music ----------
-
+// Background Music
 const bgMusic = new Audio("sounds/bgmusic.mp3");
-
 bgMusic.loop = true;
-bgMusic.volume = 0.30;
+bgMusic.volume = 0.3;
 
-
-// ---------- Sound Effects ----------
-
+// Sound Effects
 const clickSound = new Audio("sounds/click.mp3");
 clickSound.volume = 0.7;
 
@@ -24,82 +20,52 @@ exchangeSound.volume = 0.7;
 const shuffleSound = new Audio("sounds/shuffle.mp3");
 shuffleSound.volume = 0.7;
 
+// ---------------------------
+// Background Music
+// ---------------------------
 
-// ---------- Background Music ----------
-
-function startMusic(){
-
-    bgMusic.play().catch(()=>{});
-
+function startMusic() {
+    bgMusic.play().catch(() => {});
 }
 
-
-function stopMusic(){
-
+function stopMusic() {
     bgMusic.pause();
-
 }
 
-
-function toggleMusic(){
-
-    if(bgMusic.paused){
-
+function toggleMusic() {
+    if (bgMusic.paused) {
         startMusic();
-
-    }else{
-
+    } else {
         stopMusic();
-
     }
-
 }
 
+// ---------------------------
+// Sound Effects
+// ---------------------------
 
-// ---------- UI Sounds ----------
-
-function playClick(){
-
+function playClick() {
     clickSound.currentTime = 0;
     clickSound.play();
-
 }
 
-
-function playSelect(){
-
+function playSelect() {
     selectSound.currentTime = 0;
     selectSound.play();
-
 }
 
-
-function playExchange(){
-
+function playExchange() {
     exchangeSound.currentTime = 0;
     exchangeSound.play();
-
 }
 
-
-function playShuffle(){
-
+function playShuffle() {
     shuffleSound.currentTime = 0;
     shuffleSound.play();
-
 }
 
-
-// ---------- Victory ----------
-
-function playVictory(level){
-
-    const victory = new Audio(
-        "sounds/victory" + level + ".mp3"
-    );
-
+function playVictory(level) {
+    const victory = new Audio("sounds/victory" + level + ".mp3");
     victory.volume = 0.8;
-
     victory.play();
-
 }
