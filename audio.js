@@ -80,26 +80,43 @@ function playClick(){
     clickSound.play();
 
 }
+function playSelect(){
 
-function playSelect() {
+    if(!soundEnabled) return;
+
     selectSound.currentTime = 0;
     selectSound.play();
+
 }
 
-function playExchange() {
+function playExchange(){
+
+    if(!soundEnabled) return;
+
     exchangeSound.currentTime = 0;
     exchangeSound.play();
+
 }
 
-function playShuffle() {
+function playShuffle(){
+
+    if(!soundEnabled) return;
+
     shuffleSound.currentTime = 0;
     shuffleSound.play();
+
 }
 
-function playVictory(level) {
+function playVictory(level){
+
+    if(!soundEnabled) return;
+
     const victory = new Audio("sounds/victory" + level + ".mp3");
+
     victory.volume = 0.8;
+
     victory.play();
+
 }
 function setMusic(enabled){
 
