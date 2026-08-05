@@ -29,12 +29,56 @@
         🏆 LEVELS
     </button>
 
-    <button onclick="playClick()">
-        ⚙ SETTINGS
-    </button>
+    <button onclick="playClick(); openSettings()">
+    ⚙ SETTINGS
+</button>
 
 </div>
+<div id="settingsPopup" class="popup">
 
+    <div class="popup-box">
+
+        <h2>⚙ Settings</h2>
+
+        <div class="setting-row">
+
+            <span>🎵 Music</span>
+
+            <input type="checkbox" id="musicToggle">
+
+        </div>
+
+        <div class="setting-row">
+
+            <span>🔊 Sound Effects</span>
+
+            <input type="checkbox" id="soundToggle">
+
+        </div>
+
+        <div class="setting-row">
+
+            <span>✨ Animations</span>
+
+            <input type="checkbox" id="animationToggle">
+
+        </div>
+
+        <button onclick="resetProgress()">
+            🗑 Reset Progress
+        </button>
+
+        <button onclick="showAbout()">
+            ℹ About
+        </button>
+
+        <button onclick="closeSettings()">
+            ❌ Close
+        </button>
+
+    </div>
+
+</div>
 <script src="audio.js"></script>
 <script src="script.js"></script>
 
