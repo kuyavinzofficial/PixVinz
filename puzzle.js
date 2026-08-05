@@ -272,10 +272,29 @@ playExchange();
 
 // Shuffle
 playShuffle();
-function shufflePuzzle(){
 
 
-    pieces.sort(()=>Math.random()-0.5);
+
+    function shufflePuzzle() {
+
+    for (let i = pieces.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+    }
+
+    moves = 0;
+    seconds = 0;
+
+    document.getElementById("moves").textContent = moves;
+    document.getElementById("timer").textContent = seconds;
+
+    clearInterval(timer);
+    startTimer();
+
+    drawPuzzle();
+}
 
 
     drawPuzzle();
@@ -358,30 +377,30 @@ function checkWin(){
 
     playVictorySound();
 
-
-setTimeout(()=>{
+setTimeout(() => {
 
     playVictory(level);
 
-alert("🎉 Level Complete!\n"+stars);
+    alert("🎉 Level Complete!\n" + stars);
 
+    if (level < 10) {
+        localStorage.setItem("level", level + 1);
+    }
 
+    backHome();
 
-function backHome(){function playVictorySound(){
+}, 500);
 
-    let sound = new Audio(
-        "sounds/victory"+level+".mp3"
-    );
+}
 
-
+function playVictorySound() {
+    let sound = new Audio("sounds/victory" + level + ".mp3");
     sound.play();
-
 }
 
-    window.location="index.html";
-
+function backHome() {
+    window.location = "index.html";
 }
 
-
-
-setup();startMusic();
+setup();
+startMusic();
