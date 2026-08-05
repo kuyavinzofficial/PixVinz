@@ -2,37 +2,40 @@
 <html>
 
 <head>
-<title>PuzzleMania Levels</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>PuzzleMania Levels</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
-
 
 <body>
 
 <div class="levels">
 
-<h1>🧩 PuzzleMania</h1>
+    <h1>🧩 PuzzleMania</h1>
 
-<h2>Select Level</h2>
+    <h2>Select Level</h2>
 
+    <div class="coins">
+        🪙 Coins:
+        <span id="coins">0</span>
+    </div>
 
-<div class="coins">
-🪙 Coins: <span id="coins">0</span>
+    <div
+        class="level-grid"
+        id="levelContainer">
+    </div>
+
+    <button onclick="playClick(); backHome()">
+        ⬅ Back
+    </button>
+
 </div>
 
-
-<div class="level-grid" id="levelContainer"></div>
-
-
-<button onclick="backHome()">⬅ Back</button>
-
-
-</div>
-
-
+<script src="audio.js"></script>
 <script src="script.js"></script>
 
 </body>
