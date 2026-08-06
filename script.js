@@ -1,23 +1,25 @@
-// ======================================
-// PuzzleMania Script v1.0
-// ======================================
-
-let totalLevels = 20;
 
 
-// ==============================
+// ------------------------------
+// Total Levels
+// ------------------------------
+
+const totalLevels = 20;
+
+// ------------------------------
 // Main Menu
-// ==============================
+// ------------------------------
 
-function startGame(){
+function startGame() {
 
     playClick();
 
     let nextLevel = 1;
 
-    for(let i = 1; i <= totalLevels; i++){
+    // Find the highest unlocked level
+    for (let i = 1; i <= totalLevels; i++) {
 
-        if(localStorage.getItem("level"+i) === "completed"){
+        if (localStorage.getItem("level" + i) === "completed") {
 
             nextLevel = i + 1;
 
@@ -25,103 +27,142 @@ function startGame(){
 
     }
 
-    if(nextLevel > totalLevels){
+    if (nextLevel > totalLevels) {
 
         nextLevel = totalLevels;
 
     }
 
-    localStorage.setItem(
-        "level",
-        nextLevel
-    );
+    localStorage.setItem("level", nextLevel);
 
-    window.location = "game.html";
+    window.location.href = "game.html";
 
 }
 
+// ------------------------------
+// Open Levels
+// ------------------------------
 
-function openLevels(){
+function openLevels() {
 
     playClick();
 
-    window.location = "levels.html";
+    window.location.href = "levels.html";
 
 }
 
+// ------------------------------
+// Back Home
+// ------------------------------
 
-function backHome(){
+function backHome() {
 
     playClick();
 
-    window.location = "index.html";
+    window.location.href = "index.html";
 
 }
 
+// ------------------------------
+// Play Selected Level
+// ------------------------------
 
+function playLevel(level) {
 
-// ==============================
+    localStorage.setItem("level", level);
+
+    window.location.href = "game.html";
+
+}
+// ======================================
 // Load Levels
-// ==============================
+// ======================================
 
-function loadLevels(){
+function loadLevels() {
 
-    let container =
-    document.getElementById("levelContainer");
+    const container = document.getElementById("levelContainer");
 
-    if(!container) return;
-
+    if (!container) return;
 
     container.innerHTML = "";
 
+    // ----------------------------
+    // Coins
+    // ----------------------------
 
-    let coins =
-    Number(localStorage.getItem("coins")) || 0;
+    const coins = Number(localStorage.getItem("coins")) || 0;
 
+    const coinsLabel = document.getElementById("coins");
 
-    document.getElementById("coins").innerHTML =
-    coins;
+    if (coinsLabel) {
 
+        coinsLabel.textContent = coins;
 
+    }
 
-    for(let i=1;i<=totalLevels;i++){
+    // ----------------------------
+    // Create Level Cards
+    // ----------------------------
 
-        let button =
-        document.createElement("button");
+    for (let i = 1; i <= totalLevels; i++) {
 
+        const button = document.createElement("button");
 
-        button.className =
-        "level-card";
+        button.className = "level-card";
 
+        const completed =
+            localStorage.getItem("level" + i) === "completed";
 
-        let unlocked =
-        i===1 ||
-        localStorage.getItem("level"+(i-1))
-        ==="completed";
+        const unlocked =
+            i === 1 ||
+            localStorage.getItem("level" + (i - 1)) === "completed";
 
+        // ----------------------------
+        // Completed Level
+        // ----------------------------
 
-        let completed =
-        localStorage.getItem("level"+i)
-        ==="completed";
-
-
-        if(completed){
+        if (completed) {
 
             button.classList.add("completed");
 
+            const bestTime =
+                localStorage.getItem("level" + i + "BestTime") || "--";
+
+            const bestMoves =
+                localStorage.getItem("level" + i + "BestMoves") || "--";
+
+            const starValue =
+                Number(localStorage.getItem("level" + i + "BestStars")) || 0;
+
+            let stars = "";
+
+            switch (starValue) {
+
+                case 3:
+                    stars = "⭐⭐⭐";
+                    break;
+
+                case 2:
+                    stars = "⭐⭐";
+                    break;
+
+                case 1:
+                    stars = "⭐";
+                    break;
+
+                default:
+                    stars = "⭐";
+                    break;
+
+            }
+
             button.innerHTML =
-            "⭐ Level " + i;
+                "<strong>⭐ Level " + i + "</strong><br>" +
+                stars + "<br>" +
+                "⏱ " + bestTime + "s<br>" +
+                "🔄 " + bestMoves + " Moves";
 
-        }
-
-        else if(unlocked){
-
-            button.classList.add("unlocked");
-
-            button.innerHTML =
-            "Level " + i;
-
-            button.onclick = function(){
+            button.onclick = function () {
 
                 playClick();
 
@@ -131,167 +172,95 @@ function loadLevels(){
 
         }
 
-        else{
+        // ----------------------------
+        // Unlocked but not completed
+        // ----------------------------
+
+        else if (unlocked) {
+
+            button.classList.add("unlocked");
+
+            button.innerHTML =
+                "<strong>Level " + i + "</strong><br>" +
+                "▶ Play";
+
+            button.onclick = function () {
+
+                playClick();
+
+                playLevel(i);
+
+            };
+
+        }
+
+        // ----------------------------
+        // Locked
+        // ----------------------------
+
+        else {
 
             button.classList.add("locked");
 
             button.innerHTML =
-            "🔒 Level " + i;
+                "🔒<br>Level " + i;
 
         }
-
 
         container.appendChild(button);
 
     }
 
 }
-
-
-
-// ==============================
-// Play Level
-// ==============================
-
-function playLevel(level){
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-    window.location =
-    "game.html";
-
-}
-
-
-
-// ==============================
+// ======================================
 // Auto Load
-// ==============================
+// ======================================
 
-if(window.location.pathname.includes("levels")){
+window.addEventListener("DOMContentLoaded", function () {
 
-    loadLevels();
+    // Automatically load the level cards
+    if (window.location.pathname.includes("levels")) {
 
-}
-// ==============================
-// SETTINGS
-// ==============================
-
-function openSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-    if(!popup) return;
-
-    popup.style.display = "flex";
-
-    loadSettings();
-
-}
-
-function closeSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-    if(!popup) return;
-
-    popup.style.display = "none";
-
-}
-
-function loadSettings(){
-
-    const music =
-    document.getElementById("musicToggle");
-
-    const sound =
-    document.getElementById("soundToggle");
-
-    const animation =
-    document.getElementById("animationToggle");
-
-    if(music){
-
-        music.checked =
-        localStorage.getItem("music") !== "off";
+        loadLevels();
 
     }
 
-    if(sound){
+    // Update coins on any page that has a coins label
+    const coinsLabel = document.getElementById("coins");
 
-        sound.checked =
-        localStorage.getItem("sound") !== "off";
+    if (coinsLabel) {
 
-    }
-
-    if(animation){
-
-        animation.checked =
-        localStorage.getItem("animation") !== "off";
-
-    }
-
-}
-
-document.addEventListener("change",function(e){
-
-    if(e.target.id==="musicToggle"){
-
-        setMusic(e.target.checked);
-
-    }
-
-    if(e.target.id==="soundToggle"){
-
-        setSound(e.target.checked);
-
-    }
-
-    if(e.target.id==="animationToggle"){
-
-        localStorage.setItem(
-            "animation",
-            e.target.checked ? "on":"off"
-        );
+        coinsLabel.textContent =
+            Number(localStorage.getItem("coins")) || 0;
 
     }
 
 });
-
-function resetProgress(){
+function resetProgress() {
 
     const answer = confirm(
-        "Are you sure?\n\nThis will erase:\n\n• Levels\n• Coins\n• Stars\n• Records"
+        "Reset all game progress?\n\n" +
+        "This will erase:\n\n" +
+        "• All unlocked levels\n" +
+        "• Coins\n" +
+        "• Completed levels\n" +
+        "• Best Times\n" +
+        "• Best Moves\n" +
+        "• Best Stars\n\n" +
+        "This cannot be undone."
     );
 
-    if(!answer) return;
+    if (!answer) return;
 
+    // Clear everything
     localStorage.clear();
+
+    // Restore default settings
+    localStorage.setItem("level", 1);
+    localStorage.setItem("coins", 0);
 
     alert("Progress has been reset!");
 
-    location.reload();
+    window.location.href = "index.html";
 
-}
-
-function showAbout(){
-
-    alert(
-`🧩 PuzzleMania
-
-Version 2.0
-
-Developer:
-Kuya Vinz Official
-
-Made with HTML, CSS & JavaScript
-
-© 2026`
-    );
-
-}
+        }
