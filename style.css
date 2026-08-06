@@ -618,67 +618,45 @@ button:hover::before{
 
 }
 
-
-
 /* ===============================
    ANIMATIONS
    =============================== */
 
-
 @keyframes backgroundMove{
 
-
-0%{
-
-background-position:0% 50%;
-
-}
-
-
-50%{
-
-background-position:100% 50%;
-
-}
-
-
-100%{
-
-background-position:0% 50%;
-
-}
-
-}
-
-
-
-@keyframes shine{
-
-
-50%{
-
-transform:scale(1.05);
-
-}
-
-}
-@keyframes floatCard{
-
-    0%,100%{
-
-        transform:translateY(0);
-
+    0%{
+        background-position:0% 50%;
     }
 
     50%{
+        background-position:100% 50%;
+    }
 
-        transform:translateY(-5px);
-
+    100%{
+        background-position:0% 50%;
     }
 
 }
 
+@keyframes shine{
 
+    50%{
+        transform:scale(1.05);
+    }
+
+}
+
+@keyframes floatCard{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+
+}
 
 @keyframes goldGlow{
 
@@ -703,40 +681,16 @@ transform:scale(1.05);
 @keyframes shineMove{
 
     0%{
-
         background-position:0% 50%;
-
     }
 
     100%{
-
         background-position:100% 50%;
-
     }
 
 }
-        background-position:0% 50%;
 
-    }
 
-    100%{
-
-        background-position:100% 50%;
-
-    }
-
-}
-    50%{
-
-        box-shadow:
-
-            0 0 30px #fff176,
-
-            0 0 55px gold;
-
-    }
-
-}
 /* ===============================
    MOBILE
    =============================== */
