@@ -341,36 +341,29 @@ button:active{
 #puzzleBoard{
 
     width:360px;
-
     height:360px;
 
-
     max-width:90vw;
-
     max-height:90vw;
-
 
     margin:25px auto;
 
+    display:grid;
+
+    justify-content:center;
+    align-content:center;
 
     padding:5px;
 
-
     border-radius:25px;
 
-
     background:
-
     rgba(255,255,255,.2);
 
-
     box-shadow:
-
     0 15px 35px rgba(0,0,0,.4);
 
-
 }
-
 
 
 /* ===============================
