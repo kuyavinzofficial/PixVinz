@@ -28,13 +28,13 @@ else if(level <= 25){
     size = 5;
 
 }
-else if(level <=40{
+else if(level <= 40{
 
     size = 6;
 
 }
-else if(level <=60{
-    size = 7
+else if(level <= 60{
+    size = 7;
 }
 // ------------------------------
 // LEVEL IMAGES
