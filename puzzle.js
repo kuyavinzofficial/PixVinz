@@ -13,29 +13,32 @@ let level =
 
 let size;
 
-if(level <= 5){
+if(level <= 10){
 
     size = 3;
 
 }
-else if(level <= 15){
+else if(level <= 20){
 
     size = 4;
 
 }
-else if(level <= 25){
+else if(level <= 35){
 
     size = 5;
 
 }
-else if(level <= 40){
+else if(level <= 50){
 
     size = 6;
 
 }
-else if(level <= 60){
+else{
+
     size = 7;
+
 }
+
 // ------------------------------
 // LEVEL IMAGES
 // ------------------------------
@@ -321,11 +324,11 @@ function drawPuzzle(){
 
 
         tile.style.backgroundImage =
-        `url("${images[level-1]}")`;
+        `url("${getCurrentImage()}")`;
 
 
         tile.style.backgroundSize =
-        `${size*100}% ${size*100}%`;
+       `${size*100}% ${size*100}%`;
 
 
         tile.style.backgroundPosition =
@@ -752,8 +755,7 @@ let oldStars =
     ) || 0;
 
 
-let currentStars =
-    stars.length;
+let currentStars = stars;
 
 
 if(currentStars > oldStars){
@@ -1555,7 +1557,7 @@ function changeLevel(newLevel){
 
 // Make sure game starts correctly
 
-window.addEventListener("load", function(){
+{
 
 
     // Setup victory screen
@@ -1693,41 +1695,6 @@ window.addEventListener("load", function(){
 
 
 
-
-// ======================================
-// KEYBOARD CONTROLS
-// ======================================
-
-document.addEventListener(
-"keydown",
-function(event){
-
-
-    let key =
-    event.key.toLowerCase();
-
-
-
-    if(key === "r"){
-
-
-        restartLevel();
-
-
-    }
-
-
-
-    if(key === "s"){
-
-
-        shufflePuzzle();
-
-
-    }
-
-
-});
 
 
 
