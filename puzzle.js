@@ -697,62 +697,8 @@ function checkWin(){
     localStorage.setItem(
         "coins",
         coins
-    );
-// ----------------------------
-// Save Best Records
-// ----------------------------
+    )
 
-
-// Save best time
-
-let oldTime =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestTime"
-        )
-    ) || 999999;
-
-
-if(seconds < oldTime){
-
-    localStorage.setItem(
-        "level" + level + "BestTime",
-        seconds
-    );
-
-}
-
-
-
-// Save best moves
-
-let oldMoves =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestMoves"
-        )
-    ) || 999999;
-
-
-if(moves < oldMoves){
-
-    localStorage.setItem(
-        "level" + level + "BestMoves",
-        moves
-    );
-
-}
-
-
-
-// Save best stars
-
-let oldStars =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestStars"
-        )
-    ) || 0;
 
 
 let currentStars = stars;
@@ -1550,63 +1496,6 @@ function changeLevel(newLevel){
 
 
             }
-// ======================================
-// FINAL INITIALIZATION SAFETY
-// ======================================
-
-
-// Make sure game starts correctly
-
-{
-
-
-    window.addEventListener("load", function () {
-
-    // Setup victory screen
-
-    victoryScreen = document.getElementById("victoryScreen");
-    finalTime = document.getElementById("finalTime");
-    finalMoves = document.getElementById("finalMoves");
-    rewardCoins = document.getElementById("rewardCoins");
-    starsDisplay = document.getElementById("starsDisplay");
-
-    nextBtn = document.getElementById("nextBtn");
-    retryBtn = document.getElementById("retryBtn");
-    homeBtn = document.getElementById("homeBtn");
-
-    if(nextBtn){
-        nextBtn.onclick = function(){
-            let next = level + 1;
-
-            if(next <= images.length){
-                localStorage.setItem("level", next);
-                location.reload();
-            }else{
-                backHome();
-            }
-        };
-    }
-
-    if(retryBtn){
-        retryBtn.onclick = restartLevel;
-    }
-
-    if(homeBtn){
-        homeBtn.onclick = backHome;
-    }
-
-    setup();
-
-    if(typeof startMusic === "function"){
-        startMusic();
-    }
-
-});
-}
-
-
-
-
 
 
 
