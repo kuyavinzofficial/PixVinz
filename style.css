@@ -411,12 +411,17 @@ button:hover::before{
    =============================== */
 
 .completed{
+/* ===============================
+   COMPLETED
+   =============================== */
+
+.completed{
 
     background:
         linear-gradient(
             145deg,
-            #ffd54f,
-            #ff9800
+            #67e8f9,
+            #0ea5e9
         );
 
     color:white;
@@ -424,14 +429,14 @@ button:hover::before{
     background-size:250% 250%;
 
     box-shadow:
-        0 0 18px gold,
-        0 0 40px rgba(255,215,0,.8),
+        0 0 18px #38bdf8,
+        0 0 40px rgba(56,189,248,.75),
         inset 0 2px 3px rgba(255,255,255,.45),
         inset 0 -8px 10px rgba(0,0,0,.20);
 
     animation:
         floatCard 4s ease-in-out infinite,
-        goldGlow 2s ease-in-out infinite,
+        blueGlow 2s ease-in-out infinite,
         shineMove 4s linear infinite;
 
 }
@@ -683,26 +688,25 @@ button:hover::before{
 
 }
 
-@keyframes goldGlow{
+@keyframes blueGlow{
 
     0%,100%{
 
         box-shadow:
-            0 0 20px gold,
-            0 0 40px rgba(255,215,0,.5);
+            0 0 18px #38bdf8,
+            0 0 40px rgba(56,189,248,.55);
 
     }
 
     50%{
 
         box-shadow:
-            0 0 30px #fff176,
-            0 0 55px gold;
+            0 0 28px #67e8f9,
+            0 0 60px #0ea5e9;
 
     }
 
 }
-
 @keyframes shineMove{
 
     0%{
