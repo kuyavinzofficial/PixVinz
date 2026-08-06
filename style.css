@@ -432,7 +432,7 @@ button:hover::before{
 }
 #starsDisplay{
 
-    font-size:50px;
+    font-size:30px;
     color:gold;
 
 }
@@ -469,7 +469,7 @@ button:hover::before{
 
 .stats{
 
-    font-size:22px;
+    font-size:12px;
 
     line-height:1.8;
 
@@ -640,7 +640,7 @@ button:hover::before{
 
 #starsDisplay{
 
-    font-size:50px;
+    font-size:30px;
 
 }
 
