@@ -75,17 +75,176 @@ function playLevel(level) {
 
 }
 // ======================================
+// ==============================
 // Load Levels
-// ======================================
+// ==============================
 
-function loadLevels() {
+function loadLevels(){
 
-    const container = document.getElementById("levelContainer");
+    let container =
+    document.getElementById("levelContainer");
 
-    if (!container) return;
+
+    if(!container) return;
+
 
     container.innerHTML = "";
 
+
+    let coins =
+    Number(localStorage.getItem("coins")) || 0;
+
+
+    let coinDisplay =
+    document.getElementById("coins");
+
+
+    if(coinDisplay){
+
+        coinDisplay.innerHTML = coins;
+
+    }
+
+
+
+    for(let i = 1; i <= totalLevels; i++){
+
+
+        let button =
+        document.createElement("button");
+
+
+        button.className =
+        "level-card";
+
+
+
+        let completed =
+        localStorage.getItem(
+            "level" + i
+        ) === "completed";
+
+
+
+        let unlocked =
+        i === 1 ||
+        localStorage.getItem(
+            "level" + (i-1)
+        ) === "completed";
+
+
+
+        let bestTime =
+        Number(
+            localStorage.getItem(
+                "level" + i + "BestTime"
+            )
+        ) || 0;
+
+
+
+        let bestMoves =
+        Number(
+            localStorage.getItem(
+                "level" + i + "BestMoves"
+            )
+        ) || 0;
+
+
+
+        let stars =
+        localStorage.getItem(
+            "level" + i + "BestStars"
+        ) || 0;
+
+
+
+
+        if(completed){
+
+
+            button.classList.add(
+                "completed"
+            );
+
+
+            button.innerHTML =
+
+            `
+            ⭐ Level ${i}
+            <br>
+            ${stars > 0 ? "⭐".repeat(stars) : ""}
+            `;
+
+
+            button.onclick = function(){
+
+
+                playClick();
+
+                playLevel(i);
+
+
+            };
+
+
+        }
+
+
+
+        else if(unlocked){
+
+
+            button.classList.add(
+                "unlocked"
+            );
+
+
+            button.innerHTML =
+            "Level " + i;
+
+
+
+            button.onclick = function(){
+
+
+                playClick();
+
+                playLevel(i);
+
+
+            };
+
+
+        }
+
+
+
+        else{
+
+
+            button.classList.add(
+                "locked"
+            );
+
+
+            button.innerHTML =
+            "🔒 Level " + i;
+
+
+        }
+
+
+
+        container.appendChild(
+            button
+        );
+
+
+    }
+
+
+}
     // ----------------------------
     // Coins
     // ----------------------------
