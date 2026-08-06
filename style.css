@@ -353,9 +353,9 @@ button:active{
     margin:25px auto;
 
 
-    padding:5px;
-
-
+    padding:0px;
+    display:grid;
+    overflow:hidden;
     border-radius:25px;
 
 
@@ -578,11 +578,7 @@ transform:scale(1.05);
 
 
 
-Yes, I can. I still have the original CSS you sent before we started fixing the mobile alignment problem.
 
-Because the full CSS is very long, I will send it in parts so it does not get cut off by the chat limit. This will be the exact version before the mobile centering fix (including the original mobile section with the issue).
-
-Here is Part 1/3:
 
 /* ======================================
    PuzzleMania Premium Game UI
@@ -795,12 +791,8 @@ button:active{
     font-size:22px;
 
 }
-I will send Part 2/3 next.
 
 
-next
-
-Part 2/3 — Original CSS continued
 
 /* ===============================
    LEVEL GRID
@@ -1137,12 +1129,6 @@ transform:scale(1.05);
 }
 
 }
-I will send Part 3/3 (mobile section + settings popup) next.
-
-
-next
-
-Part 3/3 — Original CSS continued (Mobile + Settings Popup)
 
 /* ===============================
    MOBILE
