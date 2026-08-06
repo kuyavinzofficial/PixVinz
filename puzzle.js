@@ -9,18 +9,25 @@ let level = Number(localStorage.getItem("level")) || 1;
 // Difficulty
 let size;
 
-if (level <= 2) {
+if(level <= 5){
+
     size = 3;
-} else if (level <= 4) {
+
+}
+else if(level <= 10){
+
     size = 4;
-} else if (level <= 6) {
+
+}
+else if(level <= 15){
+
     size = 5;
-} else if (level <= 8) {
+
+}
+else{
+
     size = 6;
-} else if (level == 9) {
-    size = 7;
-} else {
-    size = 8;
+
 }
 
 // Images
@@ -35,7 +42,18 @@ const images = [
     "images/level7.jpeg",
     "images/level8.jpeg",
     "images/level9.jpeg",
-    "images/level10.jpeg"
+    "images/level10.jpeg",
+
+    "images/level11.jpeg",
+    "images/level12.jpeg",
+    "images/level13.jpeg",
+    "images/level14.jpeg",
+    "images/level15.jpeg",
+    "images/level16.jpeg",
+    "images/level17.jpeg",
+    "images/level18.jpeg",
+    "images/level19.jpeg",
+    "images/level20.jpeg"
 
 ];
 
