@@ -252,9 +252,6 @@ button:hover::before{
 
 }
 
-
-
-
 .level-card::before{
 
     content:"";
@@ -269,14 +266,22 @@ button:hover::before{
 
     height:220%;
 
-    background:
-        rgba(255,255,255,.18);
+    background:rgba(255,255,255,.18);
 
     transform:rotate(30deg);
 
     transition:.7s;
 
 }
+
+.level-card:hover::before{
+
+    left:130%;
+
+}
+
+
+
 
 .level-card{
 
