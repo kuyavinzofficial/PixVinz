@@ -247,23 +247,7 @@ function loadLevels(){
 }
     
 
-    // ----------------------------
-    // Create Level Cards
-    // ----------------------------
-
-    for (let i = 1; i <= totalLevels; i++) {
-
-        const button = document.createElement("button");
-
-        button.className = "level-card";
-
-        const completed =
-            localStorage.getItem("level" + i) === "completed";
-
-        const unlocked =
-            i === 1 ||
-            localStorage.getItem("level" + (i - 1)) === "completed";
-
+    
         // ----------------------------
         // Completed Level
         // ----------------------------
