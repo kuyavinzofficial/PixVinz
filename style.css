@@ -388,35 +388,22 @@ button:active{
 }
 
 .victory-box {
-
     width: 90%;
     max-width: 420px;
-
     background: white;
     color: #222;
-
     padding: 30px;
-
     border-radius: 20px;
-
     text-align: center;
-
     box-shadow: 0 10px 30px rgba(0,0,0,.4);
-
 }
 
 #starsDisplay {
-
     font-size: 42px;
     margin: 20px 0;
-
 }
 
 .victory-box button {
-
     width: 100%;
     margin-top: 10px;
-
-    
-
 }
