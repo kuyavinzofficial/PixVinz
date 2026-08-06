@@ -1,69 +1,100 @@
+/* ======================================
+   PuzzleMania Premium Game UI
+   ====================================== */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:'Arial',sans-serif;
 }
 
 
 body{
 
-    background:
-        linear-gradient(
-            135deg,
-            #4f46e5 0%,
-            #7c3aed 50%,
-            #9333ea 100%
-        );
-
-    background-size:300% 300%;
-
-    animation:gradientMove 12s ease infinite;
+    min-height:100vh;
 
     color:white;
-
-    min-height:100vh;
 
     text-align:center;
 
     overflow-x:hidden;
 
+
+    background:
+    linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea,
+        #2563eb
+    );
+
+    background-size:400% 400%;
+
+    animation:
+    backgroundMove 15s ease infinite;
+
 }
+
+
+
+/* ===============================
+   MAIN CONTAINERS
+   =============================== */
 
 
 .menu,
 .levels,
 .game{
 
-    width:100%;
+    width:90%;
 
-    max-width:500px;
+    max-width:520px;
 
     margin:40px auto;
 
     padding:35px;
 
-    border-radius:25px;
 
-    background:rgba(255,255,255,.12);
+    background:
+    rgba(255,255,255,.15);
 
-    backdrop-filter:blur(12px);
+
+    backdrop-filter:
+    blur(15px);
+
+
+    border-radius:30px;
+
+
+    border:
+    1px solid rgba(255,255,255,.25);
+
 
     box-shadow:
 
-        0 15px 35px rgba(0,0,0,.25);
+    0 20px 50px rgba(0,0,0,.35);
+
 
 }
 
 
 
-/* MAIN TITLE */
+/* ===============================
+   TITLES
+   =============================== */
+
 
 h1{
 
-    font-size:45px;
+    font-size:48px;
 
-    margin-bottom:10px;
+    margin-bottom:15px;
+
+    text-shadow:
+
+    0 5px 15px rgba(0,0,0,.4);
 
 }
 
@@ -81,58 +112,72 @@ p{
 
     font-size:20px;
 
-    margin-bottom:20px;
-
 }
 
 
 
-/* BUTTONS */
+/* ===============================
+   BUTTON DESIGN
+   =============================== */
+
 
 button{
 
     width:260px;
 
-    max-width:90%;
-
-    padding:16px;
+    padding:17px;
 
     margin:12px auto;
 
+
     display:block;
+
 
     border:none;
 
-    border-radius:18px;
+    border-radius:20px;
 
-    background:rgba(255,255,255,.95);
-
-    color:#5b21b6;
-
-    font-size:20px;
-
-    font-weight:700;
 
     cursor:pointer;
 
-    transition:.25s;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+
+    color:#4c1d95;
+
+
+    background:white;
+
 
     box-shadow:
 
-        0 8px 20px rgba(0,0,0,.25);
+    0 10px 20px rgba(0,0,0,.3);
+
+
+    transition:.25s;
 
 }
+
+
+
 button:hover{
 
-    transform:translateY(-3px);
+    transform:
+
+    translateY(-5px)
+    scale(1.03);
+
+
+    box-shadow:
+
+    0 15px 30px rgba(0,0,0,.4);
 
 }
 
-button:active{
 
-    transform:scale(.96);
-
-}
 
 button:active{
 
@@ -142,20 +187,47 @@ button:active{
 
 
 
-/* LEVEL SCREEN */
+/* ===============================
+   COINS
+   =============================== */
+
+
+.coins{
+
+    margin:20px;
+
+    padding:12px;
+
+    border-radius:15px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    font-size:22px;
+
+}
+/* ===============================
+   LEVEL GRID
+   =============================== */
 
 
 .level-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(2,120px);
+
+    grid-template-columns:
+    repeat(2,120px);
+
 
     justify-content:center;
 
-    gap:15px;
 
-    margin:20px auto;
+    gap:18px;
+
 
 }
 
@@ -165,135 +237,170 @@ button:active{
 
     width:120px;
 
-    height:100px;
+    height:110px;
 
-    border-radius:18px;
 
-    font-size:20px;
+    border-radius:25px;
 
-    font-weight:bold;
 
-    transition:.25s;
+    font-size:18px;
+
 
     box-shadow:
 
-        0 8px 15px rgba(0,0,0,.2);
+    0 10px 20px rgba(0,0,0,.3);
 
 }
-.level-card:hover{
 
-    transform:translateY(-5px);
 
-}
+
+/* AVAILABLE */
 
 .unlocked{
 
-    background:white;
+    background:
 
-    color:#764ba2;
+    linear-gradient(
+    135deg,
+    #ffffff,
+    #ddd6fe
+    );
 
-}
 
-
-
-.locked{
-
-    background:#555;
-
-    color:#ddd;
+    color:#6d28d9;
 
 }
 
+
+
+/* COMPLETED */
 
 
 .completed{
 
-    background:#ffd700;
+    background:
+
+    linear-gradient(
+    135deg,
+    #ffd700,
+    #f59e0b
+    );
+
 
     color:white;
 
-}
 
+    animation:
 
-
-/* COINS */
-
-.coins{
-
-    font-size:22px;
-
-    margin:20px;
+    shine 2s infinite;
 
 }
 
 
 
-/* GAME INFO */
+/* LOCKED */
+
+
+.locked{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #374151,
+    #111827
+    );
+
+
+    color:#aaa;
+
+}
+
+
+
+/* ===============================
+   GAME STATS
+   =============================== */
 
 
 .stats{
 
-    font-size:20px;
+    font-size:22px;
 
     line-height:1.8;
-
-    margin-bottom:15px;
 
 }
 
 
 
-/* PUZZLE BOARD */
+/* ===============================
+   PUZZLE BOARD
+   =============================== */
 
 
 #puzzleBoard{
 
-    width:350px;
+    width:360px;
 
-    height:350px;
+    height:360px;
+
 
     max-width:90vw;
 
     max-height:90vw;
 
-    margin:20px auto;
 
-    display:grid;
+    margin:25px auto;
 
-    gap:1px;
 
-    touch-action: manipulation;
+    padding:5px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    rgba(255,255,255,.2);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.4);
+
 
 }
 
 
 
-/* PUZZLE PIECES */
+/* ===============================
+   PUZZLE PIECES
+   =============================== */
 
 
 .piece{
 
-    width:100%;
+    border-radius:10px;
 
-    height:100%;
 
-    background-repeat:no-repeat;
+    border:
 
-    border-radius:8px;
+    1px solid
+    rgba(255,255,255,.35);
 
-    border:1px solid rgba(255,255,255,.25);
 
     transition:.2s;
 
-    cursor:pointer;
 
 }
 
 
 
-.piece:active{
+.piece:hover{
 
-    transform:scale(.95);
+    filter:
+
+    brightness(1.15);
 
 }
 
@@ -301,7 +408,364 @@ button:active{
 
 .selected{
 
-    border:4px solid yellow;
+    border:
+
+    4px solid yellow;
+
+
+    transform:
+
+    scale(.93);
+
+
+    box-shadow:
+
+    0 0 20px yellow;
+
+}
+
+
+
+/* ===============================
+   VICTORY SCREEN
+   =============================== */
+
+
+.hidden{
+
+    display:none!important;
+
+}
+
+
+
+#victoryScreen{
+
+    position:fixed;
+
+    inset:0;
+
+
+    background:
+
+    rgba(0,0,0,.75);
+
+
+    display:flex;
+
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    z-index:9999;
+
+}
+
+
+
+.victory-box{
+
+
+    width:90%;
+
+    max-width:420px;
+
+
+    background:white;
+
+
+    color:#222;
+
+
+    padding:35px;
+
+
+    border-radius:30px;
+
+
+    box-shadow:
+
+    0 20px 50px black;
+
+
+}
+
+
+
+#starsDisplay{
+
+    font-size:50px;
+
+}
+
+
+
+/* ===============================
+   ANIMATIONS
+   =============================== */
+
+
+@keyframes backgroundMove{
+
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+}
+
+
+
+@keyframes shine{
+
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+}
+/* ===============================
+   MOBILE
+   =============================== */
+
+
+@media(max-width:500px){
+
+    .game{
+
+        width:95%;
+
+        padding:15px;
+
+    }
+
+
+    #puzzleBoard{
+
+        width:90vw;
+
+        height:90vw;
+
+        max-width:360px;
+
+        max-height:360px;
+
+        margin:25px auto;
+    }
+
+
+}
+
+
+
+Yes, I can. I still have the original CSS you sent before we started fixing the mobile alignment problem.
+
+Because the full CSS is very long, I will send it in parts so it does not get cut off by the chat limit. This will be the exact version before the mobile centering fix (including the original mobile section with the issue).
+
+Here is Part 1/3:
+
+/* ======================================
+   PuzzleMania Premium Game UI
+   ====================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Arial',sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    color:white;
+
+    text-align:center;
+
+    overflow-x:hidden;
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea,
+        #2563eb
+    );
+
+    background-size:400% 400%;
+
+    animation:
+    backgroundMove 15s ease infinite;
+
+}
+
+
+
+/* ===============================
+   MAIN CONTAINERS
+   =============================== */
+
+
+.menu,
+.levels,
+.game{
+
+    width:90%;
+
+    max-width:520px;
+
+    margin:40px auto;
+
+    padding:35px;
+
+
+    background:
+    rgba(255,255,255,.15);
+
+
+    backdrop-filter:
+    blur(15px);
+
+
+    border-radius:30px;
+
+
+    border:
+    1px solid rgba(255,255,255,.25);
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.35);
+
+
+}
+
+
+
+/* ===============================
+   TITLES
+   =============================== */
+
+
+h1{
+
+    font-size:48px;
+
+    margin-bottom:15px;
+
+    text-shadow:
+
+    0 5px 15px rgba(0,0,0,.4);
+
+}
+
+
+h2{
+
+    font-size:30px;
+
+    margin-bottom:20px;
+
+}
+
+
+p{
+
+    font-size:20px;
+
+}
+
+
+
+/* ===============================
+   BUTTON DESIGN
+   =============================== */
+
+
+button{
+
+    width:260px;
+
+    padding:17px;
+
+    margin:12px auto;
+
+
+    display:block;
+
+
+    border:none;
+
+    border-radius:20px;
+
+
+    cursor:pointer;
+
+
+    font-size:20px;
+
+    font-weight:bold;
+
+
+    color:#4c1d95;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.3);
+
+
+    transition:.25s;
+
+}
+
+
+
+button:hover{
+
+    transform:
+
+    translateY(-5px)
+    scale(1.03);
+
+
+    box-shadow:
+
+    0 15px 30px rgba(0,0,0,.4);
+
+}
+
+
+
+button:active{
 
     transform:scale(.95);
 
@@ -309,101 +773,478 @@ button:active{
 
 
 
-/* GAME BUTTONS */
+/* ===============================
+   COINS
+   =============================== */
 
 
-.game button{
+.coins{
 
-    margin-top:15px;
+    margin:20px;
+
+    padding:12px;
+
+    border-radius:15px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    font-size:22px;
+
+}
+I will send Part 2/3 next.
+
+
+next
+
+Part 2/3 — Original CSS continued
+
+/* ===============================
+   LEVEL GRID
+   =============================== */
+
+
+.level-grid{
+
+    display:grid;
+
+
+    grid-template-columns:
+    repeat(2,120px);
+
+
+    justify-content:center;
+
+
+    gap:18px;
+
 
 }
 
 
 
-/* MOBILE FIX */
+.level-card{
 
-@media(max-width:400px){
+    width:120px;
 
-
-    h1{
-
-        font-size:36px;
-
-    }
+    height:110px;
 
 
-    h2{
+    border-radius:25px;
 
-        font-size:25px;
+
+    font-size:18px;
+
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.3);
+
+}
+
+
+
+/* AVAILABLE */
+
+.unlocked{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #ffffff,
+    #ddd6fe
+    );
+
+
+    color:#6d28d9;
+
+}
+
+
+
+/* COMPLETED */
+
+
+.completed{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #ffd700,
+    #f59e0b
+    );
+
+
+    color:white;
+
+
+    animation:
+
+    shine 2s infinite;
+
+}
+
+
+
+/* LOCKED */
+
+
+.locked{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #374151,
+    #111827
+    );
+
+
+    color:#aaa;
+
+}
+
+
+
+/* ===============================
+   GAME STATS
+   =============================== */
+
+
+.stats{
+
+    font-size:22px;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ===============================
+   PUZZLE BOARD
+   =============================== */
+
+
+#puzzleBoard{
+
+    width:360px;
+
+    height:360px;
+
+
+    max-width:90vw;
+
+    max-height:90vw;
+
+
+    margin:25px auto;
+
+
+    padding:5px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    rgba(255,255,255,.2);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.4);
+
+
+}
+
+
+
+/* ===============================
+   PUZZLE PIECES
+   =============================== */
+
+
+.piece{
+
+    border-radius:10px;
+
+
+    border:
+
+    1px solid
+    rgba(255,255,255,.35);
+
+
+    transition:.2s;
+
+
+}
+
+
+
+.piece:hover{
+
+    filter:
+
+    brightness(1.15);
+
+}
+
+
+
+.selected{
+
+    border:
+
+    4px solid yellow;
+
+
+    transform:
+
+    scale(.93);
+
+
+    box-shadow:
+
+    0 0 20px yellow;
+
+}
+
+
+
+/* ===============================
+   VICTORY SCREEN
+   =============================== */
+
+
+.hidden{
+
+    display:none!important;
+
+}
+
+
+
+#victoryScreen{
+
+    position:fixed;
+
+    inset:0;
+
+
+    background:
+
+    rgba(0,0,0,.75);
+
+
+    display:flex;
+
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    z-index:9999;
+
+}
+
+
+
+.victory-box{
+
+
+    width:90%;
+
+    max-width:420px;
+
+
+    background:white;
+
+
+    color:#222;
+
+
+    padding:35px;
+
+
+    border-radius:30px;
+
+
+    box-shadow:
+
+    0 20px 50px black;
+
+
+}
+
+
+
+#starsDisplay{
+
+    font-size:50px;
+
+}
+
+
+
+/* ===============================
+   ANIMATIONS
+   =============================== */
+
+
+@keyframes backgroundMove{
+
+
+0%{
+
+background-position:0% 50%;
+
+}
+
+
+50%{
+
+background-position:100% 50%;
+
+}
+
+
+100%{
+
+background-position:0% 50%;
+
+}
+
+}
+
+
+
+@keyframes shine{
+
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+}
+I will send Part 3/3 (mobile section + settings popup) next.
+
+
+next
+
+Part 3/3 — Original CSS continued (Mobile + Settings Popup)
+
+/* ===============================
+   MOBILE
+   =============================== */
+
+
+@media(max-width:500px){
+
+    .game{
+
+        width:95%;
+
+        padding:15px;
 
     }
 
 
     #puzzleBoard{
 
-        width:320px;
+        width:90vw;
 
-        height:320px;
+        height:90vw;
 
+        max-width:360px;
+
+        max-height:360px;
+
+        margin:25px auto;
     }
 
 
-    }
-@keyframes gradientMove {
+}
 
-    0% {
-        background-position: 0% 50%;
-    }
 
-    50% {
-        background-position: 100% 50%;
-    }
 
-    100% {
-        background-position: 0% 50%;
-    }
+/* ==========================
+   SETTINGS POPUP
+   ========================== */
+
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.7);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
 
 }
 
-/* =========================
-   Victory Screen
-   ========================= */
 
-.hidden {
-    display: none !important;
+
+.popup-box{
+
+    width:90%;
+
+    max-width:400px;
+
+    background:white;
+
+    color:#333;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    box-shadow:
+
+    0 20px 50px black;
+
 }
 
-#victoryScreen {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+
+
+.setting-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:20px 0;
+
+    font-size:20px;
+
 }
 
-#victoryScreen.hidden {
-    display: none !important;
-}
 
-.victory-box {
-    width: 90%;
-    max-width: 420px;
-    background: white;
-    color: #222;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.4);
-}
 
-#starsDisplay {
-    font-size: 42px;
-    margin: 20px 0;
-}
+.setting-row input{
 
-.victory-box button {
-    width: 100%;
-    margin-top: 10px;
+    width:25px;
+
+    height:25px;
+
 }
