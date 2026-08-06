@@ -1,3 +1,4 @@
+
 /* ======================================
    PuzzleMania Premium Game UI
    ====================================== */
@@ -115,659 +116,55 @@ p{
 }
 
 
-
 /* ===============================
-   BUTTON DESIGN
+   PREMIUM BUTTON DESIGN
    =============================== */
-
 
 button{
 
-    width:260px;
+    width:270px;
+    max-width:90%;
 
-    padding:17px;
+    padding:18px;
 
-    margin:12px auto;
-
+    margin:14px auto;
 
     display:block;
 
-
     border:none;
 
-    border-radius:20px;
-
+    border-radius:22px;
 
     cursor:pointer;
 
-
     font-size:20px;
 
-    font-weight:bold;
+    font-weight:700;
 
-
-    color:#4c1d95;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.3);
-
-
-    transition:.25s;
-
-}
-
-
-
-button:hover{
-
-    transform:
-
-    translateY(-5px)
-    scale(1.03);
-
-
-    box-shadow:
-
-    0 15px 30px rgba(0,0,0,.4);
-
-}
-
-
-
-button:active{
-
-    transform:scale(.95);
-
-}
-
-
-
-/* ===============================
-   COINS
-   =============================== */
-
-
-.coins{
-
-    margin:20px;
-
-    padding:12px;
-
-    border-radius:15px;
-
-
-    background:
-
-    rgba(255,255,255,.15);
-
-
-    font-size:22px;
-
-}
-/* ===============================
-   LEVEL GRID
-   =============================== */
-
-
-.level-grid{
-
-    display:grid;
-
-
-    grid-template-columns:
-    repeat(2,120px);
-
-
-    justify-content:center;
-
-
-    gap:18px;
-
-
-}
-
-
-
-.level-card{
-
-    width:120px;
-
-    height:110px;
-
-
-    border-radius:25px;
-
-
-    font-size:18px;
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.3);
-
-}
-
-
-
-/* AVAILABLE */
-
-.unlocked{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffffff,
-    #ddd6fe
-    );
-
-
-    color:#6d28d9;
-
-}
-
-
-
-/* COMPLETED */
-
-
-.completed{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffd700,
-    #f59e0b
-    );
-
+    letter-spacing:.5px;
 
     color:white;
 
-
-    animation:
-
-    shine 2s infinite;
-
-}
-
-
-
-/* LOCKED */
-
-
-.locked{
-
     background:
+        linear-gradient(
+            145deg,
+            #8b5cf6,
+            #6366f1
+        );
 
-    linear-gradient(
-    135deg,
-    #374151,
-    #111827
-    );
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.30),
+        inset 0 2px 2px rgba(255,255,255,.30),
+        inset 0 -5px 8px rgba(0,0,0,.20),
+        0 0 20px rgba(139,92,246,.30);
 
+    transition:all .30s ease;
 
-    color:#aaa;
+    position:relative;
 
-}
-
-
-
-/* ===============================
-   GAME STATS
-   =============================== */
-
-
-.stats{
-
-    font-size:22px;
-
-    line-height:1.8;
-
-}
-
-
-
-/* ===============================
-   PUZZLE BOARD
-   =============================== */
-
-
-#puzzleBoard{
-
-    width:360px;
-
-    height:360px;
-
-
-    max-width:90vw;
-
-    max-height:90vw;
-
-
-    margin:25px auto;
-
-
-    padding:0px;
-    display:grid;
     overflow:hidden;
-    border-radius:25px;
-
-
-    background:
-
-    rgba(255,255,255,.2);
-
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.4);
-
 
 }
-
-
-
-/* ===============================
-   PUZZLE PIECES
-   =============================== */
-
-
-.piece{
-
-    border-radius:10px;
-
-
-    border:
-
-    1px solid
-    rgba(255,255,255,.35);
-
-
-    transition:.2s;
-
-
-}
-
-
-
-.piece:hover{
-
-    filter:
-
-    brightness(1.15);
-
-}
-
-
-
-.selected{
-
-    border:
-
-    4px solid yellow;
-
-
-    transform:
-
-    scale(.93);
-
-
-    box-shadow:
-
-    0 0 20px yellow;
-
-}
-
-
-
-/* ===============================
-   VICTORY SCREEN
-   =============================== */
-
-
-.hidden{
-
-    display:none!important;
-
-}
-
-
-
-#victoryScreen{
-
-    position:fixed;
-
-    inset:0;
-
-
-    background:
-
-    rgba(0,0,0,.75);
-
-
-    display:flex;
-
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    z-index:9999;
-
-}
-
-
-
-.victory-box{
-
-
-    width:90%;
-
-    max-width:420px;
-
-
-    background:white;
-
-
-    color:#222;
-
-
-    padding:35px;
-
-
-    border-radius:30px;
-
-
-    box-shadow:
-
-    0 20px 50px black;
-
-
-}
-
-
-
-#starsDisplay{
-
-    font-size:50px;
-
-}
-
-
-
-/* ===============================
-   ANIMATIONS
-   =============================== */
-
-
-@keyframes backgroundMove{
-
-
-0%{
-
-background-position:0% 50%;
-
-}
-
-
-50%{
-
-background-position:100% 50%;
-
-}
-
-
-100%{
-
-background-position:0% 50%;
-
-}
-
-}
-
-
-
-@keyframes shine{
-
-
-50%{
-
-transform:scale(1.05);
-
-}
-
-}
-/* ===============================
-   MOBILE
-   =============================== */
-
-
-@media(max-width:500px){
-
-    .game{
-
-        width:95%;
-
-        padding:15px;
-
-    }
-
-
-    #puzzleBoard{
-
-        width:90vw;
-
-        height:90vw;
-
-        max-width:360px;
-
-        max-height:360px;
-
-        margin:25px auto;
-    }
-
-
-}
-
-
-
-
-
-/* ======================================
-   PuzzleMania Premium Game UI
-   ====================================== */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:'Arial',sans-serif;
-}
-
-
-body{
-
-    min-height:100vh;
-
-    color:white;
-
-    text-align:center;
-
-    overflow-x:hidden;
-
-
-    background:
-    linear-gradient(
-        135deg,
-        #312e81,
-        #6d28d9,
-        #9333ea,
-        #2563eb
-    );
-
-    background-size:400% 400%;
-
-    animation:
-    backgroundMove 15s ease infinite;
-
-}
-
-
-
-/* ===============================
-   MAIN CONTAINERS
-   =============================== */
-
-
-.menu,
-.levels,
-.game{
-
-    width:90%;
-
-    max-width:520px;
-
-    margin:40px auto;
-
-    padding:35px;
-
-
-    background:
-    rgba(255,255,255,.15);
-
-
-    backdrop-filter:
-    blur(15px);
-
-
-    border-radius:30px;
-
-
-    border:
-    1px solid rgba(255,255,255,.25);
-
-
-    box-shadow:
-
-    0 20px 50px rgba(0,0,0,.35);
-
-
-}
-
-
-
-/* ===============================
-   TITLES
-   =============================== */
-
-
-h1{
-
-    font-size:48px;
-
-    margin-bottom:15px;
-
-    text-shadow:
-
-    0 5px 15px rgba(0,0,0,.4);
-
-}
-
-
-h2{
-
-    font-size:30px;
-
-    margin-bottom:20px;
-
-}
-
-
-p{
-
-    font-size:20px;
-
-}
-
-
-
-/* ===============================
-   BUTTON DESIGN
-   =============================== */
-
-
-button{
-
-    width:260px;
-
-    padding:17px;
-
-    margin:12px auto;
-
-
-    display:block;
-
-
-    border:none;
-
-    border-radius:20px;
-
-
-    cursor:pointer;
-
-
-    font-size:20px;
-
-    font-weight:bold;
-
-
-    color:#4c1d95;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.3);
-
-
-    transition:.25s;
-
-}
-
-
-
-button:hover{
-
-    transform:
-
-    translateY(-5px)
-    scale(1.03);
-
-
-    box-shadow:
-
-    0 15px 30px rgba(0,0,0,.4);
-
-}
-
-
-
-button:active{
-
-    transform:scale(.95);
-
-}
-
-
 
 /* ===============================
    COINS
@@ -792,27 +189,21 @@ button:active{
 
 }
 
-
-
 /* ===============================
-   LEVEL GRID
+   PREMIUM LEVEL GRID
    =============================== */
-
 
 .level-grid{
 
     display:grid;
 
-
-    grid-template-columns:
-    repeat(2,120px);
-
+    grid-template-columns:repeat(2,130px);
 
     justify-content:center;
 
+    gap:22px;
 
-    gap:18px;
-
+    margin-top:20px;
 
 }
 
@@ -820,88 +211,159 @@ button:active{
 
 .level-card{
 
-    width:120px;
+    width:130px;
 
-    height:110px;
+    height:115px;
 
+    border:none;
 
-    border-radius:25px;
+    border-radius:24px;
 
+    font-size:20px;
 
-    font-size:18px;
+    font-weight:bold;
 
+    cursor:pointer;
 
-    box-shadow:
+    position:relative;
 
-    0 10px 20px rgba(0,0,0,.3);
+    overflow:hidden;
+
+    transition:all .35s ease;
+
+    transform:translateY(0);
 
 }
 
 
 
-/* AVAILABLE */
+/* Floating Animation */
+
+.level-card{
+
+    animation:floatCard 4s ease-in-out infinite;
+
+}
+
+
+
+/* Hover */
+
+.level-card:hover{
+
+    transform:translateY(-8px) scale(1.05);
+
+}
+
+
+
+/* Press */
+
+.level-card:active{
+
+    transform:scale(.95);
+
+}
+
+
+
+/* ===============================
+   UNLOCKED
+   =============================== */
 
 .unlocked{
 
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffffff,
-    #ddd6fe
+    background:linear-gradient(
+        145deg,
+        #7c3aed,
+        #4f46e5
     );
-
-
-    color:#6d28d9;
-
-}
-
-
-
-/* COMPLETED */
-
-
-.completed{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffd700,
-    #f59e0b
-    );
-
 
     color:white;
 
+    box-shadow:
+
+        0 8px 20px rgba(79,70,229,.5),
+
+        inset 0 2px 3px rgba(255,255,255,.25),
+
+        inset 0 -4px 8px rgba(0,0,0,.25);
+
+}
+
+
+
+/* Glow */
+
+.unlocked:hover{
+
+    box-shadow:
+
+        0 0 15px #7c3aed,
+
+        0 0 35px #4f46e5;
+
+}
+
+
+
+/* ===============================
+   COMPLETED
+   =============================== */
+
+.completed{
+
+    background:linear-gradient(
+        145deg,
+        #FFD54F,
+        #FF9800
+    );
+
+    color:white;
+
+    box-shadow:
+
+        0 0 20px gold,
+
+        0 0 40px rgba(255,215,0,.6),
+
+        inset 0 2px 3px rgba(255,255,255,.4);
 
     animation:
 
-    shine 2s infinite;
+        floatCard 4s ease-in-out infinite,
+
+        goldGlow 2s ease-in-out infinite;
 
 }
 
 
 
-/* LOCKED */
-
+/* ===============================
+   LOCKED
+   =============================== */
 
 .locked{
 
-    background:
-
-    linear-gradient(
-    135deg,
-    #374151,
-    #111827
+    background:linear-gradient(
+        145deg,
+        #3f3f46,
+        #18181b
     );
 
+    color:#bcbcbc;
 
-    color:#aaa;
+    box-shadow:
+
+        inset 0 2px 4px rgba(255,255,255,.08),
+
+        inset 0 -4px 10px rgba(0,0,0,.6);
+
+    cursor:not-allowed;
+
+    opacity:.8;
 
 }
-
-
 
 /* ===============================
    GAME STATS
@@ -1129,7 +591,47 @@ transform:scale(1.05);
 }
 
 }
+@keyframes floatCard{
 
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-5px);
+
+    }
+
+}
+
+
+
+@keyframes goldGlow{
+
+    0%,100%{
+
+        box-shadow:
+
+            0 0 20px gold,
+
+            0 0 40px rgba(255,215,0,.5);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 30px #fff176,
+
+            0 0 55px gold;
+
+    }
+
+}
 /* ===============================
    MOBILE
    =============================== */
