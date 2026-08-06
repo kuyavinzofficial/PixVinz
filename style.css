@@ -1,657 +1,1590 @@
 
 
-/* ======================================
-   PuzzleMania Premium Game UI
-   ====================================== */
+// ------------------------------// CURRENT LEVEL// ------------------------------
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:'Arial',sans-serif;
-}
+let level =Number(localStorage.getItem("level")) || 1;
 
+// ------------------------------// DIFFICULTY// ------------------------------
 
-body{
+let size;
 
-    min-height:100vh;
+if(level <= 5){
 
-    color:white;
+size = 3;
 
-    text-align:center;
+}else if(level <= 10){
 
-    overflow-x:hidden;
+size = 4;
 
+}else if(level <= 15){
 
-    background:
-    linear-gradient(
-        135deg,
-        #312e81,
-        #6d28d9,
-        #9333ea,
-        #2563eb
-    );
+size = 5;
 
-    background-size:400% 400%;
+}else{
 
-    animation:
-    backgroundMove 15s ease infinite;
+size = 6;
 
 }
 
+// ------------------------------// LEVEL IMAGES// ------------------------------
 
+const images = [
 
-/* ===============================
-   MAIN CONTAINERS
-   =============================== */
+"images/level1.jpeg",
+"images/level2.jpeg",
+"images/level3.jpeg",
+"images/level4.jpeg",
+"images/level5.jpeg",
 
+"images/level6.jpeg",
+"images/level7.jpeg",
+"images/level8.jpeg",
+"images/level9.jpeg",
+"images/level10.jpeg",
 
-.menu,
-.levels,
-.game{
+"images/level11.jpeg",
+"images/level12.jpeg",
+"images/level13.jpeg",
+"images/level14.jpeg",
+"images/level15.jpeg",
 
-    width:90%;
+"images/level16.jpeg",
+"images/level17.jpeg",
+"images/level18.jpeg",
+"images/level19.jpeg",
+"images/level20.jpeg"
 
-    max-width:520px;
+];
 
-    margin:40px auto;
+// ------------------------------// GAME VARIABLES// ------------------------------
 
-    padding:25px;
+let pieces = [];
 
+let moves = 0;
 
-    background:
-    rgba(255,255,255,.15);
+let seconds = 0;
 
+let timer = null;
 
-    backdrop-filter:
-    blur(15px);
+let selectedPiece = null;
 
+// ------------------------------// VICTORY SCREEN// ------------------------------
 
-    border-radius:30px;
+let victoryScreen;
 
+let finalTime;
 
-    border:
-    1px solid rgba(255,255,255,.25);
+let finalMoves;
 
+let rewardCoins;
 
-    box-shadow:
+let starsDisplay;
 
-    0 20px 50px rgba(0,0,0,.35);
+let nextBtn;
 
+let retryBtn;
 
-}
+let homeBtn;
 
+// ------------------------------// SETUP// ------------------------------
 
+function setup(){
 
-/* ===============================
-   TITLES
-   =============================== */
+document.getElementById("levelTitle").textContent =
+    "Level " + level;
 
+createPieces();
 
-h1{
-
-    font-size:48px;
-
-    margin-bottom:15px;
-
-    text-shadow:
-
-    0 5px 15px rgba(0,0,0,.4);
-
-}
-
-
-h2{
-
-    font-size:30px;
-
-    margin-bottom:20px;
-
-}
-
-
-p{
-
-    font-size:20px;
+shufflePuzzle();
 
 }
 
+// ------------------------------// TIMER// ------------------------------
 
+function startTimer(){
 
-/* ===============================
-   BUTTON DESIGN
-   =============================== */
+clearInterval(timer);
 
+timer = setInterval(function(){
 
-button{
+    seconds++;
 
-    width:260px;
+    document.getElementById("timer").textContent =
+        seconds;
 
-    padding:17px;
-
-    margin:12px auto;
-
-
-    display:block;
-
-
-    border:none;
-
-    border-radius:20px;
-
-
-    cursor:pointer;
-
-
-    font-size:20px;
-
-    font-weight:bold;
-
-
-    color:#4c1d95;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.3);
-
-
-    transition:.25s;
+},1000);
 
 }
 
+// ------------------------------// CREATE PIECES// ------------------------------
 
+function createPieces(){
 
-button:hover{
+pieces = [];
 
-    transform:
+for(let i=0;i<size*size;i++){
 
-    translateY(-5px)
-    scale(1.03);
-
-
-    box-shadow:
-
-    0 15px 30px rgba(0,0,0,.4);
-
-}
-
-
-
-button:active{
-
-    transform:scale(.95);
-
-}
-
-
-
-/* ===============================
-   COINS
-   =============================== */
-
-
-.coins{
-
-    margin:20px;
-
-    padding:12px;
-
-    border-radius:15px;
-
-
-    background:
-
-    rgba(255,255,255,.15);
-
-
-    font-size:22px;
-
-}
-
-
-/* ===============================
-   LEVEL GRID
-   =============================== */
-
-
-.level-grid{
-
-    display:grid;
-
-
-    grid-template-columns:
-    repeat(2,120px);
-
-
-    justify-content:center;
-
-
-    gap:18px;
-
-
-}
-
-
-
-.level-card{
-
-    width:120px;
-
-    height:110px;
-
-
-    border-radius:25px;
-
-
-    font-size:18px;
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.3);
-
-}
-
-
-
-/* AVAILABLE */
-
-.unlocked{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffffff,
-    #ddd6fe
-    );
-
-
-    color:#6d28d9;
-
-}
-
-
-
-/* COMPLETED */
-
-
-.completed{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ffd700,
-    #f59e0b
-    );
-
-
-    color:white;
-
-
-    animation:
-
-    shine 2s infinite;
-
-}
-
-
-
-/* LOCKED */
-
-
-.locked{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #374151,
-    #111827
-    );
-
-
-    color:#aaa;
-
-}
-
-
-
-/* ===============================
-   GAME STATS
-   =============================== */
-
-
-.stats{
-
-    font-size:22px;
-
-    line-height:1.8;
-
-}
-
-
-
-/* ===============================
-   PUZZLE BOARD
-   =============================== */
-
-
-#puzzleBoard{
-
-    width:360px;
-
-    height:360px;
-
-
-    max-width:90vw;
-
-    max-height:90vw;
-
-
-    margin:25px auto;
-
-
-    padding:5px;
-
-
-    border-radius:25px;
-
-
-    background:
-
-    rgba(255,255,255,.2);
-
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.4);
-
-
-}
-
-
-
-/* ===============================
-   PUZZLE PIECES
-   =============================== */
-
-
-.piece{
-
-    border-radius:10px;
-
-
-    border:
-
-    1px solid
-    rgba(255,255,255,.35);
-
-
-    transition:.2s;
-
-
-}
-
-
-
-.piece:hover{
-
-    filter:
-
-    brightness(1.15);
-
-}
-
-
-
-.selected{
-
-    border:
-
-    4px solid yellow;
-
-
-    transform:
-
-    scale(.93);
-
-
-    box-shadow:
-
-    0 0 20px yellow;
-
-}
-
-
-
-/* ===============================
-   VICTORY SCREEN
-   =============================== */
-
-
-.hidden{
-
-    display:none!important;
-
-}
-
-
-
-#victoryScreen{
-
-    position:fixed;
-
-    inset:0;
-
-
-    background:
-
-    rgba(0,0,0,.75);
-
-
-    display:flex;
-
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    z-index:9999;
-
-}
-
-
-
-.victory-box{
-
-
-    width:90%;
-
-    max-width:420px;
-
-
-    background:white;
-
-
-    color:#222;
-
-
-    padding:35px;
-
-
-    border-radius:30px;
-
-
-    box-shadow:
-
-    0 20px 50px black;
-
-
-}
-
-
-
-#starsDisplay{
-
-    font-size:50px;
-
-}
-
-
-
-/* ===============================
-   ANIMATIONS
-   =============================== */
-
-
-@keyframes backgroundMove{
-
-
-0%{
-
-background-position:0% 50%;
-
-}
-
-
-50%{
-
-background-position:100% 50%;
-
-}
-
-
-100%{
-
-background-position:0% 50%;
+    pieces.push(i);
 
 }
 
 }
 
+// ------------------------------// RESET STATS// ------------------------------
 
+function resetStats(){
 
-@keyframes shine{
+moves = 0;
 
+seconds = 0;
 
-50%{
+selectedPiece = null;
 
-transform:scale(1.05);
+document.getElementById("moves").textContent = "0";
+
+document.getElementById("timer").textContent = "0";
+
+document.getElementById("stars").textContent = "⭐⭐⭐";
 
 }
 
+// ------------------------------// SHUFFLE// ------------------------------
+
+function shufflePuzzle(){
+
+createPieces();
+
+for(let i = pieces.length-1;i>0;i--){
+
+    const j =
+    Math.floor(Math.random()*(i+1));
+
+    [pieces[i],pieces[j]] =
+    [pieces[j],pieces[i]];
+
 }
 
-/* ===============================
-   MOBILE
-   =============================== */
+// Prevent solved puzzle
+
+let solved = true;
+
+for(let i=0;i<pieces.length;i++){
+
+    if(pieces[i] !== i){
+
+        solved = false;
+
+        break;
+
+    }
+
+}
+
+if(solved){
+
+    [pieces[0],pieces[1]] =
+    [pieces[1],pieces[0]];
+
+}
+
+resetStats();
+
+startTimer();
+
+drawPuzzle();
+
+if(typeof playShuffle==="function"){
+
+    playShuffle();
+
+}
+
+}// ======================================// DRAW PUZZLE// ======================================
+
+function drawPuzzle(){
+
+const board =
+document.getElementById("puzzleBoard");
 
 
-@media (max-width:500px){
+board.innerHTML = "";
 
-    .game{
 
-        width:100%;
-        max-width:100%;
-        margin:0 auto;
-        padding:20px;
+board.style.display = "grid";
 
-    
+
+board.style.gridTemplateColumns =
+    `repeat(${size},1fr)`;
+
+
+pieces.forEach(function(piece,index){
+
+
+    const tile =
+    document.createElement("div");
+
+
+    tile.className = "piece";
+
+
+    const row =
+    Math.floor(piece / size);
+
+
+    const col =
+    piece % size;
+
+
+
+    tile.style.backgroundImage =
+    `url("${images[level-1]}")`;
+
+
+    tile.style.backgroundSize =
+    `${size*100}% ${size*100}%`;
+
+
+    tile.style.backgroundPosition =
+    `${col*100/(size-1)}% ${row*100/(size-1)}%`;
+
+
+
+    tile.onclick = function(){
+
+        selectPiece(index);
+
+    };
+
+
+    board.appendChild(tile);
+
+
+});
+
+}
+
+
+
+// ======================================// SELECT PIECE// ======================================
+
+function selectPiece(index){
+
+const allPieces =
+document.querySelectorAll(".piece");
+
+
+
+if(selectedPiece === null){
+
+
+    selectedPiece = index;
+
+
+    allPieces[index]
+    .classList.add("selected");
+
+
+
+    if(typeof playSelect === "function"){
+
+        playSelect();
+
     }
 
 
-    #puzzleBoard{
 
-        width:90vw;
+}
+else{
 
-        height:90vw;
 
-        max-width:360px;
+    swapPieces(
+        selectedPiece,
+        index
+    );
 
-        max-height:360px;
 
-        margin:25px auto;
+}
+
+}
+
+
+
+// ======================================// SWAP PIECES// ======================================
+
+function swapPieces(first,second){
+
+const allPieces =
+document.querySelectorAll(".piece");
+
+
+
+allPieces[first]
+.classList.remove("selected");
+
+
+
+if(first === second){
+
+
+    selectedPiece = null;
+
+    return;
+
+
+}
+
+
+
+const temp =
+pieces[first];
+
+
+pieces[first] =
+pieces[second];
+
+
+pieces[second] =
+temp;
+
+
+
+selectedPiece = null;
+
+
+moves++;
+
+
+document.getElementById("moves")
+.textContent = moves;
+
+
+
+if(typeof playExchange === "function"){
+
+    playExchange();
+
+}
+
+
+
+drawPuzzle();
+
+
+
+checkWin();
+
+}
+
+
+
+// ======================================// CHECK IF PUZZLE IS COMPLETE// ======================================
+
+function isSolved(){
+
+for(let i=0;i<pieces.length;i++){
+
+
+    if(pieces[i] !== i){
+
+
+        return false;
+
+
     }
 
 
 }
 
 
-
-/* ==========================
-   SETTINGS POPUP
-   ========================== */
+return true;
 
 
-.popup{
+     }
 
-    position:fixed;
+// ======================================// CHECK WIN// ======================================
 
-    inset:0;
+function checkWin(){
 
-    background:rgba(0,0,0,.7);
+if(!isSolved()){
 
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:9999;
+    return;
 
 }
 
 
 
-.popup-box{
+// Stop Timer
 
-    width:90%;
+clearInterval(timer);
 
-    max-width:400px;
 
-    background:white;
 
-    color:#333;
+// ------------------------------
+// Calculate Stars
+// ------------------------------
 
-    padding:30px;
+let stars = 1;
 
-    border-radius:25px;
 
-    box-shadow:
+if(seconds < 60 && moves < 50){
 
-    0 20px 50px black;
+    stars = 3;
+
+}
+else if(seconds < 120 && moves < 100){
+
+    stars = 2;
 
 }
 
 
 
-.setting-row{
+let starText = "⭐";
 
-    display:flex;
 
-    justify-content:space-between;
+if(stars === 2){
 
-    align-items:center;
+    starText = "⭐⭐";
 
-    margin:20px 0;
+}
 
-    font-size:20px;
+
+if(stars === 3){
+
+    starText = "⭐⭐⭐";
 
 }
 
 
 
-.setting-row input{
+document.getElementById("stars")
+.textContent = starText;
 
-    width:25px;
 
-    height:25px;
+
+// ------------------------------
+// Save Completion
+// ------------------------------
+
+localStorage.setItem(
+    "level" + level,
+    "completed"
+);
+
+
+
+// ------------------------------
+// Unlock Next Level
+// ------------------------------
+
+let unlocked =
+Number(localStorage.getItem("level")) || 1;
+
+
+
+if(level + 1 > unlocked && level < 20){
+
+
+    localStorage.setItem(
+        "level",
+        level + 1
+    );
+
 
 }
+
+
+
+// ------------------------------
+// Save Best Stars
+// ------------------------------
+
+let bestStars =
+Number(
+    localStorage.getItem(
+        "level" + level + "BestStars"
+    )
+) || 0;
+
+
+
+if(stars > bestStars){
+
+
+    localStorage.setItem(
+        "level" + level + "BestStars",
+        stars
+    );
+
+
+}
+
+
+
+// ------------------------------
+// Save Best Time
+// ------------------------------
+
+let bestTime =
+Number(
+    localStorage.getItem(
+        "level" + level + "BestTime"
+    )
+) || 0;
+
+
+
+if(bestTime === 0 || seconds < bestTime){
+
+
+    localStorage.setItem(
+        "level" + level + "BestTime",
+        seconds
+    );
+
+
+}
+
+
+
+// ------------------------------
+// Save Best Moves
+// ------------------------------
+
+let bestMoves =
+Number(
+    localStorage.getItem(
+        "level" + level + "BestMoves"
+    )
+) || 0;
+
+
+
+if(bestMoves === 0 || moves < bestMoves){
+
+
+    localStorage.setItem(
+        "level" + level + "BestMoves",
+        moves
+    );
+
+
+}
+
+
+
+// ------------------------------
+// Give Coins
+// ------------------------------
+
+let coins =
+Number(
+    localStorage.getItem("coins")
+) || 0;
+
+
+
+let reward =
+level * 20;
+
+
+
+coins += reward;
+
+
+
+localStorage.setItem(
+    "coins",
+    coins
+);
+
+// ----------------------------// Save Best Records// ----------------------------
+
+// Save best time
+
+let oldTime =Number(localStorage.getItem("level" + level + "BestTime")) || 999999;
+
+if(seconds < oldTime){
+
+localStorage.setItem(
+    "level" + level + "BestTime",
+    seconds
+);
+
+}
+
+
+
+// Save best moves
+
+let oldMoves =Number(localStorage.getItem("level" + level + "BestMoves")) || 999999;
+
+if(moves < oldMoves){
+
+localStorage.setItem(
+    "level" + level + "BestMoves",
+    moves
+);
+
+}
+
+
+
+// Save best stars
+
+let oldStars =Number(localStorage.getItem("level" + level + "BestStars")) || 0;
+
+let currentStars =stars.length;
+
+if(currentStars > oldStars){
+
+localStorage.setItem(
+    "level" + level + "BestStars",
+    currentStars
+);
+
+        }
+
+
+// ------------------------------
+// Sounds
+// ------------------------------
+
+if(typeof playVictorySound === "function"){
+
+    playVictorySound();
+
+}
+
+
+
+if(typeof playVictory === "function"){
+
+    playVictory(level);
+
+}
+
+
+
+// ------------------------------
+// Show Result
+// ------------------------------
+
+showVictory(
+    starText,
+    reward
+);
+
+}// ======================================// VICTORY SCREEN// ======================================
+
+function showVictory(stars, reward){
+
+if(!victoryScreen){
+
+    return;
+
+}
+
+
+
+finalTime.textContent =
+    seconds + "s";
+
+
+finalMoves.textContent =
+    moves;
+
+
+rewardCoins.textContent =
+    reward;
+
+
+starsDisplay.textContent =
+    stars;
+
+
+
+// Add best record display
+
+let bestRecord =
+document.getElementById("bestRecord");
+
+
+
+if(!bestRecord){
+
+
+    bestRecord =
+    document.createElement("div");
+
+
+    bestRecord.id =
+    "bestRecord";
+
+
+    bestRecord.style.marginTop =
+    "20px";
+
+
+    document.querySelector(".victory-box")
+    .appendChild(bestRecord);
+
+
+}
+
+
+
+const bestTime =
+localStorage.getItem(
+    "level" + level + "BestTime"
+);
+
+
+const bestMoves =
+localStorage.getItem(
+    "level" + level + "BestMoves"
+);
+
+
+const bestStars =
+Number(
+    localStorage.getItem(
+        "level" + level + "BestStars"
+    )
+) || 1;
+
+
+
+let bestStarText = "⭐";
+
+
+if(bestStars === 2){
+
+    bestStarText = "⭐⭐";
+
+}
+
+
+if(bestStars === 3){
+
+    bestStarText = "⭐⭐⭐";
+
+}
+
+
+
+bestRecord.innerHTML = `
+
+    <hr>
+
+    <h3>🏆 Best Record</h3>
+
+    <p>${bestStarText}</p>
+
+    <p>⏱ ${bestTime}s</p>
+
+    <p>🔄 ${bestMoves} moves</p>
+
+`;
+
+
+
+victoryScreen
+.classList.remove("hidden");
+
+}
+
+
+
+// ======================================// BACK TO HOME// ======================================
+
+function backHome(){
+
+if(typeof playClick === "function"){
+
+    playClick();
+
+}
+
+
+
+window.location =
+"index.html";
+
+}
+
+
+
+// ======================================// RESTART CURRENT LEVEL// ======================================
+
+function restartLevel(){
+
+if(victoryScreen){
+
+    victoryScreen
+    .classList.add("hidden");
+
+}
+
+
+
+clearInterval(timer);
+
+
+
+shufflePuzzle();
+
+}// ======================================// START GAME// ======================================
+
+window.onload = function(){
+
+
+
+// ------------------------------
+// Victory Elements
+// ------------------------------
+
+victoryScreen =
+document.getElementById("victoryScreen");
+
+
+finalTime =
+document.getElementById("finalTime");
+
+
+finalMoves =
+document.getElementById("finalMoves");
+
+
+rewardCoins =
+document.getElementById("rewardCoins");
+
+
+starsDisplay =
+document.getElementById("starsDisplay");
+
+
+
+nextBtn =
+document.getElementById("nextBtn");
+
+
+retryBtn =
+document.getElementById("retryBtn");
+
+
+homeBtn =
+document.getElementById("homeBtn");
+
+
+
+// ------------------------------
+// Hide Victory At Start
+// ------------------------------
+
+if(victoryScreen){
+
+    victoryScreen
+    .classList.add("hidden");
+
+}
+
+
+
+// ------------------------------
+// NEXT LEVEL BUTTON
+// ------------------------------
+
+if(nextBtn){
+
+
+    nextBtn.onclick = function(){
+
+
+        if(typeof playClick === "function"){
+
+            playClick();
+
+        }
+
+
+
+        let unlocked =
+        Number(
+            localStorage.getItem("level")
+        ) || 1;
+
+
+
+        // Only allow unlocked levels
+
+        if(level < unlocked){
+
+
+            level++;
+
+
+            localStorage.setItem(
+                "level",
+                level
+            );
+
+
+            window.location.reload();
+
+
+        }
+        else if(level === unlocked && level < 20){
+
+
+            level++;
+
+
+            localStorage.setItem(
+                "level",
+                level
+            );
+
+
+            window.location.reload();
+
+
+        }
+        else{
+
+
+            backHome();
+
+
+        }
+
+
+    };
+
+
+}
+
+
+
+
+// ------------------------------
+// RETRY BUTTON
+// ------------------------------
+
+if(retryBtn){
+
+
+    retryBtn.onclick = function(){
+
+
+        if(typeof playClick === "function"){
+
+            playClick();
+
+        }
+
+
+        restartLevel();
+
+
+    };
+
+
+}
+
+
+
+
+// ------------------------------
+// HOME BUTTON
+// ------------------------------
+
+if(homeBtn){
+
+
+    homeBtn.onclick = function(){
+
+
+        backHome();
+
+
+    };
+
+
+}
+
+
+
+
+// ------------------------------
+// Start Puzzle
+// ------------------------------
+
+setup();
+
+
+
+// ------------------------------
+// Background Music
+// ------------------------------
+
+if(typeof startMusic === "function"){
+
+    startMusic();
+
+}
+
+};// ======================================// LEVEL VALIDATION// ======================================
+
+function validateLevel(){
+
+if(level < 1){
+
+    level = 1;
+
+}
+
+
+
+if(level > 20){
+
+    level = 20;
+
+}
+
+
+
+localStorage.setItem(
+    "level",
+    level
+);
+
+}
+
+
+
+// ======================================// SAFE LEVEL IMAGE CHECK// ======================================
+
+function getCurrentImage(){
+
+if(images[level - 1]){
+
+    return images[level - 1];
+
+}
+
+
+return images[0];
+
+}
+
+
+
+// ======================================// PREVENT DOUBLE CLICK ISSUES// ======================================
+
+let inputLocked = false;
+
+
+
+function lockInput(){
+
+inputLocked = true;
+
+
+setTimeout(function(){
+
+
+    inputLocked = false;
+
+
+},200);
+
+}
+
+
+
+// ======================================// UPDATED SELECT CHECK// ======================================
+
+const oldSelectPiece = selectPiece;
+
+
+
+selectPiece = function(index){
+
+if(inputLocked){
+
+    return;
+
+}
+
+
+
+lockInput();
+
+
+
+oldSelectPiece(index);
+
+};
+
+
+
+// ======================================// KEYBOARD SHORTCUTS// ======================================
+
+document.addEventListener("keydown",function(event){
+
+let key =
+event.key.toLowerCase();
+
+
+
+switch(key){
+
+
+    case "r":
+
+        restartLevel();
+
+        break;
+
+
+
+    case "s":
+
+        shufflePuzzle();
+
+        break;
+
+
+
+    case "escape":
+
+
+        if(victoryScreen){
+
+            victoryScreen
+            .classList.add("hidden");
+
+        }
+
+
+        break;
+
+
+}
+
+
+
+});
+
+
+
+// ======================================// CHECK PAGE BEFORE RUNNING// ======================================
+
+validateLevel();// ======================================// RECORD HELPERS// ======================================
+
+// Get best time of a level
+
+function getBestTime(levelNumber){
+
+return Number(
+
+    localStorage.getItem(
+        "level" + levelNumber + "BestTime"
+    )
+
+) || 0;
+
+}
+
+
+
+// Get best moves of a level
+
+function getBestMoves(levelNumber){
+
+return Number(
+
+    localStorage.getItem(
+        "level" + levelNumber + "BestMoves"
+    )
+
+) || 0;
+
+}
+
+
+
+// Get best stars of a level
+
+function getBestStars(levelNumber){
+
+return Number(
+
+    localStorage.getItem(
+        "level" + levelNumber + "BestStars"
+    )
+
+) || 0;
+
+}
+
+
+
+// ======================================// TOTAL PLAYER STATISTICS// ======================================
+
+function getTotalStars(){
+
+let total = 0;
+
+
+
+for(let i = 1; i <= 20; i++){
+
+
+    total += getBestStars(i);
+
+
+}
+
+
+
+return total;
+
+}
+
+
+
+
+
+function getCompletedLevels(){
+
+let completed = 0;
+
+
+
+for(let i = 1; i <= 20; i++){
+
+
+    if(
+
+        localStorage.getItem(
+            "level" + i
+        ) === "completed"
+
+    ){
+
+
+        completed++;
+
+
+    }
+
+
+}
+
+
+
+return completed;
+
+}
+
+
+
+
+
+function getTotalCoins(){
+
+return Number(
+
+    localStorage.getItem(
+        "coins"
+    )
+
+) || 0;
+
+}
+
+
+
+// ======================================// RESET CURRENT LEVEL DISPLAY// ======================================
+
+function resetBoardDisplay(){
+
+document.getElementById("moves")
+.textContent = moves;
+
+
+
+document.getElementById("timer")
+.textContent = seconds;
+
+
+
+}
+
+
+
+// ======================================// FUTURE LEVEL SUPPORT// ======================================
+
+function changeLevel(newLevel){
+
+if(newLevel < 1){
+
+    return;
+
+}
+
+
+
+if(newLevel > images.length){
+
+    return;
+
+}
+
+
+
+level = newLevel;
+
+
+
+localStorage.setItem(
+    "level",
+    level
+);
+
+
+
+location.reload();
+
+
+        }
+
+// ======================================// FINAL INITIALIZATION SAFETY// ======================================
+
+// Make sure game starts correctly
+
+window.addEventListener("load", function(){
+
+// Setup victory screen
+
+victoryScreen =
+    document.getElementById("victoryScreen");
+
+
+finalTime =
+    document.getElementById("finalTime");
+
+
+finalMoves =
+    document.getElementById("finalMoves");
+
+
+rewardCoins =
+    document.getElementById("rewardCoins");
+
+
+starsDisplay =
+    document.getElementById("starsDisplay");
+
+
+
+nextBtn =
+    document.getElementById("nextBtn");
+
+
+retryBtn =
+    document.getElementById("retryBtn");
+
+
+homeBtn =
+    document.getElementById("homeBtn");
+
+
+
+// Next level button
+
+if(nextBtn){
+
+
+    nextBtn.onclick = function(){
+
+
+        let next = level + 1;
+
+
+
+        if(next <= images.length){
+
+
+            localStorage.setItem(
+                "level",
+                next
+            );
+
+
+            location.reload();
+
+
+        }
+
+        else{
+
+
+            backHome();
+
+
+        }
+
+
+    };
+
+
+}
+
+
+
+
+// Retry button
+
+if(retryBtn){
+
+
+    retryBtn.onclick = function(){
+
+
+        restartLevel();
+
+
+    };
+
+
+}
+
+
+
+
+// Home button
+
+if(homeBtn){
+
+
+    homeBtn.onclick = function(){
+
+
+        backHome();
+
+
+    };
+
+
+}
+
+
+
+
+setup();
+
+
+
+if(typeof startMusic === "function"){
+
+
+    startMusic();
+
+
+}
+
+
+
+});
+
+
+
+// ======================================// KEYBOARD CONTROLS// ======================================
+
+document.addEventListener("keydown",function(event){
+
+let key =
+event.key.toLowerCase();
+
+
+
+if(key === "r"){
+
+
+    restartLevel();
+
+
+}
+
+
+
+if(key === "s"){
+
+
+    shufflePuzzle();
+
+
+}
+
+});
+
+
+
+// ======================================// MOBILE SWIPE SUPPORT PREPARATION// ======================================
+
+let touchStartX = 0;let touchStartY = 0;
+
+
+
+document.addEventListener("touchstart",function(e){
+
+if(e.touches.length > 0){
+
+
+    touchStartX =
+    e.touches[0].clientX;
+
+
+    touchStartY =
+    e.touches[0].clientY;
+
+
+}
+
+});
+
+
+
+document.addEventListener("touchend",function(e){
+
+if(e.changedTouches.length > 0){
+
+
+    let endX =
+    e.changedTouches[0].clientX;
+
+
+    let endY =
+    e.changedTouches[0].clientY;
+
+
+
+    let diffX =
+    endX - touchStartX;
+
+
+
+    let diffY =
+    endY - touchStartY;
+
+
+
+    // reserved for future swipe controls
+
+
+}
+
+});
