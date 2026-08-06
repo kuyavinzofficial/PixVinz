@@ -28,12 +28,12 @@ else if(level <= 25){
     size = 5;
 
 }
-else if(level <= 40{
+else if(level <= 40){
 
     size = 6;
 
 }
-else if(level <= 60{
+else if(level <= 60){
     size = 7;
 }
 // ------------------------------
@@ -64,7 +64,7 @@ const images = [
     "images/level17.jpeg",
     "images/level18.jpeg",
     "images/level19.jpeg",
-    "images/level20.jpeg"
+    "images/level20.jpeg",
 
     "images/level21.jpeg",
     "images/level22.jpeg",
@@ -88,7 +88,7 @@ const images = [
     "images/level37.jpeg",
     "images/level38.jpeg",
     "images/level39.jpeg",
-    "images/level40.jpeg"
+    "images/level40.jpeg",
 
    "images/level41.jpeg",
     "images/level42.jpeg",
@@ -110,7 +110,7 @@ const images = [
 
     "images/level56.jpeg",
     "images/level57.jpeg",
-    "images/level88.jpeg",
+    "images/level58.jpeg",
     "images/level59.jpeg",
     "images/level60.jpeg"
  
@@ -580,7 +580,7 @@ function checkWin(){
 
 
 
-    if(level + 1 > unlocked && level < 20){
+    if(level + 1 > unlocked && level < 60){
 
 
         localStorage.setItem(
@@ -1414,7 +1414,7 @@ function getTotalStars(){
 
 
 
-    for(let i = 1; i <= 20; i++){
+    for(let i = 1; i <= 60; i++){
 
 
         total += getBestStars(i);
@@ -1440,7 +1440,7 @@ function getCompletedLevels(){
 
 
 
-    for(let i = 1; i <= 20; i++){
+    for(let i = 1; i <= 60; i++){
 
 
         if(
