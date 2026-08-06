@@ -553,32 +553,33 @@ transform:scale(1.05);
 /* MOBILE */
 
 @media(max-width:400px){
+@media(max-width:500px){
 
-h1{
+    .game{
 
-font-size:36px;
+        width:95%;
 
-}
-
-
-.level-grid{
-
-grid-template-columns:
-repeat(2,110px);
-
-}
-
-
-#puzzleBoard{
-
-width:320px;
-
-height:320px;
-
-}
-
+        padding:15px;
 
     }
+
+
+    #puzzleBoard{
+
+        width:90vw;
+
+        height:90vw;
+
+        max-width:360px;
+
+        max-height:360px;
+
+        margin:25px auto;
+
+    }
+
+
+}
 /* ==========================
    SETTINGS POPUP
    ========================== */
