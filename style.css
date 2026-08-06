@@ -165,7 +165,52 @@ button{
     overflow:hidden;
 
 }
+button:hover{
 
+    transform:
+        translateY(-6px)
+        scale(1.04);
+
+    box-shadow:
+        0 18px 35px rgba(0,0,0,.35),
+        0 0 30px rgba(139,92,246,.55);
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-100%;
+
+    left:-40%;
+
+    width:40%;
+
+    height:300%;
+
+    background:
+        rgba(255,255,255,.35);
+
+    transform:rotate(25deg);
+
+    transition:.7s;
+
+}
+
+button:hover::before{
+
+    left:120%;
+
+}
 /* ===============================
    COINS
    =============================== */
@@ -209,8 +254,35 @@ button{
 
 
 
-.level-card{
 
+.level-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-50%;
+
+    left:-60%;
+
+    width:70%;
+
+    height:220%;
+
+    background:
+        rgba(255,255,255,.18);
+
+    transform:rotate(30deg);
+
+    transition:.7s;
+
+}
+
+.level-card:hover::before{
+
+    left:130%;
+
+}
     width:130px;
 
     height:115px;
@@ -313,30 +385,26 @@ button{
 
 .completed{
 
-    background:linear-gradient(
-        145deg,
-        #FFD54F,
-        #FF9800
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #ffe66d,
+            #f59e0b
+        );
 
     color:white;
 
     box-shadow:
-
         0 0 20px gold,
-
-        0 0 40px rgba(255,215,0,.6),
-
-        inset 0 2px 3px rgba(255,255,255,.4);
+        0 0 45px rgba(255,215,0,.75),
+        inset 0 2px 3px rgba(255,255,255,.5);
 
     animation:
-
         floatCard 4s ease-in-out infinite,
-
-        goldGlow 2s ease-in-out infinite;
+        goldGlow 2s infinite,
+        shineMove 3s linear infinite;
 
 }
-
 
 
 /* ===============================
@@ -620,7 +688,21 @@ transform:scale(1.05);
             0 0 40px rgba(255,215,0,.5);
 
     }
+@keyframes shineMove{
 
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    100%{
+
+        background-position:100% 50%;
+
+    }
+
+}
     50%{
 
         box-shadow:
