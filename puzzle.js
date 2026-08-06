@@ -646,7 +646,75 @@ function checkWin(){
         "coins",
         coins
     );
+// ----------------------------
+// Save Best Records
+// ----------------------------
 
+
+// Save best time
+
+let oldTime =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestTime"
+        )
+    ) || 999999;
+
+
+if(seconds < oldTime){
+
+    localStorage.setItem(
+        "level" + level + "BestTime",
+        seconds
+    );
+
+}
+
+
+
+// Save best moves
+
+let oldMoves =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestMoves"
+        )
+    ) || 999999;
+
+
+if(moves < oldMoves){
+
+    localStorage.setItem(
+        "level" + level + "BestMoves",
+        moves
+    );
+
+}
+
+
+
+// Save best stars
+
+let oldStars =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestStars"
+        )
+    ) || 0;
+
+
+let currentStars =
+    stars.length;
+
+
+if(currentStars > oldStars){
+
+    localStorage.setItem(
+        "level" + level + "BestStars",
+        currentStars
+    );
+
+            }
 
 
     // ------------------------------
