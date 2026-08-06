@@ -2,7 +2,7 @@
 // PuzzleMania Script v1.0
 // ======================================
 
-let totalLevels = 10;
+let totalLevels = 20;
 
 
 // ==============================
