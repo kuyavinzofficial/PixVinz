@@ -1602,6 +1602,7 @@ function changeLevel(newLevel){
     }
 
 });
+}
 
 
 
