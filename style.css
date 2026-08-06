@@ -552,7 +552,6 @@ transform:scale(1.05);
 
 /* MOBILE */
 
-@media(max-width:400px){
 @media(max-width:500px){
 
     .game{
@@ -575,7 +574,9 @@ transform:scale(1.05);
         max-height:360px;
 
         margin:25px auto;
-
+{
+    margin-left:auto;
+    margin-right:auto;
     }
 
 
