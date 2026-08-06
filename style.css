@@ -274,12 +274,15 @@ button:hover::before{
 
 }
 
-.level-card:hover::before{
+.level-card:hover{
 
-    left:130%;
+    transform:
+        perspective(700px)
+        rotateX(10deg)
+        translateY(-8px)
+        scale(1.06);
 
 }
-
 
 
 
@@ -297,24 +300,41 @@ button:hover::before{
 
     font-weight:bold;
 
+    color:white;
+
     cursor:pointer;
 
     position:relative;
 
     overflow:hidden;
 
-    transition:all .35s ease;
+    display:flex;
 
-    transform:translateY(0);
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:6px;
+
+    text-shadow:
+        0 2px 6px rgba(0,0,0,.45);
+
+    transition:
+        transform .35s,
+        box-shadow .35s;
+
+    transform-style:preserve-3d;
 
     box-shadow:
-        0 12px 25px rgba(0,0,0,.35),
-        inset 0 2px 2px rgba(255,255,255,.25);
+        0 18px 28px rgba(0,0,0,.35),
+        inset 0 2px 2px rgba(255,255,255,.30),
+        inset 0 -8px 12px rgba(0,0,0,.28);
 
     background-size:200% 200%;
 
 }
-
 
 
 /* Floating Animation */
@@ -341,10 +361,11 @@ button:hover::before{
 
 .level-card:active{
 
-    transform:scale(.95);
+    transform:
+        perspective(700px)
+        scale(.94);
 
 }
-
 
 
 /* ===============================
@@ -378,13 +399,11 @@ button:hover::before{
 .unlocked:hover{
 
     box-shadow:
-
-        0 0 15px #7c3aed,
-
-        0 0 35px #4f46e5;
+        0 0 20px #7c3aed,
+        0 0 40px #6d28d9,
+        0 0 60px rgba(124,58,237,.55);
 
 }
-
 
 
 /* ===============================
@@ -396,25 +415,26 @@ button:hover::before{
     background:
         linear-gradient(
             145deg,
-            #ffe66d,
-            #f59e0b
+            #ffd54f,
+            #ff9800
         );
 
     color:white;
 
+    background-size:250% 250%;
+
     box-shadow:
-        0 0 20px gold,
-        0 0 45px rgba(255,215,0,.75),
-        inset 0 2px 3px rgba(255,255,255,.5);
+        0 0 18px gold,
+        0 0 40px rgba(255,215,0,.8),
+        inset 0 2px 3px rgba(255,255,255,.45),
+        inset 0 -8px 10px rgba(0,0,0,.20);
 
     animation:
         floatCard 4s ease-in-out infinite,
-        goldGlow 2s infinite,
-        shineMove 3s linear infinite;
+        goldGlow 2s ease-in-out infinite,
+        shineMove 4s linear infinite;
 
 }
-
-
 /* ===============================
    LOCKED
    =============================== */
