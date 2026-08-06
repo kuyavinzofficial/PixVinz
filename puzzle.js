@@ -63,22 +63,14 @@ let moves = 0;
 let seconds = 0;
 let timer = null;
 let selectedPiece = null;
-// Victory Screen Elements
-const victoryScreen = document.getElementById("victoryScreen");
-
-const finalTime = document.getElementById("finalTime");
-
-const finalMoves = document.getElementById("finalMoves");
-
-const rewardCoins = document.getElementById("rewardCoins");
-
-const starsDisplay = document.getElementById("starsDisplay");
-
-const nextBtn = document.getElementById("nextBtn");
-
-const retryBtn = document.getElementById("retryBtn");
-
-const homeBtn = document.getElementById("homeBtn");
+let victoryScreen;
+let finalTime;
+let finalMoves;
+let rewardCoins;
+let starsDisplay;
+let nextBtn;
+let retryBtn;
+let homeBtn;
 // ======================================
 // Setup
 // ======================================
@@ -329,7 +321,7 @@ function checkWin() {
     );
 
     // Unlock next level
-    if (level < 10) {
+    if (level < 20) {
 
         let unlocked =
             Number(localStorage.getItem("level")) || 1;
@@ -349,7 +341,7 @@ function checkWin() {
     let coins =
         Number(localStorage.getItem("coins")) || 0;
 
-    coins += level * 10;
+    coins += level * 20;
 
     localStorage.setItem(
         "coins",
@@ -366,21 +358,7 @@ function checkWin() {
     }
 
     // Small delay before leaving
-    setTimeout(function () {
-
-        alert(
-            "🎉 LEVEL COMPLETE!\n\n" +
-            "Stars: " + stars +
-            "\nMoves: " + moves +
-            "\nTime: " + seconds + "s" +
-            "\nCoins Earned: +" + (level * 10)
-        );
-
-        backHome();
-
-    }, 500);
-
-               }
+    showVictory(stars);
 // ======================================
 // Back to Menu
 // ======================================
@@ -417,15 +395,55 @@ function restartLevel() {
 
 window.onload = function () {
 
+    // Get Victory Screen elements
+    victoryScreen = document.getElementById("victoryScreen");
+    finalTime = document.getElementById("finalTime");
+    finalMoves = document.getElementById("finalMoves");
+    rewardCoins = document.getElementById("rewardCoins");
+    starsDisplay = document.getElementById("starsDisplay");
+
+    nextBtn = document.getElementById("nextBtn");
+    retryBtn = document.getElementById("retryBtn");
+    homeBtn = document.getElementById("homeBtn");
+
+    // Button actions
+    nextBtn.onclick = function () {
+
+        window.location.reload();
+
+    };
+
+    retryBtn.onclick = function () {
+
+        restartLevel();
+
+    };
+
+    homeBtn.onclick = function () {
+function showVictory(stars) {
+
+    finalTime.textContent = seconds + "s";
+
+    finalMoves.textContent = moves;
+
+    rewardCoins.textContent = level * 20;
+
+    starsDisplay.textContent = stars;
+
+    victoryScreen.classList.remove("hidden");
+
+}
+        backHome();
+
+    };
+
     setup();
 
-    // Start background music if audio.js exists
     if (typeof startMusic === "function") {
         startMusic();
     }
 
 };
-
 // ======================================
 // Keyboard Shortcuts (Optional)
 // ======================================
