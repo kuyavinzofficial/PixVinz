@@ -410,33 +410,6 @@ window.onload = function () {
     }
 
 };
-<div id="victoryScreen" class="hidden">
-
-    <div class="victory-box">
-
-        <h1>🎉 LEVEL COMPLETE!</h1>
-
-        <div id="starsDisplay">⭐⭐⭐</div>
-
-        <div class="stats">
-
-            <p>⏱ Time: <span id="finalTime">00:00</span></p>
-
-            <p>🔄 Moves: <span id="finalMoves">0</span></p>
-
-            <p>🪙 Reward: +<span id="rewardCoins">40</span> Coins</p>
-
-        </div>
-
-        <button id="nextBtn">➡ Next Level</button>
-
-        <button id="retryBtn">🔄 Play Again</button>
-
-        <button id="homeBtn">🏠 Home</button>
-
-    </div>
-
-</div>
 
 // ======================================
 // Keyboard Shortcuts (Optional)
