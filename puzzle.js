@@ -358,7 +358,16 @@ function checkWin() {
     }
 
     // Small delay before leaving
-    showVictory(stars);
+    function showVictory(stars) {
+
+    finalTime.textContent = seconds + "s";
+    finalMoves.textContent = moves;
+    rewardCoins.textContent = level * 20;
+    starsDisplay.textContent = stars;
+
+    victoryScreen.classList.remove("hidden");
+
+}
 // ======================================
 // Back to Menu
 // ======================================
@@ -395,7 +404,6 @@ function restartLevel() {
 
 window.onload = function () {
 
-    // Get Victory Screen elements
     victoryScreen = document.getElementById("victoryScreen");
     finalTime = document.getElementById("finalTime");
     finalMoves = document.getElementById("finalMoves");
@@ -406,35 +414,16 @@ window.onload = function () {
     retryBtn = document.getElementById("retryBtn");
     homeBtn = document.getElementById("homeBtn");
 
-    // Button actions
     nextBtn.onclick = function () {
-
         window.location.reload();
-
     };
 
     retryBtn.onclick = function () {
-
         restartLevel();
-
     };
 
     homeBtn.onclick = function () {
-function showVictory(stars) {
-
-    finalTime.textContent = seconds + "s";
-
-    finalMoves.textContent = moves;
-
-    rewardCoins.textContent = level * 20;
-
-    starsDisplay.textContent = stars;
-
-    victoryScreen.classList.remove("hidden");
-
-}
         backHome();
-
     };
 
     setup();
@@ -444,6 +433,7 @@ function showVictory(stars) {
     }
 
 };
+
 // ======================================
 // Keyboard Shortcuts (Optional)
 // ======================================
