@@ -1,25 +1,24 @@
-
-
-// ------------------------------
-// Total Levels
-// ------------------------------
+// ======================================
+// PuzzleMania Script v2.1
+// Level System + Records
+// ======================================
 
 const totalLevels = 20;
 
-// ------------------------------
-// Main Menu
-// ------------------------------
 
-function startGame() {
+// ==============================
+// Main Menu
+// ==============================
+
+function startGame(){
 
     playClick();
 
     let nextLevel = 1;
 
-    // Find the highest unlocked level
-    for (let i = 1; i <= totalLevels; i++) {
+    for(let i = 1; i <= totalLevels; i++){
 
-        if (localStorage.getItem("level" + i) === "completed") {
+        if(localStorage.getItem("level"+i) === "completed"){
 
             nextLevel = i + 1;
 
@@ -27,7 +26,7 @@ function startGame() {
 
     }
 
-    if (nextLevel > totalLevels) {
+    if(nextLevel > totalLevels){
 
         nextLevel = totalLevels;
 
@@ -35,130 +34,153 @@ function startGame() {
 
     localStorage.setItem("level", nextLevel);
 
-    window.location.href = "game.html";
+    window.location.href="game.html";
 
 }
 
-// ------------------------------
-// Open Levels
-// ------------------------------
 
-function openLevels() {
+
+// ==============================
+// Navigation
+// ==============================
+
+function openLevels(){
 
     playClick();
 
-    window.location.href = "levels.html";
+    window.location.href="levels.html";
 
 }
 
-// ------------------------------
-// Back Home
-// ------------------------------
 
-function backHome() {
+function backHome(){
 
     playClick();
 
-    window.location.href = "index.html";
+    window.location.href="index.html";
 
 }
 
-// ------------------------------
-// Play Selected Level
-// ------------------------------
 
-function playLevel(level) {
 
-    localStorage.setItem("level", level);
+function playLevel(level){
 
-    window.location.href = "game.html";
+    playClick();
+
+    localStorage.setItem(
+        "level",
+        level
+    );
+
+    window.location.href="game.html";
 
 }
-// ======================================
+
+
+
 // ==============================
 // Load Levels
 // ==============================
 
 function loadLevels(){
 
-    let container =
+    const container =
     document.getElementById("levelContainer");
 
 
     if(!container) return;
 
 
-    container.innerHTML = "";
+    container.innerHTML="";
 
 
-    let coins =
+    const coins =
     Number(localStorage.getItem("coins")) || 0;
 
 
-    let coinDisplay =
+    const coinDisplay =
     document.getElementById("coins");
 
 
     if(coinDisplay){
 
-        coinDisplay.innerHTML = coins;
+        coinDisplay.textContent = coins;
 
     }
 
 
 
-    for(let i = 1; i <= totalLevels; i++){
+    for(let i=1;i<=totalLevels;i++){
 
 
-        let button =
+        const button =
         document.createElement("button");
 
 
-        button.className =
-        "level-card";
+        button.className="level-card";
 
 
 
-        let completed =
+        const completed =
         localStorage.getItem(
-            "level" + i
-        ) === "completed";
+            "level"+i
+        )==="completed";
 
 
 
-        let unlocked =
-        i === 1 ||
+        const unlocked =
+        i===1 ||
         localStorage.getItem(
-            "level" + (i-1)
-        ) === "completed";
+            "level"+(i-1)
+        )==="completed";
 
 
 
-        let bestTime =
+        const bestTime =
+        localStorage.getItem(
+            "level"+i+"BestTime"
+        ) || "--";
+
+
+
+        const bestMoves =
+        localStorage.getItem(
+            "level"+i+"BestMoves"
+        ) || "--";
+
+
+
+        const bestStars =
         Number(
             localStorage.getItem(
-                "level" + i + "BestTime"
+                "level"+i+"BestStars"
             )
         ) || 0;
 
 
 
-        let bestMoves =
-        Number(
-            localStorage.getItem(
-                "level" + i + "BestMoves"
-            )
-        ) || 0;
+        let stars="";
+
+
+        if(bestStars===3){
+
+            stars="⭐⭐⭐";
+
+        }
+        else if(bestStars===2){
+
+            stars="⭐⭐";
+
+        }
+        else if(bestStars===1){
+
+            stars="⭐";
+
+        }
 
 
 
-        let stars =
-        localStorage.getItem(
-            "level" + i + "BestStars"
-        ) || 0;
-
-
-
+        // COMPLETED
 
         if(completed){
 
@@ -168,22 +190,19 @@ function loadLevels(){
             );
 
 
-            button.innerHTML =
+            button.innerHTML=
 
             `
-            ⭐ Level ${i}
-            <br>
-            ${stars > 0 ? "⭐".repeat(stars) : ""}
+            ⭐ Level ${i}<br>
+            ${stars}<br>
+            ⏱ ${bestTime}s<br>
+            🔄 ${bestMoves} Moves
             `;
 
 
-            button.onclick = function(){
-
-
-                playClick();
+            button.onclick=function(){
 
                 playLevel(i);
-
 
             };
 
@@ -191,6 +210,8 @@ function loadLevels(){
         }
 
 
+
+        // UNLOCKED
 
         else if(unlocked){
 
@@ -200,18 +221,17 @@ function loadLevels(){
             );
 
 
-            button.innerHTML =
-            "Level " + i;
+            button.innerHTML=
+
+            `
+            Level ${i}<br>
+            ▶ Play
+            `;
 
 
-
-            button.onclick = function(){
-
-
-                playClick();
+            button.onclick=function(){
 
                 playLevel(i);
-
 
             };
 
@@ -219,6 +239,8 @@ function loadLevels(){
         }
 
 
+
+        // LOCKED
 
         else{
 
@@ -228,170 +250,104 @@ function loadLevels(){
             );
 
 
-            button.innerHTML =
-            "🔒 Level " + i;
+            button.innerHTML=
+
+            `
+            🔒<br>
+            Level ${i}
+            `;
 
 
         }
 
-
-
-        container.appendChild(
-            button
-        );
-
-
-    }
-
-
-}
-    
-
-    
-        // ----------------------------
-        // Completed Level
-        // ----------------------------
-
-        if (completed) {
-
-            button.classList.add("completed");
-
-            const bestTime =
-                localStorage.getItem("level" + i + "BestTime") || "--";
-
-            const bestMoves =
-                localStorage.getItem("level" + i + "BestMoves") || "--";
-
-            const starValue =
-                Number(localStorage.getItem("level" + i + "BestStars")) || 0;
-
-            let stars = "";
-
-            switch (starValue) {
-
-                case 3:
-                    stars = "⭐⭐⭐";
-                    break;
-
-                case 2:
-                    stars = "⭐⭐";
-                    break;
-
-                case 1:
-                    stars = "⭐";
-                    break;
-
-                default:
-                    stars = "⭐";
-                    break;
-
-            }
-
-            button.innerHTML =
-                "<strong>⭐ Level " + i + "</strong><br>" +
-                stars + "<br>" +
-                "⏱ " + bestTime + "s<br>" +
-                "🔄 " + bestMoves + " Moves";
-
-            button.onclick = function () {
-
-                playClick();
-
-                playLevel(i);
-
-            };
-
-        }
-
-        // ----------------------------
-        // Unlocked but not completed
-        // ----------------------------
-
-        else if (unlocked) {
-
-            button.classList.add("unlocked");
-
-            button.innerHTML =
-                "<strong>Level " + i + "</strong><br>" +
-                "▶ Play";
-
-            button.onclick = function () {
-
-                playClick();
-
-                playLevel(i);
-
-            };
-
-        }
-
-        // ----------------------------
-        // Locked
-        // ----------------------------
-
-        else {
-
-            button.classList.add("locked");
-
-            button.innerHTML =
-                "🔒<br>Level " + i;
-
-        }
 
         container.appendChild(button);
 
+
     }
 
+
 }
-// ======================================
+
+
+
+// ==============================
 // Auto Load
-// ======================================
+// ==============================
 
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener(
+"DOMContentLoaded",
+function(){
 
-    // Automatically load the level cards
-    if (window.location.pathname.includes("levels")) {
+
+    if(
+    window.location.pathname.includes("levels")
+    ){
 
         loadLevels();
 
     }
 
-    // Update coins on any page that has a coins label
-    const coinsLabel = document.getElementById("coins");
 
-    if (coinsLabel) {
+    const coins =
+    document.getElementById("coins");
 
-        coinsLabel.textContent =
-            Number(localStorage.getItem("coins")) || 0;
+
+    if(coins){
+
+        coins.textContent =
+        Number(localStorage.getItem("coins")) || 0;
 
     }
 
-});
-function resetProgress() {
 
-    const answer = confirm(
-        "Reset all game progress?\n\n" +
-        "This will erase:\n\n" +
-        "• All unlocked levels\n" +
-        "• Coins\n" +
-        "• Completed levels\n" +
-        "• Best Times\n" +
-        "• Best Moves\n" +
-        "• Best Stars\n\n" +
-        "This cannot be undone."
+});
+
+
+
+
+// ==============================
+// Reset Progress
+// ==============================
+
+function resetProgress(){
+
+
+    const answer =
+    confirm(
+    "Reset all progress?\n\n"+
+    "This removes:\n"+
+    "• Levels\n"+
+    "• Coins\n"+
+    "• Records\n"+
+    "• Stars"
     );
 
-    if (!answer) return;
 
-    // Clear everything
+    if(!answer)return;
+
+
     localStorage.clear();
 
-    // Restore default settings
-    localStorage.setItem("level", 1);
-    localStorage.setItem("coins", 0);
 
-    alert("Progress has been reset!");
+    localStorage.setItem(
+        "level",
+        1
+    );
 
-    window.location.href = "index.html";
 
-        }
+    localStorage.setItem(
+        "coins",
+        0
+    );
+
+
+    alert(
+        "Progress Reset!"
+    );
+
+
+    window.location.href="index.html";
+
+
+}
