@@ -694,45 +694,30 @@ function checkWin(){
 
 
     localStorage.setItem(
-        "coins",
-        coins
-    )
+    "coins",
+    coins
+);
 
+// ------------------------------
+// Sounds
+// ------------------------------
 
+if(typeof playVictorySound === "function"){
+    playVictorySound();
+}
 
+if(typeof playVictory === "function"){
+    playVictory(level);
+}
 
-            }
+// ------------------------------
+// Show Result
+// ------------------------------
 
-
-    // ------------------------------
-    // Sounds
-    // ------------------------------
-
-    if(typeof playVictorySound === "function"){
-
-        playVictorySound();
-
-    }
-
-
-
-    if(typeof playVictory === "function"){
-
-        playVictory(level);
-
-    }
-
-
-
-    // ------------------------------
-    // Show Result
-    // ------------------------------
-
-    showVictory(
-        starText,
-        reward
-    );
-
+showVictory(
+    starText,
+    reward
+);
 
 }
 // ======================================
