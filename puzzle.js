@@ -160,12 +160,11 @@ let homeBtn;
 // SETUP
 // ------------------------------
 
+
 function setup(){
 
     document.getElementById("levelTitle").textContent =
         "Level " + level;
-
-    createPieces();
 
     shufflePuzzle();
 
@@ -701,15 +700,6 @@ function checkWin(){
 
 
 
-let currentStars = stars;
-
-
-if(currentStars > oldStars){
-
-    localStorage.setItem(
-        "level" + level + "BestStars",
-        currentStars
-    );
 
             }
 
