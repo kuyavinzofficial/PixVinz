@@ -63,7 +63,22 @@ let moves = 0;
 let seconds = 0;
 let timer = null;
 let selectedPiece = null;
+// Victory Screen Elements
+const victoryScreen = document.getElementById("victoryScreen");
 
+const finalTime = document.getElementById("finalTime");
+
+const finalMoves = document.getElementById("finalMoves");
+
+const rewardCoins = document.getElementById("rewardCoins");
+
+const starsDisplay = document.getElementById("starsDisplay");
+
+const nextBtn = document.getElementById("nextBtn");
+
+const retryBtn = document.getElementById("retryBtn");
+
+const homeBtn = document.getElementById("homeBtn");
 // ======================================
 // Setup
 // ======================================
