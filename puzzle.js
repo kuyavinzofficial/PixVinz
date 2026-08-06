@@ -1560,136 +1560,46 @@ function changeLevel(newLevel){
 {
 
 
+    window.addEventListener("load", function () {
+
     // Setup victory screen
 
-    victoryScreen =
-        document.getElementById("victoryScreen");
+    victoryScreen = document.getElementById("victoryScreen");
+    finalTime = document.getElementById("finalTime");
+    finalMoves = document.getElementById("finalMoves");
+    rewardCoins = document.getElementById("rewardCoins");
+    starsDisplay = document.getElementById("starsDisplay");
 
-
-    finalTime =
-        document.getElementById("finalTime");
-
-
-    finalMoves =
-        document.getElementById("finalMoves");
-
-
-    rewardCoins =
-        document.getElementById("rewardCoins");
-
-
-    starsDisplay =
-        document.getElementById("starsDisplay");
-
-
-
-    nextBtn =
-        document.getElementById("nextBtn");
-
-
-    retryBtn =
-        document.getElementById("retryBtn");
-
-
-    homeBtn =
-        document.getElementById("homeBtn");
-
-
-
-    // Next level button
+    nextBtn = document.getElementById("nextBtn");
+    retryBtn = document.getElementById("retryBtn");
+    homeBtn = document.getElementById("homeBtn");
 
     if(nextBtn){
-
-
         nextBtn.onclick = function(){
-
-
             let next = level + 1;
 
-
-
             if(next <= images.length){
-
-
-                localStorage.setItem(
-                    "level",
-                    next
-                );
-
-
+                localStorage.setItem("level", next);
                 location.reload();
-
-
-            }
-
-            else{
-
-
+            }else{
                 backHome();
-
-
             }
-
-
         };
-
-
     }
-
-
-
-
-    // Retry button
 
     if(retryBtn){
-
-
-        retryBtn.onclick = function(){
-
-
-            restartLevel();
-
-
-        };
-
-
+        retryBtn.onclick = restartLevel;
     }
-
-
-
-
-    // Home button
 
     if(homeBtn){
-
-
-        homeBtn.onclick = function(){
-
-
-            backHome();
-
-
-        };
-
-
+        homeBtn.onclick = backHome;
     }
-
-
-
 
     setup();
 
-
-
     if(typeof startMusic === "function"){
-
-
         startMusic();
-
-
     }
-
-
 
 });
 
