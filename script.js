@@ -245,19 +245,7 @@ function loadLevels(){
 
 
 }
-    // ----------------------------
-    // Coins
-    // ----------------------------
-
-    const coins = Number(localStorage.getItem("coins")) || 0;
-
-    const coinsLabel = document.getElementById("coins");
-
-    if (coinsLabel) {
-
-        coinsLabel.textContent = coins;
-
-    }
+    
 
     // ----------------------------
     // Create Level Cards
