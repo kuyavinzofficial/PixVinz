@@ -18,23 +18,24 @@ if(level <= 5){
     size = 3;
 
 }
-else if(level <= 10){
+else if(level <= 15){
 
     size = 4;
 
 }
-else if(level <= 15){
+else if(level <= 25){
 
     size = 5;
 
 }
-else{
+else if(level <=40{
 
     size = 6;
 
 }
-
-
+else if(level <=60{
+    size = 7
+}
 // ------------------------------
 // LEVEL IMAGES
 // ------------------------------
@@ -65,6 +66,54 @@ const images = [
     "images/level19.jpeg",
     "images/level20.jpeg"
 
+    "images/level21.jpeg",
+    "images/level22.jpeg",
+    "images/level23.jpeg",
+    "images/level24.jpeg",
+    "images/level25.jpeg",
+
+    "images/level26.jpeg",
+    "images/level27.jpeg",
+    "images/level28.jpeg",
+    "images/level29.jpeg",
+    "images/level30.jpeg",
+
+    "images/level31.jpeg",
+    "images/level32.jpeg",
+    "images/level33.jpeg",
+    "images/level34.jpeg",
+    "images/level35.jpeg",
+
+    "images/level36.jpeg",
+    "images/level37.jpeg",
+    "images/level38.jpeg",
+    "images/level39.jpeg",
+    "images/level40.jpeg"
+
+   "images/level41.jpeg",
+    "images/level42.jpeg",
+    "images/level43.jpeg",
+    "images/level44.jpeg",
+    "images/level45.jpeg",
+
+    "images/level46.jpeg",
+    "images/level47.jpeg",
+    "images/level48.jpeg",
+    "images/level49.jpeg",
+    "images/level50.jpeg",
+
+    "images/level51.jpeg",
+    "images/level52.jpeg",
+    "images/level53.jpeg",
+    "images/level54.jpeg",
+    "images/level55.jpeg",
+
+    "images/level56.jpeg",
+    "images/level57.jpeg",
+    "images/level88.jpeg",
+    "images/level59.jpeg",
+    "images/level60.jpeg"
+ 
 ];
 
 
@@ -1022,7 +1071,7 @@ window.onload = function(){
 
 
             }
-            else if(level === unlocked && level < 20){
+            else if(level === unlocked && level < 60){
 
 
                 level++;
@@ -1139,9 +1188,9 @@ function validateLevel(){
 
 
 
-    if(level > 20){
+    if(level > 60){
 
-        level = 20;
+        level = 60;
 
     }
 
