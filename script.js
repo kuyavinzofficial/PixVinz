@@ -3,7 +3,7 @@
 // Level System + Records
 // ======================================
 
-const totalLevels = 20;
+const totalLevels = 60;
 
 
 // ==============================
