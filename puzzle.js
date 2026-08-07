@@ -302,7 +302,8 @@ function drawPuzzle(){
 
 
     board.style.gridTemplateColumns =
-    `repeat(${size}, minmax(0,1fr))`;
+        `repeat(${size},1fr)`;
+
 
     pieces.forEach(function(piece,index){
 
@@ -324,11 +325,11 @@ function drawPuzzle(){
 
 
         tile.style.backgroundImage =
-        `url("${getCurrentImage()}")`;
+        `url("${images[level-1]}")`;
 
 
         tile.style.backgroundSize =
-       `${size*100}% ${size*100}%`;
+        `${size*100}% ${size*100}%`;
 
 
         tile.style.backgroundPosition =
@@ -350,6 +351,9 @@ function drawPuzzle(){
 
 
 }
+
+
+
 
 
 
