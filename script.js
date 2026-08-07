@@ -507,3 +507,75 @@ Made with HTML, CSS & JavaScript
 
 
 }
+
+// ======================================
+// PLAYER ACCOUNT
+// ======================================
+
+window.addEventListener("load", function () {
+
+    const currentUser = localStorage.getItem("currentUser");
+
+    // If no user is logged in
+    if (!currentUser) {
+
+        window.location.href = "login.html";
+        return;
+
+    }
+
+    // Load user list
+    const users =
+        JSON.parse(localStorage.getItem("users")) || [];
+
+    // Find logged in user
+    const user =
+        users.find(function(u){
+
+            return u.username === currentUser;
+
+        });
+
+    // Display player information
+    if(user){
+
+        const welcome =
+            document.getElementById("welcomeText");
+
+        const username =
+            document.getElementById("usernameDisplay");
+
+        if(welcome){
+
+            welcome.textContent =
+                "Welcome, " + user.displayName + "!";
+
+        }
+
+        if(username){
+
+            username.textContent =
+                "@" + user.username;
+
+        }
+
+    }
+
+});
+
+
+// ======================================
+// LOGOUT
+// ======================================
+
+function logout(){
+
+    if(confirm("Are you sure you want to logout?")){
+
+        localStorage.removeItem("currentUser");
+
+        window.location.href = "login.html";
+
+    }
+
+}
