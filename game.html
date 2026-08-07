@@ -1,85 +1,92 @@
-<!DOCTYPE html>
-<html>
+<title>PuzzleMania</title>
 
-<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PuzzleMania</title>
+<link rel="stylesheet" href="style.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<h1>🧩 PuzzleMania</h1>
 
-</head>
+<h2 id="levelTitle"></h2>
 
-<body>
+<div class="stats">
 
-<div class="game">
+    ⏱ Time:
+    <span id="timer">0</span>s
 
-    <h1>🧩 PuzzleMania</h1>
+    <br>
 
-    <h2 id="levelTitle"></h2>
+    🔄 Moves:
+    <span id="moves">0</span>
 
-    <div class="stats">
+    <br>
 
-        ⏱ Time:
-        <span id="timer">0</span>s
-
-        <br>
-
-        🔄 Moves:
-        <span id="moves">0</span>
-
-        <br>
-
-        ⭐ Score:
-        <span id="stars">⭐⭐⭐</span>
-
-    </div>
-
-    <div id="puzzleBoard"></div>
-
-    <button onclick="playClick(); shufflePuzzle()">
-        🔀 Shuffle
-    </button>
-
-    <button onclick="playClick(); backHome()">
-        ⬅ Menu
-    </button>
+    ⭐ Score:
+    <span id="stars">⭐⭐⭐</span>
 
 </div>
+
+<div id="puzzleBoard"></div>
+
+<button onclick="playClick(); shufflePuzzle()">
+    🔀 Shuffle
+</button>
+
+<button onclick="playClick(); backHome()">
+    ⬅ Menu
+</button>
+
+
+<!-- ==============================
+     Victory Screen
+================================ -->
+
 <div id="victoryScreen" class="hidden">
 
     <div class="victory-box">
 
         <h1>🎉 LEVEL COMPLETE!</h1>
 
+        <!-- Solved Puzzle Image -->
+        <img
+            id="completedImage"
+            src=""
+            alt="Solved Puzzle"
+        >
+
         <div id="starsDisplay">⭐⭐⭐</div>
 
         <div class="stats">
 
-            <p>⏱ Time: <span id="finalTime">00:00</span></p>
+            <p>
+                ⏱ Time:
+                <span id="finalTime">00:00</span>
+            </p>
 
-            <p>🔄 Moves: <span id="finalMoves">0</span></p>
+            <p>
+                🔄 Moves:
+                <span id="finalMoves">0</span>
+            </p>
 
-            <p>🪙 Reward: +<span id="rewardCoins">40</span> Coins</p>
+            <p>
+                🪙 Reward:
+                +<span id="rewardCoins">40</span> Coins
+            </p>
 
         </div>
 
-        <button id="nextBtn">➡ Next Level</button>
+        <button id="nextBtn">
+            ➡ Next Level
+        </button>
 
-        <button id="retryBtn">🔄 Play Again</button>
+        <button id="retryBtn">
+            🔄 Play Again
+        </button>
 
-        <button id="homeBtn">🏠 Home</button>
+        <button id="homeBtn">
+            🏠 Home
+        </button>
 
     </div>
 
 </div>
-<!-- Audio Manager MUST load first -->
-<script src="audio.js"></script>
-
-<!-- Puzzle Logic -->
-<script src="puzzle.js"></script>
-
-</body>
-
-</html>
