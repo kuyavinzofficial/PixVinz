@@ -36,7 +36,7 @@ let completedImage =
 document.getElementById("completedImage");
 
 
-if(completedImage){
+if(completedImage && images[level - 1]){
 
     completedImage.src =
     images[level - 1];
