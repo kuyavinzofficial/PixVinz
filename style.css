@@ -489,7 +489,7 @@ button:hover::before{
     align-content:center;
 
     padding:0;
-
+    gap:2xp
     border-radius:25px;
 
     background:rgba(255,255,255,.2);
@@ -517,7 +517,7 @@ button:hover::before{
 
 
     transition:.2s;
-
+    overflow: hidden;
 
 }
 
