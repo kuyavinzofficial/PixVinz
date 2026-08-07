@@ -1,21 +1,29 @@
 // ==============================
 // PuzzleMania Audio Manager
 // ==============================
+
 // ==============================
 // User Audio Settings
 // ==============================
 
 let musicEnabled =
-    localStorage.getItem("music") !== "off";
+localStorage.getItem("music") !== "off";
 
 let soundEnabled =
-    localStorage.getItem("sound") !== "off";
+localStorage.getItem("sound") !== "off";
+
+// ==============================
 // Background Music
+// ==============================
+
 const bgMusic = new Audio("sounds/bgmusic.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.3;
 
+// ==============================
 // Sound Effects
+// ==============================
+
 const clickSound = new Audio("sounds/click.mp3");
 clickSound.volume = 0.7;
 
@@ -28,11 +36,11 @@ exchangeSound.volume = 0.7;
 const shuffleSound = new Audio("sounds/shuffle.mp3");
 shuffleSound.volume = 0.7;
 
-// ---------------------------
+// ==============================
 // Background Music
-// ---------------------------
+// ==============================
 
-function startMusic() {
+function startMusic(){
 
     if(!musicEnabled) return;
 
@@ -40,8 +48,10 @@ function startMusic() {
 
 }
 
-function stopMusic() {
+function stopMusic(){
+
     bgMusic.pause();
+
 }
 
 function toggleMusic(){
@@ -58,7 +68,6 @@ function toggleMusic(){
         startMusic();
 
     }
-
     else{
 
         stopMusic();
@@ -67,9 +76,9 @@ function toggleMusic(){
 
 }
 
-// ---------------------------
+// ==============================
 // Sound Effects
-// ---------------------------
+// ==============================
 
 function playClick(){
 
@@ -77,15 +86,17 @@ function playClick(){
 
     clickSound.currentTime = 0;
 
-    clickSound.play();
+    clickSound.play().catch(() => {});
 
 }
+
 function playSelect(){
 
     if(!soundEnabled) return;
 
     selectSound.currentTime = 0;
-    selectSound.play();
+
+    selectSound.play().catch(() => {});
 
 }
 
@@ -94,7 +105,8 @@ function playExchange(){
     if(!soundEnabled) return;
 
     exchangeSound.currentTime = 0;
-    exchangeSound.play();
+
+    exchangeSound.play().catch(() => {});
 
 }
 
@@ -103,7 +115,8 @@ function playShuffle(){
     if(!soundEnabled) return;
 
     shuffleSound.currentTime = 0;
-    shuffleSound.play();
+
+    shuffleSound.play().catch(() => {});
 
 }
 
@@ -115,9 +128,14 @@ function playVictory(level){
 
     victory.volume = 0.8;
 
-    victory.play();
+    victory.play().catch(() => {});
 
 }
+
+// ==============================
+// Settings
+// ==============================
+
 function setMusic(enabled){
 
     musicEnabled = enabled;
@@ -132,7 +150,6 @@ function setMusic(enabled){
         startMusic();
 
     }
-
     else{
 
         stopMusic();
@@ -151,3 +168,25 @@ function setSound(enabled){
     );
 
 }
+
+// ==============================
+// Auto Click Sounds
+// ==============================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // All buttons
+    document.querySelectorAll("button").forEach(button => {
+
+        button.addEventListener("click", playClick);
+
+    });
+
+    // Level cards
+    document.querySelectorAll(".level-card").forEach(card => {
+
+        card.addEventListener("click", playClick);
+
+    });
+
+});
