@@ -65,6 +65,27 @@ function createPieces(){
 
 }
 
+// ======================================
+// CHECK WIN
+// ======================================
+
+function checkWin(){
+
+
+    if(!isSolved()){
+
+        return;
+
+    }
+
+
+
+    // Stop Timer
+
+    clearInterval(timer);
+
+
+}
 
 // ======================================
 // RESET GAME STATS
