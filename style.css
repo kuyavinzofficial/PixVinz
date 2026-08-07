@@ -966,3 +966,18 @@ PLAYER PROFILE
     opacity:.9;
 
 }
+
+
+/* ===============================
+LOGOUT BUTTON
+=============================== */
+
+.logout-btn{
+
+    margin:70px auto 20px auto;
+
+    width:220px;
+
+    opacity:.85;
+
+}
