@@ -1,20 +1,12 @@
 // ======================================
+// PuzzleMania
 // LEVEL SYSTEM
 // ======================================
 
 
-// ------------------------------
-// CURRENT LEVEL
-// ------------------------------
-
-let level =
-    Number(localStorage.getItem("level")) || 1;
-
-
-
-// ------------------------------
+// ======================================
 // IMAGE LIST
-// ------------------------------
+// ======================================
 
 let images = [
 
@@ -87,10 +79,43 @@ let images = [
 ];
 
 
+// ======================================
+// CURRENT LEVEL
+// ======================================
 
-// ------------------------------
-// DIFFICULTY
-// ------------------------------
+let level =
+Number(localStorage.getItem("level")) || 1;
+
+
+
+// ======================================
+// LEVEL VALIDATION
+// ======================================
+
+if(level < 1){
+
+    level = 1;
+
+}
+
+
+if(level > images.length){
+
+    level = images.length;
+
+}
+
+
+localStorage.setItem(
+    "level",
+    level
+);
+
+
+
+// ======================================
+// DIFFICULTY SYSTEM
+// ======================================
 
 let size;
 
@@ -123,52 +148,63 @@ else{
 
 
 
-// ------------------------------
-// CURRENT IMAGE
-// ------------------------------
+// ======================================
+// GET CURRENT IMAGE
+// ======================================
 
 function getCurrentImage(){
 
-    let index = level - 1;
+    let index =
+    level - 1;
 
 
-    if(index < images.length){
+    if(images[index]){
 
         return images[index];
 
     }
 
 
-    return images[images.length - 1];
+    return images[0];
 
 }
 
 
 
-// ------------------------------
+// ======================================
 // NEXT LEVEL
-// ------------------------------
+// ======================================
 
 function nextLevel(){
 
-    level++;
+    if(level < images.length){
+
+        level++;
 
 
-    localStorage.setItem(
-        "level",
-        level
-    );
+        localStorage.setItem(
+            "level",
+            level
+        );
 
 
-    location.reload();
+        location.reload();
+
+    }
+    else{
+
+        window.location =
+        "index.html";
+
+    }
 
 }
 
 
 
-// ------------------------------
-// RESET LEVEL
-// ------------------------------
+// ======================================
+// RESET GAME PROGRESS
+// ======================================
 
 function resetLevel(){
 
