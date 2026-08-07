@@ -243,12 +243,67 @@ function shufflePuzzle(){
     // Draw Puzzle
     // ------------------------------
 
-    if(typeof drawPuzzle === "function"){
+    function drawPuzzle(){
 
-        drawPuzzle();
+    const board =
+    document.getElementById("puzzleBoard");
 
-    }
 
+    board.innerHTML = "";
+
+
+    board.style.display = "grid";
+
+
+    board.style.gridTemplateColumns =
+    `repeat(${size}, minmax(0,1fr))`;
+
+    pieces.forEach(function(piece,index){
+
+
+        const tile =
+        document.createElement("div");
+
+
+        tile.className = "piece";
+
+
+        const row =
+        Math.floor(piece / size);
+
+
+        const col =
+        piece % size;
+
+
+
+        tile.style.backgroundImage =
+        `url("${getCurrentImage()}")`;
+
+
+        tile.style.backgroundSize =
+       `${size*100}% ${size*100}%`;
+
+
+        tile.style.backgroundPosition =
+        `${col*100/(size-1)}% ${row*100/(size-1)}%`;
+
+
+
+        tile.onclick = function(){
+
+            selectPiece(index);
+
+        };
+
+
+        board.appendChild(tile);
+
+
+    });
+
+
+}
 
     // ------------------------------
     // Shuffle Sound
