@@ -503,6 +503,49 @@ function isSolved(){
 
 
          }
+
+// ======================================
+// COIN REWARD TABLE
+// ======================================
+
+function getRewardByStars(level, stars){
+
+    // Levels 1-30
+    if(level <= 30){
+
+        if(stars === 1) return 5;
+        if(stars === 2) return 10;
+        return 15;
+
+    }
+
+    // Levels 31-60
+    if(level <= 60){
+
+        if(stars === 1) return 10;
+        if(stars === 2) return 20;
+        return 30;
+
+    }
+
+    // Levels 61-90 (Future)
+
+    if(level <= 90){
+
+        if(stars === 1) return 20;
+        if(stars === 2) return 40;
+        return 60;
+
+    }
+
+    // Levels 91+
+
+    if(stars === 1) return 50;
+    if(stars === 2) return 100;
+    return 150;
+
+}
+
 // ======================================
 // CHECK WIN
 // ======================================
@@ -681,28 +724,52 @@ function checkWin(){
 
 
     // ------------------------------
-    // Give Coins
-    // ------------------------------
+// GIVE COINS (Best Reward Only)
+// ------------------------------
 
-    let coins =
-    Number(
-        localStorage.getItem("coins")
-    ) || 0;
+// Reward based on stars and level
 
+const reward =
+getRewardByStars(level, stars);
 
+// Previous best reward for this level
 
-    let reward =
-    level * 20;
+const previousReward =
+Number(
+    localStorage.getItem(
+        "level" + level + "BestReward"
+    )
+) || 0;
 
+// Coins to give now
 
+const coinsToGive =
+Math.max(
+    0,
+    reward - previousReward
+);
 
-    coins += reward;
+// Current total coins
 
+let coins =
+Number(
+    localStorage.getItem("coins")
+) || 0;
 
+// Give only the missing coins
 
-    localStorage.setItem(
+coins += coinsToGive;
+
+// Save
+
+localStorage.setItem(
     "coins",
     coins
+);
+
+localStorage.setItem(
+    "level" + level + "BestReward",
+    Math.max(previousReward, reward)
 );
 
 // ------------------------------
@@ -723,7 +790,8 @@ if(typeof playVictory === "function"){
 
 showVictory(
     starText,
-    reward
+    coinsToGive
+
 );
 
 }
