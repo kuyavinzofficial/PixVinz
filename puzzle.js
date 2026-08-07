@@ -63,76 +63,7 @@ const images = [
     "images/level17.jpeg",
     "images/level18.jpeg",
     "images/level19.jpeg",
-    "images/level20.jpeg",
-    "images/level21.jpeg",
-    "images/level22.jpeg",
-    "images/level23.jpeg",
-    "images/level24.jpeg",
-    "images/level25.jpeg",
-
-    "images/level26.jpeg",
-    "images/level27.jpeg",
-    "images/level28.jpeg",
-    "images/level29.jpeg",
-    "images/level30.jpeg",
-
-    "images/level31.jpeg",
-    "images/level32.jpeg",
-    "images/level33.jpeg",
-    "images/level34.jpeg",
-    "images/level35.jpeg",
-
-    "images/level36.jpeg",
-    "images/level37.jpeg",
-    "images/level38.jpeg",
-    "images/level39.jpeg",
-    "images/level40.jpeg"
-    "images/level41.jpeg",
-    "images/level42.jpeg",
-    "images/level43.jpeg",
-    "images/level44.jpeg",
-    "images/level45.jpeg",
-
-    "images/level46.jpeg",
-    "images/level47.jpeg",
-    "images/level48.jpeg",
-    "images/level49.jpeg",
-    "images/level50.jpeg",
-
-    "images/level51.jpeg",
-    "images/level52.jpeg",
-    "images/level53.jpeg",
-    "images/level54.jpeg",
-    "images/level55.jpeg",
-
-    "images/level56.jpeg",
-    "images/level57.jpeg",
-    "images/level58.jpeg",
-    "images/level59.jpeg",
-    "images/level60.jpeg",
-    "images/level61.jpeg",
-    "images/level62.jpeg",
-    "images/level63.jpeg",
-    "images/level64.jpeg",
-    "images/level65.jpeg",
-
-    "images/level66.jpeg",
-    "images/level67.jpeg",
-    "images/level68.jpeg",
-    "images/level69.jpeg",
-    "images/level70.jpeg",
-
-    "images/level71.jpeg",
-    "images/level72.jpeg",
-    "images/level73.jpeg",
-    "images/level74.jpeg",
-    "images/level75.jpeg",
-
-    "images/level76.jpeg",
-    "images/level77.jpeg",
-    "images/level78.jpeg",
-    "images/level79.jpeg",
-    "images/level80.jpeg"
+    "images/level20.jpeg"
 
 ];
 
@@ -544,7 +475,7 @@ function checkWin(){
     let stars = 1;
 
 
-    if(seconds < 30 && moves < 30){
+    if(seconds < 60 && moves < 50){
 
         stars = 3;
 
@@ -703,7 +634,7 @@ function checkWin(){
 
 
     let reward =
-    level * 80;
+    level * 20;
 
 
 
@@ -1208,9 +1139,9 @@ function validateLevel(){
 
 
 
-    if(level > 80){
+    if(level > 20){
 
-        level = 80;
+        level = 20;
 
     }
 
@@ -1434,7 +1365,7 @@ function getTotalStars(){
 
 
 
-    for(let i = 1; i <= 80; i++){
+    for(let i = 1; i <= 20; i++){
 
 
         total += getBestStars(i);
@@ -1460,7 +1391,7 @@ function getCompletedLevels(){
 
 
 
-    for(let i = 1; i <= 80; i++){
+    for(let i = 1; i <= 20; i++){
 
 
         if(
