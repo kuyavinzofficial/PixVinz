@@ -15,6 +15,7 @@ function showVictory(stars, reward){
 
     }
 
+  
     finalTime.textContent =
         seconds + "s";
 
@@ -27,6 +28,21 @@ function showVictory(stars, reward){
     starsDisplay.textContent =
         stars;
 
+// ------------------------------
+// SHOW COMPLETED PUZZLE IMAGE
+// ------------------------------
+
+let completedImage =
+document.getElementById("completedImage");
+
+
+if(completedImage){
+
+    completedImage.src =
+    images[level - 1];
+
+}
+    
     // Add best record display
 
     let bestRecord =
