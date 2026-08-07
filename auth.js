@@ -1,9 +1,17 @@
 // ======================================
-// PuzzleMania Authentication
+// PuzzleMania Authentication System
+// Version 2.0
 // ======================================
 
-// Create Account
+
+// ------------------------------
+// CREATE ACCOUNT
+// ------------------------------
+
 function signup(){
+
+    const displayName =
+        document.getElementById("displayName").value.trim();
 
     const username =
         document.getElementById("signupUsername").value.trim();
@@ -11,13 +19,38 @@ function signup(){
     const password =
         document.getElementById("signupPassword").value;
 
-    if(username === "" || password === ""){
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+    // Check empty fields
+
+    if(
+        displayName === "" ||
+        username === "" ||
+        password === "" ||
+        confirmPassword === ""
+    ){
 
         alert("Please complete all fields.");
 
         return;
 
     }
+
+
+    // Passwords must match
+
+    if(password !== confirmPassword){
+
+        alert("Passwords do not match.");
+
+        return;
+
+    }
+
+
+    // Username already exists
 
     if(localStorage.getItem("user_" + username)){
 
@@ -27,7 +60,12 @@ function signup(){
 
     }
 
+
+    // Create player
+
     const user = {
+
+        displayName: displayName,
 
         username: username,
 
@@ -35,16 +73,31 @@ function signup(){
 
         coins: 0,
 
-        unlockedLevel: 1
+        unlockedLevel: 1,
+
+        totalStars: 0,
+
+        createdAt: Date.now()
 
     };
+
 
     localStorage.setItem(
         "user_" + username,
         JSON.stringify(user)
     );
 
+
+    // Automatically log in
+
+    localStorage.setItem(
+        "currentUser",
+        username
+    );
+
+
     alert("Account created successfully!");
+
 
     window.location = "index.html";
 
@@ -52,7 +105,10 @@ function signup(){
 
 
 
-// Login
+// ------------------------------
+// LOGIN
+// ------------------------------
+
 function login(){
 
     const username =
@@ -61,8 +117,19 @@ function login(){
     const password =
         document.getElementById("loginPassword").value;
 
+
+    if(username === "" || password === ""){
+
+        alert("Please enter your username and password.");
+
+        return;
+
+    }
+
+
     const data =
         localStorage.getItem("user_" + username);
+
 
     if(!data){
 
@@ -72,7 +139,10 @@ function login(){
 
     }
 
-    const user = JSON.parse(data);
+
+    const user =
+        JSON.parse(data);
+
 
     if(user.password !== password){
 
@@ -82,22 +152,110 @@ function login(){
 
     }
 
+
     localStorage.setItem(
         "currentUser",
         username
     );
 
-    window.location = "menu.html";
+
+    window.location = "index.html";
 
 }
 
 
 
-// Logout
+// ------------------------------
+// LOGOUT
+// ------------------------------
+
 function logout(){
 
-    localStorage.removeItem("currentUser");
+    if(confirm("Logout from PuzzleMania?")){
 
-    window.location = "index.html";
+        localStorage.removeItem(
+            "currentUser"
+        );
+
+        window.location =
+        "login.html";
+
+    }
+
+}
+
+
+
+// ------------------------------
+// GET CURRENT USER
+// ------------------------------
+
+function getCurrentUser(){
+
+    const username =
+        localStorage.getItem(
+            "currentUser"
+        );
+
+    if(!username){
+
+        return null;
+
+    }
+
+
+    const data =
+        localStorage.getItem(
+            "user_" + username
+        );
+
+    if(!data){
+
+        return null;
+
+    }
+
+
+    return JSON.parse(data);
+
+}
+
+
+
+// ------------------------------
+// SAVE CURRENT USER
+// ------------------------------
+
+function saveCurrentUser(user){
+
+    localStorage.setItem(
+
+        "user_" + user.username,
+
+        JSON.stringify(user)
+
+    );
+
+}
+
+
+
+// ------------------------------
+// REQUIRE LOGIN
+// ------------------------------
+
+function requireLogin(){
+
+    const username =
+        localStorage.getItem(
+            "currentUser"
+        );
+
+    if(!username){
+
+        window.location =
+        "login.html";
+
+    }
 
 }
