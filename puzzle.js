@@ -302,8 +302,7 @@ function drawPuzzle(){
 
 
     board.style.gridTemplateColumns =
-        `repeat(${size},1fr)`;
-
+    `repeat(${size}, minmax(0,1fr))`;
 
     pieces.forEach(function(piece,index){
 
