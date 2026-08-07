@@ -116,47 +116,6 @@ const images = [
     "images/level58.jpeg",
     "images/level59.jpeg",
     "images/level60.jpeg"
- 
-];
-
-
-// ------------------------------
-// GAME VARIABLES
-// ------------------------------
-
-let pieces = [];
-
-let moves = 0;
-
-let seconds = 0;
-
-let timer = null;
-
-let selectedPiece = null;
-
-
-// ------------------------------
-// VICTORY SCREEN
-// ------------------------------
-
-let victoryScreen;
-
-let finalTime;
-
-let finalMoves;
-
-let rewardCoins;
-
-let starsDisplay;
-
-let completedImage;
-
-let nextBtn;
-
-let retryBtn;
-
-let homeBtn;
-
 
 // ------------------------------
 // SETUP
