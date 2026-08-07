@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
 
     <title>PuzzleMania</title>
 
@@ -19,6 +22,24 @@
 
     <h2>PuzzleMania</h2>
 
+    <!-- ==========================
+         PLAYER PROFILE
+    ========================== -->
+
+    <div id="playerProfile">
+
+        <h3 id="welcomeText">
+            Welcome!
+        </h3>
+
+        <p id="usernameDisplay"></p>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
     <p>Piece Together The Fun!</p>
 
     <button onclick="playClick(); startGame()">
@@ -30,10 +51,15 @@
     </button>
 
     <button onclick="playClick(); openSettings()">
-    ⚙ SETTINGS
-</button>
+        ⚙ SETTINGS
+    </button>
 
 </div>
+
+<!-- ==========================
+     SETTINGS POPUP
+========================== -->
+
 <div id="settingsPopup" class="popup">
 
     <div class="popup-box">
@@ -79,7 +105,9 @@
     </div>
 
 </div>
+
 <script src="audio.js"></script>
+<script src="auth.js"></script>
 <script src="script.js"></script>
 
 </body>
