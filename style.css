@@ -291,7 +291,7 @@ button:hover::before{
     width:130px;
     height:125px;
 
-    font-size:12px;
+    font-size:16px;
 
     font-weight:bold;
 
@@ -401,10 +401,10 @@ button:hover::before{
 
     background:linear-gradient(
         135deg,
-        #67e8f9,
-        #38bdf8,
-        #0ea5e9,
-        #67e8f9
+        #FFD54F,
+        #FFC107,
+        #FF9800,
+        #F57C00
     );
 
     background-size:300% 300%;
@@ -412,16 +412,15 @@ button:hover::before{
     color:white;
 
     box-shadow:
-        0 0 18px #38bdf8,
-        0 0 40px rgba(56,189,248,.75),
+        0 0 18px #FFC107,
+        0 0 40px rgba(255,193,7,.75),
         inset 0 2px 3px rgba(255,255,255,.45),
         inset 0 -8px 10px rgba(0,0,0,.20);
 
     animation:
         floatCard 4s ease-in-out infinite,
-        blueGlow 2s ease-in-out infinite,
+        goldGlow 2s ease-in-out infinite,
         shineMove 4s linear infinite;
-
 }
 #starsDisplay{
 
@@ -682,18 +681,20 @@ button:hover::before{
     0%,100%{
 
         box-shadow:
-            0 0 18px #38bdf8,
-            0 0 40px rgba(56,189,248,.55);
+            0 0 18px #FFC107,
+            0 0 40px rgba(255,193,7,.60);
 
     }
 
     50%{
 
         box-shadow:
-            0 0 28px #67e8f9,
-            0 0 60px #0ea5e9;
+            0 0 30px #FFD54F,
+            0 0 60px #FF9800,
+            0 0 80px rgba(255,152,0,.70);
 
     }
+
 
 }
 @keyframes shineMove{
