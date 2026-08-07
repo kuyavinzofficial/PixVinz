@@ -7,8 +7,7 @@
 // START GAME
 // ======================================
 
-window.onload = function(){
-
+window.addEventListener("load", function(){
 
 
 // ------------------------------
@@ -178,4 +177,4 @@ if(typeof startMusic === "function"){
 
 
 
-};
+});
