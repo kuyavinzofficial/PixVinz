@@ -1,46 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
 
-    <title>PuzzleMania</title>
+<head>
+
+    <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PuzzleMania</title>
 
     <link rel="stylesheet" href="style.css">
 
 </head>
 
+<body>
 
-<div class="menu">
+<div class="game">
 
-<h1>🧩 PuzzleMania</h1>
+    <h1>🧩 PuzzleMania</h1>
 
-<h2 id="levelTitle"></h2>
+    <h2 id="levelTitle"></h2>
 
-<div class="stats">
+    <div class="stats">
 
-    ⏱ Time:
-    <span id="timer">0</span>s
+        ⏱ Time:
+        <span id="timer">0</span>s
 
-    <br>
+        <br><br>
 
-    🔄 Moves:
-    <span id="moves">0</span>
+        🔄 Moves:
+        <span id="moves">0</span>
 
-    <br>
+        <br><br>
 
-    ⭐ Score:
-    <span id="stars">⭐⭐⭐</span>
+        ⭐ Score:
+        <span id="stars">⭐⭐⭐</span>
+
+    </div>
+
+    <div id="puzzleBoard"></div>
+
+    <button onclick="playClick(); shufflePuzzle()">
+        🔀 Shuffle
+    </button>
+
+    <button onclick="playClick(); backHome()">
+        ⬅ Menu
+    </button>
 
 </div>
-
-<div id="puzzleBoard"></div>
-
-<button onclick="playClick(); shufflePuzzle()">
-    🔀 Shuffle
-</button>
-
-<button onclick="playClick(); backHome()">
-    ⬅ Menu
-</button>
-
 
 <!-- ==============================
      Victory Screen
@@ -52,12 +60,10 @@
 
         <h1>🎉 LEVEL COMPLETE!</h1>
 
-        <!-- Solved Puzzle Image -->
         <img
             id="completedImage"
             src=""
-            alt="Solved Puzzle"
-        >
+            alt="Solved Puzzle">
 
         <div id="starsDisplay">⭐⭐⭐</div>
 
@@ -95,7 +101,9 @@
     </div>
 
 </div>
+
 <script src="audio.js"></script>
 <script src="puzzle.js"></script>
+
 </body>
 </html>
