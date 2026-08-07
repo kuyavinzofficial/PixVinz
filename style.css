@@ -874,3 +874,55 @@ VICTORY SCREEN
     height:25px;
 
 }
+
+
+/* ===============================
+LOGIN & SIGNUP INPUTS
+=============================== */
+
+input{
+
+    width:270px;
+    max-width:90%;
+
+    padding:16px;
+
+    margin:8px auto;
+
+    display:block;
+
+    border:none;
+
+    border-radius:18px;
+
+    outline:none;
+
+    font-size:18px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.95);
+
+    color:#222;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+input:focus{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 18px #8b5cf6;
+
+}
+
+input::placeholder{
+
+    color:#666;
+
+}
