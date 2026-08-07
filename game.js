@@ -1,82 +1,148 @@
-// ------------------------------
-// PIECE SELECTION
-// ------------------------------
+// ======================================
+// PuzzleMania
+// GAME CONTROL SYSTEM
+// ======================================
 
-function selectPiece(piece){
+
+// ======================================
+// PIECE SELECTION
+// ======================================
+
+function selectPiece(index){
+
+
+    const allPieces =
+    document.querySelectorAll(".piece");
+
+
 
     if(selectedPiece === null){
 
-        selectedPiece = piece;
 
-        piece.classList.add("selected");
+        selectedPiece = index;
+
+
+        if(allPieces[index]){
+
+            allPieces[index]
+            .classList.add("selected");
+
+        }
+
+
+
+        if(typeof playSelect === "function"){
+
+            playSelect();
+
+        }
+
 
     }
     else{
 
-        swapPieces(selectedPiece, piece);
 
-        selectedPiece.classList.remove("selected");
+        swapPieces(
+            selectedPiece,
+            index
+        );
 
-        selectedPiece = null;
 
     }
 
 }
 
 
-// ------------------------------
+
+// ======================================
 // SWAP PIECES
-// ------------------------------
+// ======================================
 
 function swapPieces(first, second){
 
-    let firstIndex = Number(first.dataset.index);
-    let secondIndex = Number(second.dataset.index);
+
+    const allPieces =
+    document.querySelectorAll(".piece");
 
 
-    let temp = board[firstIndex];
 
-    board[firstIndex] = board[secondIndex];
+    if(allPieces[first]){
 
-    board[secondIndex] = temp;
+        allPieces[first]
+        .classList.remove("selected");
+
+    }
+
+
+
+    if(first === second){
+
+
+        selectedPiece = null;
+
+        return;
+
+
+    }
+
+
+
+    let temp =
+    pieces[first];
+
+
+    pieces[first] =
+    pieces[second];
+
+
+    pieces[second] =
+    temp;
+
+
+
+    selectedPiece = null;
+
 
 
     moves++;
 
-    updateMoves();
 
-
-    drawBoard();
-
-
-    checkVictory();
-
-}
-
-
-// ------------------------------
-// UPDATE MOVES
-// ------------------------------
-
-function updateMoves(){
 
     let moveDisplay =
-        document.getElementById("moves");
+    document.getElementById("moves");
 
 
     if(moveDisplay){
 
-        moveDisplay.innerText =
-            "Moves: " + moves;
+        moveDisplay.textContent =
+        moves;
 
     }
+
+
+
+    if(typeof playExchange === "function"){
+
+        playExchange();
+
+    }
+
+
+
+    drawPuzzle();
+
+
+
+    checkWin();
+
 
 }
 
 
-// ------------------------------
-// CHECK PLAYER MOVE
-// ------------------------------
+
+// ======================================
+// CHECK MOVE PLACEHOLDER
+// ======================================
 
 function checkMove(){
 
