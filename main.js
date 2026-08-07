@@ -1,4 +1,6 @@
+```javascript
 // ======================================
+// PuzzleMania
 // MAIN GAME STARTUP
 // ======================================
 
@@ -147,7 +149,9 @@ if(homeBtn){
 
     homeBtn.onclick = function(){
 
+
         backHome();
+
 
     };
 
@@ -160,7 +164,11 @@ if(homeBtn){
 // START PUZZLE
 // ------------------------------
 
-setup();
+if(typeof setup === "function"){
+
+    setup();
+
+}
 
 
 
@@ -178,3 +186,4 @@ if(typeof startMusic === "function"){
 
 
 });
+```
