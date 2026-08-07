@@ -15,9 +15,9 @@ function validateLevel(){
 
     }
 
-    if(level > 20){
+    if(level > 60){
 
-        level = 20;
+        level = 60;
 
     }
 
@@ -108,7 +108,7 @@ function getTotalStars(){
 
     let total = 0;
 
-    for(let i = 1; i <= 20; i++){
+    for(let i = 1; i <= 60; i++){
 
         total += getBestStars(i);
 
@@ -124,7 +124,7 @@ function getCompletedLevels(){
 
     let completed = 0;
 
-    for(let i = 1; i <= 20; i++){
+    for(let i = 1; i <= 60; i++){
 
         if(
 
@@ -166,11 +166,29 @@ function getTotalCoins(){
 
 function resetBoardDisplay(){
 
-    document.getElementById("moves")
-    .textContent = moves;
+    let movesDisplay =
+    document.getElementById("moves");
 
-    document.getElementById("timer")
-    .textContent = seconds;
+
+    let timerDisplay =
+    document.getElementById("timer");
+
+
+
+    if(movesDisplay){
+
+        movesDisplay.textContent =
+        moves;
+
+    }
+
+
+    if(timerDisplay){
+
+        timerDisplay.textContent =
+        seconds;
+
+    }
 
 }
 
