@@ -149,6 +149,8 @@ let rewardCoins;
 
 let starsDisplay;
 
+let completedImage;
+
 let nextBtn;
 
 let retryBtn;
@@ -749,6 +751,12 @@ function showVictory(stars, reward){
 
     starsDisplay.textContent =
         stars;
+ 
+   if(completedImage){
+
+    completedImage.src = getCurrentImage();
+
+}
 
 
 
@@ -923,6 +931,8 @@ window.onload = function(){
     starsDisplay =
     document.getElementById("starsDisplay");
 
+    completedImage =
+    document.getElementById("completedImage");
 
 
     nextBtn =
