@@ -1,4 +1,3 @@
-```javascript
 // ======================================
 // PuzzleMania
 // MAIN GAME STARTUP
