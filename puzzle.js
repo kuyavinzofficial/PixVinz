@@ -1,13 +1,119 @@
 
 // ------------------------------
-// SETUP
+// CURRENT LEVEL
 // ------------------------------
 
+let level =
+    Number(localStorage.getItem("level")) || 1;
+
+
+// ------------------------------
+// DIFFICULTY
+// ------------------------------
+
+let size;
+
+if(level <= 5){
+
+    size = 3;
+
+}
+else if(level <= 10){
+
+    size = 4;
+
+}
+else if(level <= 15){
+
+    size = 5;
+
+}
+else{
+
+    size = 6;
+
+}
+
+
+// ------------------------------
+// LEVEL IMAGES
+// ------------------------------
+
+const images = [
+
+    "images/level1.jpeg",
+    "images/level2.jpeg",
+    "images/level3.jpeg",
+    "images/level4.jpeg",
+    "images/level5.jpeg",
+
+    "images/level6.jpeg",
+    "images/level7.jpeg",
+    "images/level8.jpeg",
+    "images/level9.jpeg",
+    "images/level10.jpeg",
+
+    "images/level11.jpeg",
+    "images/level12.jpeg",
+    "images/level13.jpeg",
+    "images/level14.jpeg",
+    "images/level15.jpeg",
+
+    "images/level16.jpeg",
+    "images/level17.jpeg",
+    "images/level18.jpeg",
+    "images/level19.jpeg",
+    "images/level20.jpeg"
+
+];
+
+
+// ------------------------------
+// GAME VARIABLES
+// ------------------------------
+
+let pieces = [];
+
+let moves = 0;
+
+let seconds = 0;
+
+let timer = null;
+
+let selectedPiece = null;
+
+
+// ------------------------------
+// VICTORY SCREEN
+// ------------------------------
+
+let victoryScreen;
+
+let finalTime;
+
+let finalMoves;
+
+let rewardCoins;
+
+let starsDisplay;
+
+let nextBtn;
+
+let retryBtn;
+
+let homeBtn;
+
+
+// ------------------------------
+// SETUP
+// ------------------------------
 
 function setup(){
 
     document.getElementById("levelTitle").textContent =
         "Level " + level;
+
+    createPieces();
 
     shufflePuzzle();
 
@@ -195,9 +301,6 @@ function drawPuzzle(){
 
 
 
-
-
-
 // ======================================
 // SELECT PIECE
 // ======================================
@@ -344,49 +447,6 @@ function isSolved(){
 
 
          }
-
-// ======================================
-// COIN REWARD TABLE
-// ======================================
-
-function getRewardByStars(level, stars){
-
-    // Levels 1-30
-    if(level <= 30){
-
-        if(stars === 1) return 5;
-        if(stars === 2) return 10;
-        return 15;
-
-    }
-
-    // Levels 31-60
-    if(level <= 60){
-
-        if(stars === 1) return 10;
-        if(stars === 2) return 20;
-        return 30;
-
-    }
-
-    // Levels 61-90 (Future)
-
-    if(level <= 90){
-
-        if(stars === 1) return 20;
-        if(stars === 2) return 40;
-        return 60;
-
-    }
-
-    // Levels 91+
-
-    if(stars === 1) return 50;
-    if(stars === 2) return 100;
-    return 150;
-
-}
-
 // ======================================
 // CHECK WIN
 // ======================================
@@ -409,43 +469,45 @@ function checkWin(){
 
 
     // ------------------------------
-// Calculate Stars
-// ------------------------------
+    // Calculate Stars
+    // ------------------------------
 
-let stars = 1;
+    let stars = 1;
 
-if(seconds < 30 && moves < 30){
 
-    stars = 3;
+    if(seconds < 60 && moves < 50){
 
-}
-else if(seconds < 90 && moves < 80){
+        stars = 3;
 
-    stars = 2;
+    }
+    else if(seconds < 120 && moves < 100){
 
-}
-else{
+        stars = 2;
 
-    stars = 1;
+    }
 
-}
 
-let starText = "⭐";
 
-if(stars === 2){
+    let starText = "⭐";
 
-    starText = "⭐⭐";
 
-}
+    if(stars === 2){
 
-if(stars === 3){
+        starText = "⭐⭐";
 
-    starText = "⭐⭐⭐";
+    }
 
-}
 
-document.getElementById("stars").textContent = starText;
-    
+    if(stars === 3){
+
+        starText = "⭐⭐⭐";
+
+    }
+
+
+
+    document.getElementById("stars")
+    .textContent = starText;
 
 
 
@@ -465,16 +527,16 @@ document.getElementById("stars").textContent = starText;
     // ------------------------------
 
     let unlocked =
-    getPlayerData("unlockedLevel",1);
+    Number(localStorage.getItem("level")) || 1;
 
 
-    if(level + 1 > unlocked && level < 60){
+
+    if(level + 1 > unlocked && level < 20){
 
 
-        setPlayerData(
-       "unlockedLevel",
-         level+1
-    );
+        localStorage.setItem(
+            "level",
+            level + 1
         );
 
 
@@ -561,75 +623,129 @@ document.getElementById("stars").textContent = starText;
 
 
     // ------------------------------
-// GIVE COINS (Best Reward Only)
-// ------------------------------
+    // Give Coins
+    // ------------------------------
 
-// Reward based on stars and level
+    let coins =
+    Number(
+        localStorage.getItem("coins")
+    ) || 0;
 
-const reward =
-getRewardByStars(level, stars);
 
-// Previous best reward for this level
 
-const previousReward =
-Number(
-    localStorage.getItem(
-        "level" + level + "BestReward"
-    )
-) || 0;
+    let reward =
+    level * 20;
 
-// Coins to give now
 
-const coinsToGive =
-Math.max(
-    0,
-    reward - previousReward
-);
 
-// Current total coins
+    coins += reward;
 
-let coins =
-Number(
-    localStorage.getItem("coins")
-) || 0;
 
-// Give only the missing coins
 
-coins += coinsToGive;
+    localStorage.setItem(
+        "coins",
+        coins
+    );
+// ----------------------------
+// Save Best Records
+// ----------------------------
 
-// Save
 
-localStorage.setItem(
-    "coins",
-    coins
-);
+// Save best time
 
-localStorage.setItem(
-    "level" + level + "BestReward",
-    Math.max(previousReward, reward)
-);
+let oldTime =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestTime"
+        )
+    ) || 999999;
 
-// ------------------------------
-// Sounds
-// ------------------------------
 
-if(typeof playVictorySound === "function"){
-    playVictorySound();
+if(seconds < oldTime){
+
+    localStorage.setItem(
+        "level" + level + "BestTime",
+        seconds
+    );
+
 }
 
-if(typeof playVictory === "function"){
-    playVictory(level);
+
+
+// Save best moves
+
+let oldMoves =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestMoves"
+        )
+    ) || 999999;
+
+
+if(moves < oldMoves){
+
+    localStorage.setItem(
+        "level" + level + "BestMoves",
+        moves
+    );
+
 }
 
-// ------------------------------
-// Show Result
-// ------------------------------
 
-showVictory(
-    starText,
-    coinsToGive
 
-);
+// Save best stars
+
+let oldStars =
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestStars"
+        )
+    ) || 0;
+
+
+let currentStars =
+    stars.length;
+
+
+if(currentStars > oldStars){
+
+    localStorage.setItem(
+        "level" + level + "BestStars",
+        currentStars
+    );
+
+            }
+
+
+    // ------------------------------
+    // Sounds
+    // ------------------------------
+
+    if(typeof playVictorySound === "function"){
+
+        playVictorySound();
+
+    }
+
+
+
+    if(typeof playVictory === "function"){
+
+        playVictory(level);
+
+    }
+
+
+
+    // ------------------------------
+    // Show Result
+    // ------------------------------
+
+    showVictory(
+        starText,
+        reward
+    );
+
 
 }
 // ======================================
@@ -661,12 +777,6 @@ function showVictory(stars, reward){
 
     starsDisplay.textContent =
         stars;
- 
-   if(completedImage){
-
-    completedImage.src = getCurrentImage();
-
-}
 
 
 
@@ -841,8 +951,6 @@ window.onload = function(){
     starsDisplay =
     document.getElementById("starsDisplay");
 
-    completedImage =
-    document.getElementById("completedImage");
 
 
     nextBtn =
@@ -914,7 +1022,7 @@ window.onload = function(){
 
 
             }
-            else if(level === unlocked && level < 60){
+            else if(level === unlocked && level < 20){
 
 
                 level++;
@@ -1031,9 +1139,9 @@ function validateLevel(){
 
 
 
-    if(level > 60){
+    if(level > 20){
 
-        level = 60;
+        level = 20;
 
     }
 
@@ -1257,7 +1365,7 @@ function getTotalStars(){
 
 
 
-    for(let i = 1; i <= 60; i++){
+    for(let i = 1; i <= 20; i++){
 
 
         total += getBestStars(i);
@@ -1283,7 +1391,7 @@ function getCompletedLevels(){
 
 
 
-    for(let i = 1; i <= 60; i++){
+    for(let i = 1; i <= 20; i++){
 
 
         if(
@@ -1391,6 +1499,187 @@ function changeLevel(newLevel){
 
 
             }
+// ======================================
+// FINAL INITIALIZATION SAFETY
+// ======================================
+
+
+// Make sure game starts correctly
+
+window.addEventListener("load", function(){
+
+
+    // Setup victory screen
+
+    victoryScreen =
+        document.getElementById("victoryScreen");
+
+
+    finalTime =
+        document.getElementById("finalTime");
+
+
+    finalMoves =
+        document.getElementById("finalMoves");
+
+
+    rewardCoins =
+        document.getElementById("rewardCoins");
+
+
+    starsDisplay =
+        document.getElementById("starsDisplay");
+
+
+
+    nextBtn =
+        document.getElementById("nextBtn");
+
+
+    retryBtn =
+        document.getElementById("retryBtn");
+
+
+    homeBtn =
+        document.getElementById("homeBtn");
+
+
+
+    // Next level button
+
+    if(nextBtn){
+
+
+        nextBtn.onclick = function(){
+
+
+            let next = level + 1;
+
+
+
+            if(next <= images.length){
+
+
+                localStorage.setItem(
+                    "level",
+                    next
+                );
+
+
+                location.reload();
+
+
+            }
+
+            else{
+
+
+                backHome();
+
+
+            }
+
+
+        };
+
+
+    }
+
+
+
+
+    // Retry button
+
+    if(retryBtn){
+
+
+        retryBtn.onclick = function(){
+
+
+            restartLevel();
+
+
+        };
+
+
+    }
+
+
+
+
+    // Home button
+
+    if(homeBtn){
+
+
+        homeBtn.onclick = function(){
+
+
+            backHome();
+
+
+        };
+
+
+    }
+
+
+
+
+    setup();
+
+
+
+    if(typeof startMusic === "function"){
+
+
+        startMusic();
+
+
+    }
+
+
+
+});
+
+
+
+
+// ======================================
+// KEYBOARD CONTROLS
+// ======================================
+
+document.addEventListener(
+"keydown",
+function(event){
+
+
+    let key =
+    event.key.toLowerCase();
+
+
+
+    if(key === "r"){
+
+
+        restartLevel();
+
+
+    }
+
+
+
+    if(key === "s"){
+
+
+        shufflePuzzle();
+
+
+    }
+
+
+});
+
 
 
 
@@ -1460,5 +1749,3 @@ function(e){
 
 
 });
-
-
