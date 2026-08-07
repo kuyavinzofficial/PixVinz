@@ -1,26 +1,50 @@
-// ------------------------------
-// TIMER
-// ------------------------------
+// ======================================
+// PuzzleMania
+// TIMER SYSTEM
+// ======================================
+
+
+// ======================================
+// START TIMER
+// ======================================
 
 function startTimer(){
 
-    timer = setInterval(()=>{
+    clearInterval(timer);
+
+
+    timer = setInterval(function(){
+
 
         seconds++;
 
+
         updateTimer();
+
 
     },1000);
 
 }
 
 
+
+// ======================================
+// STOP TIMER
+// ======================================
+
 function stopTimer(){
 
     clearInterval(timer);
 
+    timer = null;
+
 }
 
+
+
+// ======================================
+// RESET TIMER
+// ======================================
 
 function resetTimer(){
 
@@ -31,16 +55,21 @@ function resetTimer(){
 }
 
 
+
+// ======================================
+// UPDATE TIMER DISPLAY
+// ======================================
+
 function updateTimer(){
 
     let display =
-        document.getElementById("timer");
+    document.getElementById("timer");
 
 
     if(display){
 
-        display.innerText =
-            "Time: " + seconds;
+        display.textContent =
+        seconds;
 
     }
 
