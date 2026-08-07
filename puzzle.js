@@ -12,12 +12,7 @@ let pieces = [];
 
 let moves = 0;
 
-let seconds = 0;
-
-let timer = null;
-
 let selectedPiece = null;
-
 
 
 // ======================================
@@ -26,24 +21,31 @@ let selectedPiece = null;
 
 function setup(){
 
+    // ------------------------------
+    // Level Title
+    // ------------------------------
+
     let levelTitle =
-    document.getElementById("levelTitle");
+        document.getElementById("levelTitle");
 
 
     if(levelTitle){
 
         levelTitle.textContent =
-        "Level " + level;
+            "Level " + level;
 
     }
 
+
+    // ------------------------------
+    // Create And Shuffle Puzzle
+    // ------------------------------
 
     createPieces();
 
     shufflePuzzle();
 
 }
-
 
 
 // ======================================
@@ -64,23 +66,23 @@ function createPieces(){
 }
 
 
-
 // ======================================
-// RESET STATS
+// RESET GAME STATS
 // ======================================
 
 function resetStats(){
 
     moves = 0;
 
-    seconds = 0;
-
     selectedPiece = null;
 
 
+    // ------------------------------
+    // Reset Moves Display
+    // ------------------------------
 
     let moveDisplay =
-    document.getElementById("moves");
+        document.getElementById("moves");
 
 
     if(moveDisplay){
@@ -90,21 +92,36 @@ function resetStats(){
     }
 
 
+    // ------------------------------
+    // Reset Timer
+    // ------------------------------
 
-    let timerDisplay =
-    document.getElementById("timer");
+    if(typeof resetTimer === "function"){
+
+        resetTimer();
+
+    }
+    else{
+
+        let timerDisplay =
+            document.getElementById("timer");
 
 
-    if(timerDisplay){
+        if(timerDisplay){
 
-        timerDisplay.textContent = "0";
+            timerDisplay.textContent = "0";
+
+        }
 
     }
 
 
+    // ------------------------------
+    // Reset Stars
+    // ------------------------------
 
     let stars =
-    document.getElementById("stars");
+        document.getElementById("stars");
 
 
     if(stars){
@@ -114,20 +131,35 @@ function resetStats(){
     }
 
 }
+
+
 // ======================================
 // SHUFFLE PUZZLE
 // ======================================
 
 function shufflePuzzle(){
 
+    // ------------------------------
+    // Create Fresh Puzzle
+    // ------------------------------
+
     createPieces();
 
 
+    // ------------------------------
+    // Shuffle Pieces
+    // ------------------------------
 
-    for(let i = pieces.length - 1; i > 0; i--){
+    for(
+        let i = pieces.length - 1;
+        i > 0;
+        i--
+    ){
 
         const j =
-        Math.floor(Math.random() * (i + 1));
+            Math.floor(
+                Math.random() * (i + 1)
+            );
 
 
         [pieces[i], pieces[j]] =
@@ -136,13 +168,18 @@ function shufflePuzzle(){
     }
 
 
-
-    // Prevent solved puzzle
+    // ------------------------------
+    // Prevent Solved Puzzle
+    // ------------------------------
 
     let solved = true;
 
 
-    for(let i = 0; i < pieces.length; i++){
+    for(
+        let i = 0;
+        i < pieces.length;
+        i++
+    ){
 
         if(pieces[i] !== i){
 
@@ -155,8 +192,7 @@ function shufflePuzzle(){
     }
 
 
-
-    if(solved){
+    if(solved && pieces.length > 1){
 
         [pieces[0], pieces[1]] =
         [pieces[1], pieces[0]];
@@ -164,9 +200,16 @@ function shufflePuzzle(){
     }
 
 
+    // ------------------------------
+    // Reset Stats
+    // ------------------------------
 
     resetStats();
 
+
+    // ------------------------------
+    // Start Timer
+    // ------------------------------
 
     if(typeof startTimer === "function"){
 
@@ -175,6 +218,9 @@ function shufflePuzzle(){
     }
 
 
+    // ------------------------------
+    // Draw Puzzle
+    // ------------------------------
 
     if(typeof drawPuzzle === "function"){
 
@@ -183,6 +229,9 @@ function shufflePuzzle(){
     }
 
 
+    // ------------------------------
+    // Shuffle Sound
+    // ------------------------------
 
     if(typeof playShuffle === "function"){
 
@@ -190,4 +239,5 @@ function shufflePuzzle(){
 
     }
 
-       }
+}
+```
