@@ -531,19 +531,21 @@ function checkWin(){
     let stars = 1;
 
 
-    if(seconds < 60 && moves < 50){
+    if(seconds < 30 && moves < 30){
 
         stars = 3;
 
     }
-    else if(seconds < 120 && moves < 100){
+    if(seconds < 90 && moves < 80){
 
         stars = 2;
 
     }
+    else if(seconds < 120 && moves < 100+){
 
-
-
+        stars = 1;
+    }   
+    
     let starText = "⭐";
 
 
@@ -583,16 +585,16 @@ function checkWin(){
     // ------------------------------
 
     let unlocked =
-    Number(localStorage.getItem("level")) || 1;
-
+    getPlayerData("unlockedLevel",1);
 
 
     if(level + 1 > unlocked && level < 60){
 
 
-        localStorage.setItem(
-            "level",
-            level + 1
+        setPlayerData(
+       "unlockedLevel",
+         level+1
+    );
         );
 
 
