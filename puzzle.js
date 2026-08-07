@@ -1,74 +1,5 @@
 
 // ------------------------------
-// CURRENT LEVEL
-// ------------------------------
-
-let level =
-    Number(localStorage.getItem("level")) || 1;
-
-
-// ------------------------------
-// DIFFICULTY
-// ------------------------------
-
-let size;
-
-if(level <= 5){
-
-    size = 3;
-
-}
-else if(level <= 10){
-
-    size = 4;
-
-}
-else if(level <= 15){
-
-    size = 5;
-
-}
-else{
-
-    size = 6;
-
-}
-
-
-// ------------------------------
-// LEVEL IMAGES
-// ------------------------------
-
-const images = [
-
-    "images/level1.jpeg",
-    "images/level2.jpeg",
-    "images/level3.jpeg",
-    "images/level4.jpeg",
-    "images/level5.jpeg",
-
-    "images/level6.jpeg",
-    "images/level7.jpeg",
-    "images/level8.jpeg",
-    "images/level9.jpeg",
-    "images/level10.jpeg",
-
-    "images/level11.jpeg",
-    "images/level12.jpeg",
-    "images/level13.jpeg",
-    "images/level14.jpeg",
-    "images/level15.jpeg",
-
-    "images/level16.jpeg",
-    "images/level17.jpeg",
-    "images/level18.jpeg",
-    "images/level19.jpeg",
-    "images/level20.jpeg"
-
-];
-
-
-// ------------------------------
 // GAME VARIABLES
 // ------------------------------
 
@@ -84,27 +15,6 @@ let selectedPiece = null;
 
 
 // ------------------------------
-// VICTORY SCREEN
-// ------------------------------
-
-let victoryScreen;
-
-let finalTime;
-
-let finalMoves;
-
-let rewardCoins;
-
-let starsDisplay;
-
-let nextBtn;
-
-let retryBtn;
-
-let homeBtn;
-
-
-// ------------------------------
 // SETUP
 // ------------------------------
 
@@ -116,26 +26,6 @@ function setup(){
     createPieces();
 
     shufflePuzzle();
-
-}
-
-
-// ------------------------------
-// TIMER
-// ------------------------------
-
-function startTimer(){
-
-    clearInterval(timer);
-
-    timer = setInterval(function(){
-
-        seconds++;
-
-        document.getElementById("timer").textContent =
-            seconds;
-
-    },1000);
 
 }
 
@@ -920,62 +810,7 @@ function restartLevel(){
 
 
 }
-// ======================================
-// START GAME
-// ======================================
 
-window.onload = function(){
-
-
-
-    // ------------------------------
-    // Victory Elements
-    // ------------------------------
-
-    victoryScreen =
-    document.getElementById("victoryScreen");
-
-
-    finalTime =
-    document.getElementById("finalTime");
-
-
-    finalMoves =
-    document.getElementById("finalMoves");
-
-
-    rewardCoins =
-    document.getElementById("rewardCoins");
-
-
-    starsDisplay =
-    document.getElementById("starsDisplay");
-
-
-
-    nextBtn =
-    document.getElementById("nextBtn");
-
-
-    retryBtn =
-    document.getElementById("retryBtn");
-
-
-    homeBtn =
-    document.getElementById("homeBtn");
-
-
-
-    // ------------------------------
-    // Hide Victory At Start
-    // ------------------------------
-
-    if(victoryScreen){
-
-        victoryScreen
-        .classList.add("hidden");
-
-    }
 
 
 
