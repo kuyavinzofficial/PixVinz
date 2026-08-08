@@ -2686,6 +2686,93 @@ input::placeholder{
 
 }
 
+/* ============================================================
+   PIXVINZ LOGO - PUZZLE / GAME SCREEN
+   Keeps logo visible above Level title
+   ============================================================ */
+
+.game .app-logo{
+
+    display:block !important;
+
+    width:170px !important;
+
+    max-width:65% !important;
+
+    height:auto !important;
+
+    max-height:110px !important;
+
+    object-fit:contain !important;
+
+    margin:0 auto 6px auto !important;
+
+    border:none !important;
+
+    outline:none !important;
+
+    background:transparent !important;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+
+/* ============================================================
+   MOBILE PUZZLE SCREEN LOGO
+   ============================================================ */
+
+@media(max-width:500px){
+
+    .game .app-logo{
+
+        display:block !important;
+
+        width:155px !important;
+
+        max-width:58vw !important;
+
+        max-height:100px !important;
+
+        height:auto !important;
+
+        object-fit:contain !important;
+
+        margin:
+            0 auto 4px auto !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media(max-width:360px){
+
+    .game .app-logo{
+
+        width:140px !important;
+
+        max-width:55vw !important;
+
+        max-height:90px !important;
+
+    }
+
+}
+
+
 
 /* ============================================================
    END OF PUZZLEMANIA CSS
