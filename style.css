@@ -1,6 +1,12 @@
-/* ======================================
-   PuzzleMania Premium Game UI
-   ====================================== */
+/* ============================================================
+   PUZZLEMANIA / PIXVINZ PREMIUM GAME UI
+   CLEAN FINAL CSS
+   ============================================================ */
+
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
 
 *{
     box-sizing:border-box;
@@ -10,9 +16,17 @@
 }
 
 
+html{
+    width:100%;
+    min-height:100%;
+}
+
+
 body{
 
     min-height:100vh;
+
+    width:100%;
 
     color:white;
 
@@ -21,25 +35,25 @@ body{
     overflow-x:hidden;
 
     background:
-    linear-gradient(
-        135deg,
-        #312e81,
-        #6d28d9,
-        #9333ea,
-        #2563eb
-    );
+        linear-gradient(
+            135deg,
+            #312e81,
+            #6d28d9,
+            #9333ea,
+            #2563eb
+        );
 
     background-size:400% 400%;
 
     animation:
-    backgroundMove 15s ease infinite;
+        backgroundMove 15s ease infinite;
 
 }
 
 
-/* ===============================
+/* ============================================================
    MAIN CONTAINERS
-   =============================== */
+   ============================================================ */
 
 .menu,
 .levels,
@@ -54,25 +68,27 @@ body{
     padding:35px;
 
     background:
-    rgba(255,255,255,.15);
+        rgba(255,255,255,.15);
 
     backdrop-filter:
-    blur(15px);
+        blur(15px);
 
     border-radius:30px;
 
     border:
-    1px solid rgba(255,255,255,.25);
+        1px solid
+        rgba(255,255,255,.25);
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,.35);
+        0 20px 50px
+        rgba(0,0,0,.35);
 
 }
 
 
-/* ===============================
+/* ============================================================
    TITLES
-   =============================== */
+   ============================================================ */
 
 h1{
 
@@ -81,7 +97,8 @@ h1{
     margin-bottom:15px;
 
     text-shadow:
-    0 5px 15px rgba(0,0,0,.4);
+        0 5px 15px
+        rgba(0,0,0,.4);
 
 }
 
@@ -102,9 +119,9 @@ p{
 }
 
 
-/* ===============================
-   PREMIUM BUTTON DESIGN
-   =============================== */
+/* ============================================================
+   PREMIUM BUTTONS
+   ============================================================ */
 
 button{
 
@@ -133,23 +150,28 @@ button{
     color:white;
 
     background:
-    linear-gradient(
-        145deg,
-        #8b5cf6,
-        #6366f1
-    );
+        linear-gradient(
+            145deg,
+            #8b5cf6,
+            #6366f1
+        );
 
     box-shadow:
 
-    0 10px 20px rgba(0,0,0,.30),
+        0 10px 20px
+        rgba(0,0,0,.30),
 
-    inset 0 2px 2px rgba(255,255,255,.30),
+        inset 0 2px 2px
+        rgba(255,255,255,.30),
 
-    inset 0 -5px 8px rgba(0,0,0,.20),
+        inset 0 -5px 8px
+        rgba(0,0,0,.20),
 
-    0 0 20px rgba(139,92,246,.30);
+        0 0 20px
+        rgba(139,92,246,.30);
 
-    transition:all .30s ease;
+    transition:
+        all .30s ease;
 
     position:relative;
 
@@ -161,14 +183,16 @@ button{
 button:hover{
 
     transform:
-    translateY(-6px)
-    scale(1.04);
+        translateY(-6px)
+        scale(1.04);
 
     box-shadow:
 
-    0 18px 35px rgba(0,0,0,.35),
+        0 18px 35px
+        rgba(0,0,0,.35),
 
-    0 0 30px rgba(139,92,246,.55);
+        0 0 30px
+        rgba(139,92,246,.55);
 
 }
 
@@ -195,9 +219,10 @@ button::before{
     height:300%;
 
     background:
-    rgba(255,255,255,.35);
+        rgba(255,255,255,.35);
 
-    transform:rotate(25deg);
+    transform:
+        rotate(25deg);
 
     transition:.7s;
 
@@ -211,9 +236,9 @@ button:hover::before{
 }
 
 
-/* ===============================
+/* ============================================================
    COINS
-   =============================== */
+   ============================================================ */
 
 .coins{
 
@@ -224,23 +249,23 @@ button:hover::before{
     border-radius:15px;
 
     background:
-    rgba(255,255,255,.15);
+        rgba(255,255,255,.15);
 
     font-size:22px;
 
 }
 
 
-/* ===============================
-   PREMIUM LEVEL GRID
-   =============================== */
+/* ============================================================
+   LEVEL GRID
+   ============================================================ */
 
 .level-grid{
 
     display:grid;
 
     grid-template-columns:
-    repeat(2,130px);
+        repeat(2,130px);
 
     justify-content:center;
 
@@ -250,6 +275,10 @@ button:hover::before{
 
 }
 
+
+/* ============================================================
+   LEVEL CARD
+   ============================================================ */
 
 .level-card{
 
@@ -280,29 +309,36 @@ button:hover::before{
     gap:4px;
 
     text-shadow:
-    0 2px 6px rgba(0,0,0,.45);
+        0 2px 6px
+        rgba(0,0,0,.45);
 
     transition:
-    transform .35s,
-    box-shadow .35s;
+        transform .35s,
+        box-shadow .35s;
 
     transform-style:preserve-3d;
 
     box-shadow:
 
-    0 18px 28px rgba(0,0,0,.35),
+        0 18px 28px
+        rgba(0,0,0,.35),
 
-    inset 0 2px 2px rgba(255,255,255,.30),
+        inset 0 2px 2px
+        rgba(255,255,255,.30),
 
-    inset 0 -8px 12px rgba(0,0,0,.28);
+        inset 0 -8px 12px
+        rgba(0,0,0,.28);
 
-    background-size:200% 200%;
+    background-size:
+        200% 200%;
 
     animation:
-    floatCard 4s ease-in-out infinite;
+        floatCard 4s ease-in-out infinite;
 
 }
 
+
+/* Level Card Shine */
 
 .level-card::before{
 
@@ -319,9 +355,10 @@ button:hover::before{
     height:220%;
 
     background:
-    rgba(255,255,255,.18);
+        rgba(255,255,255,.18);
 
-    transform:rotate(30deg);
+    transform:
+        rotate(30deg);
 
     transition:.7s;
 
@@ -331,10 +368,10 @@ button:hover::before{
 .level-card:hover{
 
     transform:
-    perspective(700px)
-    rotateX(10deg)
-    translateY(-8px)
-    scale(1.06);
+        perspective(700px)
+        rotateX(10deg)
+        translateY(-8px)
+        scale(1.06);
 
 }
 
@@ -342,34 +379,37 @@ button:hover::before{
 .level-card:active{
 
     transform:
-    perspective(700px)
-    scale(.94);
+        perspective(700px)
+        scale(.94);
 
 }
 
 
-/* ===============================
-   UNLOCKED
-   =============================== */
+/* ============================================================
+   UNLOCKED LEVEL
+   ============================================================ */
 
 .unlocked{
 
     background:
-    linear-gradient(
-        145deg,
-        #7c3aed,
-        #4f46e5
-    );
+        linear-gradient(
+            145deg,
+            #7c3aed,
+            #4f46e5
+        );
 
     color:white;
 
     box-shadow:
 
-    0 8px 20px rgba(79,70,229,.5),
+        0 8px 20px
+        rgba(79,70,229,.5),
 
-    inset 0 2px 3px rgba(255,255,255,.25),
+        inset 0 2px 3px
+        rgba(255,255,255,.25),
 
-    inset 0 -4px 8px rgba(0,0,0,.25);
+        inset 0 -4px 8px
+        rgba(0,0,0,.25);
 
 }
 
@@ -378,84 +418,82 @@ button:hover::before{
 
     box-shadow:
 
-    0 0 20px #7c3aed,
+        0 0 20px
+        #7c3aed,
 
-    0 0 40px #6d28d9,
+        0 0 40px
+        #6d28d9,
 
-    0 0 60px rgba(124,58,237,.55);
+        0 0 60px
+        rgba(124,58,237,.55);
 
 }
 
 
-/* ===============================
-   COMPLETED
-   =============================== */
+/* ============================================================
+   COMPLETED LEVEL
+   ============================================================ */
 
 .completed{
 
     background:
-    linear-gradient(
-        135deg,
-        #FFD54F,
-        #FFC107,
-        #FF9800,
-        #F57C00
-    );
+        linear-gradient(
+            135deg,
+            #FFD54F,
+            #FFC107,
+            #FF9800,
+            #F57C00
+        );
 
-    background-size:300% 300%;
+    background-size:
+        300% 300%;
 
     color:white;
 
     box-shadow:
 
-    0 0 18px #FFC107,
+        0 0 18px
+        #FFC107,
 
-    0 0 40px rgba(255,193,7,.75),
+        0 0 40px
+        rgba(255,193,7,.75),
 
-    inset 0 2px 3px rgba(255,255,255,.45),
+        inset 0 2px 3px
+        rgba(255,255,255,.45),
 
-    inset 0 -8px 10px rgba(0,0,0,.20);
+        inset 0 -8px 10px
+        rgba(0,0,0,.20);
 
     animation:
-
-    floatCard 4s ease-in-out infinite,
-
-    goldGlow 2s ease-in-out infinite,
-
-    shineMove 4s linear infinite;
+        floatCard 4s ease-in-out infinite,
+        goldGlow 2s ease-in-out infinite,
+        shineMove 4s linear infinite;
 
 }
 
 
-#starsDisplay{
-
-    font-size:30px;
-
-    color:gold;
-
-}
-
-
-/* ===============================
-   LOCKED
-   =============================== */
+/* ============================================================
+   LOCKED LEVEL
+   ============================================================ */
 
 .locked{
 
     background:
-    linear-gradient(
-        145deg,
-        #3f3f46,
-        #18181b
-    );
+        linear-gradient(
+            145deg,
+            #3f3f46,
+            #18181b
+        );
 
     color:#bcbcbc;
 
     box-shadow:
 
-    inset 0 2px 4px rgba(255,255,255,.08),
+        inset 0 2px 4px
+        rgba(255,255,255,.08),
 
-    inset 0 -4px 10px rgba(0,0,0,.6);
+        inset 0 -4px 10px
+        rgba(0,0,0,.6);
 
     cursor:not-allowed;
 
@@ -464,9 +502,9 @@ button:hover::before{
 }
 
 
-/* ===============================
-   GAME STATS
-   =============================== */
+/* ============================================================
+   STATS
+   ============================================================ */
 
 .stats{
 
@@ -502,25 +540,26 @@ button:hover::before{
     border-radius:25px;
 
     background:
-    rgba(255,255,255,.2);
+        rgba(255,255,255,.2);
 
     box-shadow:
-    0 15px 35px rgba(0,0,0,.4);
+        0 15px 35px
+        rgba(0,0,0,.4);
 
 }
 
 
-/* ===============================
+/* ============================================================
    PUZZLE PIECES
-   =============================== */
+   ============================================================ */
 
 .piece{
 
     border-radius:10px;
 
     border:
-    1px solid
-    rgba(255,255,255,.35);
+        1px solid
+        rgba(255,255,255,.35);
 
     transition:.2s;
 
@@ -532,7 +571,7 @@ button:hover::before{
 .piece:hover{
 
     filter:
-    brightness(1.15);
+        brightness(1.15);
 
 }
 
@@ -540,24 +579,52 @@ button:hover::before{
 .selected{
 
     border:
-    4px solid yellow;
+        4px solid
+        yellow;
 
     transform:
-    scale(.93);
+        scale(.93);
 
     box-shadow:
-    0 0 20px yellow;
+        0 0 20px
+        yellow;
 
 }
 
 
 /* ============================================================
-   PUZZLEMANIA LOGO SYSTEM
+   STARS DISPLAY
+   ============================================================ */
+
+#starsDisplay{
+
+    font-size:30px;
+
+    color:gold;
+
+}
+
+
+/* ============================================================
+   HIDDEN
+   ============================================================ */
+
+.hidden{
+
+    display:none!important;
+
+}
+
+
+/* ============================================================
+   ============================================================
+   LOGO SYSTEM
+   ============================================================
    ============================================================ */
 
 
 /* ============================================================
-   OPENING / LOADING SPLASH
+   OPENING SPLASH SCREEN
    ============================================================ */
 
 #puzzleSplash{
@@ -576,16 +643,16 @@ button:hover::before{
 
     align-items:center;
 
-    padding:25px;
+    padding:15px;
 
     background:
-    linear-gradient(
-        135deg,
-        #312e81,
-        #6d28d9,
-        #9333ea,
-        #2563eb
-    );
+        linear-gradient(
+            135deg,
+            #312e81,
+            #6d28d9,
+            #9333ea,
+            #2563eb
+        );
 
     z-index:99999;
 
@@ -596,14 +663,16 @@ button:hover::before{
     visibility:visible;
 
     transition:
-    opacity .8s ease,
-    visibility .8s ease;
+        opacity .8s ease,
+        visibility .8s ease;
 
 }
 
 
 /* ============================================================
-   OPENING LOGO / VIDEO
+   OPENING LOGO
+   IMPORTANT:
+   SMALL ENOUGH TO FIT MOBILE
    ============================================================ */
 
 #puzzleSplash .app-logo{
@@ -614,11 +683,17 @@ button:hover::before{
 
     height:auto;
 
-    max-width:68vw;
+    max-width:70vw;
 
     max-height:42vh;
 
     object-fit:contain;
+
+    object-position:center;
+
+    margin:auto;
+
+    padding:0;
 
     border:none;
 
@@ -627,10 +702,51 @@ button:hover::before{
     background:transparent;
 
     filter:
-    drop-shadow(
-        0 12px 25px
-        rgba(0,0,0,.45)
-    );
+        drop-shadow(
+            0 10px 20px
+            rgba(0,0,0,.40)
+        );
+
+    animation:
+        splashLogoIntro
+        3s
+        ease-in-out
+        forwards;
+
+}
+
+
+/* Compatibility if splash uses .splash-logo */
+
+#puzzleSplash .splash-logo{
+
+    display:block;
+
+    width:240px;
+
+    height:auto;
+
+    max-width:70vw;
+
+    max-height:42vh;
+
+    object-fit:contain;
+
+    object-position:center;
+
+    margin:auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+        drop-shadow(
+            0 10px 20px
+            rgba(0,0,0,.40)
+        );
 
 }
 
@@ -651,6 +767,65 @@ button:hover::before{
 
 
 /* ============================================================
+   SPLASH ANIMATION
+   ============================================================ */
+
+@keyframes splashLogoIntro{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            scale(.78)
+            translateY(15px);
+
+    }
+
+    20%{
+
+        opacity:1;
+
+        transform:
+            scale(1.02)
+            translateY(0);
+
+    }
+
+    40%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+    70%{
+
+        opacity:1;
+
+        transform:
+            scale(1.015)
+            translateY(-3px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+/* ============================================================
    MAIN MENU LOGO
    ============================================================ */
 
@@ -658,18 +833,22 @@ button:hover::before{
 
     display:block;
 
-    width:175px;
-
-    max-width:65%;
+    width:190px;
 
     height:auto;
 
-    max-height:120px;
+    max-width:65%;
+
+    max-height:130px;
 
     object-fit:contain;
 
+    object-position:center;
+
     margin:
-    0 auto 12px auto;
+        0 auto 10px auto;
+
+    padding:0;
 
     border:none;
 
@@ -678,16 +857,38 @@ button:hover::before{
     background:transparent;
 
     filter:
-    drop-shadow(
-        0 8px 15px
-        rgba(0,0,0,.35)
-    );
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
 
     animation:
-    menuLogoFloat
-    4s
-    ease-in-out
-    infinite;
+        menuLogoFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* Compatibility for .menu-logo */
+
+.menu-logo{
+
+    display:block;
+
+    width:190px;
+
+    height:auto;
+
+    max-width:65%;
+
+    max-height:130px;
+
+    object-fit:contain;
+
+    margin:
+        0 auto 10px auto;
 
 }
 
@@ -700,18 +901,22 @@ button:hover::before{
 
     display:block;
 
-    width:165px;
-
-    max-width:62%;
+    width:170px;
 
     height:auto;
+
+    max-width:60%;
 
     max-height:115px;
 
     object-fit:contain;
 
+    object-position:center;
+
     margin:
-    0 auto 10px auto;
+        0 auto 8px auto;
+
+    padding:0;
 
     border:none;
 
@@ -720,40 +925,48 @@ button:hover::before{
     background:transparent;
 
     filter:
-    drop-shadow(
-        0 8px 15px
-        rgba(0,0,0,.35)
-    );
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
 
     animation:
-    menuLogoFloat
-    4s
-    ease-in-out
-    infinite;
+        menuLogoFloat
+        4s
+        ease-in-out
+        infinite;
 
 }
 
 
 /* ============================================================
-   GAME / PUZZLE SCREEN LOGO
+   GAME / LEVEL 1 LOGO
    ============================================================ */
 
 .game .app-logo{
 
-    display:block;
+    display:block !important;
 
-    width:150px;
+    visibility:visible !important;
 
-    max-width:55%;
+    opacity:1 !important;
+
+    width:165px;
 
     height:auto;
 
-    max-height:95px;
+    max-width:58%;
+
+    max-height:100px;
 
     object-fit:contain;
 
+    object-position:center;
+
     margin:
-    0 auto 3px auto;
+        0 auto 2px auto;
+
+    padding:0;
 
     border:none;
 
@@ -762,16 +975,16 @@ button:hover::before{
     background:transparent;
 
     filter:
-    drop-shadow(
-        0 7px 14px
-        rgba(0,0,0,.35)
-    );
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
 
     animation:
-    gameLogoFloat
-    4s
-    ease-in-out
-    infinite;
+        gameLogoFloat
+        4s
+        ease-in-out
+        infinite;
 
 }
 
@@ -782,12 +995,12 @@ button:hover::before{
 
 .game #levelTitle{
 
-    font-size:28px;
+    font-size:30px;
 
     margin:
-    3px 0 7px 0;
+        3px 0 8px 0;
 
-    line-height:1.15;
+    line-height:1.2;
 
 }
 
@@ -798,17 +1011,17 @@ button:hover::before{
 
 .game .stats{
 
-    font-size:14px;
+    font-size:15px;
 
-    line-height:1.35;
+    line-height:1.45;
 
-    margin-bottom:6px;
+    margin-bottom:8px;
 
 }
 
 
 /* ============================================================
-   LOGO ANIMATIONS
+   LOGO FLOAT ANIMATION
    ============================================================ */
 
 @keyframes menuLogoFloat{
@@ -816,16 +1029,16 @@ button:hover::before{
     0%,100%{
 
         transform:
-        translateY(0)
-        scale(1);
+            translateY(0)
+            scale(1);
 
     }
 
     50%{
 
         transform:
-        translateY(-5px)
-        scale(1.02);
+            translateY(-5px)
+            scale(1.02);
 
     }
 
@@ -837,16 +1050,16 @@ button:hover::before{
     0%,100%{
 
         transform:
-        translateY(0)
-        scale(1);
+            translateY(0)
+            scale(1);
 
     }
 
     50%{
 
         transform:
-        translateY(-4px)
-        scale(1.015);
+            translateY(-4px)
+            scale(1.015);
 
     }
 
@@ -854,218 +1067,197 @@ button:hover::before{
 
 
 /* ============================================================
-   MOBILE LOGO SIZING
+   SETTINGS POPUP
    ============================================================ */
 
-@media(max-width:500px){
+.popup{
 
-    #puzzleSplash{
+    position:fixed;
 
-        padding:20px;
+    inset:0;
 
-    }
+    background:
+        rgba(0,0,0,.7);
 
+    display:none;
 
-    #puzzleSplash .app-logo{
+    justify-content:center;
 
-        width:210px;
+    align-items:center;
 
-        max-width:65vw;
+    z-index:9999;
 
-        max-height:38vh;
-
-    }
-
-
-    .menu .app-logo{
-
-        width:165px;
-
-        max-width:62%;
-
-        max-height:110px;
-
-        margin:
-        0 auto 10px auto;
-
-    }
+}
 
 
-    .levels .app-logo{
+.popup-box{
 
-        width:155px;
+    width:90%;
 
-        max-width:60%;
+    max-width:400px;
 
-        max-height:105px;
+    background:white;
 
-        margin:
-        0 auto 9px auto;
+    color:#333;
 
-    }
+    padding:30px;
 
+    border-radius:25px;
 
-    .game .app-logo{
+    box-shadow:
+        0 20px 50px
+        black;
 
-        width:140px;
-
-        max-width:52%;
-
-        max-height:85px;
-
-        margin:
-        0 auto 2px auto;
-
-    }
+}
 
 
-    .game #levelTitle{
+.setting-row{
 
-        font-size:25px;
+    display:flex;
 
-        margin:
-        2px 0 5px 0;
+    justify-content:space-between;
 
-    }
+    align-items:center;
+
+    margin:20px 0;
+
+    font-size:20px;
+
+}
 
 
-    .game .stats{
+.setting-row input{
 
-        font-size:13px;
+    width:25px;
 
-        line-height:1.3;
-
-        margin-bottom:4px;
-
-    }
+    height:25px;
 
 }
 
 
 /* ============================================================
-   VERY SMALL PHONES
+   INPUTS / LOGIN / SIGNUP
    ============================================================ */
 
-@media(max-width:360px){
+input{
 
-    #puzzleSplash .app-logo{
+    width:270px;
 
-        width:190px;
+    max-width:90%;
 
-        max-width:62vw;
+    padding:16px;
 
-        max-height:34vh;
+    margin:8px auto;
 
-    }
+    display:block;
 
+    border:none;
 
-    .menu .app-logo{
+    border-radius:18px;
 
-        width:150px;
+    outline:none;
 
-        max-width:60%;
+    font-size:18px;
 
-        max-height:100px;
+    text-align:center;
 
-    }
+    background:
+        rgba(255,255,255,.95);
 
+    color:#222;
 
-    .levels .app-logo{
+    box-shadow:
+        0 8px 18px
+        rgba(0,0,0,.25);
 
-        width:145px;
+    transition:.3s;
 
-        max-width:58%;
-
-        max-height:95px;
-
-    }
-
-
-    .game .app-logo{
-
-        width:125px;
-
-        max-width:50%;
-
-        max-height:75px;
-
-    }
+}
 
 
-    .game #levelTitle{
+input:focus{
 
-        font-size:23px;
+    transform:
+        scale(1.03);
 
-    }
+    box-shadow:
+        0 0 18px
+        #8b5cf6;
+
+}
 
 
-    .game .stats{
+input::placeholder{
 
-        font-size:12px;
-
-    }
+    color:#666;
 
 }
 
 
 /* ============================================================
-   SMALL HEIGHT PHONES
+   PLAYER PROFILE
    ============================================================ */
 
-@media(max-width:500px) and (max-height:700px){
+#playerProfile{
 
-    #puzzleSplash .app-logo{
+    margin:20px auto;
 
-        width:190px;
+    padding:15px;
 
-        max-width:60vw;
+    width:90%;
 
-        max-height:32vh;
+    border-radius:18px;
 
-    }
+    background:
+        rgba(255,255,255,.15);
 
+    backdrop-filter:
+        blur(10px);
 
-    .game .app-logo{
-
-        width:125px;
-
-        max-height:70px;
-
-        margin-bottom:1px;
-
-    }
+}
 
 
-    .game #levelTitle{
+#playerProfile h3{
 
-        font-size:23px;
+    margin-bottom:8px;
 
-        margin-bottom:3px;
+    font-size:22px;
 
-    }
+}
 
 
-    .game .stats{
+#usernameDisplay{
 
-        line-height:1.2;
+    margin-bottom:15px;
 
-        margin-bottom:2px;
+    font-size:16px;
 
-    }
+    opacity:.9;
 
 }
 
 
 /* ============================================================
+   LOGOUT
+   ============================================================ */
+
+.logout-btn{
+
+    margin:
+        70px auto 20px auto;
+
+    width:220px;
+
+    opacity:.85;
+
+}
+
+
+/* ============================================================
+   ============================================================
    VICTORY SCREEN
+   ============================================================
    ============================================================ */
-
-.hidden{
-
-    display:none!important;
-
-}
-
 
 #victoryScreen{
 
@@ -1086,13 +1278,14 @@ button:hover::before{
     padding:20px;
 
     background:
-    radial-gradient(
-        circle at center,
-        rgba(124,58,237,.25),
-        rgba(0,0,0,.82)
-    );
+        radial-gradient(
+            circle at center,
+            rgba(124,58,237,.25),
+            rgba(0,0,0,.82)
+        );
 
-    backdrop-filter:blur(6px);
+    backdrop-filter:
+        blur(6px);
 
     z-index:99999;
 
@@ -1120,43 +1313,48 @@ button:hover::before{
     overflow-x:hidden;
 
     padding:
-    24px 22px 22px 22px;
+        24px 22px 22px 22px;
 
     margin:auto;
 
     background:
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #fffdf7
-    );
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fffdf7
+        );
 
     color:#222;
 
     border-radius:38px;
 
     border:
-    5px solid #FFD21C;
+        5px solid
+        #FFD21C;
 
     box-shadow:
 
-    0 0 12px rgba(255,215,0,.8),
+        0 0 12px
+        rgba(255,215,0,.8),
 
-    0 0 30px rgba(255,193,7,.65),
+        0 0 30px
+        rgba(255,193,7,.65),
 
-    0 20px 60px rgba(0,0,0,.65);
+        0 20px 60px
+        rgba(0,0,0,.65);
 
     text-align:center;
 
     animation:
-    victoryAppear .55s
-    cubic-bezier(.2,.8,.2,1);
+        victoryAppear
+        .55s
+        cubic-bezier(.2,.8,.2,1);
 
 }
 
 
 /* ============================================================
-   VICTORY CONFETTI
+   VICTORY CONFETTI LAYER
    ============================================================ */
 
 .victory-box::before{
@@ -1173,61 +1371,60 @@ button:hover::before{
 
     z-index:1;
 
-    opacity:.85;
+    opacity:.65;
 
     background-image:
 
-    linear-gradient(
-        135deg,
-        #ff4d6d 0 8px,
-        transparent 8px 100%
-    ),
+        linear-gradient(
+            135deg,
+            #ff4d6d 0 8px,
+            transparent 8px 100%
+        ),
 
-    linear-gradient(
-        45deg,
-        #ffd21c 0 7px,
-        transparent 7px 100%
-    ),
+        linear-gradient(
+            45deg,
+            #ffd21c 0 7px,
+            transparent 7px 100%
+        ),
 
-    linear-gradient(
-        120deg,
-        #22c55e 0 8px,
-        transparent 8px 100%
-    ),
+        linear-gradient(
+            120deg,
+            #22c55e 0 8px,
+            transparent 8px 100%
+        ),
 
-    linear-gradient(
-        60deg,
-        #3b82f6 0 7px,
-        transparent 7px 100%
-    ),
+        linear-gradient(
+            60deg,
+            #3b82f6 0 7px,
+            transparent 7px 100%
+        ),
 
-    linear-gradient(
-        160deg,
-        #a855f7 0 8px,
-        transparent 8px 100%
-    );
+        linear-gradient(
+            160deg,
+            #a855f7 0 8px,
+            transparent 8px 100%
+        );
 
     background-size:
 
-    75px 95px,
-    95px 120px,
-    110px 100px,
-    85px 130px,
-    120px 110px;
-
-    background-position:
-
-    0 0,
-    20px -40px,
-    -30px 20px,
-    50px -20px,
-    -20px 50px;
+        75px 95px,
+        95px 120px,
+        110px 100px,
+        85px 130px,
+        120px 110px;
 
     animation:
-    confettiFall 5s linear infinite;
+        confettiFall
+        5s
+        linear
+        infinite;
 
 }
 
+
+/* ============================================================
+   SECOND CONFETTI
+   ============================================================ */
 
 .victory-box::after{
 
@@ -1243,58 +1440,66 @@ button:hover::before{
 
     z-index:1;
 
-    opacity:.55;
+    opacity:.45;
 
     background-image:
 
-    radial-gradient(
-        circle,
-        #ffd21c 0 4px,
-        transparent 5px
-    ),
+        radial-gradient(
+            circle,
+            #ffd21c 0 4px,
+            transparent 5px
+        ),
 
-    radial-gradient(
-        circle,
-        #ff4d6d 0 4px,
-        transparent 5px
-    ),
+        radial-gradient(
+            circle,
+            #ff4d6d 0 4px,
+            transparent 5px
+        ),
 
-    radial-gradient(
-        circle,
-        #3b82f6 0 4px,
-        transparent 5px
-    ),
+        radial-gradient(
+            circle,
+            #3b82f6 0 4px,
+            transparent 5px
+        ),
 
-    radial-gradient(
-        circle,
-        #22c55e 0 4px,
-        transparent 5px
-    ),
+        radial-gradient(
+            circle,
+            #22c55e 0 4px,
+            transparent 5px
+        ),
 
-    radial-gradient(
-        circle,
-        #a855f7 0 4px,
-        transparent 5px
-    );
+        radial-gradient(
+            circle,
+            #a855f7 0 4px,
+            transparent 5px
+        );
 
     background-size:
 
-    90px 110px,
-    120px 140px,
-    100px 130px,
-    130px 100px,
-    110px 120px;
-
-    background-position:
-
-    10px 0,
-    -30px -50px,
-    40px -20px,
-    -20px 40px,
-    60px 20px;
+        90px 110px,
+        120px 140px,
+        100px 130px,
+        130px 100px,
+        110px 120px;
 
     animation:
-    confettiFallReverse 7s linear infinite;
+        confettiFallReverse
+        7s
+        linear
+        infinite;
+
+}
+
+
+/* ============================================================
+   KEEP VICTORY CONTENT ABOVE CONFETTI
+   ============================================================ */
+
+.victory-box > *{
+
+    position:relative;
+
+    z-index:2;
 
 }
 
@@ -1310,10 +1515,14 @@ button:hover::before{
     z-index:2;
 
     margin:
-    12px 0 18px 0;
+        12px 0 18px 0;
 
     font-size:
-    clamp(30px,7vw,48px);
+        clamp(
+            30px,
+            7vw,
+            48px
+        );
 
     line-height:1.05;
 
@@ -1323,15 +1532,17 @@ button:hover::before{
 
     text-shadow:
 
-    0 3px 0 #ffffff,
+        0 3px 0
+        #ffffff,
 
-    0 6px 15px rgba(0,0,0,.20);
+        0 6px 15px
+        rgba(0,0,0,.20);
 
 }
 
 
 /* ============================================================
-   COMPLETED IMAGE
+   COMPLETED PUZZLE IMAGE
    ============================================================ */
 
 #completedImage{
@@ -1351,27 +1562,34 @@ button:hover::before{
     display:block;
 
     margin:
-    10px auto 16px auto;
+        10px auto 16px auto;
 
     object-fit:cover;
 
     border-radius:27px;
 
     border:
-    6px solid #FFD21C;
+        6px solid
+        #FFD21C;
 
     background:white;
 
     box-shadow:
 
-    0 0 12px rgba(255,215,0,.95),
+        0 0 12px
+        rgba(255,215,0,.95),
 
-    0 0 30px rgba(255,193,7,.65),
+        0 0 30px
+        rgba(255,193,7,.65),
 
-    0 10px 25px rgba(0,0,0,.30);
+        0 10px 25px
+        rgba(0,0,0,.30);
 
     animation:
-    imageGlow 2s ease-in-out infinite;
+        imageGlow
+        2s
+        ease-in-out
+        infinite;
 
 }
 
@@ -1391,23 +1609,26 @@ button:hover::before{
     line-height:1;
 
     margin:
-    10px 0 18px 0;
+        10px 0 18px 0;
 
     color:#FFD21C;
 
     letter-spacing:4px;
 
     text-shadow:
-    0 3px 8px rgba(255,193,7,.45);
+        0 3px 8px
+        rgba(255,193,7,.45);
 
     animation:
-    starsPop .7s ease-out;
+        starsPop
+        .7s
+        ease-out;
 
 }
 
 
 /* ============================================================
-   VICTORY STATISTICS
+   VICTORY STATS
    ============================================================ */
 
 .victory-box .stats{
@@ -1421,7 +1642,7 @@ button:hover::before{
     max-width:360px;
 
     margin:
-    8px auto 16px auto;
+        8px auto 16px auto;
 
     font-size:20px;
 
@@ -1433,10 +1654,10 @@ button:hover::before{
 .victory-box .stats p{
 
     margin:
-    7px auto;
+        7px auto;
 
     padding:
-    5px 10px;
+        5px 10px;
 
     border-radius:15px;
 
@@ -1458,10 +1679,10 @@ button:hover::before{
     max-width:360px;
 
     padding:
-    15px 18px;
+        15px 18px;
 
     margin:
-    8px auto;
+        8px auto;
 
     border:none;
 
@@ -1474,28 +1695,29 @@ button:hover::before{
     color:white;
 
     background:
-    linear-gradient(
-        145deg,
-        #8b5cf6,
-        #6366f1
-    );
+        linear-gradient(
+            145deg,
+            #8b5cf6,
+            #6366f1
+        );
 
     box-shadow:
 
-    0 10px 20px rgba(0,0,0,.25),
+        0 10px 20px
+        rgba(0,0,0,.25),
 
-    inset 0 2px 2px
-    rgba(255,255,255,.35),
+        inset 0 2px 2px
+        rgba(255,255,255,.35),
 
-    inset 0 -6px 8px
-    rgba(0,0,0,.18),
+        inset 0 -6px 8px
+        rgba(0,0,0,.18),
 
-    0 0 18px
-    rgba(124,58,237,.25);
+        0 0 18px
+        rgba(124,58,237,.25);
 
     transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 
 }
 
@@ -1503,22 +1725,24 @@ button:hover::before{
 #victoryScreen button:hover{
 
     transform:
-    translateY(-3px)
-    scale(1.02);
+        translateY(-3px)
+        scale(1.02);
 
     box-shadow:
 
-    0 15px 28px rgba(0,0,0,.30),
+        0 15px 28px
+        rgba(0,0,0,.30),
 
-    0 0 25px
-    rgba(124,58,237,.55);
+        0 0 25px
+        rgba(124,58,237,.55);
 
 }
 
 
 #victoryScreen button:active{
 
-    transform:scale(.96);
+    transform:
+        scale(.96);
 
 }
 
@@ -1534,15 +1758,15 @@ button:hover::before{
     z-index:2;
 
     margin:
-    18px auto 0 auto !important;
+        18px auto 0 auto !important;
 
     padding-top:12px;
 
     width:90%;
 
     border-top:
-    2px solid
-    rgba(100,70,130,.30);
+        2px solid
+        rgba(100,70,130,.30);
 
     color:#222;
 
@@ -1552,7 +1776,7 @@ button:hover::before{
 #bestRecord h3{
 
     margin:
-    0 0 8px 0;
+        0 0 8px 0;
 
     font-size:24px;
 
@@ -1564,7 +1788,7 @@ button:hover::before{
 #bestRecord p{
 
     margin:
-    4px 0;
+        4px 0;
 
     font-size:20px;
 
@@ -1582,8 +1806,8 @@ button:hover::before{
     line-height:1;
 
     text-shadow:
-    0 3px 7px
-    rgba(255,193,7,.35);
+        0 3px 7px
+        rgba(255,193,7,.35);
 
 }
 
@@ -1599,16 +1823,16 @@ button:hover::before{
         opacity:0;
 
         transform:
-        scale(.82)
-        translateY(30px);
+            scale(.82)
+            translateY(30px);
 
     }
 
     70%{
 
         transform:
-        scale(1.02)
-        translateY(-3px);
+            scale(1.02)
+            translateY(-3px);
 
     }
 
@@ -1617,8 +1841,8 @@ button:hover::before{
         opacity:1;
 
         transform:
-        scale(1)
-        translateY(0);
+            scale(1)
+            translateY(0);
 
     }
 
@@ -1631,11 +1855,14 @@ button:hover::before{
 
         box-shadow:
 
-        0 0 12px rgba(255,215,0,.8),
+            0 0 12px
+            rgba(255,215,0,.8),
 
-        0 0 28px rgba(255,193,7,.5),
+            0 0 28px
+            rgba(255,193,7,.5),
 
-        0 10px 25px rgba(0,0,0,.3);
+            0 10px 25px
+            rgba(0,0,0,.3);
 
     }
 
@@ -1643,11 +1870,14 @@ button:hover::before{
 
         box-shadow:
 
-        0 0 20px rgba(255,215,0,1),
+            0 0 20px
+            rgba(255,215,0,1),
 
-        0 0 42px rgba(255,193,7,.75),
+            0 0 42px
+            rgba(255,193,7,.75),
 
-        0 12px 30px rgba(0,0,0,.35);
+            0 12px 30px
+            rgba(0,0,0,.35);
 
     }
 
@@ -1660,13 +1890,15 @@ button:hover::before{
 
         opacity:0;
 
-        transform:scale(.5);
+        transform:
+            scale(.5);
 
     }
 
     70%{
 
-        transform:scale(1.12);
+        transform:
+            scale(1.12);
 
     }
 
@@ -1674,7 +1906,8 @@ button:hover::before{
 
         opacity:1;
 
-        transform:scale(1);
+        transform:
+            scale(1);
 
     }
 
@@ -1687,14 +1920,14 @@ button:hover::before{
 
         background-position:
 
-        0 -100px,
-        20px -140px,
-        -30px -120px,
-        50px -160px,
-        -20px -130px;
+            0 -100px,
+            20px -140px,
+            -30px -120px,
+            50px -160px,
+            -20px -130px;
 
         transform:
-        rotate(0deg);
+            rotate(0deg);
 
     }
 
@@ -1702,14 +1935,14 @@ button:hover::before{
 
         background-position:
 
-        25px 180px,
-        -20px 220px,
-        40px 160px,
-        10px 240px,
-        30px 190px;
+            25px 180px,
+            -20px 220px,
+            40px 160px,
+            10px 240px,
+            30px 190px;
 
         transform:
-        rotate(2deg);
+            rotate(2deg);
 
     }
 
@@ -1717,14 +1950,14 @@ button:hover::before{
 
         background-position:
 
-        0 450px,
-        20px 500px,
-        -30px 470px,
-        50px 520px,
-        -20px 490px;
+            0 450px,
+            20px 500px,
+            -30px 470px,
+            50px 520px,
+            -20px 490px;
 
         transform:
-        rotate(0deg);
+            rotate(0deg);
 
     }
 
@@ -1737,11 +1970,11 @@ button:hover::before{
 
         background-position:
 
-        10px -120px,
-        -30px -160px,
-        40px -100px,
-        -20px -180px,
-        60px -140px;
+            10px -120px,
+            -30px -160px,
+            40px -100px,
+            -20px -180px,
+            60px -140px;
 
     }
 
@@ -1749,11 +1982,11 @@ button:hover::before{
 
         background-position:
 
-        -20px 160px,
-        20px 200px,
-        -30px 180px,
-        30px 220px,
-        10px 170px;
+            -20px 160px,
+            20px 200px,
+            -30px 180px,
+            30px 220px,
+            10px 170px;
 
     }
 
@@ -1761,11 +1994,11 @@ button:hover::before{
 
         background-position:
 
-        10px 480px,
-        -30px 520px,
-        40px 500px,
-        -20px 540px,
-        60px 510px;
+            10px 480px,
+            -30px 520px,
+            40px 500px,
+            -20px 540px,
+            60px 510px;
 
     }
 
@@ -1773,23 +2006,272 @@ button:hover::before{
 
 
 /* ============================================================
-   KEEP VICTORY CONTENT ABOVE CONFETTI
+   GENERAL ANIMATIONS
    ============================================================ */
 
-.victory-box > *{
+@keyframes backgroundMove{
 
-    position:relative;
+    0%{
 
-    z-index:2;
+        background-position:
+            0% 50%;
+
+    }
+
+    50%{
+
+        background-position:
+            100% 50%;
+
+    }
+
+    100%{
+
+        background-position:
+            0% 50%;
+
+    }
+
+}
+
+
+@keyframes shine{
+
+    50%{
+
+        transform:
+            scale(1.05);
+
+    }
+
+}
+
+
+@keyframes floatCard{
+
+    0%,100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+@keyframes goldGlow{
+
+    0%,100%{
+
+        box-shadow:
+
+            0 0 18px
+            #FFC107,
+
+            0 0 40px
+            rgba(255,193,7,.60);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 30px
+            #FFD54F,
+
+            0 0 60px
+            #FF9800,
+
+            0 0 80px
+            rgba(255,152,0,.70);
+
+    }
+
+}
+
+
+@keyframes shineMove{
+
+    0%{
+
+        background-position:
+            0% 50%;
+
+    }
+
+    100%{
+
+        background-position:
+            100% 50%;
+
+    }
 
 }
 
 
 /* ============================================================
-   MOBILE VICTORY SCREEN
+   MOBILE DEVICES
    ============================================================ */
 
 @media(max-width:500px){
+
+    /* -----------------------------
+       MAIN CONTAINERS
+       ----------------------------- */
+
+    .menu,
+    .levels,
+    .game{
+
+        width:95%;
+
+        padding:15px;
+
+        margin:
+            20px auto;
+
+        border-radius:25px;
+
+    }
+
+
+    /* -----------------------------
+       PUZZLE BOARD
+       ----------------------------- */
+
+    #puzzleBoard{
+
+        width:90vw;
+
+        height:90vw;
+
+        max-width:360px;
+
+        max-height:360px;
+
+        margin:
+            25px auto;
+
+    }
+
+
+    /* -----------------------------
+       SPLASH LOGO
+       ----------------------------- */
+
+    #puzzleSplash{
+
+        padding:10px;
+
+    }
+
+
+    #puzzleSplash .app-logo,
+    #puzzleSplash .splash-logo{
+
+        width:240px;
+
+        max-width:70vw;
+
+        max-height:42vh;
+
+    }
+
+
+    /* -----------------------------
+       MAIN MENU LOGO
+       ----------------------------- */
+
+    .menu .app-logo{
+
+        width:180px;
+
+        max-width:64%;
+
+        max-height:120px;
+
+        margin:
+            0 auto 8px auto;
+
+    }
+
+
+    /* -----------------------------
+       LEVEL PAGE LOGO
+       ----------------------------- */
+
+    .levels .app-logo{
+
+        width:165px;
+
+        max-width:58%;
+
+        max-height:105px;
+
+        margin:
+            0 auto 8px auto;
+
+    }
+
+
+    /* -----------------------------
+       GAME LOGO
+       ----------------------------- */
+
+    .game .app-logo{
+
+        width:165px;
+
+        max-width:55%;
+
+        max-height:100px;
+
+        margin:
+            0 auto 2px auto;
+
+    }
+
+
+    /* -----------------------------
+       GAME TITLE
+       ----------------------------- */
+
+    .game #levelTitle{
+
+        font-size:26px;
+
+        margin:
+            2px 0 6px 0;
+
+    }
+
+
+    /* -----------------------------
+       GAME STATS
+       ----------------------------- */
+
+    .game .stats{
+
+        font-size:14px;
+
+        line-height:1.35;
+
+        margin-bottom:5px;
+
+    }
+
+
+    /* -----------------------------
+       VICTORY SCREEN
+       ----------------------------- */
 
     #victoryScreen{
 
@@ -1809,10 +2291,10 @@ button:hover::before{
         max-height:88vh;
 
         padding:
-        20px
-        16px
-        18px
-        16px;
+            20px
+            16px
+            18px
+            16px;
 
         border-radius:32px;
 
@@ -1824,15 +2306,14 @@ button:hover::before{
     .victory-box h1{
 
         font-size:
-        clamp(
-            28px,
-            8vw,
-            38px
-        );
+            clamp(
+                28px,
+                8vw,
+                38px
+            );
 
         margin:
-        10px 0
-        14px 0;
+            10px 0 14px 0;
 
     }
 
@@ -1852,8 +2333,7 @@ button:hover::before{
         border-radius:23px;
 
         margin:
-        8px auto
-        14px auto;
+            8px auto 14px auto;
 
     }
 
@@ -1865,8 +2345,7 @@ button:hover::before{
         letter-spacing:2px;
 
         margin:
-        8px 0
-        14px 0;
+            8px 0 14px 0;
 
     }
 
@@ -1876,15 +2355,15 @@ button:hover::before{
         font-size:18px;
 
         margin:
-        6px auto
-        12px auto;
+            6px auto 12px auto;
 
     }
 
 
     .victory-box .stats p{
 
-        margin:4px auto;
+        margin:
+            4px auto;
 
     }
 
@@ -1894,11 +2373,10 @@ button:hover::before{
         width:88%;
 
         padding:
-        13px
-        15px;
+            13px 15px;
 
         margin:
-        7px auto;
+            7px auto;
 
         font-size:18px;
 
@@ -1909,7 +2387,8 @@ button:hover::before{
 
     #bestRecord{
 
-        margin-top:14px !important;
+        margin-top:
+            14px !important;
 
         padding-top:10px;
 
@@ -1944,10 +2423,96 @@ button:hover::before{
 
 
 /* ============================================================
-   VERY SMALL PHONES - VICTORY
+   VERY SMALL PHONES
    ============================================================ */
 
 @media(max-width:360px){
+
+    /* -----------------------------
+       SPLASH
+       ----------------------------- */
+
+    #puzzleSplash{
+
+        padding:8px;
+
+    }
+
+
+    #puzzleSplash .app-logo,
+    #puzzleSplash .splash-logo{
+
+        width:210px;
+
+        max-width:68vw;
+
+        max-height:38vh;
+
+    }
+
+
+    /* -----------------------------
+       MAIN MENU
+       ----------------------------- */
+
+    .menu .app-logo{
+
+        width:165px;
+
+        max-width:62%;
+
+        max-height:110px;
+
+    }
+
+
+    /* -----------------------------
+       LEVELS
+       ----------------------------- */
+
+    .levels .app-logo{
+
+        width:150px;
+
+        max-width:58%;
+
+        max-height:95px;
+
+    }
+
+
+    /* -----------------------------
+       GAME
+       ----------------------------- */
+
+    .game .app-logo{
+
+        width:150px;
+
+        max-width:54%;
+
+        max-height:90px;
+
+    }
+
+
+    .game #levelTitle{
+
+        font-size:24px;
+
+    }
+
+
+    .game .stats{
+
+        font-size:13px;
+
+    }
+
+
+    /* -----------------------------
+       VICTORY
+       ----------------------------- */
 
     #victoryScreen{
 
@@ -1961,10 +2526,10 @@ button:hover::before{
         max-height:90vh;
 
         padding:
-        17px
-        13px
-        15px
-        13px;
+            17px
+            13px
+            15px
+            13px;
 
         border-radius:28px;
 
@@ -2046,6 +2611,55 @@ button:hover::before{
 
 
 /* ============================================================
+   SMALL HEIGHT PHONES
+   ============================================================ */
+
+@media(max-width:500px) and (max-height:700px){
+
+    #puzzleSplash .app-logo,
+    #puzzleSplash .splash-logo{
+
+        width:210px;
+
+        max-width:68vw;
+
+        max-height:36vh;
+
+    }
+
+
+    .game .app-logo{
+
+        width:150px;
+
+        max-height:90px;
+
+        margin-bottom:2px;
+
+    }
+
+
+    .game #levelTitle{
+
+        font-size:24px;
+
+        margin-bottom:4px;
+
+    }
+
+
+    .game .stats{
+
+        line-height:1.25;
+
+        margin-bottom:3px;
+
+    }
+
+}
+
+
+/* ============================================================
    VICTORY SCROLLBAR
    ============================================================ */
 
@@ -2066,7 +2680,7 @@ button:hover::before{
 .victory-box::-webkit-scrollbar-thumb{
 
     background:
-    rgba(124,58,237,.45);
+        rgba(124,58,237,.45);
 
     border-radius:10px;
 
@@ -2074,329 +2688,5 @@ button:hover::before{
 
 
 /* ============================================================
-   GENERAL MOBILE GAME CONTAINER
+   END OF PUZZLEMANIA CSS
    ============================================================ */
-
-@media(max-width:500px){
-
-    .game{
-
-        width:95%;
-
-        padding:15px;
-
-        margin:
-        20px auto;
-
-    }
-
-
-    #puzzleBoard{
-
-        width:90vw;
-
-        height:90vw;
-
-        max-width:360px;
-
-        max-height:360px;
-
-        margin:
-        20px auto;
-
-    }
-
-}
-
-
-/* ============================================================
-   SETTINGS POPUP
-   ============================================================ */
-
-.popup{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    rgba(0,0,0,.7);
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:9999;
-
-}
-
-
-.popup-box{
-
-    width:90%;
-
-    max-width:400px;
-
-    background:white;
-
-    color:#333;
-
-    padding:30px;
-
-    border-radius:25px;
-
-    box-shadow:
-    0 20px 50px black;
-
-}
-
-
-.setting-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin:20px 0;
-
-    font-size:20px;
-
-}
-
-
-.setting-row input{
-
-    width:25px;
-
-    height:25px;
-
-}
-
-
-/* ============================================================
-   LOGIN & SIGNUP INPUTS
-   ============================================================ */
-
-input{
-
-    width:270px;
-
-    max-width:90%;
-
-    padding:16px;
-
-    margin:8px auto;
-
-    display:block;
-
-    border:none;
-
-    border-radius:18px;
-
-    outline:none;
-
-    font-size:18px;
-
-    text-align:center;
-
-    background:
-    rgba(255,255,255,.95);
-
-    color:#222;
-
-    box-shadow:
-    0 8px 18px rgba(0,0,0,.25);
-
-    transition:.3s;
-
-}
-
-
-input:focus{
-
-    transform:scale(1.03);
-
-    box-shadow:
-    0 0 18px #8b5cf6;
-
-}
-
-
-input::placeholder{
-
-    color:#666;
-
-}
-
-
-/* ============================================================
-   PLAYER PROFILE
-   ============================================================ */
-
-#playerProfile{
-
-    margin:
-    20px auto;
-
-    padding:15px;
-
-    width:90%;
-
-    border-radius:18px;
-
-    background:
-    rgba(255,255,255,.15);
-
-    backdrop-filter:
-    blur(10px);
-
-}
-
-
-#playerProfile h3{
-
-    margin-bottom:8px;
-
-    font-size:22px;
-
-}
-
-
-#usernameDisplay{
-
-    margin-bottom:15px;
-
-    font-size:16px;
-
-    opacity:.9;
-
-}
-
-
-/* ============================================================
-   LOGOUT BUTTON
-   ============================================================ */
-
-.logout-btn{
-
-    margin:
-    70px auto 20px auto;
-
-    width:220px;
-
-    opacity:.85;
-
-}
-
-
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-
-@keyframes backgroundMove{
-
-    0%{
-
-        background-position:
-        0% 50%;
-
-    }
-
-    50%{
-
-        background-position:
-        100% 50%;
-
-    }
-
-    100%{
-
-        background-position:
-        0% 50%;
-
-    }
-
-}
-
-
-@keyframes shine{
-
-    50%{
-
-        transform:
-        scale(1.05);
-
-    }
-
-}
-
-
-@keyframes floatCard{
-
-    0%,100%{
-
-        transform:
-        translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-        translateY(-5px);
-
-    }
-
-}
-
-
-@keyframes blueGlow{
-
-    0%,100%{
-
-        box-shadow:
-
-        0 0 18px #FFC107,
-
-        0 0 40px
-        rgba(255,193,7,.60);
-
-    }
-
-    50%{
-
-        box-shadow:
-
-        0 0 30px #FFD54F,
-
-        0 0 60px #FF9800,
-
-        0 0 80px
-        rgba(255,152,0,.70);
-
-    }
-
-}
-
-
-@keyframes shineMove{
-
-    0%{
-
-        background-position:
-        0% 50%;
-
-    }
-
-    100%{
-
-        background-position:
-        100% 50%;
-
-    }
-
-}
