@@ -466,8 +466,8 @@ button:hover::before{
 
     animation:
         floatCard 4s ease-in-out infinite,
-        goldGlow 2s ease-in-out infinite,
-        shineMove 4s linear infinite;
+        goldGlow 1s ease-in-out infinite,
+        shineMove 2s linear infinite;
 
 }
 
@@ -901,13 +901,13 @@ button:hover::before{
 
     display:block;
 
-    width:170px;
+    width:200px;
 
     height:auto;
 
-    max-width:60%;
+    max-width:75%;
 
-    max-height:115px;
+    max-height:125px;
 
     object-fit:contain;
 
@@ -1236,7 +1236,7 @@ input::placeholder{
 
     font-weight:900;
 
-    color:#ffffff;
+    color:#FFD21C;
 
     letter-spacing:1px;
 
@@ -1593,13 +1593,13 @@ input::placeholder{
 
     z-index:2;
 
-    width:155px;
+    width:165px;
 
-    height:155px;
+    height:165px;
 
-    max-width:42vw;
+    max-width:47vw;
 
-    max-height:42vw;
+    max-height:47vw;
 
     display:block;
 
