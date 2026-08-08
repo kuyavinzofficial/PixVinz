@@ -648,53 +648,7 @@ VICTORY SCREEN
 
 }
 
-/* Stars */
 
-#starsDisplay{
-
-    font-size:28px;
-
-    color:#FFD700;
-
-    margin:12px 0;
-
-}
-
-/* Statistics */
-
-.victory-box .stats{
-
-    font-size:17px;
-
-    line-height:1.6;
-
-    margin:15px 0;
-
-}
-
-.victory-box .stats p{
-
-    margin:6px 0;
-
-}
-
-/* Victory Buttons */
-
-#victoryScreen button{
-
-    width:240px;
-
-    max-width:90%;
-
-    padding:15px;
-
-    margin:10px auto;
-
-    font-size:18px;
-
-                      }
-
-    
 
 /* ===============================
    ANIMATIONS
@@ -1704,5 +1658,1104 @@ LOGOUT BUTTON
         margin-bottom:3px;
 
     }
+
+}
+
+
+
+
+/* ==========================================================
+   PUZZLEMANIA PREMIUM VICTORY SCREEN
+   FINAL MOBILE DESIGN
+   ========================================================== */
+
+
+/* ==========================================================
+   VICTORY BACKDROP
+   ========================================================== */
+
+#victoryScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(124,58,237,.25),
+            rgba(0,0,0,.82)
+        );
+
+    backdrop-filter:blur(6px);
+
+    z-index:99999;
+
+    overflow-y:auto;
+
+}
+
+
+/* ==========================================================
+   MAIN VICTORY BOX
+   ========================================================== */
+
+.victory-box{
+
+    position:relative;
+
+    width:92%;
+
+    max-width:500px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:24px 22px 22px 22px;
+
+    margin:auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fffdf7
+        );
+
+    color:#222;
+
+    border-radius:38px;
+
+    border:
+        5px solid #FFD21C;
+
+    box-shadow:
+
+        0 0 12px rgba(255,215,0,.8),
+
+        0 0 30px rgba(255,193,7,.65),
+
+        0 20px 60px rgba(0,0,0,.65);
+
+    text-align:center;
+
+    animation:
+        victoryAppear .55s
+        cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+/* ==========================================================
+   SUBTLE INNER GLOW
+   ========================================================== */
+
+.victory-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:7px;
+
+    border-radius:30px;
+
+    pointer-events:none;
+
+    border:
+        2px solid
+        rgba(255,215,0,.25);
+
+}
+
+
+/* ==========================================================
+   CELEBRATION DECORATION
+   ========================================================== */
+
+.victory-box::after{
+
+    content:"🎉   ⭐   ✨   ⭐   🎊";
+
+    position:absolute;
+
+    top:10px;
+
+    left:0;
+
+    width:100%;
+
+    font-size:20px;
+
+    letter-spacing:8px;
+
+    opacity:.75;
+
+    pointer-events:none;
+
+    animation:
+        celebrationFloat 3s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   VICTORY TITLE
+   ========================================================== */
+
+.victory-box h1{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:12px 0 18px 0;
+
+    font-size:clamp(30px,7vw,48px);
+
+    line-height:1.05;
+
+    font-weight:900;
+
+    color:#222;
+
+    text-shadow:
+
+        0 3px 0 #ffffff,
+
+        0 6px 15px rgba(0,0,0,.20);
+
+}
+
+
+/* ==========================================================
+   COMPLETED PUZZLE IMAGE
+   ========================================================== */
+
+#completedImage{
+
+    position:relative;
+
+    z-index:2;
+
+    width:155px;
+
+    height:155px;
+
+    max-width:42vw;
+
+    max-height:42vw;
+
+    display:block;
+
+    margin:10px auto 16px auto;
+
+    object-fit:cover;
+
+    border-radius:27px;
+
+    border:
+        6px solid #FFD21C;
+
+    background:white;
+
+    box-shadow:
+
+        0 0 12px rgba(255,215,0,.95),
+
+        0 0 30px rgba(255,193,7,.65),
+
+        0 10px 25px rgba(0,0,0,.30);
+
+    animation:
+        imageGlow 2s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   STARS
+   ========================================================== */
+
+#starsDisplay{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:42px;
+
+    line-height:1;
+
+    margin:10px 0 18px 0;
+
+    color:#FFD21C;
+
+    letter-spacing:4px;
+
+    text-shadow:
+
+        0 3px 8px rgba(255,193,7,.45);
+
+    animation:
+        starsPop .7s ease-out;
+
+}
+
+
+/* ==========================================================
+   VICTORY STATISTICS
+   ========================================================== */
+
+.victory-box .stats{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    max-width:360px;
+
+    margin:8px auto 16px auto;
+
+    font-size:20px;
+
+    line-height:1.5;
+
+}
+
+
+/* Individual statistic */
+
+.victory-box .stats p{
+
+    margin:7px auto;
+
+    padding:5px 10px;
+
+    border-radius:15px;
+
+}
+
+
+/* ==========================================================
+   VICTORY BUTTONS
+   ========================================================== */
+
+#victoryScreen button{
+
+    position:relative;
+
+    z-index:3;
+
+    width:85%;
+
+    max-width:360px;
+
+    padding:15px 18px;
+
+    margin:8px auto;
+
+    border:none;
+
+    border-radius:24px;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:white;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #8b5cf6,
+            #6366f1
+        );
+
+    box-shadow:
+
+        0 10px 20px rgba(0,0,0,.25),
+
+        inset 0 2px 2px
+        rgba(255,255,255,.35),
+
+        inset 0 -6px 8px
+        rgba(0,0,0,.18),
+
+        0 0 18px
+        rgba(124,58,237,.25);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+/* Button hover */
+
+#victoryScreen button:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+
+        0 15px 28px rgba(0,0,0,.30),
+
+        0 0 25px
+        rgba(124,58,237,.55);
+
+}
+
+
+/* Button press */
+
+#victoryScreen button:active{
+
+    transform:scale(.96);
+
+}
+
+
+/* ==========================================================
+   BEST RECORD
+   ========================================================== */
+
+#bestRecord{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:18px auto 0 auto !important;
+
+    padding-top:12px;
+
+    width:90%;
+
+    border-top:
+        2px solid
+        rgba(100,70,130,.30);
+
+    color:#222;
+
+}
+
+
+/* Best Record title */
+
+#bestRecord h3{
+
+    margin:0 0 8px 0;
+
+    font-size:24px;
+
+    font-weight:900;
+
+}
+
+
+/* Best record text */
+
+#bestRecord p{
+
+    margin:4px 0;
+
+    font-size:20px;
+
+    line-height:1.3;
+
+}
+
+
+/* Best record stars */
+
+#bestRecord p:first-of-type{
+
+    color:#FFD21C;
+
+    font-size:34px;
+
+    line-height:1;
+
+    text-shadow:
+        0 3px 7px
+        rgba(255,193,7,.35);
+
+}
+
+
+/* ==========================================================
+   VICTORY ANIMATIONS
+   ========================================================== */
+
+@keyframes victoryAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            scale(.82)
+            translateY(30px);
+
+    }
+
+    70%{
+
+        transform:
+            scale(1.02)
+            translateY(-3px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes imageGlow{
+
+    0%,100%{
+
+        box-shadow:
+
+            0 0 12px rgba(255,215,0,.8),
+
+            0 0 28px rgba(255,193,7,.5),
+
+            0 10px 25px rgba(0,0,0,.3);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 20px rgba(255,215,0,1),
+
+            0 0 42px rgba(255,193,7,.75),
+
+            0 12px 30px rgba(0,0,0,.35);
+
+    }
+
+}
+
+
+@keyframes starsPop{
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(.5);
+
+    }
+
+    70%{
+
+        transform:scale(1.12);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+@keyframes celebrationFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-5px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE PHONES
+   ========================================================== */
+
+@media(max-width:500px){
+
+    #victoryScreen{
+
+        padding:14px;
+
+        align-items:center;
+
+    }
+
+
+    .victory-box{
+
+        width:94%;
+
+        max-width:430px;
+
+        max-height:88vh;
+
+        padding:
+            20px
+            16px
+            18px
+            16px;
+
+        border-radius:32px;
+
+        border-width:4px;
+
+    }
+
+
+    .victory-box h1{
+
+        font-size:
+            clamp(
+                28px,
+                8vw,
+                38px
+            );
+
+        margin:
+            10px 0
+            14px 0;
+
+    }
+
+
+    #completedImage{
+
+        width:135px;
+
+        height:135px;
+
+        max-width:38vw;
+
+        max-height:38vw;
+
+        border-width:5px;
+
+        border-radius:23px;
+
+        margin:
+            8px auto
+            14px auto;
+
+    }
+
+
+    #starsDisplay{
+
+        font-size:36px;
+
+        letter-spacing:2px;
+
+        margin:
+            8px 0
+            14px 0;
+
+    }
+
+
+    .victory-box .stats{
+
+        font-size:18px;
+
+        margin:
+            6px auto
+            12px auto;
+
+    }
+
+
+    .victory-box .stats p{
+
+        margin:4px auto;
+
+    }
+
+
+    #victoryScreen button{
+
+        width:88%;
+
+        padding:
+            13px
+            15px;
+
+        margin:
+            7px auto;
+
+        font-size:18px;
+
+        border-radius:21px;
+
+    }
+
+
+    #bestRecord{
+
+        margin-top:14px !important;
+
+        padding-top:10px;
+
+    }
+
+
+    #bestRecord h3{
+
+        font-size:21px;
+
+        margin-bottom:5px;
+
+    }
+
+
+    #bestRecord p{
+
+        font-size:18px;
+
+        margin:2px 0;
+
+    }
+
+
+    #bestRecord p:first-of-type{
+
+        font-size:30px;
+
+    }
+
+
+    .victory-box::after{
+
+        font-size:15px;
+
+        letter-spacing:4px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL PHONES
+   ========================================================== */
+
+@media(max-width:360px){
+
+    #victoryScreen{
+
+        padding:10px;
+
+    }
+
+
+    .victory-box{
+
+        max-height:90vh;
+
+        padding:
+            17px
+            13px
+            15px
+            13px;
+
+        border-radius:28px;
+
+    }
+
+
+    .victory-box h1{
+
+        font-size:27px;
+
+        margin-bottom:10px;
+
+    }
+
+
+    #completedImage{
+
+        width:120px;
+
+        height:120px;
+
+        max-width:35vw;
+
+        max-height:35vw;
+
+    }
+
+
+    #starsDisplay{
+
+        font-size:31px;
+
+        margin-bottom:10px;
+
+    }
+
+
+    .victory-box .stats{
+
+        font-size:16px;
+
+    }
+
+
+    #victoryScreen button{
+
+        width:92%;
+
+        padding:11px;
+
+        font-size:17px;
+
+        margin:5px auto;
+
+    }
+
+
+    #bestRecord h3{
+
+        font-size:19px;
+
+    }
+
+
+    #bestRecord p{
+
+        font-size:16px;
+
+    }
+
+
+    #bestRecord p:first-of-type{
+
+        font-size:27px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   VICTORY SCROLLBAR
+   ========================================================== */
+
+.victory-box::-webkit-scrollbar{
+
+    width:5px;
+
+}
+
+
+.victory-box::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+.victory-box::-webkit-scrollbar-thumb{
+
+    background:
+        rgba(124,58,237,.45);
+
+    border-radius:10px;
+
+}
+
+
+
+/* ==========================================================
+   MOVING VICTORY CONFETTI
+   CSS ONLY — NO JAVASCRIPT REQUIRED
+   ========================================================== */
+
+.victory-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:34px;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:.85;
+
+    background-image:
+
+        linear-gradient(
+            135deg,
+            #ff4d6d 0 8px,
+            transparent 8px 100%
+        ),
+
+        linear-gradient(
+            45deg,
+            #ffd21c 0 7px,
+            transparent 7px 100%
+        ),
+
+        linear-gradient(
+            120deg,
+            #22c55e 0 8px,
+            transparent 8px 100%
+        ),
+
+        linear-gradient(
+            60deg,
+            #3b82f6 0 7px,
+            transparent 7px 100%
+        ),
+
+        linear-gradient(
+            160deg,
+            #a855f7 0 8px,
+            transparent 8px 100%
+        );
+
+    background-size:
+        75px 95px,
+        95px 120px,
+        110px 100px,
+        85px 130px,
+        120px 110px;
+
+    background-position:
+        0 0,
+        20px -40px,
+        -30px 20px,
+        50px -20px,
+        -20px 50px;
+
+    animation:
+        confettiFall 5s linear infinite;
+
+}
+
+
+/* ==========================================================
+   SECOND CONFETTI LAYER
+   ========================================================== */
+
+.victory-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:40px;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:.55;
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            #ffd21c 0 4px,
+            transparent 5px
+        ),
+
+        radial-gradient(
+            circle,
+            #ff4d6d 0 4px,
+            transparent 5px
+        ),
+
+        radial-gradient(
+            circle,
+            #3b82f6 0 4px,
+            transparent 5px
+        ),
+
+        radial-gradient(
+            circle,
+            #22c55e 0 4px,
+            transparent 5px
+        ),
+
+        radial-gradient(
+            circle,
+            #a855f7 0 4px,
+            transparent 5px
+        );
+
+    background-size:
+        90px 110px,
+        120px 140px,
+        100px 130px,
+        130px 100px,
+        110px 120px;
+
+    background-position:
+        10px 0,
+        -30px -50px,
+        40px -20px,
+        -20px 40px,
+        60px 20px;
+
+    animation:
+        confettiFallReverse 7s linear infinite;
+
+}
+
+
+/* ==========================================================
+   CONFETTI MOVEMENT
+   ========================================================== */
+
+@keyframes confettiFall{
+
+    0%{
+
+        background-position:
+            0 -100px,
+            20px -140px,
+            -30px -120px,
+            50px -160px,
+            -20px -130px;
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    50%{
+
+        background-position:
+            25px 180px,
+            -20px 220px,
+            40px 160px,
+            10px 240px,
+            30px 190px;
+
+        transform:
+            rotate(2deg);
+
+    }
+
+    100%{
+
+        background-position:
+            0 450px,
+            20px 500px,
+            -30px 470px,
+            50px 520px,
+            -20px 490px;
+
+        transform:
+            rotate(0deg);
+
+    }
+
+}
+
+
+@keyframes confettiFallReverse{
+
+    0%{
+
+        background-position:
+            10px -120px,
+            -30px -160px,
+            40px -100px,
+            -20px -180px,
+            60px -140px;
+
+    }
+
+    50%{
+
+        background-position:
+            -20px 160px,
+            20px 200px,
+            -30px 180px,
+            30px 220px,
+            10px 170px;
+
+    }
+
+    100%{
+
+        background-position:
+            10px 480px,
+            -30px 520px,
+            40px 500px,
+            -20px 540px,
+            60px 510px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   KEEP VICTORY CONTENT ABOVE CONFETTI
+   ========================================================== */
+
+.victory-box > *{
+
+    position:relative;
+
+    z-index:2;
 
 }
