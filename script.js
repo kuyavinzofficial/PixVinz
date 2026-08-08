@@ -579,3 +579,25 @@ function logout(){
     }
 
 }
+
+
+
+// ======================================
+// DISPLAY PLAYER NAME
+// ======================================
+
+window.addEventListener("load", function(){
+
+    const user = getCurrentUser();
+
+    const usernameDisplay =
+        document.getElementById("usernameDisplay");
+
+    if(user && usernameDisplay){
+
+        usernameDisplay.textContent =
+            user.displayName;
+
+    }
+
+});
