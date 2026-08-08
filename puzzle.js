@@ -110,15 +110,121 @@ let homeBtn;
 
 function setup(){
 
-    document.getElementById("levelTitle").textContent =
-        "Level " + level;
+    // ------------------------------
+    // GAME LOGO
+    // ------------------------------
+
+    const levelTitle =
+        document.getElementById("levelTitle");
+
+
+    if(levelTitle){
+
+        // Check if logo already exists
+        // so it is never duplicated
+
+        let gameLogo =
+            document.querySelector(".game .app-logo");
+
+
+        if(!gameLogo){
+
+            gameLogo =
+            document.createElement("video");
+
+
+            gameLogo.className =
+                "app-logo";
+
+
+            gameLogo.autoplay =
+                true;
+
+
+            gameLogo.muted =
+                true;
+
+
+            gameLogo.loop =
+                true;
+
+
+            gameLogo.playsInline =
+                true;
+
+
+            gameLogo.setAttribute(
+                "playsinline",
+                ""
+            );
+
+
+            // Logo video source
+
+            const source =
+                document.createElement("source");
+
+
+            source.src =
+                "images/logo.webm";
+
+
+            source.type =
+                "video/webm";
+
+
+            gameLogo.appendChild(
+                source
+            );
+
+
+            // Put logo ABOVE Level 1
+
+            levelTitle.parentNode.insertBefore(
+                gameLogo,
+                levelTitle
+            );
+
+
+            // Start video safely
+
+            gameLogo.play().catch(
+                function(){
+
+                    // Mobile browsers may
+                    // delay autoplay until
+                    // interaction.
+
+                }
+            );
+
+        }
+
+    }
+
+
+    // ------------------------------
+    // LEVEL TITLE
+    // ------------------------------
+
+    if(levelTitle){
+
+        levelTitle.textContent =
+            "Level " + level;
+
+    }
+
+
+    // ------------------------------
+    // CREATE PUZZLE
+    // ------------------------------
 
     createPieces();
+
 
     shufflePuzzle();
 
 }
-
 
 // ------------------------------
 // TIMER
