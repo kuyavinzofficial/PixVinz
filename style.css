@@ -1,12 +1,6 @@
 /* ======================================
    PuzzleMania Premium Game UI
-   CLEAN + MOBILE OPTIMIZED VERSION
    ====================================== */
-
-
-/* ============================================================
-   GLOBAL
-   ============================================================ */
 
 *{
     box-sizing:border-box;
@@ -27,24 +21,25 @@ body{
     overflow-x:hidden;
 
     background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #6d28d9,
-            #9333ea,
-            #2563eb
-        );
+    linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea,
+        #2563eb
+    );
 
     background-size:400% 400%;
 
     animation:
-        backgroundMove 15s ease infinite;
+    backgroundMove 15s ease infinite;
+
 }
 
 
-/* ============================================================
+/* ===============================
    MAIN CONTAINERS
-   ============================================================ */
+   =============================== */
 
 .menu,
 .levels,
@@ -59,24 +54,25 @@ body{
     padding:35px;
 
     background:
-        rgba(255,255,255,.15);
+    rgba(255,255,255,.15);
 
     backdrop-filter:
-        blur(15px);
+    blur(15px);
 
     border-radius:30px;
 
     border:
-        1px solid rgba(255,255,255,.25);
+    1px solid rgba(255,255,255,.25);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
+    0 20px 50px rgba(0,0,0,.35);
+
 }
 
 
-/* ============================================================
+/* ===============================
    TITLES
-   ============================================================ */
+   =============================== */
 
 h1{
 
@@ -85,7 +81,8 @@ h1{
     margin-bottom:15px;
 
     text-shadow:
-        0 5px 15px rgba(0,0,0,.4);
+    0 5px 15px rgba(0,0,0,.4);
+
 }
 
 
@@ -94,18 +91,20 @@ h2{
     font-size:30px;
 
     margin-bottom:20px;
+
 }
 
 
 p{
 
     font-size:20px;
+
 }
 
 
-/* ============================================================
-   PREMIUM BUTTONS
-   ============================================================ */
+/* ===============================
+   PREMIUM BUTTON DESIGN
+   =============================== */
 
 button{
 
@@ -134,53 +133,50 @@ button{
     color:white;
 
     background:
-        linear-gradient(
-            145deg,
-            #8b5cf6,
-            #6366f1
-        );
+    linear-gradient(
+        145deg,
+        #8b5cf6,
+        #6366f1
+    );
 
     box-shadow:
 
-        0 10px 20px rgba(0,0,0,.30),
+    0 10px 20px rgba(0,0,0,.30),
 
-        inset 0 2px 2px
-        rgba(255,255,255,.30),
+    inset 0 2px 2px rgba(255,255,255,.30),
 
-        inset 0 -5px 8px
-        rgba(0,0,0,.20),
+    inset 0 -5px 8px rgba(0,0,0,.20),
 
-        0 0 20px
-        rgba(139,92,246,.30);
+    0 0 20px rgba(139,92,246,.30);
 
-    transition:
-        all .30s ease;
+    transition:all .30s ease;
 
     position:relative;
 
     overflow:hidden;
+
 }
 
 
 button:hover{
 
     transform:
-        translateY(-6px)
-        scale(1.04);
+    translateY(-6px)
+    scale(1.04);
 
     box-shadow:
 
-        0 18px 35px rgba(0,0,0,.35),
+    0 18px 35px rgba(0,0,0,.35),
 
-        0 0 30px
-        rgba(139,92,246,.55);
+    0 0 30px rgba(139,92,246,.55);
+
 }
 
 
 button:active{
 
-    transform:
-        scale(.96);
+    transform:scale(.96);
+
 }
 
 
@@ -199,24 +195,25 @@ button::before{
     height:300%;
 
     background:
-        rgba(255,255,255,.35);
+    rgba(255,255,255,.35);
 
-    transform:
-        rotate(25deg);
+    transform:rotate(25deg);
 
     transition:.7s;
+
 }
 
 
 button:hover::before{
 
     left:120%;
+
 }
 
 
-/* ============================================================
+/* ===============================
    COINS
-   ============================================================ */
+   =============================== */
 
 .coins{
 
@@ -227,34 +224,32 @@ button:hover::before{
     border-radius:15px;
 
     background:
-        rgba(255,255,255,.15);
+    rgba(255,255,255,.15);
 
     font-size:22px;
+
 }
 
 
-/* ============================================================
-   LEVEL GRID
-   ============================================================ */
+/* ===============================
+   PREMIUM LEVEL GRID
+   =============================== */
 
 .level-grid{
 
     display:grid;
 
     grid-template-columns:
-        repeat(2,130px);
+    repeat(2,130px);
 
     justify-content:center;
 
     gap:22px;
 
     margin-top:20px;
+
 }
 
-
-/* ============================================================
-   LEVEL CARD
-   ============================================================ */
 
 .level-card{
 
@@ -285,29 +280,27 @@ button:hover::before{
     gap:4px;
 
     text-shadow:
-        0 2px 6px rgba(0,0,0,.45);
+    0 2px 6px rgba(0,0,0,.45);
 
     transition:
-        transform .35s,
-        box-shadow .35s;
+    transform .35s,
+    box-shadow .35s;
 
     transform-style:preserve-3d;
 
     box-shadow:
 
-        0 18px 28px rgba(0,0,0,.35),
+    0 18px 28px rgba(0,0,0,.35),
 
-        inset 0 2px 2px
-        rgba(255,255,255,.30),
+    inset 0 2px 2px rgba(255,255,255,.30),
 
-        inset 0 -8px 12px
-        rgba(0,0,0,.28);
+    inset 0 -8px 12px rgba(0,0,0,.28);
 
-    background-size:
-        200% 200%;
+    background-size:200% 200%;
 
     animation:
-        floatCard 4s ease-in-out infinite;
+    floatCard 4s ease-in-out infinite;
+
 }
 
 
@@ -326,58 +319,58 @@ button:hover::before{
     height:220%;
 
     background:
-        rgba(255,255,255,.18);
+    rgba(255,255,255,.18);
 
-    transform:
-        rotate(30deg);
+    transform:rotate(30deg);
 
     transition:.7s;
+
 }
 
 
 .level-card:hover{
 
     transform:
-        perspective(700px)
-        rotateX(10deg)
-        translateY(-8px)
-        scale(1.06);
+    perspective(700px)
+    rotateX(10deg)
+    translateY(-8px)
+    scale(1.06);
+
 }
 
 
 .level-card:active{
 
     transform:
-        perspective(700px)
-        scale(.94);
+    perspective(700px)
+    scale(.94);
+
 }
 
 
-/* ============================================================
-   UNLOCKED LEVEL
-   ============================================================ */
+/* ===============================
+   UNLOCKED
+   =============================== */
 
 .unlocked{
 
     background:
-        linear-gradient(
-            145deg,
-            #7c3aed,
-            #4f46e5
-        );
+    linear-gradient(
+        145deg,
+        #7c3aed,
+        #4f46e5
+    );
 
     color:white;
 
     box-shadow:
 
-        0 8px 20px
-        rgba(79,70,229,.5),
+    0 8px 20px rgba(79,70,229,.5),
 
-        inset 0 2px 3px
-        rgba(255,255,255,.25),
+    inset 0 2px 3px rgba(255,255,255,.25),
 
-        inset 0 -4px 8px
-        rgba(0,0,0,.25);
+    inset 0 -4px 8px rgba(0,0,0,.25);
+
 }
 
 
@@ -385,105 +378,102 @@ button:hover::before{
 
     box-shadow:
 
-        0 0 20px #7c3aed,
+    0 0 20px #7c3aed,
 
-        0 0 40px #6d28d9,
+    0 0 40px #6d28d9,
 
-        0 0 60px
-        rgba(124,58,237,.55);
+    0 0 60px rgba(124,58,237,.55);
+
 }
 
 
-/* ============================================================
-   COMPLETED LEVEL
-   ============================================================ */
+/* ===============================
+   COMPLETED
+   =============================== */
 
 .completed{
 
     background:
-        linear-gradient(
-            135deg,
-            #FFD54F,
-            #FFC107,
-            #FF9800,
-            #F57C00
-        );
+    linear-gradient(
+        135deg,
+        #FFD54F,
+        #FFC107,
+        #FF9800,
+        #F57C00
+    );
 
-    background-size:
-        300% 300%;
+    background-size:300% 300%;
 
     color:white;
 
     box-shadow:
 
-        0 0 18px #FFC107,
+    0 0 18px #FFC107,
 
-        0 0 40px
-        rgba(255,193,7,.75),
+    0 0 40px rgba(255,193,7,.75),
 
-        inset 0 2px 3px
-        rgba(255,255,255,.45),
+    inset 0 2px 3px rgba(255,255,255,.45),
 
-        inset 0 -8px 10px
-        rgba(0,0,0,.20);
+    inset 0 -8px 10px rgba(0,0,0,.20);
 
     animation:
-        floatCard 4s ease-in-out infinite,
-        goldGlow 2s ease-in-out infinite,
-        shineMove 4s linear infinite;
+
+    floatCard 4s ease-in-out infinite,
+
+    goldGlow 2s ease-in-out infinite,
+
+    shineMove 4s linear infinite;
+
 }
 
-
-/* ============================================================
-   LOCKED LEVEL
-   ============================================================ */
-
-.locked{
-
-    background:
-        linear-gradient(
-            145deg,
-            #3f3f46,
-            #18181b
-        );
-
-    color:#bcbcbc;
-
-    box-shadow:
-
-        inset 0 2px 4px
-        rgba(255,255,255,.08),
-
-        inset 0 -4px 10px
-        rgba(0,0,0,.6);
-
-    cursor:not-allowed;
-
-    opacity:.8;
-}
-
-
-/* ============================================================
-   STARS
-   ============================================================ */
 
 #starsDisplay{
 
     font-size:30px;
 
     color:gold;
+
 }
 
 
-/* ============================================================
+/* ===============================
+   LOCKED
+   =============================== */
+
+.locked{
+
+    background:
+    linear-gradient(
+        145deg,
+        #3f3f46,
+        #18181b
+    );
+
+    color:#bcbcbc;
+
+    box-shadow:
+
+    inset 0 2px 4px rgba(255,255,255,.08),
+
+    inset 0 -4px 10px rgba(0,0,0,.6);
+
+    cursor:not-allowed;
+
+    opacity:.8;
+
+}
+
+
+/* ===============================
    GAME STATS
-   ============================================================ */
+   =============================== */
 
 .stats{
 
     font-size:12px;
 
     line-height:1.8;
+
 }
 
 
@@ -512,58 +502,1610 @@ button:hover::before{
     border-radius:25px;
 
     background:
-        rgba(255,255,255,.2);
+    rgba(255,255,255,.2);
 
     box-shadow:
-        0 15px 35px rgba(0,0,0,.4);
+    0 15px 35px rgba(0,0,0,.4);
+
 }
 
 
-/* ============================================================
+/* ===============================
    PUZZLE PIECES
-   ============================================================ */
+   =============================== */
 
 .piece{
 
     border-radius:10px;
 
     border:
-        1px solid
-        rgba(255,255,255,.35);
+    1px solid
+    rgba(255,255,255,.35);
 
     transition:.2s;
 
     overflow:hidden;
+
 }
 
 
 .piece:hover{
 
     filter:
-        brightness(1.15);
+    brightness(1.15);
+
 }
 
 
 .selected{
 
     border:
-        4px solid yellow;
+    4px solid yellow;
 
     transform:
-        scale(.93);
+    scale(.93);
 
     box-shadow:
-        0 0 20px yellow;
+    0 0 20px yellow;
+
 }
 
 
 /* ============================================================
-   HIDDEN
+   PUZZLEMANIA LOGO SYSTEM
+   ============================================================ */
+
+
+/* ============================================================
+   OPENING / LOADING SPLASH
+   ============================================================ */
+
+#puzzleSplash{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea,
+        #2563eb
+    );
+
+    z-index:99999;
+
+    overflow:hidden;
+
+    opacity:1;
+
+    visibility:visible;
+
+    transition:
+    opacity .8s ease,
+    visibility .8s ease;
+
+}
+
+
+/* ============================================================
+   OPENING LOGO / VIDEO
+   ============================================================ */
+
+#puzzleSplash .app-logo{
+
+    display:block;
+
+    width:240px;
+
+    height:auto;
+
+    max-width:68vw;
+
+    max-height:42vh;
+
+    object-fit:contain;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+    drop-shadow(
+        0 12px 25px
+        rgba(0,0,0,.45)
+    );
+
+}
+
+
+/* ============================================================
+   SPLASH EXIT
+   ============================================================ */
+
+#puzzleSplash.splashHidden{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* ============================================================
+   MAIN MENU LOGO
+   ============================================================ */
+
+.menu .app-logo{
+
+    display:block;
+
+    width:175px;
+
+    max-width:65%;
+
+    height:auto;
+
+    max-height:120px;
+
+    object-fit:contain;
+
+    margin:
+    0 auto 12px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+    drop-shadow(
+        0 8px 15px
+        rgba(0,0,0,.35)
+    );
+
+    animation:
+    menuLogoFloat
+    4s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* ============================================================
+   LEVELS PAGE LOGO
+   ============================================================ */
+
+.levels .app-logo{
+
+    display:block;
+
+    width:165px;
+
+    max-width:62%;
+
+    height:auto;
+
+    max-height:115px;
+
+    object-fit:contain;
+
+    margin:
+    0 auto 10px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+    drop-shadow(
+        0 8px 15px
+        rgba(0,0,0,.35)
+    );
+
+    animation:
+    menuLogoFloat
+    4s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* ============================================================
+   GAME / PUZZLE SCREEN LOGO
+   ============================================================ */
+
+.game .app-logo{
+
+    display:block;
+
+    width:150px;
+
+    max-width:55%;
+
+    height:auto;
+
+    max-height:95px;
+
+    object-fit:contain;
+
+    margin:
+    0 auto 3px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+    drop-shadow(
+        0 7px 14px
+        rgba(0,0,0,.35)
+    );
+
+    animation:
+    gameLogoFloat
+    4s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* ============================================================
+   GAME LEVEL TITLE
+   ============================================================ */
+
+.game #levelTitle{
+
+    font-size:28px;
+
+    margin:
+    3px 0 7px 0;
+
+    line-height:1.15;
+
+}
+
+
+/* ============================================================
+   GAME STATISTICS
+   ============================================================ */
+
+.game .stats{
+
+    font-size:14px;
+
+    line-height:1.35;
+
+    margin-bottom:6px;
+
+}
+
+
+/* ============================================================
+   LOGO ANIMATIONS
+   ============================================================ */
+
+@keyframes menuLogoFloat{
+
+    0%,100%{
+
+        transform:
+        translateY(0)
+        scale(1);
+
+    }
+
+    50%{
+
+        transform:
+        translateY(-5px)
+        scale(1.02);
+
+    }
+
+}
+
+
+@keyframes gameLogoFloat{
+
+    0%,100%{
+
+        transform:
+        translateY(0)
+        scale(1);
+
+    }
+
+    50%{
+
+        transform:
+        translateY(-4px)
+        scale(1.015);
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE LOGO SIZING
+   ============================================================ */
+
+@media(max-width:500px){
+
+    #puzzleSplash{
+
+        padding:20px;
+
+    }
+
+
+    #puzzleSplash .app-logo{
+
+        width:210px;
+
+        max-width:65vw;
+
+        max-height:38vh;
+
+    }
+
+
+    .menu .app-logo{
+
+        width:165px;
+
+        max-width:62%;
+
+        max-height:110px;
+
+        margin:
+        0 auto 10px auto;
+
+    }
+
+
+    .levels .app-logo{
+
+        width:155px;
+
+        max-width:60%;
+
+        max-height:105px;
+
+        margin:
+        0 auto 9px auto;
+
+    }
+
+
+    .game .app-logo{
+
+        width:140px;
+
+        max-width:52%;
+
+        max-height:85px;
+
+        margin:
+        0 auto 2px auto;
+
+    }
+
+
+    .game #levelTitle{
+
+        font-size:25px;
+
+        margin:
+        2px 0 5px 0;
+
+    }
+
+
+    .game .stats{
+
+        font-size:13px;
+
+        line-height:1.3;
+
+        margin-bottom:4px;
+
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media(max-width:360px){
+
+    #puzzleSplash .app-logo{
+
+        width:190px;
+
+        max-width:62vw;
+
+        max-height:34vh;
+
+    }
+
+
+    .menu .app-logo{
+
+        width:150px;
+
+        max-width:60%;
+
+        max-height:100px;
+
+    }
+
+
+    .levels .app-logo{
+
+        width:145px;
+
+        max-width:58%;
+
+        max-height:95px;
+
+    }
+
+
+    .game .app-logo{
+
+        width:125px;
+
+        max-width:50%;
+
+        max-height:75px;
+
+    }
+
+
+    .game #levelTitle{
+
+        font-size:23px;
+
+    }
+
+
+    .game .stats{
+
+        font-size:12px;
+
+    }
+
+}
+
+
+/* ============================================================
+   SMALL HEIGHT PHONES
+   ============================================================ */
+
+@media(max-width:500px) and (max-height:700px){
+
+    #puzzleSplash .app-logo{
+
+        width:190px;
+
+        max-width:60vw;
+
+        max-height:32vh;
+
+    }
+
+
+    .game .app-logo{
+
+        width:125px;
+
+        max-height:70px;
+
+        margin-bottom:1px;
+
+    }
+
+
+    .game #levelTitle{
+
+        font-size:23px;
+
+        margin-bottom:3px;
+
+    }
+
+
+    .game .stats{
+
+        line-height:1.2;
+
+        margin-bottom:2px;
+
+    }
+
+}
+
+
+/* ============================================================
+   VICTORY SCREEN
    ============================================================ */
 
 .hidden{
 
     display:none!important;
+
+}
+
+
+#victoryScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:
+    radial-gradient(
+        circle at center,
+        rgba(124,58,237,.25),
+        rgba(0,0,0,.82)
+    );
+
+    backdrop-filter:blur(6px);
+
+    z-index:99999;
+
+    overflow-y:auto;
+
+}
+
+
+/* ============================================================
+   VICTORY BOX
+   ============================================================ */
+
+.victory-box{
+
+    position:relative;
+
+    width:92%;
+
+    max-width:500px;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:
+    24px 22px 22px 22px;
+
+    margin:auto;
+
+    background:
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #fffdf7
+    );
+
+    color:#222;
+
+    border-radius:38px;
+
+    border:
+    5px solid #FFD21C;
+
+    box-shadow:
+
+    0 0 12px rgba(255,215,0,.8),
+
+    0 0 30px rgba(255,193,7,.65),
+
+    0 20px 60px rgba(0,0,0,.65);
+
+    text-align:center;
+
+    animation:
+    victoryAppear .55s
+    cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+/* ============================================================
+   VICTORY CONFETTI
+   ============================================================ */
+
+.victory-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:34px;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:.85;
+
+    background-image:
+
+    linear-gradient(
+        135deg,
+        #ff4d6d 0 8px,
+        transparent 8px 100%
+    ),
+
+    linear-gradient(
+        45deg,
+        #ffd21c 0 7px,
+        transparent 7px 100%
+    ),
+
+    linear-gradient(
+        120deg,
+        #22c55e 0 8px,
+        transparent 8px 100%
+    ),
+
+    linear-gradient(
+        60deg,
+        #3b82f6 0 7px,
+        transparent 7px 100%
+    ),
+
+    linear-gradient(
+        160deg,
+        #a855f7 0 8px,
+        transparent 8px 100%
+    );
+
+    background-size:
+
+    75px 95px,
+    95px 120px,
+    110px 100px,
+    85px 130px,
+    120px 110px;
+
+    background-position:
+
+    0 0,
+    20px -40px,
+    -30px 20px,
+    50px -20px,
+    -20px 50px;
+
+    animation:
+    confettiFall 5s linear infinite;
+
+}
+
+
+.victory-box::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:40px;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    opacity:.55;
+
+    background-image:
+
+    radial-gradient(
+        circle,
+        #ffd21c 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle,
+        #ff4d6d 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle,
+        #3b82f6 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle,
+        #22c55e 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle,
+        #a855f7 0 4px,
+        transparent 5px
+    );
+
+    background-size:
+
+    90px 110px,
+    120px 140px,
+    100px 130px,
+    130px 100px,
+    110px 120px;
+
+    background-position:
+
+    10px 0,
+    -30px -50px,
+    40px -20px,
+    -20px 40px,
+    60px 20px;
+
+    animation:
+    confettiFallReverse 7s linear infinite;
+
+}
+
+
+/* ============================================================
+   VICTORY TITLE
+   ============================================================ */
+
+.victory-box h1{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:
+    12px 0 18px 0;
+
+    font-size:
+    clamp(30px,7vw,48px);
+
+    line-height:1.05;
+
+    font-weight:900;
+
+    color:#222;
+
+    text-shadow:
+
+    0 3px 0 #ffffff,
+
+    0 6px 15px rgba(0,0,0,.20);
+
+}
+
+
+/* ============================================================
+   COMPLETED IMAGE
+   ============================================================ */
+
+#completedImage{
+
+    position:relative;
+
+    z-index:2;
+
+    width:155px;
+
+    height:155px;
+
+    max-width:42vw;
+
+    max-height:42vw;
+
+    display:block;
+
+    margin:
+    10px auto 16px auto;
+
+    object-fit:cover;
+
+    border-radius:27px;
+
+    border:
+    6px solid #FFD21C;
+
+    background:white;
+
+    box-shadow:
+
+    0 0 12px rgba(255,215,0,.95),
+
+    0 0 30px rgba(255,193,7,.65),
+
+    0 10px 25px rgba(0,0,0,.30);
+
+    animation:
+    imageGlow 2s ease-in-out infinite;
+
+}
+
+
+/* ============================================================
+   VICTORY STARS
+   ============================================================ */
+
+#starsDisplay{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:42px;
+
+    line-height:1;
+
+    margin:
+    10px 0 18px 0;
+
+    color:#FFD21C;
+
+    letter-spacing:4px;
+
+    text-shadow:
+    0 3px 8px rgba(255,193,7,.45);
+
+    animation:
+    starsPop .7s ease-out;
+
+}
+
+
+/* ============================================================
+   VICTORY STATISTICS
+   ============================================================ */
+
+.victory-box .stats{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    max-width:360px;
+
+    margin:
+    8px auto 16px auto;
+
+    font-size:20px;
+
+    line-height:1.5;
+
+}
+
+
+.victory-box .stats p{
+
+    margin:
+    7px auto;
+
+    padding:
+    5px 10px;
+
+    border-radius:15px;
+
+}
+
+
+/* ============================================================
+   VICTORY BUTTONS
+   ============================================================ */
+
+#victoryScreen button{
+
+    position:relative;
+
+    z-index:3;
+
+    width:85%;
+
+    max-width:360px;
+
+    padding:
+    15px 18px;
+
+    margin:
+    8px auto;
+
+    border:none;
+
+    border-radius:24px;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        145deg,
+        #8b5cf6,
+        #6366f1
+    );
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.25),
+
+    inset 0 2px 2px
+    rgba(255,255,255,.35),
+
+    inset 0 -6px 8px
+    rgba(0,0,0,.18),
+
+    0 0 18px
+    rgba(124,58,237,.25);
+
+    transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+#victoryScreen button:hover{
+
+    transform:
+    translateY(-3px)
+    scale(1.02);
+
+    box-shadow:
+
+    0 15px 28px rgba(0,0,0,.30),
+
+    0 0 25px
+    rgba(124,58,237,.55);
+
+}
+
+
+#victoryScreen button:active{
+
+    transform:scale(.96);
+
+}
+
+
+/* ============================================================
+   BEST RECORD
+   ============================================================ */
+
+#bestRecord{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:
+    18px auto 0 auto !important;
+
+    padding-top:12px;
+
+    width:90%;
+
+    border-top:
+    2px solid
+    rgba(100,70,130,.30);
+
+    color:#222;
+
+}
+
+
+#bestRecord h3{
+
+    margin:
+    0 0 8px 0;
+
+    font-size:24px;
+
+    font-weight:900;
+
+}
+
+
+#bestRecord p{
+
+    margin:
+    4px 0;
+
+    font-size:20px;
+
+    line-height:1.3;
+
+}
+
+
+#bestRecord p:first-of-type{
+
+    color:#FFD21C;
+
+    font-size:34px;
+
+    line-height:1;
+
+    text-shadow:
+    0 3px 7px
+    rgba(255,193,7,.35);
+
+}
+
+
+/* ============================================================
+   VICTORY ANIMATIONS
+   ============================================================ */
+
+@keyframes victoryAppear{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        scale(.82)
+        translateY(30px);
+
+    }
+
+    70%{
+
+        transform:
+        scale(1.02)
+        translateY(-3px);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+
+    }
+
+}
+
+
+@keyframes imageGlow{
+
+    0%,100%{
+
+        box-shadow:
+
+        0 0 12px rgba(255,215,0,.8),
+
+        0 0 28px rgba(255,193,7,.5),
+
+        0 10px 25px rgba(0,0,0,.3);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+        0 0 20px rgba(255,215,0,1),
+
+        0 0 42px rgba(255,193,7,.75),
+
+        0 12px 30px rgba(0,0,0,.35);
+
+    }
+
+}
+
+
+@keyframes starsPop{
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(.5);
+
+    }
+
+    70%{
+
+        transform:scale(1.12);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+@keyframes confettiFall{
+
+    0%{
+
+        background-position:
+
+        0 -100px,
+        20px -140px,
+        -30px -120px,
+        50px -160px,
+        -20px -130px;
+
+        transform:
+        rotate(0deg);
+
+    }
+
+    50%{
+
+        background-position:
+
+        25px 180px,
+        -20px 220px,
+        40px 160px,
+        10px 240px,
+        30px 190px;
+
+        transform:
+        rotate(2deg);
+
+    }
+
+    100%{
+
+        background-position:
+
+        0 450px,
+        20px 500px,
+        -30px 470px,
+        50px 520px,
+        -20px 490px;
+
+        transform:
+        rotate(0deg);
+
+    }
+
+}
+
+
+@keyframes confettiFallReverse{
+
+    0%{
+
+        background-position:
+
+        10px -120px,
+        -30px -160px,
+        40px -100px,
+        -20px -180px,
+        60px -140px;
+
+    }
+
+    50%{
+
+        background-position:
+
+        -20px 160px,
+        20px 200px,
+        -30px 180px,
+        30px 220px,
+        10px 170px;
+
+    }
+
+    100%{
+
+        background-position:
+
+        10px 480px,
+        -30px 520px,
+        40px 500px,
+        -20px 540px,
+        60px 510px;
+
+    }
+
+}
+
+
+/* ============================================================
+   KEEP VICTORY CONTENT ABOVE CONFETTI
+   ============================================================ */
+
+.victory-box > *{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* ============================================================
+   MOBILE VICTORY SCREEN
+   ============================================================ */
+
+@media(max-width:500px){
+
+    #victoryScreen{
+
+        padding:14px;
+
+        align-items:center;
+
+    }
+
+
+    .victory-box{
+
+        width:94%;
+
+        max-width:430px;
+
+        max-height:88vh;
+
+        padding:
+        20px
+        16px
+        18px
+        16px;
+
+        border-radius:32px;
+
+        border-width:4px;
+
+    }
+
+
+    .victory-box h1{
+
+        font-size:
+        clamp(
+            28px,
+            8vw,
+            38px
+        );
+
+        margin:
+        10px 0
+        14px 0;
+
+    }
+
+
+    #completedImage{
+
+        width:135px;
+
+        height:135px;
+
+        max-width:38vw;
+
+        max-height:38vw;
+
+        border-width:5px;
+
+        border-radius:23px;
+
+        margin:
+        8px auto
+        14px auto;
+
+    }
+
+
+    #starsDisplay{
+
+        font-size:36px;
+
+        letter-spacing:2px;
+
+        margin:
+        8px 0
+        14px 0;
+
+    }
+
+
+    .victory-box .stats{
+
+        font-size:18px;
+
+        margin:
+        6px auto
+        12px auto;
+
+    }
+
+
+    .victory-box .stats p{
+
+        margin:4px auto;
+
+    }
+
+
+    #victoryScreen button{
+
+        width:88%;
+
+        padding:
+        13px
+        15px;
+
+        margin:
+        7px auto;
+
+        font-size:18px;
+
+        border-radius:21px;
+
+    }
+
+
+    #bestRecord{
+
+        margin-top:14px !important;
+
+        padding-top:10px;
+
+    }
+
+
+    #bestRecord h3{
+
+        font-size:21px;
+
+        margin-bottom:5px;
+
+    }
+
+
+    #bestRecord p{
+
+        font-size:18px;
+
+        margin:2px 0;
+
+    }
+
+
+    #bestRecord p:first-of-type{
+
+        font-size:30px;
+
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES - VICTORY
+   ============================================================ */
+
+@media(max-width:360px){
+
+    #victoryScreen{
+
+        padding:10px;
+
+    }
+
+
+    .victory-box{
+
+        max-height:90vh;
+
+        padding:
+        17px
+        13px
+        15px
+        13px;
+
+        border-radius:28px;
+
+    }
+
+
+    .victory-box h1{
+
+        font-size:27px;
+
+        margin-bottom:10px;
+
+    }
+
+
+    #completedImage{
+
+        width:120px;
+
+        height:120px;
+
+        max-width:35vw;
+
+        max-height:35vw;
+
+    }
+
+
+    #starsDisplay{
+
+        font-size:31px;
+
+        margin-bottom:10px;
+
+    }
+
+
+    .victory-box .stats{
+
+        font-size:16px;
+
+    }
+
+
+    #victoryScreen button{
+
+        width:92%;
+
+        padding:11px;
+
+        font-size:17px;
+
+        margin:5px auto;
+
+    }
+
+
+    #bestRecord h3{
+
+        font-size:19px;
+
+    }
+
+
+    #bestRecord p{
+
+        font-size:16px;
+
+    }
+
+
+    #bestRecord p:first-of-type{
+
+        font-size:27px;
+
+    }
+
+}
+
+
+/* ============================================================
+   VICTORY SCROLLBAR
+   ============================================================ */
+
+.victory-box::-webkit-scrollbar{
+
+    width:5px;
+
+}
+
+
+.victory-box::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+.victory-box::-webkit-scrollbar-thumb{
+
+    background:
+    rgba(124,58,237,.45);
+
+    border-radius:10px;
+
+}
+
+
+/* ============================================================
+   GENERAL MOBILE GAME CONTAINER
+   ============================================================ */
+
+@media(max-width:500px){
+
+    .game{
+
+        width:95%;
+
+        padding:15px;
+
+        margin:
+        20px auto;
+
+    }
+
+
+    #puzzleBoard{
+
+        width:90vw;
+
+        height:90vw;
+
+        max-width:360px;
+
+        max-height:360px;
+
+        margin:
+        20px auto;
+
+    }
+
 }
 
 
@@ -578,7 +2120,7 @@ button:hover::before{
     inset:0;
 
     background:
-        rgba(0,0,0,.7);
+    rgba(0,0,0,.7);
 
     display:none;
 
@@ -587,6 +2129,7 @@ button:hover::before{
     align-items:center;
 
     z-index:9999;
+
 }
 
 
@@ -605,7 +2148,8 @@ button:hover::before{
     border-radius:25px;
 
     box-shadow:
-        0 20px 50px black;
+    0 20px 50px black;
+
 }
 
 
@@ -620,6 +2164,7 @@ button:hover::before{
     margin:20px 0;
 
     font-size:20px;
+
 }
 
 
@@ -628,6 +2173,7 @@ button:hover::before{
     width:25px;
 
     height:25px;
+
 }
 
 
@@ -658,30 +2204,32 @@ input{
     text-align:center;
 
     background:
-        rgba(255,255,255,.95);
+    rgba(255,255,255,.95);
 
     color:#222;
 
     box-shadow:
-        0 8px 18px rgba(0,0,0,.25);
+    0 8px 18px rgba(0,0,0,.25);
 
     transition:.3s;
+
 }
 
 
 input:focus{
 
-    transform:
-        scale(1.03);
+    transform:scale(1.03);
 
     box-shadow:
-        0 0 18px #8b5cf6;
+    0 0 18px #8b5cf6;
+
 }
 
 
 input::placeholder{
 
     color:#666;
+
 }
 
 
@@ -691,7 +2239,8 @@ input::placeholder{
 
 #playerProfile{
 
-    margin:20px auto;
+    margin:
+    20px auto;
 
     padding:15px;
 
@@ -700,10 +2249,11 @@ input::placeholder{
     border-radius:18px;
 
     background:
-        rgba(255,255,255,.15);
+    rgba(255,255,255,.15);
 
     backdrop-filter:
-        blur(10px);
+    blur(10px);
+
 }
 
 
@@ -712,6 +2262,7 @@ input::placeholder{
     margin-bottom:8px;
 
     font-size:22px;
+
 }
 
 
@@ -722,6 +2273,7 @@ input::placeholder{
     font-size:16px;
 
     opacity:.9;
+
 }
 
 
@@ -731,829 +2283,13 @@ input::placeholder{
 
 .logout-btn{
 
-    margin:70px auto 20px auto;
+    margin:
+    70px auto 20px auto;
 
     width:220px;
 
     opacity:.85;
-}
 
-
-/* ============================================================
-   PUZZLEMANIA SPLASH SCREEN
-   ============================================================ */
-
-#puzzleSplash{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #6d28d9,
-            #9333ea,
-            #2563eb
-        );
-
-    z-index:99999;
-
-    overflow:hidden;
-
-    opacity:1;
-
-    visibility:visible;
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-}
-
-
-/* ============================================================
-   SPLASH VIDEO LOGO
-   ============================================================ */
-
-#puzzleSplash .app-logo{
-
-    display:block;
-
-    width:240px;
-
-    max-width:65vw;
-
-    height:auto;
-
-    max-height:45vh;
-
-    object-fit:contain;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 15px 30px
-            rgba(0,0,0,.45)
-        );
-}
-
-
-#puzzleSplash.splashHidden{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-}
-
-
-/* ============================================================
-   MAIN MENU VIDEO LOGO
-   ============================================================ */
-
-.menu .app-logo{
-
-    display:block;
-
-    width:180px;
-
-    max-width:65%;
-
-    height:auto;
-
-    max-height:125px;
-
-    object-fit:contain;
-
-    margin:
-        0 auto 12px auto;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        menuLogoFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-/* ============================================================
-   LEVELS PAGE VIDEO LOGO
-   IMPORTANT: SMALLER THAN BEFORE
-   ============================================================ */
-
-.levels .app-logo{
-
-    display:block;
-
-    width:125px;
-
-    max-width:45%;
-
-    height:auto;
-
-    max-height:90px;
-
-    object-fit:contain;
-
-    margin:
-        0 auto 8px auto;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 6px 12px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        menuLogoFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-/* ============================================================
-   GAME SCREEN VIDEO LOGO
-   ============================================================ */
-
-.game .app-logo{
-
-    display:block;
-
-    width:155px;
-
-    max-width:58%;
-
-    height:auto;
-
-    max-height:105px;
-
-    object-fit:contain;
-
-    margin:
-        0 auto 4px auto;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        gameLogoFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-/* ============================================================
-   LOGO ANIMATIONS
-   ============================================================ */
-
-@keyframes menuLogoFloat{
-
-    0%,100%{
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-    50%{
-
-        transform:
-            translateY(-5px)
-            scale(1.02);
-    }
-}
-
-
-@keyframes gameLogoFloat{
-
-    0%,100%{
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-    50%{
-
-        transform:
-            translateY(-4px)
-            scale(1.015);
-    }
-}
-
-
-/* ============================================================
-   GAME LEVEL TITLE
-   ============================================================ */
-
-.game #levelTitle{
-
-    font-size:30px;
-
-    margin:
-        3px 0 8px 0;
-
-    line-height:1.2;
-}
-
-
-/* ============================================================
-   GAME STATISTICS
-   ============================================================ */
-
-.game .stats{
-
-    font-size:15px;
-
-    line-height:1.45;
-
-    margin-bottom:8px;
-}
-
-
-/* ============================================================
-   VICTORY SCREEN
-   ============================================================ */
-
-#victoryScreen{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(124,58,237,.25),
-            rgba(0,0,0,.82)
-        );
-
-    backdrop-filter:
-        blur(6px);
-
-    z-index:99999;
-
-    overflow-y:auto;
-}
-
-
-/* ============================================================
-   VICTORY BOX
-   ============================================================ */
-
-.victory-box{
-
-    position:relative;
-
-    width:92%;
-
-    max-width:500px;
-
-    max-height:90vh;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    padding:
-        24px 22px
-        22px 22px;
-
-    margin:auto;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fffdf7
-        );
-
-    color:#222;
-
-    border-radius:38px;
-
-    border:
-        5px solid #FFD21C;
-
-    box-shadow:
-
-        0 0 12px
-        rgba(255,215,0,.8),
-
-        0 0 30px
-        rgba(255,193,7,.65),
-
-        0 20px 60px
-        rgba(0,0,0,.65);
-
-    text-align:center;
-
-    animation:
-        victoryAppear
-        .55s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-
-/* ============================================================
-   VICTORY CONFETTI
-   ============================================================ */
-
-.victory-box::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:34px;
-
-    pointer-events:none;
-
-    z-index:1;
-
-    opacity:.85;
-
-    background-image:
-
-        linear-gradient(
-            135deg,
-            #ff4d6d 0 8px,
-            transparent 8px 100%
-        ),
-
-        linear-gradient(
-            45deg,
-            #ffd21c 0 7px,
-            transparent 7px 100%
-        ),
-
-        linear-gradient(
-            120deg,
-            #22c55e 0 8px,
-            transparent 8px 100%
-        ),
-
-        linear-gradient(
-            60deg,
-            #3b82f6 0 7px,
-            transparent 7px 100%
-        ),
-
-        linear-gradient(
-            160deg,
-            #a855f7 0 8px,
-            transparent 8px 100%
-        );
-
-    background-size:
-
-        75px 95px,
-        95px 120px,
-        110px 100px,
-        85px 130px,
-        120px 110px;
-
-    background-position:
-
-        0 0,
-        20px -40px,
-        -30px 20px,
-        50px -20px,
-        -20px 50px;
-
-    animation:
-        confettiFall
-        5s linear infinite;
-}
-
-
-.victory-box::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20px;
-
-    border-radius:40px;
-
-    pointer-events:none;
-
-    z-index:1;
-
-    opacity:.55;
-
-    background-image:
-
-        radial-gradient(
-            circle,
-            #ffd21c 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #ff4d6d 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #3b82f6 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #22c55e 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #a855f7 0 4px,
-            transparent 5px
-        );
-
-    background-size:
-
-        90px 110px,
-        120px 140px,
-        100px 130px,
-        130px 100px,
-        110px 120px;
-
-    background-position:
-
-        10px 0,
-        -30px -50px,
-        40px -20px,
-        -20px 40px,
-        60px 20px;
-
-    animation:
-        confettiFallReverse
-        7s linear infinite;
-}
-
-
-.victory-box > *{
-
-    position:relative;
-
-    z-index:2;
-}
-
-
-/* ============================================================
-   VICTORY TITLE
-   ============================================================ */
-
-.victory-box h1{
-
-    position:relative;
-
-    z-index:2;
-
-    margin:
-        12px 0 18px 0;
-
-    font-size:
-        clamp(
-            30px,
-            7vw,
-            48px
-        );
-
-    line-height:1.05;
-
-    font-weight:900;
-
-    color:#222;
-
-    text-shadow:
-
-        0 3px 0 #ffffff,
-
-        0 6px 15px
-        rgba(0,0,0,.20);
-}
-
-
-/* ============================================================
-   COMPLETED IMAGE
-   ============================================================ */
-
-#completedImage{
-
-    position:relative;
-
-    z-index:2;
-
-    width:155px;
-
-    height:155px;
-
-    max-width:42vw;
-
-    max-height:42vw;
-
-    display:block;
-
-    margin:
-        10px auto 16px auto;
-
-    object-fit:cover;
-
-    border-radius:27px;
-
-    border:
-        6px solid #FFD21C;
-
-    background:white;
-
-    box-shadow:
-
-        0 0 12px
-        rgba(255,215,0,.95),
-
-        0 0 30px
-        rgba(255,193,7,.65),
-
-        0 10px 25px
-        rgba(0,0,0,.30);
-
-    animation:
-        imageGlow
-        2s ease-in-out infinite;
-}
-
-
-/* ============================================================
-   VICTORY STARS
-   ============================================================ */
-
-#starsDisplay{
-
-    position:relative;
-
-    z-index:2;
-
-    font-size:42px;
-
-    line-height:1;
-
-    margin:
-        10px 0 18px 0;
-
-    color:#FFD21C;
-
-    letter-spacing:4px;
-
-    text-shadow:
-        0 3px 8px
-        rgba(255,193,7,.45);
-
-    animation:
-        starsPop
-        .7s ease-out;
-}
-
-
-/* ============================================================
-   VICTORY STATISTICS
-   ============================================================ */
-
-.victory-box .stats{
-
-    position:relative;
-
-    z-index:2;
-
-    width:100%;
-
-    max-width:360px;
-
-    margin:
-        8px auto 16px auto;
-
-    font-size:20px;
-
-    line-height:1.5;
-}
-
-
-.victory-box .stats p{
-
-    margin:7px auto;
-
-    padding:
-        5px 10px;
-
-    border-radius:15px;
-}
-
-
-/* ============================================================
-   VICTORY BUTTONS
-   ============================================================ */
-
-#victoryScreen button{
-
-    position:relative;
-
-    z-index:3;
-
-    width:85%;
-
-    max-width:360px;
-
-    padding:
-        15px 18px;
-
-    margin:
-        8px auto;
-
-    border:none;
-
-    border-radius:24px;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            145deg,
-            #8b5cf6,
-            #6366f1
-        );
-
-    box-shadow:
-
-        0 10px 20px
-        rgba(0,0,0,.25),
-
-        inset 0 2px 2px
-        rgba(255,255,255,.35),
-
-        inset 0 -6px 8px
-        rgba(0,0,0,.18),
-
-        0 0 18px
-        rgba(124,58,237,.25);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-
-#victoryScreen button:hover{
-
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
-    box-shadow:
-
-        0 15px 28px
-        rgba(0,0,0,.30),
-
-        0 0 25px
-        rgba(124,58,237,.55);
-}
-
-
-#victoryScreen button:active{
-
-    transform:
-        scale(.96);
-}
-
-
-/* ============================================================
-   BEST RECORD
-   ============================================================ */
-
-#bestRecord{
-
-    position:relative;
-
-    z-index:2;
-
-    margin:
-        18px auto 0 auto !important;
-
-    padding-top:12px;
-
-    width:90%;
-
-    border-top:
-        2px solid
-        rgba(100,70,130,.30);
-
-    color:#222;
-}
-
-
-#bestRecord h3{
-
-    margin:
-        0 0 8px 0;
-
-    font-size:24px;
-
-    font-weight:900;
-}
-
-
-#bestRecord p{
-
-    margin:
-        4px 0;
-
-    font-size:20px;
-
-    line-height:1.3;
-}
-
-
-#bestRecord p:first-of-type{
-
-    color:#FFD21C;
-
-    font-size:34px;
-
-    line-height:1;
-
-    text-shadow:
-        0 3px 7px
-        rgba(255,193,7,.35);
 }
 
 
@@ -1564,759 +2300,103 @@ input::placeholder{
 @keyframes backgroundMove{
 
     0%{
-        background-position:0% 50%;
+
+        background-position:
+        0% 50%;
+
     }
 
     50%{
-        background-position:100% 50%;
+
+        background-position:
+        100% 50%;
+
     }
 
     100%{
-        background-position:0% 50%;
+
+        background-position:
+        0% 50%;
+
     }
+
+}
+
+
+@keyframes shine{
+
+    50%{
+
+        transform:
+        scale(1.05);
+
+    }
+
 }
 
 
 @keyframes floatCard{
 
     0%,100%{
-        transform:translateY(0);
+
+        transform:
+        translateY(0);
+
     }
 
     50%{
-        transform:translateY(-5px);
+
+        transform:
+        translateY(-5px);
+
     }
+
 }
 
 
-@keyframes goldGlow{
+@keyframes blueGlow{
 
     0%,100%{
 
         box-shadow:
 
-            0 0 18px #FFC107,
+        0 0 18px #FFC107,
 
-            0 0 40px
-            rgba(255,193,7,.60);
+        0 0 40px
+        rgba(255,193,7,.60);
+
     }
 
     50%{
 
         box-shadow:
 
-            0 0 30px #FFD54F,
+        0 0 30px #FFD54F,
 
-            0 0 60px #FF9800,
+        0 0 60px #FF9800,
 
-            0 0 80px
-            rgba(255,152,0,.70);
+        0 0 80px
+        rgba(255,152,0,.70);
+
     }
+
 }
 
 
 @keyframes shineMove{
 
     0%{
-        background-position:0% 50%;
-    }
-
-    100%{
-        background-position:100% 50%;
-    }
-}
-
-
-@keyframes victoryAppear{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.82)
-            translateY(30px);
-    }
-
-    70%{
-
-        transform:
-            scale(1.02)
-            translateY(-3px);
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-    }
-}
-
-
-@keyframes imageGlow{
-
-    0%,100%{
-
-        box-shadow:
-
-            0 0 12px
-            rgba(255,215,0,.8),
-
-            0 0 28px
-            rgba(255,193,7,.5),
-
-            0 10px 25px
-            rgba(0,0,0,.3);
-    }
-
-    50%{
-
-        box-shadow:
-
-            0 0 20px
-            rgba(255,215,0,1),
-
-            0 0 42px
-            rgba(255,193,7,.75),
-
-            0 12px 30px
-            rgba(0,0,0,.35);
-    }
-}
-
-
-@keyframes starsPop{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.5);
-    }
-
-    70%{
-
-        transform:
-            scale(1.12);
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1);
-    }
-}
-
-
-@keyframes confettiFall{
-
-    0%{
 
         background-position:
+        0% 50%;
 
-            0 -100px,
-            20px -140px,
-            -30px -120px,
-            50px -160px,
-            -20px -130px;
-
-        transform:
-            rotate(0deg);
-    }
-
-    50%{
-
-        background-position:
-
-            25px 180px,
-            -20px 220px,
-            40px 160px,
-            10px 240px,
-            30px 190px;
-
-        transform:
-            rotate(2deg);
     }
 
     100%{
 
         background-position:
+        100% 50%;
 
-            0 450px,
-            20px 500px,
-            -30px 470px,
-            50px 520px,
-            -20px 490px;
-
-        transform:
-            rotate(0deg);
-    }
-}
-
-
-@keyframes confettiFallReverse{
-
-    0%{
-
-        background-position:
-
-            10px -120px,
-            -30px -160px,
-            40px -100px,
-            -20px -180px,
-            60px -140px;
     }
 
-    50%{
-
-        background-position:
-
-            -20px 160px,
-            20px 200px,
-            -30px 180px,
-            30px 220px,
-            10px 170px;
-    }
-
-    100%{
-
-        background-position:
-
-            10px 480px,
-            -30px 520px,
-            40px 500px,
-            -20px 540px,
-            60px 510px;
-    }
-}
-
-
-/* ============================================================
-   MOBILE DEVICES
-   ============================================================ */
-
-@media(max-width:500px){
-
-    /* --------------------------------
-       MAIN CONTAINERS
-       -------------------------------- */
-
-    .menu,
-    .levels,
-    .game{
-
-        width:94%;
-
-        max-width:430px;
-
-        margin:
-            20px auto;
-
-        padding:
-            18px;
-    }
-
-
-    /* --------------------------------
-       LEVEL PAGE
-       -------------------------------- */
-
-    .levels{
-
-        padding:
-            18px 12px;
-    }
-
-
-    .levels .app-logo{
-
-        width:125px;
-
-        max-width:42%;
-
-        max-height:85px;
-
-        margin:
-            0 auto 6px auto;
-    }
-
-
-    /* --------------------------------
-       LEVEL GRID
-       -------------------------------- */
-
-    .level-grid{
-
-        grid-template-columns:
-            repeat(2,120px);
-
-        gap:16px;
-
-        margin-top:16px;
-    }
-
-
-    .level-card{
-
-        width:120px;
-
-        height:115px;
-
-        font-size:15px;
-    }
-
-
-    /* --------------------------------
-       GAME
-       -------------------------------- */
-
-    .game{
-
-        padding:
-            15px;
-    }
-
-
-    .game .app-logo{
-
-        width:155px;
-
-        max-width:58%;
-
-        max-height:105px;
-
-        margin:
-            0 auto 3px auto;
-    }
-
-
-    #puzzleBoard{
-
-        width:90vw;
-
-        height:90vw;
-
-        max-width:360px;
-
-        max-height:360px;
-
-        margin:
-            20px auto;
-    }
-
-
-    .game #levelTitle{
-
-        font-size:26px;
-
-        margin:
-            2px 0 6px 0;
-    }
-
-
-    .game .stats{
-
-        font-size:14px;
-
-        line-height:1.35;
-
-        margin-bottom:5px;
-    }
-
-
-    /* --------------------------------
-       SPLASH
-       -------------------------------- */
-
-    #puzzleSplash{
-
-        padding:15px;
-    }
-
-
-    #puzzleSplash .app-logo{
-
-        width:240px;
-
-        max-width:65vw;
-
-        max-height:45vh;
-    }
-
-
-    /* --------------------------------
-       VICTORY
-       -------------------------------- */
-
-    #victoryScreen{
-
-        padding:14px;
-
-        align-items:center;
-    }
-
-
-    .victory-box{
-
-        width:94%;
-
-        max-width:430px;
-
-        max-height:88vh;
-
-        padding:
-            20px 16px 18px 16px;
-
-        border-radius:32px;
-
-        border-width:4px;
-    }
-
-
-    .victory-box h1{
-
-        font-size:
-            clamp(
-                28px,
-                8vw,
-                38px
-            );
-
-        margin:
-            10px 0 14px 0;
-    }
-
-
-    #completedImage{
-
-        width:135px;
-
-        height:135px;
-
-        max-width:38vw;
-
-        max-height:38vw;
-
-        border-width:5px;
-
-        border-radius:23px;
-
-        margin:
-            8px auto 14px auto;
-    }
-
-
-    #starsDisplay{
-
-        font-size:36px;
-
-        letter-spacing:2px;
-
-        margin:
-            8px 0 14px 0;
-    }
-
-
-    .victory-box .stats{
-
-        font-size:18px;
-
-        margin:
-            6px auto 12px auto;
-    }
-
-
-    .victory-box .stats p{
-
-        margin:
-            4px auto;
-    }
-
-
-    #victoryScreen button{
-
-        width:88%;
-
-        padding:
-            13px 15px;
-
-        margin:
-            7px auto;
-
-        font-size:18px;
-
-        border-radius:21px;
-    }
-
-
-    #bestRecord{
-
-        margin-top:14px !important;
-
-        padding-top:10px;
-    }
-
-
-    #bestRecord h3{
-
-        font-size:21px;
-
-        margin-bottom:5px;
-    }
-
-
-    #bestRecord p{
-
-        font-size:18px;
-
-        margin:2px 0;
-    }
-
-
-    #bestRecord p:first-of-type{
-
-        font-size:30px;
-    }
-}
-
-
-/* ============================================================
-   VERY SMALL PHONES
-   ============================================================ */
-
-@media(max-width:360px){
-
-    .menu,
-    .levels,
-    .game{
-
-        width:95%;
-
-        padding:
-            14px 10px;
-    }
-
-
-    /* LEVEL LOGO */
-
-    .levels .app-logo{
-
-        width:110px;
-
-        max-width:40%;
-
-        max-height:75px;
-    }
-
-
-    /* LEVEL GRID */
-
-    .level-grid{
-
-        grid-template-columns:
-            repeat(2,110px);
-
-        gap:13px;
-    }
-
-
-    .level-card{
-
-        width:110px;
-
-        height:105px;
-
-        font-size:14px;
-    }
-
-
-    /* GAME LOGO */
-
-    .game .app-logo{
-
-        width:145px;
-
-        max-width:55%;
-
-        max-height:95px;
-    }
-
-
-    .game #levelTitle{
-
-        font-size:24px;
-    }
-
-
-    .game .stats{
-
-        font-size:13px;
-    }
-
-
-    /* SPLASH */
-
-    #puzzleSplash .app-logo{
-
-        width:220px;
-
-        max-width:68vw;
-
-        max-height:42vh;
-    }
-
-
-    /* VICTORY */
-
-    #victoryScreen{
-
-        padding:10px;
-    }
-
-
-    .victory-box{
-
-        max-height:90vh;
-
-        padding:
-            17px 13px 15px 13px;
-
-        border-radius:28px;
-    }
-
-
-    .victory-box h1{
-
-        font-size:27px;
-
-        margin-bottom:10px;
-    }
-
-
-    #completedImage{
-
-        width:120px;
-
-        height:120px;
-
-        max-width:35vw;
-
-        max-height:35vw;
-    }
-
-
-    #starsDisplay{
-
-        font-size:31px;
-
-        margin-bottom:10px;
-    }
-
-
-    .victory-box .stats{
-
-        font-size:16px;
-    }
-
-
-    #victoryScreen button{
-
-        width:92%;
-
-        padding:11px;
-
-        font-size:17px;
-
-        margin:5px auto;
-    }
-
-
-    #bestRecord h3{
-
-        font-size:19px;
-    }
-
-
-    #bestRecord p{
-
-        font-size:16px;
-    }
-
-
-    #bestRecord p:first-of-type{
-
-        font-size:27px;
-    }
-}
-
-
-/* ============================================================
-   SMALL HEIGHT PHONES
-   ============================================================ */
-
-@media(max-width:500px) and (max-height:700px){
-
-    .game .app-logo{
-
-        width:145px;
-
-        max-height:90px;
-
-        margin-bottom:2px;
-    }
-
-
-    .game #levelTitle{
-
-        font-size:24px;
-
-        margin-bottom:4px;
-    }
-
-
-    .game .stats{
-
-        line-height:1.25;
-
-        margin-bottom:3px;
-    }
-
-
-    .levels .app-logo{
-
-        width:110px;
-
-        max-height:75px;
-    }
-}
-
-
-/* ============================================================
-   VICTORY SCROLLBAR
-   ============================================================ */
-
-.victory-box::-webkit-scrollbar{
-
-    width:5px;
-}
-
-
-.victory-box::-webkit-scrollbar-track{
-
-    background:transparent;
-}
-
-
-.victory-box::-webkit-scrollbar-thumb{
-
-    background:
-        rgba(124,58,237,.45);
-
-    border-radius:10px;
 }
