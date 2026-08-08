@@ -1273,80 +1273,6 @@ LOGOUT BUTTON
 
     object-fit:contain;
 
-    margin:0 auto 12px auto;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        menuLogoFloat
-        4s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ============================================================
-   6. LEVELS PAGE LOGO
-   ============================================================ */
-
-.levels .menu-logo{
-
-    width:190px;
-
-    max-width:65%;
-
-    max-height:135px;
-
-    margin:
-        0 auto 12px auto;
-
-}
-
-
-/* ============================================================
-   7. GAME SCREEN LOGO
-   ============================================================ */
-
-.game-logo{
-
-    display:block;
-
-    width:190px;
-
-    max-width:62%;
-
-    height:auto;
-
-    max-height:125px;
-
-    object-fit:contain;
-
-    margin:
-        0 auto 4px auto;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        gameLogoFloat
-        4s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ============================================================
-   8. MAIN MENU LOGO ANIMATION
-   ============================================================ */
 
 @keyframes menuLogoFloat{
 
@@ -1397,7 +1323,281 @@ LOGOUT BUTTON
 
 
 /* ============================================================
-   10. GAME LEVEL TITLE
+   PIXVINZ VIDEO LOGO SYSTEM
+   logo.webm
+   ============================================================ */
+
+
+/* ============================================================
+   1. OPENING SPLASH SCREEN
+   ============================================================ */
+
+#puzzleSplash{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #6d28d9,
+            #9333ea,
+            #2563eb
+        );
+
+    z-index:99999;
+
+    overflow:hidden;
+
+    opacity:1;
+
+    visibility:visible;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+
+}
+
+
+/* ============================================================
+   2. SPLASH VIDEO LOGO
+   ============================================================ */
+
+#puzzleSplash .app-logo{
+
+    display:block;
+
+    width:300px;
+
+    max-width:78vw;
+
+    height:auto;
+
+    max-height:60vh;
+
+    object-fit:contain;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+        drop-shadow(
+            0 15px 30px
+            rgba(0,0,0,.45)
+        );
+
+}
+
+
+/* ============================================================
+   3. SPLASH EXIT
+   ============================================================ */
+
+#puzzleSplash.splashHidden{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* ============================================================
+   4. MAIN MENU VIDEO LOGO
+   ============================================================ */
+
+.menu .app-logo{
+
+    display:block;
+
+    width:210px;
+
+    max-width:70%;
+
+    height:auto;
+
+    max-height:150px;
+
+    object-fit:contain;
+
+    margin:
+        0 auto 12px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
+
+    animation:
+        menuLogoFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ============================================================
+   5. LEVELS PAGE VIDEO LOGO
+   ============================================================ */
+
+.levels .app-logo{
+
+    display:block;
+
+    width:190px;
+
+    max-width:65%;
+
+    height:auto;
+
+    max-height:135px;
+
+    object-fit:contain;
+
+    margin:
+        0 auto 12px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
+
+    animation:
+        menuLogoFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ============================================================
+   6. GAME SCREEN VIDEO LOGO
+   ============================================================ */
+
+.game .app-logo{
+
+    display:block;
+
+    width:190px;
+
+    max-width:62%;
+
+    height:auto;
+
+    max-height:125px;
+
+    object-fit:contain;
+
+    margin:
+        0 auto 4px auto;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
+
+    animation:
+        gameLogoFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* ============================================================
+   7. MAIN MENU / LEVEL LOGO FLOAT
+   ============================================================ */
+
+@keyframes menuLogoFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-5px)
+            scale(1.02);
+
+    }
+
+}
+
+
+/* ============================================================
+   8. GAME LOGO FLOAT
+   ============================================================ */
+
+@keyframes gameLogoFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-4px)
+            scale(1.015);
+
+    }
+
+}
+
+
+/* ============================================================
+   9. GAME LEVEL TITLE
    ============================================================ */
 
 .game #levelTitle{
@@ -1413,7 +1613,7 @@ LOGOUT BUTTON
 
 
 /* ============================================================
-   11. GAME STATISTICS
+   10. GAME STATISTICS
    ============================================================ */
 
 .game .stats{
@@ -1428,14 +1628,13 @@ LOGOUT BUTTON
 
 
 /* ============================================================
-   12. MOBILE DEVICES
+   11. MOBILE DEVICES
    ============================================================ */
 
 @media(max-width:500px){
 
-
     /* -----------------------------
-       SPLASH
+       SPLASH VIDEO
        ----------------------------- */
 
     #puzzleSplash{
@@ -1444,12 +1643,11 @@ LOGOUT BUTTON
 
     }
 
-
-    .splash-logo{
+    #puzzleSplash .app-logo{
 
         width:280px;
 
-        max-width:75vw;
+        max-width:78vw;
 
         max-height:55vh;
 
@@ -1457,10 +1655,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       MAIN MENU
+       MAIN MENU VIDEO
        ----------------------------- */
 
-    .menu-logo{
+    .menu .app-logo{
 
         width:190px;
 
@@ -1475,10 +1673,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       LEVELS
+       LEVELS VIDEO
        ----------------------------- */
 
-    .levels .menu-logo{
+    .levels .app-logo{
 
         width:175px;
 
@@ -1493,10 +1691,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       GAME
+       GAME VIDEO
        ----------------------------- */
 
-    .game-logo{
+    .game .app-logo{
 
         width:175px;
 
@@ -1511,7 +1709,7 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       GAME LEVEL
+       GAME LEVEL TITLE
        ----------------------------- */
 
     .game #levelTitle{
@@ -1525,7 +1723,7 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       GAME STATS
+       GAME STATISTICS
        ----------------------------- */
 
     .game .stats{
@@ -1542,17 +1740,16 @@ LOGOUT BUTTON
 
 
 /* ============================================================
-   13. VERY SMALL PHONES
+   12. VERY SMALL PHONES
    ============================================================ */
 
 @media(max-width:360px){
 
-
     /* -----------------------------
-       SPLASH
+       SPLASH VIDEO
        ----------------------------- */
 
-    .splash-logo{
+    #puzzleSplash .app-logo{
 
         width:240px;
 
@@ -1564,10 +1761,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       MAIN MENU
+       MAIN MENU VIDEO
        ----------------------------- */
 
-    .menu-logo{
+    .menu .app-logo{
 
         width:165px;
 
@@ -1579,10 +1776,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       LEVELS
+       LEVELS VIDEO
        ----------------------------- */
 
-    .levels .menu-logo{
+    .levels .app-logo{
 
         width:155px;
 
@@ -1594,10 +1791,10 @@ LOGOUT BUTTON
 
 
     /* -----------------------------
-       GAME
+       GAME VIDEO
        ----------------------------- */
 
-    .game-logo{
+    .game .app-logo{
 
         width:155px;
 
@@ -1625,13 +1822,12 @@ LOGOUT BUTTON
 
 
 /* ============================================================
-   14. EXTRA SMALL HEIGHT SCREENS
-   Helps keep the game compact vertically
+   13. SMALL HEIGHT PHONES
    ============================================================ */
 
 @media(max-width:500px) and (max-height:700px){
 
-    .game-logo{
+    .game .app-logo{
 
         width:155px;
 
@@ -1660,10 +1856,7 @@ LOGOUT BUTTON
     }
 
 }
-
-
-
-
+   
 /* ==========================================================
    PUZZLEMANIA PREMIUM VICTORY SCREEN
    FINAL MOBILE DESIGN
