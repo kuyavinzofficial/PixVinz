@@ -1752,20 +1752,3 @@ function(e){
 
 
 
-/* ======================================
-   PUZZLEMANIA SPLASH SCREEN
-   ====================================== */
-
-window.addEventListener("load", function(){
-
-    const splash = document.getElementById("puzzleSplash");
-
-    if(!splash) return;
-
-    setTimeout(function(){
-
-        splash.classList.add("splashHidden");
-
-    }, 3000);
-
-});
