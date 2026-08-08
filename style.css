@@ -1226,15 +1226,57 @@ input::placeholder{
 }
 
 
+/* ============================================================
+   PIXVINZ WELCOME TEXT - PREMIUM GLOW
+   ============================================================ */
+
+#welcomeText{
+
+    font-size:32px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.35),
+        0 0 8px rgba(255,255,255,.55),
+        0 0 16px rgba(216,180,254,.60),
+        0 0 28px rgba(139,92,246,.45);
+
+}
+
+
+/* ============================================================
+   PIXVINZ USERNAME - PREMIUM GLOW
+   ============================================================ */
+
 #usernameDisplay{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#ffffff;
+
+    letter-spacing:1px;
 
     margin-bottom:15px;
 
-    font-size:16px;
+    opacity:1;
 
-    opacity:.9;
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.35),
+        0 0 6px rgba(255,255,255,.60),
+        0 0 14px rgba(216,180,254,.70),
+        0 0 26px rgba(139,92,246,.55);
 
 }
+
 
 
 /* ============================================================
