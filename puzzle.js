@@ -68,6 +68,166 @@ const images = [
 ];
 
 
+Generated image: PuzzleMania Puzzle Logo Glow
+Generated image: PuzzleMania Puzzle Logo Glow
+
+
+it is too big and outside the screen
+
+and this one too is wrong placement
+
+this is what it looks like
+
+it is working now however this is how it looks like when I start to play
+
+This is my victory screen, isn't too big? can we adjust it a little so it won't cover the entire screen? just a litlle
+
+Generated image: Colorful Level Complete Game Screen
+Generated image: Colorful Level Complete Game Screen
+Generated image: Colorful Level Complete Game Screen
+
+
+Generated image: Colorful Level Complete Victory Screen
+Generated image: Colorful Level Complete Victory Screen
+Generated image: Colorful Level Complete Victory Screen
+
+
+Generated image
+Generated image
+
+
+it doesnt look well, it is too big!!! 
+
+
+
+Yes — this confirms the issue. Your main.js is not the file that creates the puzzle-board header. It only starts the game by calling:
+
+setup();
+So do not change this main.js. It is working correctly.
+
+The missing logo must be fixed inside the file containing the setup() function.
+
+What is happening now
+Your game startup is:
+
+main.js
+   ↓
+setup()
+   ↓
+creates Level 1 screen / puzzle board
+Your main menu already has:
+
+<video class="app-logo">
+    <source src="images/logo.webm" type="video/webm">
+</video>
+But the game screen apparently doesn't have that element.
+
+I don't want you to paste another large CSS change
+Since everything else is now working, let's make this surgically.
+
+Please send me the JavaScript file containing:
+
+function setup()
+It may be called something like:
+
+game.js
+puzzle.js
+levels.js
+or one of the files we split from your original Puzzle.js.
+
+Search your files for:
+
+function setup()
+and send me that whole function (or the whole file if that's easier).
+
+Then I'll modify it so your puzzle screen displays exactly:
+
+        [LOGO]
+
+       Level 1
+
+  Moves: 0 | Time: 0
+
+   ┌───────────────┐
+   │               │
+   │ PUZZLE BOARD  │
+   │               │
+   └───────────────┘
+And the same logo will automatically appear for Level 2, Level 3, Level 4... all succeeding levels, because they all use setup().
+
+Your main.js does not need to be touched.
+
+
+
+// ------------------------------
+// CURRENT LEVEL
+// ------------------------------
+
+let level =
+    Number(localStorage.getItem("level")) || 1;
+
+
+// ------------------------------
+// DIFFICULTY
+// ------------------------------
+
+let size;
+
+if(level <= 5){
+
+    size = 3;
+
+}
+else if(level <= 10){
+
+    size = 4;
+
+}
+else if(level <= 15){
+
+    size = 5;
+
+}
+else{
+
+    size = 6;
+
+}
+
+
+// ------------------------------
+// LEVEL IMAGES
+// ------------------------------
+
+const images = [
+
+    "images/level1.jpeg",
+    "images/level2.jpeg",
+    "images/level3.jpeg",
+    "images/level4.jpeg",
+    "images/level5.jpeg",
+
+    "images/level6.jpeg",
+    "images/level7.jpeg",
+    "images/level8.jpeg",
+    "images/level9.jpeg",
+    "images/level10.jpeg",
+
+    "images/level11.jpeg",
+    "images/level12.jpeg",
+    "images/level13.jpeg",
+    "images/level14.jpeg",
+    "images/level15.jpeg",
+
+    "images/level16.jpeg",
+    "images/level17.jpeg",
+    "images/level18.jpeg",
+    "images/level19.jpeg",
+    "images/level20.jpeg"
+
+];
+
+
 // ------------------------------
 // GAME VARIABLES
 // ------------------------------
@@ -225,7 +385,6 @@ function setup(){
     shufflePuzzle();
 
 }
-
 // ------------------------------
 // TIMER
 // ------------------------------
