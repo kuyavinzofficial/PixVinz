@@ -1920,10 +1920,10 @@ input::placeholder{
 
         background-position:
 
-            0 -100px,
-            20px -140px,
-            -30px -120px,
-            50px -160px,
+            0 -80px,
+            20px -120px,
+            -30px -100px,
+            50px -140px,
             -20px -130px;
 
         transform:
@@ -1935,11 +1935,11 @@ input::placeholder{
 
         background-position:
 
-            25px 180px,
+            15px 140px,
             -20px 220px,
-            40px 160px,
-            10px 240px,
-            30px 190px;
+            30px 160px,
+            10px 210px,
+            30px 170px;
 
         transform:
             rotate(2deg);
@@ -1970,11 +1970,11 @@ input::placeholder{
 
         background-position:
 
-            10px -120px,
-            -30px -160px,
-            40px -100px,
-            -20px -180px,
-            60px -140px;
+            10px -100px,
+            -30px -140px,
+            40px -180px,
+            -20px -140px,
+            60px -120px;
 
     }
 
