@@ -25,7 +25,7 @@
 
     <div class="level-grid" id="levelContainer"></div>
 
-    <button onclick="playClick(); backHome()">
+    <button onclick="backHome()">
         ⬅ Back
     </button>
 
@@ -33,11 +33,68 @@
 
 <!-- JavaScript Dependencies -->
 <script src="js/audio.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/record.js"></script>
+<script src="js/helpers.js"></script>
+
+<!-- Auth & State Modules -->
 <script src="js/auth.js"></script>
 <script src="js/save.js"></script>
-<script src="js/record.js"></script>
-<script src="js/levels.js"></script>
 <script src="js/script.js"></script>
+
+<!-- DYNAMIC LEVEL GRID GENERATOR -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Display Total Coins
+        const coinsEl = document.getElementById("coins");
+        if (coinsEl) {
+            coinsEl.textContent = typeof getTotalCoins === "function" ? getTotalCoins() : (localStorage.getItem("coins") || 0);
+        }
+
+        // Render Level Slots
+        const container = document.getElementById("levelContainer");
+        if (!container) return;
+
+        container.innerHTML = "";
+        const maxLevels = (typeof images !== "undefined" && Array.isArray(images)) ? images.length : 60;
+        const unlockedLevel = Number(localStorage.getItem("level")) || 1;
+
+        for (let i = 1; i <= maxLevels; i++) {
+            const card = document.createElement("div");
+            card.className = "level-card";
+
+            const isUnlocked = i <= unlockedLevel;
+            const starsEarned = typeof getBestStars === "function" ? getBestStars(i) : (Number(localStorage.getItem("level" + i + "BestStars")) || 0);
+
+            if (isUnlocked) {
+                let starStr = "⭐".repeat(starsEarned);
+                if (starsEarned === 0) starStr = "<i>Unplayed</i>";
+
+                card.classList.add("unlocked");
+                card.innerHTML = `
+                    <div class="level-num">Level ${i}</div>
+                    <div class="level-stars">${starStr}</div>
+                `;
+                card.onclick = function () {
+                    localStorage.setItem("level", i);
+                    window.location.href = "game.html";
+                };
+            } else {
+                card.classList.add("locked");
+                card.innerHTML = `
+                    <div class="level-num">Level ${i}</div>
+                    <div class="level-stars">🔒 Locked</div>
+                `;
+            }
+
+            container.appendChild(card);
+        }
+    });
+
+    function backHome() {
+        window.location.href = "index.html";
+    }
+</script>
 
 </body>
 </html>
