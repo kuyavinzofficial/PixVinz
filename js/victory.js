@@ -1,5 +1,5 @@
 // ======================================
-// PuzzleMania
+// PixVinz
 // VICTORY SYSTEM
 // ======================================
 
@@ -11,7 +11,27 @@
 function showVictory(stars, reward){
 
     // ------------------------------
-    // Safety Check
+    // GET VICTORY ELEMENTS
+    // ------------------------------
+
+    const victoryScreen =
+        document.getElementById("victoryScreen");
+
+    const finalTime =
+        document.getElementById("finalTime");
+
+    const finalMoves =
+        document.getElementById("finalMoves");
+
+    const rewardCoins =
+        document.getElementById("rewardCoins");
+
+    const starsDisplay =
+        document.getElementById("starsDisplay");
+
+
+    // ------------------------------
+    // SAFETY CHECK
     // ------------------------------
 
     if(!victoryScreen){
@@ -22,7 +42,7 @@ function showVictory(stars, reward){
 
 
     // ------------------------------
-    // Final Results
+    // FINAL RESULTS
     // ------------------------------
 
     if(finalTime){
@@ -65,7 +85,11 @@ function showVictory(stars, reward){
         document.getElementById("completedImage");
 
 
-    if(completedImage && images[level - 1]){
+    if(
+        completedImage &&
+        typeof images !== "undefined" &&
+        images[level - 1]
+    ){
 
         completedImage.src =
             images[level - 1];
@@ -220,8 +244,14 @@ function backHome(){
 function restartLevel(){
 
     // ------------------------------
-    // Hide Victory Screen
+    // HIDE VICTORY SCREEN
     // ------------------------------
+
+    const victoryScreen =
+        document.getElementById(
+            "victoryScreen"
+        );
+
 
     if(victoryScreen){
 
@@ -233,7 +263,7 @@ function restartLevel(){
 
 
     // ------------------------------
-    // Stop Current Timer
+    // STOP CURRENT TIMER
     // ------------------------------
 
     if(typeof stopTimer === "function"){
@@ -241,7 +271,7 @@ function restartLevel(){
         stopTimer();
 
     }
-    else{
+    else if(typeof timer !== "undefined"){
 
         clearInterval(timer);
 
@@ -249,9 +279,13 @@ function restartLevel(){
 
 
     // ------------------------------
-    // Shuffle Again
+    // SHUFFLE AGAIN
     // ------------------------------
 
-    shufflePuzzle();
+    if(typeof shufflePuzzle === "function"){
+
+        shufflePuzzle();
+
+    }
 
 }
