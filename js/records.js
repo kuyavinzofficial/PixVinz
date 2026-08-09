@@ -3,32 +3,31 @@
 // RECORD SYSTEM
 // ======================================
 
+
 // ======================================
 // LEVEL VALIDATION
 // ======================================
 
 function validateLevel(){
 
-```
-if(level < 1){
+    if(level < 1){
 
-    level = 1;
+        level = 1;
 
-}
-
-
-if(level > 60){
-
-    level = 60;
-
-}
+    }
 
 
-localStorage.setItem(
-    "level",
-    level
-);
-```
+    if(level > 60){
+
+        level = 60;
+
+    }
+
+
+    localStorage.setItem(
+        "level",
+        level
+    );
 
 }
 
@@ -40,16 +39,14 @@ localStorage.setItem(
 
 function getCurrentImage(){
 
-```
-if(images[level - 1]){
+    if(images[level - 1]){
 
-    return images[level - 1];
+        return images[level - 1];
 
-}
+    }
 
 
-return images[0];
-```
+    return images[0];
 
 }
 
@@ -61,31 +58,29 @@ return images[0];
 
 function isSolved(){
 
-```
-if(!pieces || pieces.length === 0){
-
-    return false;
-
-}
-
-
-for(
-    let i = 0;
-    i < pieces.length;
-    i++
-){
-
-    if(pieces[i] !== i){
+    if(!pieces || pieces.length === 0){
 
         return false;
 
     }
 
-}
+
+    for(
+        let i = 0;
+        i < pieces.length;
+        i++
+    ){
+
+        if(pieces[i] !== i){
+
+            return false;
+
+        }
+
+    }
 
 
-return true;
-```
+    return true;
 
 }
 
@@ -97,255 +92,253 @@ return true;
 
 function checkWin(){
 
-```
-// ------------------------------
-// Make sure puzzle is solved
-// ------------------------------
+    // ------------------------------
+    // Make sure puzzle is solved
+    // ------------------------------
 
-if(!isSolved()){
+    if(!isSolved()){
 
-    return;
+        return;
 
-}
-
-
-// ------------------------------
-// Stop Timer
-// ------------------------------
-
-if(typeof stopTimer === "function"){
-
-    stopTimer();
-
-}
-else{
-
-    clearInterval(timer);
-
-}
+    }
 
 
-// ------------------------------
-// Calculate Stars
-// ------------------------------
+    // ------------------------------
+    // Stop Timer
+    // ------------------------------
 
-let stars = 1;
+    if(typeof stopTimer === "function"){
 
+        stopTimer();
 
-if(
-    seconds < 60 &&
-    moves < 50
-){
+    }
+    else{
 
-    stars = 3;
+        clearInterval(timer);
 
-}
-else if(
-    seconds < 120 &&
-    moves < 100
-){
-
-    stars = 2;
-
-}
+    }
 
 
-// ------------------------------
-// Star Text
-// ------------------------------
+    // ------------------------------
+    // Calculate Stars
+    // ------------------------------
 
-let starText = "⭐";
-
-
-if(stars === 2){
-
-    starText = "⭐⭐";
-
-}
+    let stars = 1;
 
 
-if(stars === 3){
+    if(
+        seconds < 60 &&
+        moves < 50
+    ){
 
-    starText = "⭐⭐⭐";
+        stars = 3;
 
-}
+    }
+    else if(
+        seconds < 120 &&
+        moves < 100
+    ){
 
+        stars = 2;
 
-// ------------------------------
-// Update Star Display
-// ------------------------------
-
-const starDisplay =
-    document.getElementById("stars");
-
-
-if(starDisplay){
-
-    starDisplay.textContent =
-        starText;
-
-}
+    }
 
 
-// ------------------------------
-// Mark Level Completed
-// ------------------------------
+    // ------------------------------
+    // Star Text
+    // ------------------------------
 
-localStorage.setItem(
-    "level" + level,
-    "completed"
-);
+    let starText = "⭐";
 
 
-// ------------------------------
-// Unlock Next Level
-// ------------------------------
+    if(stars === 2){
 
-let unlocked =
-    Number(
-        localStorage.getItem("level")
-    ) || 1;
+        starText = "⭐⭐";
+
+    }
 
 
-if(
-    level + 1 > unlocked &&
-    level < 60
-){
+    if(stars === 3){
+
+        starText = "⭐⭐⭐";
+
+    }
+
+
+    // ------------------------------
+    // Update Star Display
+    // ------------------------------
+
+    const starDisplay =
+        document.getElementById("stars");
+
+
+    if(starDisplay){
+
+        starDisplay.textContent =
+            starText;
+
+    }
+
+
+    // ------------------------------
+    // Mark Level Completed
+    // ------------------------------
 
     localStorage.setItem(
-        "level",
-        level + 1
+        "level" + level,
+        "completed"
     );
 
-}
+
+    // ------------------------------
+    // Unlock Next Level
+    // ------------------------------
+
+    let unlocked =
+        Number(
+            localStorage.getItem("level")
+        ) || 1;
 
 
-// ------------------------------
-// BEST STARS
-// ------------------------------
+    if(
+        level + 1 > unlocked &&
+        level < 60
+    ){
 
-let bestStars =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestStars"
-        )
-    ) || 0;
+        localStorage.setItem(
+            "level",
+            level + 1
+        );
+
+    }
 
 
-if(stars > bestStars){
+    // ------------------------------
+    // BEST STARS
+    // ------------------------------
+
+    let bestStars =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestStars"
+            )
+        ) || 0;
+
+
+    if(stars > bestStars){
+
+        localStorage.setItem(
+            "level" + level + "BestStars",
+            stars
+        );
+
+    }
+
+
+    // ------------------------------
+    // BEST TIME
+    // ------------------------------
+
+    let bestTime =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestTime"
+            )
+        ) || 0;
+
+
+    if(
+        bestTime === 0 ||
+        seconds < bestTime
+    ){
+
+        localStorage.setItem(
+            "level" + level + "BestTime",
+            seconds
+        );
+
+    }
+
+
+    // ------------------------------
+    // BEST MOVES
+    // ------------------------------
+
+    let bestMoves =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestMoves"
+            )
+        ) || 0;
+
+
+    if(
+        bestMoves === 0 ||
+        moves < bestMoves
+    ){
+
+        localStorage.setItem(
+            "level" + level + "BestMoves",
+            moves
+        );
+
+    }
+
+
+    // ------------------------------
+    // COIN REWARD
+    // ------------------------------
+
+    let coins =
+        Number(
+            localStorage.getItem("coins")
+        ) || 0;
+
+
+    let reward =
+        level * 20;
+
+
+    coins += reward;
+
 
     localStorage.setItem(
-        "level" + level + "BestStars",
-        stars
+        "coins",
+        coins
     );
 
-}
+
+    // ------------------------------
+    // VICTORY SOUNDS
+    // ------------------------------
+
+    if(typeof playVictorySound === "function"){
+
+        playVictorySound();
+
+    }
 
 
-// ------------------------------
-// BEST TIME
-// ------------------------------
+    if(typeof playVictory === "function"){
 
-let bestTime =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestTime"
-        )
-    ) || 0;
+        playVictory(level);
+
+    }
 
 
-if(
-    bestTime === 0 ||
-    seconds < bestTime
-){
+    // ------------------------------
+    // SHOW VICTORY SCREEN
+    // ------------------------------
 
-    localStorage.setItem(
-        "level" + level + "BestTime",
-        seconds
-    );
+    if(typeof showVictory === "function"){
 
-}
+        showVictory(
+            starText,
+            reward
+        );
 
-
-// ------------------------------
-// BEST MOVES
-// ------------------------------
-
-let bestMoves =
-    Number(
-        localStorage.getItem(
-            "level" + level + "BestMoves"
-        )
-    ) || 0;
-
-
-if(
-    bestMoves === 0 ||
-    moves < bestMoves
-){
-
-    localStorage.setItem(
-        "level" + level + "BestMoves",
-        moves
-    );
-
-}
-
-
-// ------------------------------
-// COIN REWARD
-// ------------------------------
-
-let coins =
-    Number(
-        localStorage.getItem("coins")
-    ) || 0;
-
-
-let reward =
-    level * 20;
-
-
-coins += reward;
-
-
-localStorage.setItem(
-    "coins",
-    coins
-);
-
-
-// ------------------------------
-// VICTORY SOUNDS
-// ------------------------------
-
-if(typeof playVictorySound === "function"){
-
-    playVictorySound();
-
-}
-
-
-if(typeof playVictory === "function"){
-
-    playVictory(level);
-
-}
-
-
-// ------------------------------
-// SHOW VICTORY SCREEN
-// ------------------------------
-
-if(typeof showVictory === "function"){
-
-    showVictory(
-        starText,
-        reward
-    );
-
-}
-```
+    }
 
 }
 
@@ -355,21 +348,20 @@ if(typeof showVictory === "function"){
 // RECORD HELPERS
 // ======================================
 
+
 // Get best time of a level
 
 function getBestTime(levelNumber){
 
-```
-return Number(
+    return Number(
 
-    localStorage.getItem(
-        "level" +
-        levelNumber +
-        "BestTime"
-    )
+        localStorage.getItem(
+            "level" +
+            levelNumber +
+            "BestTime"
+        )
 
-) || 0;
-```
+    ) || 0;
 
 }
 
@@ -379,17 +371,15 @@ return Number(
 
 function getBestMoves(levelNumber){
 
-```
-return Number(
+    return Number(
 
-    localStorage.getItem(
-        "level" +
-        levelNumber +
-        "BestMoves"
-    )
+        localStorage.getItem(
+            "level" +
+            levelNumber +
+            "BestMoves"
+        )
 
-) || 0;
-```
+    ) || 0;
 
 }
 
@@ -399,17 +389,15 @@ return Number(
 
 function getBestStars(levelNumber){
 
-```
-return Number(
+    return Number(
 
-    localStorage.getItem(
-        "level" +
-        levelNumber +
-        "BestStars"
-    )
+        localStorage.getItem(
+            "level" +
+            levelNumber +
+            "BestStars"
+        )
 
-) || 0;
-```
+    ) || 0;
 
 }
 
@@ -421,24 +409,22 @@ return Number(
 
 function getTotalStars(){
 
-```
-let total = 0;
+    let total = 0;
 
 
-for(
-    let i = 1;
-    i <= 60;
-    i++
-){
+    for(
+        let i = 1;
+        i <= 60;
+        i++
+    ){
 
-    total +=
-        getBestStars(i);
+        total +=
+            getBestStars(i);
 
-}
+    }
 
 
-return total;
-```
+    return total;
 
 }
 
@@ -450,31 +436,29 @@ return total;
 
 function getCompletedLevels(){
 
-```
-let completed = 0;
+    let completed = 0;
 
 
-for(
-    let i = 1;
-    i <= 60;
-    i++
-){
-
-    if(
-        localStorage.getItem(
-            "level" + i
-        ) === "completed"
+    for(
+        let i = 1;
+        i <= 60;
+        i++
     ){
 
-        completed++;
+        if(
+            localStorage.getItem(
+                "level" + i
+            ) === "completed"
+        ){
+
+            completed++;
+
+        }
 
     }
 
-}
 
-
-return completed;
-```
+    return completed;
 
 }
 
@@ -486,15 +470,13 @@ return completed;
 
 function getTotalCoins(){
 
-```
-return Number(
+    return Number(
 
-    localStorage.getItem(
-        "coins"
-    )
+        localStorage.getItem(
+            "coins"
+        )
 
-) || 0;
-```
+    ) || 0;
 
 }
 
@@ -506,30 +488,28 @@ return Number(
 
 function resetBoardDisplay(){
 
-```
-let movesDisplay =
-    document.getElementById("moves");
+    let movesDisplay =
+        document.getElementById("moves");
 
 
-let timerDisplay =
-    document.getElementById("timer");
+    let timerDisplay =
+        document.getElementById("timer");
 
 
-if(movesDisplay){
+    if(movesDisplay){
 
-    movesDisplay.textContent =
-        moves;
+        movesDisplay.textContent =
+            moves;
 
-}
+    }
 
 
-if(timerDisplay){
+    if(timerDisplay){
 
-    timerDisplay.textContent =
-        seconds;
+        timerDisplay.textContent =
+            seconds;
 
-}
-```
+    }
 
 }
 
@@ -541,32 +521,30 @@ if(timerDisplay){
 
 function changeLevel(newLevel){
 
-```
-if(newLevel < 1){
+    if(newLevel < 1){
 
-    return;
+        return;
 
-}
-
-
-if(newLevel > images.length){
-
-    return;
-
-}
+    }
 
 
-level =
-    newLevel;
+    if(newLevel > images.length){
+
+        return;
+
+    }
 
 
-localStorage.setItem(
-    "level",
-    level
-);
+    level =
+        newLevel;
 
 
-location.reload();
-```
+    localStorage.setItem(
+        "level",
+        level
+    );
+
+
+    location.reload();
 
 }
