@@ -10,178 +10,144 @@
 
 window.addEventListener("load", function(){
 
+    // ------------------------------
+    // Victory Elements
+    // ------------------------------
 
-// ------------------------------
-// Victory Elements
-// ------------------------------
+    victoryScreen =
+        document.getElementById("victoryScreen");
 
-victoryScreen =
-document.getElementById("victoryScreen");
+    finalTime =
+        document.getElementById("finalTime");
 
+    finalMoves =
+        document.getElementById("finalMoves");
 
-finalTime =
-document.getElementById("finalTime");
+    rewardCoins =
+        document.getElementById("rewardCoins");
 
-
-finalMoves =
-document.getElementById("finalMoves");
-
-
-rewardCoins =
-document.getElementById("rewardCoins");
-
-
-starsDisplay =
-document.getElementById("starsDisplay");
+    starsDisplay =
+        document.getElementById("starsDisplay");
 
 
+    nextBtn =
+        document.getElementById("nextBtn");
 
-nextBtn =
-document.getElementById("nextBtn");
+    retryBtn =
+        document.getElementById("retryBtn");
 
-
-retryBtn =
-document.getElementById("retryBtn");
-
-
-homeBtn =
-document.getElementById("homeBtn");
+    homeBtn =
+        document.getElementById("homeBtn");
 
 
+    // ------------------------------
+    // Hide Victory Screen
+    // ------------------------------
+
+    if(victoryScreen){
+
+        victoryScreen.classList.add("hidden");
+
+    }
 
 
-// ------------------------------
-// Hide Victory Screen
-// ------------------------------
+    // ------------------------------
+    // NEXT BUTTON
+    // ------------------------------
 
-if(victoryScreen){
+    if(nextBtn){
 
-    victoryScreen.classList.add("hidden");
+        nextBtn.onclick = function(){
 
-}
+            if(typeof playClick === "function"){
 
+                playClick();
 
-
-
-// ------------------------------
-// NEXT BUTTON
-// ------------------------------
-
-if(nextBtn){
-
-    nextBtn.onclick = function(){
+            }
 
 
-        if(typeof playClick === "function"){
-
-            playClick();
-
-        }
+            let next =
+                level + 1;
 
 
+            if(next <= images.length){
 
-        let next =
-        level + 1;
-
-
-
-        if(next <= images.length){
-
-
-            localStorage.setItem(
-                "level",
-                next
-            );
+                localStorage.setItem(
+                    "level",
+                    next
+                );
 
 
-            location.reload();
+                location.reload();
+
+            }
+            else{
+
+                backHome();
+
+            }
+
+        };
+
+    }
 
 
-        }
-        else{
+    // ------------------------------
+    // RETRY BUTTON
+    // ------------------------------
 
+    if(retryBtn){
+
+        retryBtn.onclick = function(){
+
+            if(typeof playClick === "function"){
+
+                playClick();
+
+            }
+
+
+            restartLevel();
+
+        };
+
+    }
+
+
+    // ------------------------------
+    // HOME BUTTON
+    // ------------------------------
+
+    if(homeBtn){
+
+        homeBtn.onclick = function(){
 
             backHome();
 
+        };
 
-        }
-
-
-    };
-
-}
+    }
 
 
+    // ------------------------------
+    // START PUZZLE
+    // ------------------------------
+
+    if(typeof setup === "function"){
+
+        setup();
+
+    }
 
 
-// ------------------------------
-// RETRY BUTTON
-// ------------------------------
+    // ------------------------------
+    // BACKGROUND MUSIC
+    // ------------------------------
 
-if(retryBtn){
+    if(typeof startMusic === "function"){
 
-    retryBtn.onclick = function(){
+        startMusic();
 
-
-        if(typeof playClick === "function"){
-
-            playClick();
-
-        }
-
-
-        restartLevel();
-
-
-    };
-
-}
-
-
-
-
-// ------------------------------
-// HOME BUTTON
-// ------------------------------
-
-if(homeBtn){
-
-    homeBtn.onclick = function(){
-
-
-        backHome();
-
-
-    };
-
-}
-
-
-
-
-// ------------------------------
-// START PUZZLE
-// ------------------------------
-
-if(typeof setup === "function"){
-
-    setup();
-
-}
-
-
-
-
-// ------------------------------
-// BACKGROUND MUSIC
-// ------------------------------
-
-if(typeof startMusic === "function"){
-
-    startMusic();
-
-}
-
-
+    }
 
 });
