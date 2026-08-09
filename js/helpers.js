@@ -1,135 +1,128 @@
 // ======================================
-// PuzzleMania
-// HELPER FUNCTIONS
+// PixVinz
+// HELPER SYSTEM
+// ======================================
+//
+// Shared utility functions.
+// This file contains only safe helper
+// functions and does not control the puzzle.
 // ======================================
 
+
 // ======================================
-// PREVENT DOUBLE CLICK ISSUES
+// SAFE ELEMENT GETTER
 // ======================================
 
-let inputLocked = false;
+function getElement(id){
 
-function lockInput(){
-
-    inputLocked = true;
-
-    setTimeout(function(){
-
-        inputLocked = false;
-
-    },200);
+    return document.getElementById(id);
 
 }
 
 
-
 // ======================================
-// UPDATED SELECT CHECK
+// SHOW ELEMENT
 // ======================================
 
-const oldSelectPiece = selectPiece;
+function showElement(element){
 
-selectPiece = function(index){
-
-    if(inputLocked){
-
+    if(!element){
         return;
-
     }
 
-    lockInput();
+    element.classList.remove("hidden");
 
-    oldSelectPiece(index);
-
-};
-
+}
 
 
 // ======================================
-// KEYBOARD SHORTCUTS
+// HIDE ELEMENT
 // ======================================
 
-document.addEventListener(
-"keydown",
-function(event){
+function hideElement(element){
 
-    let key =
-    event.key.toLowerCase();
-
-    switch(key){
-
-        case "r":
-
-            restartLevel();
-
-            break;
-
-        case "s":
-
-            shufflePuzzle();
-
-            break;
-
-        case "escape":
-
-            if(victoryScreen){
-
-                victoryScreen
-                .classList.add("hidden");
-
-            }
-
-            break;
-
+    if(!element){
+        return;
     }
 
-});
+    element.classList.add("hidden");
 
+}
 
 
 // ======================================
-// MOBILE SWIPE PREPARATION
+// SAFE NUMBER
 // ======================================
 
-let touchStartX = 0;
-let touchStartY = 0;
+function safeNumber(value, fallback = 0){
 
-document.addEventListener(
-"touchstart",
-function(e){
+    const number = Number(value);
 
-    if(e.touches.length > 0){
+    if(Number.isNaN(number)){
+        return fallback;
+    }
 
-        touchStartX =
-        e.touches[0].clientX;
+    return number;
 
-        touchStartY =
-        e.touches[0].clientY;
+}
+
+
+// ======================================
+// LOCAL STORAGE NUMBER
+// ======================================
+
+function getStorageNumber(key, fallback = 0){
+
+    const value =
+        localStorage.getItem(key);
+
+    if(value === null){
+        return fallback;
+    }
+
+    return safeNumber(
+        value,
+        fallback
+    );
+
+}
+
+
+// ======================================
+// SAVE NUMBER
+// ======================================
+
+function setStorageNumber(key, value){
+
+    localStorage.setItem(
+        key,
+        String(value)
+    );
+
+}
+
+
+// ======================================
+// PLAY CLICK SOUND SAFELY
+// ======================================
+
+function safePlayClick(){
+
+    if(typeof playClick === "function"){
+
+        playClick();
 
     }
 
-});
+}
 
-document.addEventListener(
-"touchend",
-function(e){
 
-    if(e.changedTouches.length > 0){
+// ======================================
+// PAGE NAVIGATION
+// ======================================
 
-        let endX =
-        e.changedTouches[0].clientX;
+function goToPage(page){
 
-        let endY =
-        e.changedTouches[0].clientY;
+    window.location.href = page;
 
-        let diffX =
-        endX - touchStartX;
-
-        let diffY =
-        endY - touchStartY;
-
-        // Reserved for future swipe controls
-
-    }
-
-});
+}
