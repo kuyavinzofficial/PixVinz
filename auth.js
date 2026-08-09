@@ -3,140 +3,56 @@
 // AUTHENTICATION SYSTEM
 // ======================================
 //
-// Handles:
-// - Sign Up
-// - Log In
-// - Log Out
-// - Login / Signup screen switching
-// - Current player session
-// - Welcome username
+// Handles only:
+// - Sign up
+// - Log in
+// - Logout
+// - Current logged-in user
+// - Showing login / signup screens
+// - Protecting the main menu
 //
-// Storage:
-// - pixvz_user
-// - pixvz_password
-// - pixvz_loggedIn
-//
+// Does NOT handle:
+// - Audio          → audio.js
+// - Main menu      → script.js
+// - Save system    → save.js
+// - Puzzle         → js/puzzle.js
 // ======================================
-
-
-// ======================================
-// AUTH ELEMENTS
-// ======================================
-
-const loginScreen =
-    document.getElementById("loginScreen");
-
-const signupScreen =
-    document.getElementById("signupScreen");
-
-const loginUsername =
-    document.getElementById("loginUsername");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const signupUsername =
-    document.getElementById("signupUsername");
-
-const signupPassword =
-    document.getElementById("signupPassword");
-
-const signupConfirmPassword =
-    document.getElementById(
-        "signupConfirmPassword"
-    );
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const signupBtn =
-    document.getElementById("signupBtn");
-
-const showSignupBtn =
-    document.getElementById(
-        "showSignupBtn"
-    );
-
-const showLoginBtn =
-    document.getElementById(
-        "showLoginBtn"
-    );
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const authMessage =
-    document.getElementById("authMessage");
-
-const authContainer =
-    document.getElementById(
-        "authContainer"
-    );
-
-const mainMenu =
-    document.getElementById("mainMenu");
-
-const welcomeText =
-    document.getElementById(
-        "welcomeText"
-    );
-
-const usernameDisplay =
-    document.getElementById(
-        "usernameDisplay"
-    );
 
 
 // ======================================
 // STORAGE KEYS
 // ======================================
 
-const AUTH_USERNAME_KEY =
-    "pixvz_user";
+const AUTH_USERS_KEY =
+    "pixvz_users";
 
-const AUTH_PASSWORD_KEY =
-    "pixvz_password";
-
-const AUTH_LOGGED_IN_KEY =
-    "pixvz_loggedIn";
+const CURRENT_USER_KEY =
+    "pixvz_currentUser";
 
 
 // ======================================
-// SHOW MESSAGE
+// GET USERS
 // ======================================
 
-function showAuthMessage(
-    message,
-    isError = true
-){
+function getUsers(){
 
-    if(!authMessage){
+    try{
 
-        return;
-
-    }
-
-
-    authMessage.textContent =
-        message;
-
-
-    authMessage.style.display =
-        "block";
-
-
-    if(isError){
-
-        authMessage.classList.add(
-            "error"
-        );
+        return JSON.parse(
+            localStorage.getItem(
+                AUTH_USERS_KEY
+            )
+        ) || {};
 
     }
-    else{
+    catch(error){
 
-        authMessage.classList.remove(
-            "error"
+        console.error(
+            "PixVZinz: Could not read users.",
+            error
         );
+
+        return {};
 
     }
 
@@ -144,23 +60,77 @@ function showAuthMessage(
 
 
 // ======================================
-// CLEAR MESSAGE
+// SAVE USERS
 // ======================================
 
-function clearAuthMessage(){
+function saveUsers(users){
 
-    if(!authMessage){
+    localStorage.setItem(
+        AUTH_USERS_KEY,
+        JSON.stringify(users)
+    );
 
-        return;
+}
+
+
+// ======================================
+// GET CURRENT USER
+// ======================================
+
+function getCurrentUser(){
+
+    return localStorage.getItem(
+        CURRENT_USER_KEY
+    );
+
+}
+
+
+// ======================================
+// SET CURRENT USER
+// ======================================
+
+function setCurrentUser(username){
+
+    localStorage.setItem(
+        CURRENT_USER_KEY,
+        username
+    );
+
+}
+
+
+// ======================================
+// CLEAR CURRENT USER
+// ======================================
+
+function clearCurrentUser(){
+
+    localStorage.removeItem(
+        CURRENT_USER_KEY
+    );
+
+}
+
+
+// ======================================
+// AUTH MESSAGE
+// ======================================
+
+function showAuthMessage(message){
+
+    const messageElement =
+        document.getElementById(
+            "authMessage"
+        );
+
+
+    if(messageElement){
+
+        messageElement.textContent =
+            message;
 
     }
-
-
-    authMessage.textContent = "";
-
-    authMessage.classList.remove(
-        "error"
-    );
 
 }
 
@@ -171,6 +141,17 @@ function clearAuthMessage(){
 
 function showLogin(){
 
+    const loginScreen =
+        document.getElementById(
+            "loginScreen"
+        );
+
+    const signupScreen =
+        document.getElementById(
+            "signupScreen"
+        );
+
+
     if(loginScreen){
 
         loginScreen.style.display =
@@ -187,7 +168,7 @@ function showLogin(){
     }
 
 
-    clearAuthMessage();
+    showAuthMessage("");
 
 }
 
@@ -198,6 +179,17 @@ function showLogin(){
 
 function showSignup(){
 
+    const loginScreen =
+        document.getElementById(
+            "loginScreen"
+        );
+
+    const signupScreen =
+        document.getElementById(
+            "signupScreen"
+        );
+
+
     if(loginScreen){
 
         loginScreen.style.display =
@@ -214,53 +206,7 @@ function showSignup(){
     }
 
 
-    clearAuthMessage();
-
-}
-
-
-// ======================================
-// GET SAVED USERNAME
-// ======================================
-
-function getSavedUsername(){
-
-    return localStorage.getItem(
-        AUTH_USERNAME_KEY
-    ) || "";
-
-}
-
-
-// ======================================
-// CHECK IF ACCOUNT EXISTS
-// ======================================
-
-function accountExists(){
-
-    return(
-        localStorage.getItem(
-            AUTH_USERNAME_KEY
-        ) !== null &&
-        localStorage.getItem(
-            AUTH_PASSWORD_KEY
-        ) !== null
-    );
-
-}
-
-
-// ======================================
-// CHECK LOGIN STATUS
-// ======================================
-
-function isLoggedIn(){
-
-    return(
-        localStorage.getItem(
-            AUTH_LOGGED_IN_KEY
-        ) === "true"
-    );
+    showAuthMessage("");
 
 }
 
@@ -269,12 +215,28 @@ function isLoggedIn(){
 // SIGN UP
 // ======================================
 
-function signup(){
+function signupUser(){
+
+    const usernameInput =
+        document.getElementById(
+            "signupUsername"
+        );
+
+    const passwordInput =
+        document.getElementById(
+            "signupPassword"
+        );
+
+    const confirmInput =
+        document.getElementById(
+            "signupConfirmPassword"
+        );
+
 
     if(
-        !signupUsername ||
-        !signupPassword ||
-        !signupConfirmPassword
+        !usernameInput ||
+        !passwordInput ||
+        !confirmInput
     ){
 
         return;
@@ -283,26 +245,24 @@ function signup(){
 
 
     const username =
-        signupUsername.value.trim();
+        usernameInput.value.trim();
 
     const password =
-        signupPassword.value;
+        passwordInput.value;
 
     const confirmPassword =
-        signupConfirmPassword.value;
+        confirmInput.value;
 
 
     // ------------------------------
-    // Username
+    // Validate username
     // ------------------------------
 
-    if(username === ""){
+    if(!username){
 
         showAuthMessage(
-            "Please choose a username."
+            "Please enter a username."
         );
-
-        signupUsername.focus();
 
         return;
 
@@ -310,50 +270,14 @@ function signup(){
 
 
     // ------------------------------
-    // Username length
+    // Validate password
     // ------------------------------
 
-    if(username.length < 3){
+    if(!password){
 
         showAuthMessage(
-            "Username must be at least 3 characters."
+            "Please enter a password."
         );
-
-        signupUsername.focus();
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Password
-    // ------------------------------
-
-    if(password === ""){
-
-        showAuthMessage(
-            "Please create a password."
-        );
-
-        signupPassword.focus();
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Password length
-    // ------------------------------
-
-    if(password.length < 4){
-
-        showAuthMessage(
-            "Password must be at least 4 characters."
-        );
-
-        signupPassword.focus();
 
         return;
 
@@ -364,27 +288,38 @@ function signup(){
     // Confirm password
     // ------------------------------
 
-    if(password !== confirmPassword){
+    if(
+        password !==
+        confirmPassword
+    ){
 
         showAuthMessage(
             "Passwords do not match."
         );
 
-        signupConfirmPassword.focus();
-
         return;
 
     }
 
 
     // ------------------------------
-    // Existing account
+    // Get users
     // ------------------------------
 
-    if(accountExists()){
+    const users =
+        getUsers();
+
+
+    // ------------------------------
+    // Username exists
+    // ------------------------------
+
+    if(
+        users[username]
+    ){
 
         showAuthMessage(
-            "An account already exists on this device."
+            "Username already exists."
         );
 
         return;
@@ -393,47 +328,48 @@ function signup(){
 
 
     // ------------------------------
-    // Save account
+    // Create account
     // ------------------------------
 
-    localStorage.setItem(
-        AUTH_USERNAME_KEY,
-        username
-    );
+    users[username] = {
+
+        password:
+            password,
+
+        created:
+            Date.now()
+
+    };
 
 
-    localStorage.setItem(
-        AUTH_PASSWORD_KEY,
-        password
-    );
+    saveUsers(users);
 
 
     // ------------------------------
     // Log user in
     // ------------------------------
 
-    localStorage.setItem(
-        AUTH_LOGGED_IN_KEY,
-        "true"
+    setCurrentUser(username);
+
+
+    showAuthMessage(
+        "Account created successfully!"
     );
-
-
-    // ------------------------------
-    // Clear signup fields
-    // ------------------------------
-
-    signupUsername.value = "";
-
-    signupPassword.value = "";
-
-    signupConfirmPassword.value = "";
 
 
     // ------------------------------
     // Open main menu
     // ------------------------------
 
-    showMainMenu(username);
+    setTimeout(
+        function(){
+
+            window.location.href =
+                "index.html";
+
+        },
+        400
+    );
 
 }
 
@@ -442,11 +378,22 @@ function signup(){
 // LOGIN
 // ======================================
 
-function login(){
+function loginUser(){
+
+    const usernameInput =
+        document.getElementById(
+            "loginUsername"
+        );
+
+    const passwordInput =
+        document.getElementById(
+            "loginPassword"
+        );
+
 
     if(
-        !loginUsername ||
-        !loginPassword
+        !usernameInput ||
+        !passwordInput
     ){
 
         return;
@@ -455,77 +402,49 @@ function login(){
 
 
     const username =
-        loginUsername.value.trim();
+        usernameInput.value.trim();
 
     const password =
-        loginPassword.value;
+        passwordInput.value;
 
 
     // ------------------------------
-    // Empty username
-    // ------------------------------
-
-    if(username === ""){
-
-        showAuthMessage(
-            "Please enter your username."
-        );
-
-        loginUsername.focus();
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Empty password
-    // ------------------------------
-
-    if(password === ""){
-
-        showAuthMessage(
-            "Please enter your password."
-        );
-
-        loginPassword.focus();
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Check account
-    // ------------------------------
-
-    if(!accountExists()){
-
-        showAuthMessage(
-            "No account found. Please create an account first."
-        );
-
-        return;
-
-    }
-
-
-    const savedUsername =
-        getSavedUsername();
-
-    const savedPassword =
-        localStorage.getItem(
-            AUTH_PASSWORD_KEY
-        ) || "";
-
-
-    // ------------------------------
-    // Validate credentials
+    // Validate fields
     // ------------------------------
 
     if(
-        username !== savedUsername ||
-        password !== savedPassword
+        !username ||
+        !password
+    ){
+
+        showAuthMessage(
+            "Please enter your username and password."
+        );
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Get users
+    // ------------------------------
+
+    const users =
+        getUsers();
+
+
+    const user =
+        users[username];
+
+
+    // ------------------------------
+    // Validate account
+    // ------------------------------
+
+    if(
+        !user ||
+        user.password !== password
     ){
 
         showAuthMessage(
@@ -538,31 +457,47 @@ function login(){
 
 
     // ------------------------------
-    // Save login state
+    // Save session
     // ------------------------------
 
-    localStorage.setItem(
-        AUTH_LOGGED_IN_KEY,
-        "true"
+    setCurrentUser(username);
+
+
+    showAuthMessage(
+        "Login successful!"
     );
-
-
-    // ------------------------------
-    // Clear fields
-    // ------------------------------
-
-    loginUsername.value = "";
-
-    loginPassword.value = "";
 
 
     // ------------------------------
     // Open main menu
     // ------------------------------
 
-    showMainMenu(
-        savedUsername
+    setTimeout(
+        function(){
+
+            window.location.href =
+                "index.html";
+
+        },
+        300
     );
+
+}
+
+
+// ======================================
+// LOGOUT
+// ======================================
+
+function logoutUser(){
+
+    clearCurrentUser();
+
+
+    // Return to login screen
+
+    window.location.href =
+        "index.html";
 
 }
 
@@ -571,7 +506,18 @@ function login(){
 // SHOW MAIN MENU
 // ======================================
 
-function showMainMenu(username){
+function showMainMenu(){
+
+    const authContainer =
+        document.getElementById(
+            "authContainer"
+        );
+
+    const mainMenu =
+        document.getElementById(
+            "mainMenu"
+        );
+
 
     if(authContainer){
 
@@ -585,6 +531,33 @@ function showMainMenu(username){
 
         mainMenu.style.display =
             "block";
+
+    }
+
+
+    // ------------------------------
+    // Username display
+    // ------------------------------
+
+    const usernameDisplay =
+        document.getElementById(
+            "usernameDisplay"
+        );
+
+    const welcomeText =
+        document.getElementById(
+            "welcomeText"
+        );
+
+
+    const username =
+        getCurrentUser();
+
+
+    if(usernameDisplay){
+
+        usernameDisplay.textContent =
+            username || "";
 
     }
 
@@ -597,18 +570,9 @@ function showMainMenu(username){
     }
 
 
-    if(usernameDisplay){
-
-        usernameDisplay.textContent =
-            username;
-
-    }
-
-
-    clearAuthMessage();
-
-
-    // Update coins if available
+    // ------------------------------
+    // Coin display
+    // ------------------------------
 
     if(
         typeof updateCoinDisplay ===
@@ -619,33 +583,24 @@ function showMainMenu(username){
 
     }
 
-
-    // Main menu music
-
-    if(
-        typeof playMainMusic ===
-        "function"
-    ){
-
-        playMainMusic();
-
-    }
-
 }
 
 
 // ======================================
-// SHOW LOGIN SCREEN
+// SHOW AUTH SCREEN
 // ======================================
 
-function showLoginScreen(){
+function showAuthScreen(){
 
-    if(mainMenu){
+    const authContainer =
+        document.getElementById(
+            "authContainer"
+        );
 
-        mainMenu.style.display =
-            "none";
-
-    }
+    const mainMenu =
+        document.getElementById(
+            "mainMenu"
+        );
 
 
     if(authContainer){
@@ -656,253 +611,135 @@ function showLoginScreen(){
     }
 
 
-    showLogin();
+    if(mainMenu){
 
-}
-
-
-// ======================================
-// LOG OUT
-// ======================================
-
-function logout(){
-
-    localStorage.setItem(
-        AUTH_LOGGED_IN_KEY,
-        "false"
-    );
-
-
-    if(
-        typeof stopAllAudio ===
-        "function"
-    ){
-
-        stopAllAudio();
+        mainMenu.style.display =
+            "none";
 
     }
 
-
-    if(loginUsername){
-
-        loginUsername.value = "";
-
-    }
-
-
-    if(loginPassword){
-
-        loginPassword.value = "";
-
-    }
-
-
-    showLoginScreen();
-
 }
 
 
 // ======================================
-// LOGIN BUTTON
+// INITIALIZE AUTH
 // ======================================
 
-if(loginBtn){
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-    loginBtn.addEventListener(
-        "click",
-        function(){
+        // ------------------------------
+        // Buttons
+        // ------------------------------
 
-            login();
-
-        }
-    );
-
-}
-
-
-// ======================================
-// SIGNUP BUTTON
-// ======================================
-
-if(signupBtn){
-
-    signupBtn.addEventListener(
-        "click",
-        function(){
-
-            signup();
-
-        }
-    );
-
-}
-
-
-// ======================================
-// SHOW SIGNUP BUTTON
-// ======================================
-
-if(showSignupBtn){
-
-    showSignupBtn.addEventListener(
-        "click",
-        function(){
-
-            showSignup();
-
-        }
-    );
-
-}
-
-
-// ======================================
-// SHOW LOGIN BUTTON
-// ======================================
-
-if(showLoginBtn){
-
-    showLoginBtn.addEventListener(
-        "click",
-        function(){
-
-            showLogin();
-
-        }
-    );
-
-}
-
-
-// ======================================
-// LOGOUT BUTTON
-// ======================================
-
-if(logoutBtn){
-
-    logoutBtn.addEventListener(
-        "click",
-        function(){
-
-            logout();
-
-        }
-    );
-
-}
-
-
-// ======================================
-// ENTER KEY
-// ======================================
-
-if(loginPassword){
-
-    loginPassword.addEventListener(
-        "keydown",
-        function(event){
-
-            if(event.key === "Enter"){
-
-                login();
-
-            }
-
-        }
-    );
-
-}
-
-
-if(signupConfirmPassword){
-
-    signupConfirmPassword.addEventListener(
-        "keydown",
-        function(event){
-
-            if(event.key === "Enter"){
-
-                signup();
-
-            }
-
-        }
-    );
-
-}
-
-
-// ======================================
-// INITIAL AUTH STATE
-// ======================================
-
-function initializeAuth(){
-
-    if(isLoggedIn()){
-
-        const username =
-            getSavedUsername();
-
-
-        if(username){
-
-            showMainMenu(
-                username
+        const loginBtn =
+            document.getElementById(
+                "loginBtn"
             );
 
-            return;
+
+        const signupBtn =
+            document.getElementById(
+                "signupBtn"
+            );
+
+
+        const showSignupBtn =
+            document.getElementById(
+                "showSignupBtn"
+            );
+
+
+        const showLoginBtn =
+            document.getElementById(
+                "showLoginBtn"
+            );
+
+
+        // ------------------------------
+        // Login button
+        // ------------------------------
+
+        if(loginBtn){
+
+            loginBtn.onclick =
+                function(){
+
+                    loginUser();
+
+                };
 
         }
 
+
+        // ------------------------------
+        // Signup button
+        // ------------------------------
+
+        if(signupBtn){
+
+            signupBtn.onclick =
+                function(){
+
+                    signupUser();
+
+                };
+
+        }
+
+
+        // ------------------------------
+        // Show signup
+        // ------------------------------
+
+        if(showSignupBtn){
+
+            showSignupBtn.onclick =
+                function(){
+
+                    showSignup();
+
+                };
+
+        }
+
+
+        // ------------------------------
+        // Show login
+        // ------------------------------
+
+        if(showLoginBtn){
+
+            showLoginBtn.onclick =
+                function(){
+
+                    showLogin();
+
+                };
+
+        }
+
+
+        // ------------------------------
+        // Check session
+        // ------------------------------
+
+        if(getCurrentUser()){
+
+            showMainMenu();
+
+        }
+        else{
+
+            showAuthScreen();
+
+        }
+
+
+        console.log(
+            "PixVZinz: Authentication ready."
+        );
+
     }
-
-
-    // Default:
-    // Show login screen
-
-    if(mainMenu){
-
-        mainMenu.style.display =
-            "none";
-
-    }
-
-
-    if(authContainer){
-
-        authContainer.style.display =
-            "block";
-
-    }
-
-
-    showLogin();
-
-}
-
-
-// ======================================
-// INITIALIZE
-// ======================================
-
-if(
-    document.readyState ===
-    "loading"
-){
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeAuth
-    );
-
-}
-else{
-
-    initializeAuth();
-
-}
-
-
-// ======================================
-// END OF AUTH SYSTEM
-// ======================================
+);
