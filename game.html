@@ -27,17 +27,17 @@
 
     <div id="puzzleBoard"></div>
 
-    <button onclick="playClick(); shufflePuzzle()">
+    <button onclick="shufflePuzzle()">
         🔀 Shuffle
     </button>
 
-    <button onclick="playClick(); backHome()">
+    <button onclick="backHome()">
         ⬅ Menu
     </button>
 </div>
 
 <!-- ==============================
-     Victory Screen
+     Victory Screen Overlay
 ================================ -->
 <div id="victoryScreen" class="hidden">
     <div class="victory-box">
@@ -48,9 +48,9 @@
         <div id="starsDisplay">⭐⭐⭐</div>
 
         <div class="stats">
-            <p>⏱ Time: <span id="finalTime">00:00</span></p>
+            <p>⏱ Time: <span id="finalTime">0s</span></p>
             <p>🔄 Moves: <span id="finalMoves">0</span></p>
-            <p>🪙 Reward: +<span id="rewardCoins">40</span> Coins</p>
+            <p>🪙 Reward: +<span id="rewardCoins">0</span> Coins</p>
         </div>
 
         <button id="nextBtn">➡ Next Level</button>
@@ -59,23 +59,24 @@
     </div>
 </div>
 
-<!-- Utilities & Setup -->
+<!-- Core State & Asset Configuration -->
 <script src="js/audio.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/record.js"></script> 
+<script src="js/helpers.js"></script>
+
+<!-- Optional Auth / Persistence Module Stubs -->
 <script src="js/auth.js"></script>
 <script src="js/save.js"></script>
-<script src="js/records.js"></script> 
-<script src="js/helpers.js"></script>
-<script src="js/levels.js"></script>
 <script src="js/timer.js"></script>
 
 <!-- Board & Puzzle Core Engine -->
 <script src="js/board.js"></script>
-<script src="js/puzzle.js"></script>
-<script src="js/game.js"></script>
+<script src="js/script.js"></script>
 
-<!-- Overlays & Main Entry -->
+<!-- Overlays & Main Startup Entry -->
 <script src="js/victory.js"></script>
-<script src="js/main.js"></script>
+<script src="js/startup.js"></script>
 
 </body>
 </html>
