@@ -241,4 +241,61 @@ function shufflePuzzle(){
 
 }
 
+// ======================================
+// MAIN BACKGROUND MUSIC
+// ======================================
 
+const mainMusic =
+    document.getElementById("mainMusic");
+
+
+// ------------------------------
+// Start Main Music
+// ------------------------------
+
+function startMainMusic(){
+
+    if(!mainMusic){
+
+        return;
+
+    }
+
+
+    mainMusic.loop = true;
+
+
+    mainMusic.play().catch(() => {
+
+        // Browser blocked autoplay.
+        // Music will start after user interaction.
+
+    });
+
+}
+
+
+// ------------------------------
+// Try Music On Page Load
+// ------------------------------
+
+window.addEventListener("load", function(){
+
+    startMainMusic();
+
+});
+
+
+// ------------------------------
+// Start Music After First Interaction
+// ------------------------------
+
+document.addEventListener(
+    "click",
+    function(){
+
+        startMainMusic();
+
+    },
+    { once: true }
+);
