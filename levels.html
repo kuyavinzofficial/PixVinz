@@ -1,61 +1,313 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
 
-    <title>PuzzleMania Levels</title>
+```
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <link rel="stylesheet" href="css/style.css">
+<title>PixVZinz - Levels</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+```
 
 </head>
 
 <body>
 
-<div class="levels">
+<!-- =========================================================
+     LEVELS PAGE
+     ========================================================= -->
 
+<div class="menu" id="levelsPage">
 
-    <!-- ==================================
-         PUZZLEMANIA LOGO
-         ================================== -->
+```
+<!-- ==========================
+     LOGO
+     ========================== -->
 
-    <video class="app-logo level-logo" autoplay muted loop playsinline>
-    <source src="images/logo.webm" type="video/webm">
+<video
+    class="app-logo"
+    autoplay
+    muted
+    playsinline
+    loop
+>
+    <source
+        src="image/logo.webm"
+        type="video/webm"
+    >
 </video>
 
-    <h2>Select Level</h2>
+
+<!-- ==========================
+     TITLE
+     ========================== -->
+
+<h2>
+    Levels
+</h2>
 
 
-    <div class="coins">
-
-        🪙 Coins:
-        <span id="coins">0</span>
-
-    </div>
+<p>
+    Choose a level to play.
+</p>
 
 
-    <div
-        class="level-grid"
-        id="levelContainer">
+<!-- ==========================
+     LEVEL GRID
+     ========================== -->
 
-    </div>
+<div
+    id="levelsGrid"
+    class="levels-grid"
+></div>
 
 
-    <button onclick="playClick(); backHome()">
+<!-- ==========================
+     BACK BUTTON
+     ========================== -->
 
-        ⬅ Back
-
-    </button>
-
+<button
+    type="button"
+    id="backHomeBtn"
+>
+    Back
+</button>
+```
 
 </div>
 
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
 <script src="audio.js"></script>
 
-<script src="script.js"></script>
+<script src="save.js"></script>
 
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        // ======================================
+        // LEVEL SETTINGS
+        // ======================================
+
+        const totalLevels = 200;
+
+        const levelsGrid =
+            document.getElementById(
+                "levelsGrid"
+            );
+
+
+        // ======================================
+        // HIGHEST UNLOCKED LEVEL
+        // ======================================
+
+        let unlockedLevel =
+            Number(
+                localStorage.getItem(
+                    "level"
+                )
+            ) || 1;
+
+
+        if(unlockedLevel < 1){
+
+            unlockedLevel = 1;
+
+        }
+
+
+        if(unlockedLevel > totalLevels){
+
+            unlockedLevel = totalLevels;
+
+        }
+
+
+        // ======================================
+        // CREATE LEVEL BUTTONS
+        // ======================================
+
+        for(
+            let i = 1;
+            i <= totalLevels;
+            i++
+        ){
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "level-button";
+
+
+            button.textContent =
+                i;
+
+
+            // ==================================
+            // COMPLETED
+            // ==================================
+
+            const completed =
+                localStorage.getItem(
+                    "level" +
+                    i
+                ) === "completed";
+
+
+            // ==================================
+            // UNLOCKED
+            // ==================================
+
+            const unlocked =
+                i <= unlockedLevel;
+
+
+            if(completed){
+
+                button.classList.add(
+                    "completed"
+                );
+
+            }
+
+
+            if(!unlocked){
+
+                button.classList.add(
+                    "locked"
+                );
+
+                button.disabled = true;
+
+
+                button.textContent =
+                    "🔒 " + i;
+
+            }
+
+
+            // ==================================
+            // CLICK LEVEL
+            // ==================================
+
+            if(unlocked){
+
+                button.addEventListener(
+                    "click",
+                    function(){
+
+                        if(
+                            typeof playClick ===
+                            "function"
+                        ){
+
+                            playClick();
+
+                        }
+
+
+                        localStorage.setItem(
+                            "level",
+                            i
+                        );
+
+
+                        window.location.href =
+                            "game.html";
+
+                    }
+                );
+
+            }
+
+
+            levelsGrid.appendChild(
+                button
+            );
+
+        }
+
+
+        // ======================================
+        // BACK HOME
+        // ======================================
+
+        const backHomeBtn =
+            document.getElementById(
+                "backHomeBtn"
+            );
+
+
+        if(backHomeBtn){
+
+            backHomeBtn.addEventListener(
+                "click",
+                function(){
+
+                    if(
+                        typeof playClick ===
+                        "function"
+                    ){
+
+                        playClick();
+
+                    }
+
+
+                    window.location.href =
+                        "index.html";
+
+                }
+            );
+
+        }
+
+
+        // ======================================
+        // LEVELS MUSIC
+        // ======================================
+        //
+        // main.mp3 is used on the
+        // Levels page.
+        //
+
+        if(
+            typeof playMainMusic ===
+            "function"
+        ){
+
+            playMainMusic();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 
