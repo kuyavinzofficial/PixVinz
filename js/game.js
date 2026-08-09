@@ -1,24 +1,32 @@
-// ======================================
-// PixVZinz
-// GAME CONTROL SYSTEM
-// ======================================
-//
-// Handles:
-// - Piece selection
-// - Piece swapping
-// - Move counting
-// - Victory detection
-//
-// Board drawing:
-// js/board.js
-//
-// Timer:
-// js/timer.js
-//
-// Victory screen:
-// js/victory.js
-// ======================================
+/* ======================================
+PixVZinz
+GAME CONTROL SYSTEM
+===================
 
+Handles:
+
+* Creating puzzle pieces
+* Shuffling pieces
+* Selecting pieces
+* Swapping pieces
+* Move counting
+* Victory detection
+
+Board:
+js/board.js
+
+Timer:
+js/timer.js
+
+Records:
+js/records.js
+
+Victory screen:
+js/victory.js
+
+Audio:
+audio.js
+====================================== */
 
 // ======================================
 // GAME VARIABLES
@@ -32,28 +40,27 @@ let selectedPiece = null;
 
 let gameFinished = false;
 
-
 // ======================================
 // CREATE PUZZLE PIECES
 // ======================================
 
 function createPieces(){
 
-    pieces = [];
+pieces = [];
 
 
-    for(
-        let i = 0;
-        i < size * size;
-        i++
-    ){
+for(
+    let i = 0;
+    i < size * size;
+    i++
+){
 
-        pieces.push(i);
-
-    }
+    pieces.push(i);
 
 }
+```
 
+}
 
 // ======================================
 // RESET GAME STATS
@@ -61,59 +68,116 @@ function createPieces(){
 
 function resetStats(){
 
-    moves = 0;
+```
+moves = 0;
 
-    selectedPiece = null;
+selectedPiece = null;
 
-    gameFinished = false;
-
-
-    // ------------------------------
-    // Reset moves display
-    // ------------------------------
-
-    const moveDisplay =
-        document.getElementById("moves");
+gameFinished = false;
 
 
-    if(moveDisplay){
+// ------------------------------
+// Reset moves
+// ------------------------------
 
-        moveDisplay.textContent =
-            "0";
-
-    }
-
-
-    // ------------------------------
-    // Reset timer
-    // ------------------------------
-
-    if(
-        typeof resetTimer === "function"
-    ){
-
-        resetTimer();
-
-    }
+const moveDisplay =
+    document.getElementById(
+        "moves"
+    );
 
 
-    // ------------------------------
-    // Reset stars
-    // ------------------------------
+if(moveDisplay){
 
-    const starsDisplay =
-        document.getElementById("stars");
-
-
-    if(starsDisplay){
-
-        starsDisplay.textContent =
-            "⭐⭐⭐";
-
-    }
+    moveDisplay.textContent =
+        "0";
 
 }
 
+
+// ------------------------------
+// Reset stars
+// ------------------------------
+
+const starsDisplay =
+    document.getElementById(
+        "stars"
+    );
+
+
+if(starsDisplay){
+
+    starsDisplay.textContent =
+        "⭐⭐⭐";
+
+}
+
+
+// ------------------------------
+// Reset timer
+// ------------------------------
+
+if(
+    typeof resetTimer ===
+    "function"
+){
+
+    resetTimer();
+
+}
+```
+
+}
+
+// ======================================
+// SETUP GAME
+// ======================================
+
+function setup(){
+
+```
+console.log(
+    "PixVZinz: Setting up level " +
+    level
+);
+
+
+// Reset game state
+
+pieces = [];
+
+moves = 0;
+
+selectedPiece = null;
+
+gameFinished = false;
+
+
+// ------------------------------
+// Update level title
+// ------------------------------
+
+const levelTitle =
+    document.getElementById(
+        "levelTitle"
+    );
+
+
+if(levelTitle){
+
+    levelTitle.textContent =
+        "Level " + level;
+
+}
+
+
+// ------------------------------
+// Create and shuffle puzzle
+// ------------------------------
+
+shufflePuzzle();
+```
+
+}
 
 // ======================================
 // SHUFFLE PUZZLE
@@ -121,127 +185,111 @@ function resetStats(){
 
 function shufflePuzzle(){
 
-    // ------------------------------
-    // Create fresh pieces
-    // ------------------------------
+```
+// ------------------------------
+// Create fresh pieces
+// ------------------------------
 
-    createPieces();
-
-
-    // ------------------------------
-    // Shuffle
-    // ------------------------------
-
-    for(
-        let i = pieces.length - 1;
-        i > 0;
-        i--
-    ){
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
+createPieces();
 
 
-        [
-            pieces[i],
-            pieces[j]
-        ] = [
-            pieces[j],
-            pieces[i]
-        ];
+// ------------------------------
+// Shuffle pieces
+// ------------------------------
 
-    }
+for(
+    let i = pieces.length - 1;
+    i > 0;
+    i--
+){
 
-
-    // ------------------------------
-    // Prevent solved puzzle
-    // ------------------------------
-
-    let solved = true;
+    const j =
+        Math.floor(
+            Math.random() * (i + 1)
+        );
 
 
-    for(
-        let i = 0;
-        i < pieces.length;
-        i++
-    ){
-
-        if(pieces[i] !== i){
-
-            solved = false;
-
-            break;
-
-        }
-
-    }
-
-
-    if(
-        solved &&
-        pieces.length > 1
-    ){
-
-        [
-            pieces[0],
-            pieces[1]
-        ] = [
-            pieces[1],
-            pieces[0]
-        ];
-
-    }
-
-
-    // ------------------------------
-    // Reset statistics
-    // ------------------------------
-
-    resetStats();
-
-
-    // ------------------------------
-    // Draw puzzle
-    // ------------------------------
-
-    if(
-        typeof drawPuzzle === "function"
-    ){
-
-        drawPuzzle();
-
-    }
-
-
-    // ------------------------------
-    // Start timer
-    // ------------------------------
-
-    if(
-        typeof startTimer === "function"
-    ){
-
-        startTimer();
-
-    }
-
-
-    // ------------------------------
-    // Shuffle sound
-    // ------------------------------
-
-    if(
-        typeof playShuffle === "function"
-    ){
-
-        playShuffle();
-
-    }
+    [
+        pieces[i],
+        pieces[j]
+    ] = [
+        pieces[j],
+        pieces[i]
+    ];
 
 }
 
+
+// ------------------------------
+// Prevent solved puzzle
+// ------------------------------
+
+if(
+    isSolved() &&
+    pieces.length > 1
+){
+
+    [
+        pieces[0],
+        pieces[1]
+    ] = [
+        pieces[1],
+        pieces[0]
+    ];
+
+}
+
+
+// ------------------------------
+// Reset statistics
+// ------------------------------
+
+resetStats();
+
+
+// ------------------------------
+// Draw board
+// ------------------------------
+
+if(
+    typeof drawPuzzle ===
+    "function"
+){
+
+    drawPuzzle();
+
+}
+
+
+// ------------------------------
+// Start timer
+// ------------------------------
+
+if(
+    typeof startTimer ===
+    "function"
+){
+
+    startTimer();
+
+}
+
+
+// ------------------------------
+// Shuffle sound
+// ------------------------------
+
+if(
+    typeof playShuffle ===
+    "function"
+){
+
+    playShuffle();
+
+}
+```
+
+}
 
 // ======================================
 // SELECT PIECE
@@ -249,216 +297,222 @@ function shufflePuzzle(){
 
 function selectPiece(index){
 
-    // Do nothing after victory
-    if(gameFinished){
+```
+// Do nothing after victory
 
-        return;
+if(gameFinished){
 
-    }
-
-
-    // Safety check
-    if(
-        index < 0 ||
-        index >= pieces.length
-    ){
-
-        return;
-
-    }
-
-
-    const allPieces =
-        document.querySelectorAll(
-            ".piece"
-        );
-
-
-    // ======================================
-    // FIRST PIECE
-    // ======================================
-
-    if(selectedPiece === null){
-
-        selectedPiece =
-            index;
-
-
-        if(allPieces[index]){
-
-            allPieces[index]
-                .classList.add(
-                    "selected"
-                );
-
-        }
-
-
-        // Selection sound
-        if(
-            typeof playSelect === "function"
-        ){
-
-            playSelect();
-
-        }
-
-
-        return;
-
-    }
-
-
-    // ======================================
-    // SECOND PIECE
-    // ======================================
-
-    swapPieces(
-        selectedPiece,
-        index
-    );
+    return;
 
 }
 
 
-// ======================================
-// SWAP PIECES
-// ======================================
+// Safety check
 
-function swapPieces(
-    first,
-    second
+if(
+    index < 0 ||
+    index >= pieces.length
 ){
 
-    // ------------------------------
-    // Safety
-    // ------------------------------
+    return;
 
-    if(gameFinished){
-
-        return;
-
-    }
+}
 
 
-    if(
-        first < 0 ||
-        second < 0 ||
-        first >= pieces.length ||
-        second >= pieces.length
-    ){
-
-        selectedPiece = null;
-
-        return;
-
-    }
+const allPieces =
+    document.querySelectorAll(
+        ".piece"
+    );
 
 
-    const allPieces =
-        document.querySelectorAll(
-            ".piece"
-        );
+// ==================================
+// FIRST PIECE
+// ==================================
+
+if(selectedPiece === null){
+
+    selectedPiece =
+        index;
 
 
-    // ------------------------------
-    // Remove selection
-    // ------------------------------
+    if(allPieces[index]){
 
-    if(allPieces[first]){
-
-        allPieces[first]
-            .classList.remove(
+        allPieces[index]
+            .classList.add(
                 "selected"
             );
 
     }
 
 
-    // ------------------------------
-    // Same piece
-    // ------------------------------
-
-    if(first === second){
-
-        selectedPiece = null;
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Swap
-    // ------------------------------
-
-    [
-        pieces[first],
-        pieces[second]
-    ] = [
-        pieces[second],
-        pieces[first]
-    ];
-
-
-    selectedPiece = null;
-
-
-    // ------------------------------
-    // Increase moves
-    // ------------------------------
-
-    moves++;
-
-
-    const moveDisplay =
-        document.getElementById(
-            "moves"
-        );
-
-
-    if(moveDisplay){
-
-        moveDisplay.textContent =
-            moves;
-
-    }
-
-
-    // ------------------------------
-    // Exchange sound
-    // ------------------------------
-
     if(
-        typeof playExchange === "function"
+        typeof playSelect ===
+        "function"
     ){
 
-        playExchange();
+        playSelect();
 
     }
 
 
-    // ------------------------------
-    // Redraw board
-    // ------------------------------
-
-    if(
-        typeof drawPuzzle === "function"
-    ){
-
-        drawPuzzle();
-
-    }
-
-
-    // ------------------------------
-    // Check victory
-    // ------------------------------
-
-    checkWin();
+    return;
 
 }
 
+
+// ==================================
+// SECOND PIECE
+// ==================================
+
+swapPieces(
+    selectedPiece,
+    index
+);
+```
+
+}
+
+// ======================================
+// SWAP PIECES
+// ======================================
+
+function swapPieces(
+first,
+second
+){
+
+```
+// ------------------------------
+// Safety
+// ------------------------------
+
+if(gameFinished){
+
+    return;
+
+}
+
+
+if(
+    first < 0 ||
+    second < 0 ||
+    first >= pieces.length ||
+    second >= pieces.length
+){
+
+    selectedPiece = null;
+
+    return;
+
+}
+
+
+const allPieces =
+    document.querySelectorAll(
+        ".piece"
+    );
+
+
+// ------------------------------
+// Remove selection
+// ------------------------------
+
+if(allPieces[first]){
+
+    allPieces[first]
+        .classList.remove(
+            "selected"
+        );
+
+}
+
+
+// ------------------------------
+// Same piece
+// ------------------------------
+
+if(first === second){
+
+    selectedPiece = null;
+
+    return;
+
+}
+
+
+// ------------------------------
+// Swap
+// ------------------------------
+
+[
+    pieces[first],
+    pieces[second]
+] = [
+    pieces[second],
+    pieces[first]
+];
+
+
+selectedPiece = null;
+
+
+// ------------------------------
+// Increase moves
+// ------------------------------
+
+moves++;
+
+
+const moveDisplay =
+    document.getElementById(
+        "moves"
+    );
+
+
+if(moveDisplay){
+
+    moveDisplay.textContent =
+        moves;
+
+}
+
+
+// ------------------------------
+// Exchange sound
+// ------------------------------
+
+if(
+    typeof playExchange ===
+    "function"
+){
+
+    playExchange();
+
+}
+
+
+// ------------------------------
+// Redraw board
+// ------------------------------
+
+if(
+    typeof drawPuzzle ===
+    "function"
+){
+
+    drawPuzzle();
+
+}
+
+
+// ------------------------------
+// Check victory
+// ------------------------------
+
+checkWin();
+```
+
+}
 
 // ======================================
 // CHECK IF PUZZLE IS SOLVED
@@ -466,35 +520,36 @@ function swapPieces(
 
 function isSolved(){
 
-    if(
-        !pieces ||
-        pieces.length === 0
-    ){
+```
+if(
+    !pieces ||
+    pieces.length === 0
+){
+
+    return false;
+
+}
+
+
+for(
+    let i = 0;
+    i < pieces.length;
+    i++
+){
+
+    if(pieces[i] !== i){
 
         return false;
 
     }
 
-
-    for(
-        let i = 0;
-        i < pieces.length;
-        i++
-    ){
-
-        if(pieces[i] !== i){
-
-            return false;
-
-        }
-
-    }
-
-
-    return true;
-
 }
 
+
+return true;
+```
+
+}
 
 // ======================================
 // CHECK WIN
@@ -502,352 +557,304 @@ function isSolved(){
 
 function checkWin(){
 
-    // ------------------------------
-    // Already finished
-    // ------------------------------
+```
+// ------------------------------
+// Already finished
+// ------------------------------
 
-    if(gameFinished){
+if(gameFinished){
 
-        return;
+    return;
 
-    }
-
-
-    // ------------------------------
-    // Not solved
-    // ------------------------------
-
-    if(!isSolved()){
-
-        return;
-
-    }
+}
 
 
-    // ------------------------------
-    // Mark finished
-    // ------------------------------
+// ------------------------------
+// Not solved
+// ------------------------------
 
-    gameFinished = true;
+if(!isSolved()){
 
+    return;
 
-    // ------------------------------
-    // Stop timer
-    // ------------------------------
-
-    if(
-        typeof stopTimer === "function"
-    ){
-
-        stopTimer();
-
-    }
+}
 
 
-    // ------------------------------
-    // Calculate stars
-    // ------------------------------
+// ------------------------------
+// Mark finished
+// ------------------------------
 
-    let stars = 1;
-
-
-    if(
-        seconds <= 30 &&
-        moves <= 30
-    ){
-
-        stars = 3;
-
-    }
-    else if(
-        seconds <= 60 &&
-        moves <= 60
-    ){
-
-        stars = 2;
-
-    }
+gameFinished = true;
 
 
-    // ------------------------------
-    // Star text
-    // ------------------------------
+// ------------------------------
+// Stop timer
+// ------------------------------
 
-    let starText =
-        "⭐";
+if(
+    typeof stopTimer ===
+    "function"
+){
 
+    stopTimer();
 
-    if(stars === 2){
-
-        starText =
-            "⭐⭐";
-
-    }
+}
 
 
-    if(stars === 3){
+// ------------------------------
+// Calculate stars
+// ------------------------------
 
-        starText =
-            "⭐⭐⭐";
-
-    }
-
-
-    // ------------------------------
-    // Update game stars
-    // ------------------------------
-
-    const starsElement =
-        document.getElementById(
-            "stars"
-        );
+let stars = 1;
 
 
-    if(starsElement){
+if(
+    seconds <= 30 &&
+    moves <= 30
+){
 
-        starsElement.textContent =
-            starText;
+    stars = 3;
 
-    }
+}
+else if(
+    seconds <= 60 &&
+    moves <= 60
+){
+
+    stars = 2;
+
+}
 
 
-    // ------------------------------
-    // Save completion
-    // ------------------------------
+// ------------------------------
+// Star text
+// ------------------------------
+
+let starText =
+    "⭐";
+
+
+if(stars === 2){
+
+    starText =
+        "⭐⭐";
+
+}
+
+
+if(stars === 3){
+
+    starText =
+        "⭐⭐⭐";
+
+}
+
+
+// ------------------------------
+// Update stars display
+// ------------------------------
+
+const starsElement =
+    document.getElementById(
+        "stars"
+    );
+
+
+if(starsElement){
+
+    starsElement.textContent =
+        starText;
+
+}
+
+
+// ==================================
+// SAVE RECORDS
+// ==================================
+//
+// Records are handled by
+// records.js.
+//
+
+if(
+    typeof saveLevelCompletion ===
+    "function"
+){
+
+    saveLevelCompletion(
+        level
+    );
+
+}
+else{
+
+    // Safe fallback
 
     localStorage.setItem(
         "level" + level,
         "completed"
     );
 
+}
 
-    // ------------------------------
-    // Save best stars
-    // ------------------------------
 
-    const previousBestStars =
+if(
+    typeof saveBestStars ===
+    "function"
+){
+
+    saveBestStars(
+        level,
+        stars
+    );
+
+}
+
+
+if(
+    typeof saveBestTime ===
+    "function"
+){
+
+    saveBestTime(
+        level,
+        seconds
+    );
+
+}
+
+
+if(
+    typeof saveBestMoves ===
+    "function"
+){
+
+    saveBestMoves(
+        level,
+        moves
+    );
+
+}
+
+
+// ==================================
+// COIN REWARD
+// ==================================
+
+let reward = 0;
+
+
+if(level <= 30){
+
+    const starReward =
+        stars * 5;
+
+
+    let levelCoins =
         Number(
             localStorage.getItem(
                 "level" +
                 level +
-                "BestStars"
+                "Coins"
             )
         ) || 0;
 
 
-    if(
-        stars > previousBestStars
-    ){
-
-        localStorage.setItem(
-            "level" +
-            level +
-            "BestStars",
-            stars
+    const remainingCoins =
+        Math.max(
+            0,
+            15 - levelCoins
         );
 
-    }
 
-
-    // ------------------------------
-    // Save best time
-    // ------------------------------
-
-    const previousBestTime =
-        Number(
-            localStorage.getItem(
-                "level" +
-                level +
-                "BestTime"
-            )
-        ) || 0;
-
-
-    if(
-        previousBestTime === 0 ||
-        seconds < previousBestTime
-    ){
-
-        localStorage.setItem(
-            "level" +
-            level +
-            "BestTime",
-            seconds
+    reward =
+        Math.min(
+            starReward,
+            remainingCoins
         );
 
-    }
+
+    levelCoins += reward;
 
 
-    // ------------------------------
-    // Save best moves
-    // ------------------------------
-
-    const previousBestMoves =
-        Number(
-            localStorage.getItem(
-                "level" +
-                level +
-                "BestMoves"
-            )
-        ) || 0;
+    localStorage.setItem(
+        "level" +
+        level +
+        "Coins",
+        levelCoins
+    );
 
 
-    if(
-        previousBestMoves === 0 ||
-        moves < previousBestMoves
-    ){
+    if(reward > 0){
 
-        localStorage.setItem(
-            "level" +
-            level +
-            "BestMoves",
-            moves
-        );
-
-    }
-
-
-    // ======================================
-    // COIN REWARD
-    // ======================================
-
-    let reward = 0;
-
-
-    if(level <= 30){
-
-        const starReward =
-            stars * 5;
-
-
-        let levelCoins =
+        const totalCoins =
             Number(
                 localStorage.getItem(
-                    "level" +
-                    level +
-                    "Coins"
+                    "coins"
                 )
             ) || 0;
 
 
-        const remainingCoins =
-            15 - levelCoins;
-
-
-        if(remainingCoins > 0){
-
-            reward =
-                Math.min(
-                    starReward,
-                    remainingCoins
-                );
-
-        }
-
-
-        levelCoins += reward;
-
-
         localStorage.setItem(
-            "level" +
-            level +
-            "Coins",
-            levelCoins
-        );
-
-
-        if(reward > 0){
-
-            let totalCoins =
-                Number(
-                    localStorage.getItem(
-                        "coins"
-                    )
-                ) || 0;
-
-
-            totalCoins += reward;
-
-
-            localStorage.setItem(
-                "coins",
-                totalCoins
-            );
-
-        }
-
-    }
-
-
-    // ======================================
-    // VICTORY SOUND
-    // ======================================
-
-    if(
-        typeof playVictorySound ===
-        "function"
-    ){
-
-        playVictorySound();
-
-    }
-    else if(
-        typeof playVictory ===
-        "function"
-    ){
-
-        playVictory();
-
-    }
-
-
-    // ======================================
-    // SHOW VICTORY SCREEN
-    // ======================================
-
-    if(
-        typeof showVictory ===
-        "function"
-    ){
-
-        showVictory(
-            starText,
-            reward
-        );
-
-    }
-    else{
-
-        console.error(
-            "PixVZinz: showVictory() is not available."
-        );
-
-    }
-
-
-    // ======================================
-    // UNLOCK NEXT LEVEL
-    // ======================================
-
-    const unlockedLevel =
-        Number(
-            localStorage.getItem(
-                "level"
-            )
-        ) || 1;
-
-
-    if(
-        level + 1 > unlockedLevel &&
-        level < totalLevels
-    ){
-
-        localStorage.setItem(
-            "level",
-            level + 1
+            "coins",
+            totalCoins + reward
         );
 
     }
 
 }
 
+
+// ==================================
+// UNLOCK NEXT LEVEL
+// ==================================
+
+const unlockedLevel =
+    Number(
+        localStorage.getItem(
+            "level"
+        )
+    ) || 1;
+
+
+if(
+    level < totalLevels &&
+    level + 1 > unlockedLevel
+){
+
+    localStorage.setItem(
+        "level",
+        level + 1
+    );
+
+}
+
+
+// ==================================
+// SHOW VICTORY
+// ==================================
+//
+// Victory screen and victory audio
+// are handled by victory.js/audio.js.
+//
+
+if(
+    typeof showVictory ===
+    "function"
+){
+
+    showVictory(
+        starText,
+        reward
+    );
+
+}
+else{
+
+    console.error(
+        "PixVZinz: showVictory() is not available."
+    );
+
+}
+
+}
