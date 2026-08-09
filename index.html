@@ -30,9 +30,9 @@
 
         <p>Piece Together The Fun!</p>
 
-        <button onclick="playClick(); startGame()">▶ PLAY</button>
-        <button onclick="playClick(); openLevels()">🏆 LEVELS</button>
-        <button onclick="playClick(); openSettings()">⚙ SETTINGS</button>
+        <button onclick="startGame()">▶ PLAY</button>
+        <button onclick="openLevels()">🏆 LEVELS</button>
+        <button onclick="openSettings()">⚙ SETTINGS</button>
         <button class="logout-btn" onclick="logout()">🚪 Logout</button>
     </div>
 
@@ -62,22 +62,63 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- UTILITIES & CORE ENGINE -->
     <script src="js/audio.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/record.js"></script>
+    <script src="js/helpers.js"></script>
+
+    <!-- AUTH & USER PROGRESS -->
     <script src="js/auth.js"></script>
     <script src="js/save.js"></script>
     <script src="js/script.js"></script>
 
-    <!-- SPLASH CONTROL -->
+    <!-- NAVIGATION & MENU CONTROLLER -->
     <script>
-        window.addEventListener("load", function(){
+        // Splash Screen Hide Transition
+        window.addEventListener("load", function () {
             const splash = document.getElementById("puzzleSplash");
-            if(!splash) return;
+            if (!splash) return;
 
-            setTimeout(function(){
+            setTimeout(function () {
                 splash.classList.add("splashHidden");
-            }, 4000);
+            }, 3000);
         });
+
+        // Navigation Handlers
+        function startGame() {
+            window.location.href = "game.html";
+        }
+
+        function openLevels() {
+            window.location.href = "levels.html";
+        }
+
+        function openSettings() {
+            const popup = document.getElementById("settingsPopup");
+            if (popup) popup.classList.remove("hidden");
+        }
+
+        function closeSettings() {
+            const popup = document.getElementById("settingsPopup");
+            if (popup) popup.classList.add("hidden");
+        }
+
+        function resetProgress() {
+            if (confirm("Are you sure you want to reset all game progress?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        function showAbout() {
+            alert("PixVinz PuzzleMania v1.0\nBuilt for smooth web puzzle gameplay.");
+        }
+
+        function logout() {
+            localStorage.removeItem("currentUser");
+            window.location.href = "login.html";
+        }
     </script>
 
 </body>
