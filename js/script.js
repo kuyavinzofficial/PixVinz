@@ -5,682 +5,260 @@
 
 const totalLevels = 60;
 
+// Fallback Sound Helper
+function playClick() {
+    if (typeof playSound === "function") {
+        playSound("click");
+    }
+}
+
+// User Helper
+function getCurrentUser() {
+    const username = localStorage.getItem("currentUser");
+    if (!username) return null;
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    return users.find(u => u.username === username) || null;
+}
 
 // ==============================
-// Main Menu
+// Main Menu & Navigation
 // ==============================
 
-function startGame(){
-
+function startGame() {
     playClick();
-
     let nextLevel = 1;
 
-    for(let i = 1; i <= totalLevels; i++){
-
-        if(localStorage.getItem("level"+i) === "completed"){
-
+    for (let i = 1; i <= totalLevels; i++) {
+        if (localStorage.getItem("level" + i) === "completed") {
             nextLevel = i + 1;
-
         }
-
     }
 
-    if(nextLevel > totalLevels){
-
+    if (nextLevel > totalLevels) {
         nextLevel = totalLevels;
-
     }
 
     localStorage.setItem("level", nextLevel);
-
-    window.location.href="game.html";
-
+    window.location.href = "game.html";
 }
 
-
-
-// ==============================
-// Navigation
-// ==============================
-
-function openLevels(){
-
+function openLevels() {
     playClick();
-
-    window.location.href="levels.html";
-
+    window.location.href = "levels.html";
 }
 
-
-function backHome(){
-
+function backHome() {
     playClick();
-
-    window.location.href="index.html";
-
+    window.location.href = "index.html";
 }
 
-
-
-function playLevel(level){
-
+function playLevel(level) {
     playClick();
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-    window.location.href="game.html";
-
+    localStorage.setItem("level", level);
+    window.location.href = "game.html";
 }
-
-
 
 // ==============================
 // Load Levels
 // ==============================
 
-function loadLevels(){
+function loadLevels() {
+    const container = document.getElementById("levelContainer");
+    if (!container) return;
 
-    const container =
-    document.getElementById("levelContainer");
+    container.innerHTML = "";
 
-
-    if(!container) return;
-
-
-    container.innerHTML="";
-
-
-    const coins =
-    Number(localStorage.getItem("coins")) || 0;
-
-
-    const coinDisplay =
-    document.getElementById("coins");
-
-
-    if(coinDisplay){
-
+    const coins = Number(localStorage.getItem("coins")) || 0;
+    const coinDisplay = document.getElementById("coins");
+    if (coinDisplay) {
         coinDisplay.textContent = coins;
-
     }
 
+    for (let i = 1; i <= totalLevels; i++) {
+        const button = document.createElement("button");
+        button.className = "level-card";
 
+        const completed = localStorage.getItem("level" + i) === "completed";
+        const unlocked = i === 1 || localStorage.getItem("level" + (i - 1)) === "completed";
+        const bestTime = localStorage.getItem("level" + i + "BestTime") || "--";
+        const bestMoves = localStorage.getItem("level" + i + "BestMoves") || "--";
+        const bestStars = Number(localStorage.getItem("level" + i + "BestStars")) || 0;
 
-    for(let i=1;i<=totalLevels;i++){
+        let stars = "";
+        if (bestStars === 3) stars = "⭐⭐⭐";
+        else if (bestStars === 2) stars = "⭐⭐";
+        else if (bestStars === 1) stars = "⭐";
 
-
-        const button =
-        document.createElement("button");
-
-
-        button.className="level-card";
-
-
-
-        const completed =
-        localStorage.getItem(
-            "level"+i
-        )==="completed";
-
-
-
-        const unlocked =
-        i===1 ||
-        localStorage.getItem(
-            "level"+(i-1)
-        )==="completed";
-
-
-
-        const bestTime =
-        localStorage.getItem(
-            "level"+i+"BestTime"
-        ) || "--";
-
-
-
-        const bestMoves =
-        localStorage.getItem(
-            "level"+i+"BestMoves"
-        ) || "--";
-
-
-
-        const bestStars =
-        Number(
-            localStorage.getItem(
-                "level"+i+"BestStars"
-            )
-        ) || 0;
-
-
-
-        let stars="";
-
-
-        if(bestStars===3){
-
-            stars="⭐⭐⭐";
-
-        }
-        else if(bestStars===2){
-
-            stars="⭐⭐";
-
-        }
-        else if(bestStars===1){
-
-            stars="⭐";
-
-        }
-
-
-
-        // COMPLETED
-
-        if(completed){
-
-
-            button.classList.add(
-                "completed"
-            );
-
-
-            button.innerHTML=
-
-            `
-            ⭐ Level ${i}<br>
-            ${stars}<br>
-            ⏱ ${bestTime}s<br>
-            🔄 ${bestMoves} Moves
+        if (completed) {
+            button.classList.add("completed");
+            button.innerHTML = `
+                ⭐ Level ${i}<br>
+                ${stars}<br>
+                ⏱ ${bestTime}s<br>
+                🔄 ${bestMoves} Moves
             `;
-
-
-            button.onclick=function(){
-
-                playLevel(i);
-
-            };
-
-
-        }
-
-
-
-        // UNLOCKED
-
-        else if(unlocked){
-
-
-            button.classList.add(
-                "unlocked"
-            );
-
-
-            button.innerHTML=
-
-            `
-            Level ${i}<br>
-            ▶ Play
+            button.onclick = () => playLevel(i);
+        } else if (unlocked) {
+            button.classList.add("unlocked");
+            button.innerHTML = `
+                Level ${i}<br>
+                ▶ Play
             `;
-
-
-            button.onclick=function(){
-
-                playLevel(i);
-
-            };
-
-
-        }
-
-
-
-        // LOCKED
-
-        else{
-
-
-            button.classList.add(
-                "locked"
-            );
-
-
-            button.innerHTML=
-
-            `
-            🔒<br>
-            Level ${i}
+            button.onclick = () => playLevel(i);
+        } else {
+            button.classList.add("locked");
+            button.innerHTML = `
+                🔒<br>
+                Level ${i}
             `;
-
-
         }
-
 
         container.appendChild(button);
-
-
     }
-
-
 }
 
-
-
 // ==============================
-// Auto Load
+// Progress Management
 // ==============================
 
-window.addEventListener(
-"DOMContentLoaded",
-function(){
-
-
-    if(
-    window.location.pathname.includes("levels")
-    ){
-
-        loadLevels();
-
-    }
-
-
-    const coins =
-    document.getElementById("coins");
-
-
-    if(coins){
-
-        coins.textContent =
-        Number(localStorage.getItem("coins")) || 0;
-
-    }
-
-
-});
-
-
-
-
-// ==============================
-// Reset Progress
-// ==============================
-
-function resetProgress(){
-
-
-    const answer =
-    confirm(
-    "Reset all progress?\n\n"+
-    "This removes:\n"+
-    "• Levels\n"+
-    "• Coins\n"+
-    "• Records\n"+
-    "• Stars"
+function resetProgress() {
+    const answer = confirm(
+        "Reset all progress?\n\n" +
+        "This removes:\n" +
+        "• Levels\n" +
+        "• Coins\n" +
+        "• Records\n" +
+        "• Stars"
     );
 
-
-    if(!answer)return;
-
+    if (!answer) return;
 
     localStorage.clear();
+    localStorage.setItem("level", 1);
+    localStorage.setItem("coins", 0);
 
-
-    localStorage.setItem(
-        "level",
-        1
-    );
-
-
-    localStorage.setItem(
-        "coins",
-        0
-    );
-
-
-    alert(
-        "Progress Reset!"
-    );
-
-
-    window.location.href="index.html";
-
-
+    alert("Progress Reset!");
+    window.location.href = "index.html";
 }
+
 // ======================================
-// SETTINGS SYSTEM
+// Settings System
 // ======================================
 
-
-function openSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-
-    if(!popup) return;
-
-
+function openSettings() {
+    const popup = document.getElementById("settingsPopup");
+    if (!popup) return;
     popup.style.display = "flex";
-
-
     loadSettings();
-
 }
 
-
-
-function closeSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-
-    if(!popup) return;
-
-
+function closeSettings() {
+    const popup = document.getElementById("settingsPopup");
+    if (!popup) return;
     popup.style.display = "none";
-
 }
 
+function loadSettings() {
+    const music = document.getElementById("musicToggle");
+    const sound = document.getElementById("soundToggle");
+    const animation = document.getElementById("animationToggle");
 
-
-
-function loadSettings(){
-
-
-    const music =
-    document.getElementById("musicToggle");
-
-
-    const sound =
-    document.getElementById("soundToggle");
-
-
-    const animation =
-    document.getElementById("animationToggle");
-
-
-
-    if(music){
-
-        music.checked =
-        localStorage.getItem("music") !== "off";
-
-    }
-
-
-    if(sound){
-
-        sound.checked =
-        localStorage.getItem("sound") !== "off";
-
-    }
-
-
-    if(animation){
-
-        animation.checked =
-        localStorage.getItem("animation") !== "off";
-
-    }
-
+    if (music) music.checked = localStorage.getItem("music") !== "off";
+    if (sound) sound.checked = localStorage.getItem("sound") !== "off";
+    if (animation) animation.checked = localStorage.getItem("animation") !== "off";
 }
 
-
-
-
-document.addEventListener(
-"change",
-function(e){
-
-
-    if(e.target.id==="musicToggle"){
-
-
-        localStorage.setItem(
-            "music",
-            e.target.checked ? "on":"off"
-        );
-
-
+document.addEventListener("change", function (e) {
+    if (e.target.id === "musicToggle") {
+        localStorage.setItem("music", e.target.checked ? "on" : "off");
     }
-
-
-
-    if(e.target.id==="soundToggle"){
-
-
-        localStorage.setItem(
-            "sound",
-            e.target.checked ? "on":"off"
-        );
-
-
+    if (e.target.id === "soundToggle") {
+        localStorage.setItem("sound", e.target.checked ? "on" : "off");
     }
-
-
-
-    if(e.target.id==="animationToggle"){
-
-
-        localStorage.setItem(
-            "animation",
-            e.target.checked ? "on":"off"
-        );
-
-
+    if (e.target.id === "animationToggle") {
+        localStorage.setItem("animation", e.target.checked ? "on" : "off");
     }
-
-
 });
 
-
-
 // ======================================
-// ABOUT
+// About Modal
 // ======================================
 
-function showAbout(){
+function showAbout() {
+    if (document.getElementById("aboutBox")) return;
 
-    let aboutBox =
-        document.createElement("div");
-
-
-    aboutBox.id =
-        "aboutBox";
-
-
+    const aboutBox = document.createElement("div");
+    aboutBox.id = "aboutBox";
     aboutBox.innerHTML = `
-
         <div class="about-content">
-
-            <button
-                class="about-close"
-                onclick="closeAbout()"
-            >
-                ×
-            </button>
-
-
-            <video
-                class="about-logo"
-                autoplay
-                muted
-                loop
-                playsinline
-            >
-
-                <source
-                    src="images/logo.webm"
-                    type="video/webm"
-                >
-
+            <button class="about-close" onclick="closeAbout()">×</button>
+            <video class="about-logo" autoplay muted loop playsinline>
+                <source src="images/logo.webm" type="video/webm">
             </video>
-
-
-            <p>
-                Version 2.0
-            </p>
-
-
-            <p>
-                Developer:<br>
-                Kuya Vinz Official
-            </p>
-
-
-            <p>
-                Made with HTML, CSS & JavaScript
-            </p>
-
-
-            <p>
-                © 2026
-            </p>
-
+            <p>Version 2.0</p>
+            <p>Developer:<br>Kuya Vinz Official</p>
+            <p>Made with HTML, CSS & JavaScript</p>
+            <p>© 2026</p>
         </div>
-
     `;
 
+    document.body.appendChild(aboutBox);
 
-    document.body.appendChild(
-        aboutBox
-    );
-
-
-    let logo =
-        aboutBox.querySelector(
-            ".about-logo"
-        );
-
-
-    if(logo){
-
-        logo.play().catch(
-            function(){}
-        );
-
+    const logo = aboutBox.querySelector(".about-logo");
+    if (logo) {
+        logo.play().catch(() => {});
     }
-
 }
 
-
-// ======================================
-// CLOSE ABOUT
-// ======================================
-
-function closeAbout(){
-
-    let aboutBox =
-        document.getElementById(
-            "aboutBox"
-        );
-
-
-    if(aboutBox){
-
+function closeAbout() {
+    const aboutBox = document.getElementById("aboutBox");
+    if (aboutBox) {
         aboutBox.remove();
-
     }
-
 }
 
-
 // ======================================
-// PLAYER ACCOUNT
-// ======================================
-
-window.addEventListener("load", function () {
-
-    const currentUser = localStorage.getItem("currentUser");
-
-    // If no user is logged in
-    if (!currentUser) {
-
-        window.location.href = "login.html";
-        return;
-
-    }
-
-    // Load user list
-    const users =
-        JSON.parse(localStorage.getItem("users")) || [];
-
-    // Find logged in user
-    const user =
-        users.find(function(u){
-
-            return u.username === currentUser;
-
-        });
-
-    // Display player information
-    if(user){
-
-        const welcome =
-            document.getElementById("welcomeText");
-
-        const username =
-            document.getElementById("usernameDisplay");
-
-        if(welcome){
-
-            welcome.textContent =
-                "Welcome, " + user.displayName + "!";
-
-        }
-
-        if(username){
-
-            username.textContent =
-                "@" + user.username;
-
-        }
-
-    }
-
-});
-
-
-// ======================================
-// LOGOUT
+// Authentication & Profile Setup
 // ======================================
 
-function logout(){
-
-    if(confirm("Are you sure you want to logout?")){
-
+function logout() {
+    if (confirm("Are you sure you want to logout?")) {
         localStorage.removeItem("currentUser");
-
         window.location.href = "login.html";
-
     }
-
 }
 
+// DOM Initialization
+window.addEventListener("DOMContentLoaded", function () {
+    // Check level page initialization
+    if (window.location.pathname.includes("levels")) {
+        loadLevels();
+    }
 
+    // Display coin count
+    const coinsDisplay = document.getElementById("coins");
+    if (coinsDisplay) {
+        coinsDisplay.textContent = Number(localStorage.getItem("coins")) || 0;
+    }
 
-// ======================================
-// DISPLAY PLAYER NAME
-// ======================================
-
-window.addEventListener("load", function(){
-
+    // Auth & Profile Verification
+    const isLoginPage = window.location.pathname.includes("login");
     const user = getCurrentUser();
 
-    const usernameDisplay =
-        document.getElementById("usernameDisplay");
-
-    if(user && usernameDisplay){
-
-        usernameDisplay.textContent =
-            user.displayName;
-
+    if (!user && !isLoginPage) {
+        window.location.href = "login.html";
+        return;
     }
 
+    if (user) {
+        const welcome = document.getElementById("welcomeText");
+        const usernameDisplay = document.getElementById("usernameDisplay");
+
+        if (welcome) {
+            welcome.textContent = "Welcome, " + (user.displayName || user.username) + "!";
+        }
+        if (usernameDisplay) {
+            usernameDisplay.textContent = "@" + user.username;
+        }
+    }
 });
