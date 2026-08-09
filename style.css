@@ -1,7 +1,6 @@
-```css
 /* ============================================================
-   PIXVINZ PREMIUM GAME UI
-   RESTORED WORKING VERSION
+   PUZZLEMANIA / PIXVINZ PREMIUM GAME UI
+   CLEAN FINAL CSS
    ============================================================ */
 
 
@@ -16,10 +15,12 @@
     font-family:'Arial',sans-serif;
 }
 
+
 html{
     width:100%;
     min-height:100%;
 }
+
 
 body{
 
@@ -45,10 +46,8 @@ body{
     background-size:400% 400%;
 
     animation:
-        backgroundMove
-        15s
-        ease
-        infinite;
+        backgroundMove 15s ease infinite;
+
 }
 
 
@@ -83,6 +82,7 @@ body{
     box-shadow:
         0 20px 50px
         rgba(0,0,0,.35);
+
 }
 
 
@@ -99,18 +99,23 @@ h1{
     text-shadow:
         0 5px 15px
         rgba(0,0,0,.4);
+
 }
+
 
 h2{
 
     font-size:30px;
 
     margin-bottom:20px;
+
 }
+
 
 p{
 
     font-size:20px;
+
 }
 
 
@@ -171,7 +176,9 @@ button{
     position:relative;
 
     overflow:hidden;
+
 }
+
 
 button:hover{
 
@@ -186,12 +193,16 @@ button:hover{
 
         0 0 30px
         rgba(139,92,246,.55);
+
 }
+
 
 button:active{
 
     transform:scale(.96);
+
 }
+
 
 button::before{
 
@@ -214,11 +225,14 @@ button::before{
         rotate(25deg);
 
     transition:.7s;
+
 }
+
 
 button:hover::before{
 
     left:120%;
+
 }
 
 
@@ -238,6 +252,7 @@ button:hover::before{
         rgba(255,255,255,.15);
 
     font-size:22px;
+
 }
 
 
@@ -257,6 +272,7 @@ button:hover::before{
     gap:22px;
 
     margin-top:20px;
+
 }
 
 
@@ -317,11 +333,12 @@ button:hover::before{
         200% 200%;
 
     animation:
-        floatCard
-        4s
-        ease-in-out
-        infinite;
+        floatCard 4s ease-in-out infinite;
+
 }
+
+
+/* Level Card Shine */
 
 .level-card::before{
 
@@ -344,7 +361,9 @@ button:hover::before{
         rotate(30deg);
 
     transition:.7s;
+
 }
+
 
 .level-card:hover{
 
@@ -353,13 +372,16 @@ button:hover::before{
         rotateX(10deg)
         translateY(-8px)
         scale(1.06);
+
 }
+
 
 .level-card:active{
 
     transform:
         perspective(700px)
         scale(.94);
+
 }
 
 
@@ -388,7 +410,9 @@ button:hover::before{
 
         inset 0 -4px 8px
         rgba(0,0,0,.25);
+
 }
+
 
 .unlocked:hover{
 
@@ -402,6 +426,7 @@ button:hover::before{
 
         0 0 60px
         rgba(124,58,237,.55);
+
 }
 
 
@@ -443,6 +468,7 @@ button:hover::before{
         floatCard 4s ease-in-out infinite,
         goldGlow 1s ease-in-out infinite,
         shineMove 2s linear infinite;
+
 }
 
 
@@ -472,6 +498,7 @@ button:hover::before{
     cursor:not-allowed;
 
     opacity:.8;
+
 }
 
 
@@ -484,6 +511,7 @@ button:hover::before{
     font-size:12px;
 
     line-height:1.8;
+
 }
 
 
@@ -517,6 +545,7 @@ button:hover::before{
     box-shadow:
         0 15px 35px
         rgba(0,0,0,.4);
+
 }
 
 
@@ -535,13 +564,17 @@ button:hover::before{
     transition:.2s;
 
     overflow:hidden;
+
 }
+
 
 .piece:hover{
 
     filter:
         brightness(1.15);
+
 }
+
 
 .selected{
 
@@ -555,6 +588,7 @@ button:hover::before{
     box-shadow:
         0 0 20px
         yellow;
+
 }
 
 
@@ -567,6 +601,7 @@ button:hover::before{
     font-size:30px;
 
     color:gold;
+
 }
 
 
@@ -577,11 +612,14 @@ button:hover::before{
 .hidden{
 
     display:none!important;
+
 }
 
 
 /* ============================================================
+   ============================================================
    LOGO SYSTEM
+   ============================================================
    ============================================================ */
 
 
@@ -627,11 +665,14 @@ button:hover::before{
     transition:
         opacity .8s ease,
         visibility .8s ease;
+
 }
 
 
 /* ============================================================
    OPENING LOGO
+   IMPORTANT:
+   SMALL ENOUGH TO FIT MOBILE
    ============================================================ */
 
 #puzzleSplash .app-logo{
@@ -671,7 +712,11 @@ button:hover::before{
         3s
         ease-in-out
         forwards;
+
 }
+
+
+/* Compatibility if splash uses .splash-logo */
 
 #puzzleSplash .splash-logo{
 
@@ -702,6 +747,7 @@ button:hover::before{
             0 10px 20px
             rgba(0,0,0,.40)
         );
+
 }
 
 
@@ -716,6 +762,7 @@ button:hover::before{
     visibility:hidden;
 
     pointer-events:none;
+
 }
 
 
@@ -732,6 +779,7 @@ button:hover::before{
         transform:
             scale(.78)
             translateY(15px);
+
     }
 
     20%{
@@ -741,6 +789,7 @@ button:hover::before{
         transform:
             scale(1.02)
             translateY(0);
+
     }
 
     40%{
@@ -750,6 +799,7 @@ button:hover::before{
         transform:
             scale(1)
             translateY(0);
+
     }
 
     70%{
@@ -759,6 +809,7 @@ button:hover::before{
         transform:
             scale(1.015)
             translateY(-3px);
+
     }
 
     100%{
@@ -768,7 +819,9 @@ button:hover::before{
         transform:
             scale(1)
             translateY(0);
+
     }
+
 }
 
 
@@ -814,7 +867,11 @@ button:hover::before{
         4s
         ease-in-out
         infinite;
+
 }
+
+
+/* Compatibility for .menu-logo */
 
 .menu-logo{
 
@@ -832,6 +889,7 @@ button:hover::before{
 
     margin:
         0 auto 10px auto;
+
 }
 
 
@@ -877,11 +935,12 @@ button:hover::before{
         4s
         ease-in-out
         infinite;
+
 }
 
 
 /* ============================================================
-   GAME / LEVEL LOGO
+   GAME / LEVEL 1 LOGO
    ============================================================ */
 
 .game .app-logo{
@@ -892,20 +951,20 @@ button:hover::before{
 
     opacity:1 !important;
 
-    width:170px;
+    width:165px;
 
     height:auto;
 
-    max-width:65%;
+    max-width:58%;
 
-    max-height:110px;
+    max-height:100px;
 
     object-fit:contain;
 
     object-position:center;
 
     margin:
-        0 auto 6px auto;
+        0 auto 2px auto;
 
     padding:0;
 
@@ -927,9 +986,6 @@ button:hover::before{
         ease-in-out
         infinite;
 
-    position:relative;
-
-    z-index:5;
 }
 
 
@@ -945,6 +1001,7 @@ button:hover::before{
         3px 0 8px 0;
 
     line-height:1.2;
+
 }
 
 
@@ -959,6 +1016,7 @@ button:hover::before{
     line-height:1.45;
 
     margin-bottom:8px;
+
 }
 
 
@@ -973,6 +1031,7 @@ button:hover::before{
         transform:
             translateY(0)
             scale(1);
+
     }
 
     50%{
@@ -980,8 +1039,11 @@ button:hover::before{
         transform:
             translateY(-5px)
             scale(1.02);
+
     }
+
 }
+
 
 @keyframes gameLogoFloat{
 
@@ -990,6 +1052,7 @@ button:hover::before{
         transform:
             translateY(0)
             scale(1);
+
     }
 
     50%{
@@ -997,7 +1060,9 @@ button:hover::before{
         transform:
             translateY(-4px)
             scale(1.015);
+
     }
+
 }
 
 
@@ -1021,7 +1086,9 @@ button:hover::before{
     align-items:center;
 
     z-index:9999;
+
 }
+
 
 .popup-box{
 
@@ -1040,7 +1107,9 @@ button:hover::before{
     box-shadow:
         0 20px 50px
         black;
+
 }
+
 
 .setting-row{
 
@@ -1053,13 +1122,16 @@ button:hover::before{
     margin:20px 0;
 
     font-size:20px;
+
 }
+
 
 .setting-row input{
 
     width:25px;
 
     height:25px;
+
 }
 
 
@@ -1099,7 +1171,9 @@ input{
         rgba(0,0,0,.25);
 
     transition:.3s;
+
 }
+
 
 input:focus{
 
@@ -1109,11 +1183,14 @@ input:focus{
     box-shadow:
         0 0 18px
         #8b5cf6;
+
 }
+
 
 input::placeholder{
 
     color:#666;
+
 }
 
 
@@ -1136,18 +1213,21 @@ input::placeholder{
 
     backdrop-filter:
         blur(10px);
+
 }
+
 
 #playerProfile h3{
 
     margin-bottom:8px;
 
     font-size:22px;
+
 }
 
 
 /* ============================================================
-   WELCOME TEXT
+   PIXVINZ WELCOME TEXT - PREMIUM GLOW
    ============================================================ */
 
 #welcomeText{
@@ -1167,11 +1247,12 @@ input::placeholder{
         0 0 8px rgba(255,255,255,.55),
         0 0 16px rgba(216,180,254,.60),
         0 0 28px rgba(139,92,246,.45);
+
 }
 
 
 /* ============================================================
-   USERNAME
+   PIXVINZ USERNAME - PREMIUM GLOW
    ============================================================ */
 
 #usernameDisplay{
@@ -1193,7 +1274,9 @@ input::placeholder{
         0 0 6px rgba(255,255,255,.60),
         0 0 14px rgba(216,180,254,.70),
         0 0 26px rgba(139,92,246,.55);
+
 }
+
 
 
 /* ============================================================
@@ -1208,11 +1291,14 @@ input::placeholder{
     width:220px;
 
     opacity:.85;
+
 }
 
 
 /* ============================================================
+   ============================================================
    VICTORY SCREEN
+   ============================================================
    ============================================================ */
 
 #victoryScreen{
@@ -1246,6 +1332,7 @@ input::placeholder{
     z-index:99999;
 
     overflow-y:auto;
+
 }
 
 
@@ -1304,11 +1391,12 @@ input::placeholder{
         victoryAppear
         .55s
         cubic-bezier(.2,.8,.2,1);
+
 }
 
 
 /* ============================================================
-   VICTORY CONFETTI
+   VICTORY CONFETTI LAYER
    ============================================================ */
 
 .victory-box::before{
@@ -1372,6 +1460,7 @@ input::placeholder{
         5s
         linear
         infinite;
+
 }
 
 
@@ -1440,11 +1529,12 @@ input::placeholder{
         7s
         linear
         infinite;
+
 }
 
 
 /* ============================================================
-   KEEP CONTENT ABOVE CONFETTI
+   KEEP VICTORY CONTENT ABOVE CONFETTI
    ============================================================ */
 
 .victory-box > *{
@@ -1452,6 +1542,7 @@ input::placeholder{
     position:relative;
 
     z-index:2;
+
 }
 
 
@@ -1488,12 +1579,12 @@ input::placeholder{
 
         0 6px 15px
         rgba(0,0,0,.20);
+
 }
 
 
 /* ============================================================
    COMPLETED PUZZLE IMAGE
-   ORIGINAL WORKING SIZE
    ============================================================ */
 
 #completedImage{
@@ -1541,6 +1632,7 @@ input::placeholder{
         2s
         ease-in-out
         infinite;
+
 }
 
 
@@ -1573,6 +1665,7 @@ input::placeholder{
         starsPop
         .7s
         ease-out;
+
 }
 
 
@@ -1596,7 +1689,9 @@ input::placeholder{
     font-size:20px;
 
     line-height:1.5;
+
 }
+
 
 .victory-box .stats p{
 
@@ -1607,6 +1702,7 @@ input::placeholder{
         5px 10px;
 
     border-radius:15px;
+
 }
 
 
@@ -1664,7 +1760,9 @@ input::placeholder{
     transition:
         transform .2s ease,
         box-shadow .2s ease;
+
 }
+
 
 #victoryScreen button:hover{
 
@@ -1679,12 +1777,15 @@ input::placeholder{
 
         0 0 25px
         rgba(124,58,237,.55);
+
 }
+
 
 #victoryScreen button:active{
 
     transform:
         scale(.96);
+
 }
 
 
@@ -1710,7 +1811,9 @@ input::placeholder{
         rgba(100,70,130,.30);
 
     color:#222;
+
 }
+
 
 #bestRecord h3{
 
@@ -1720,7 +1823,9 @@ input::placeholder{
     font-size:24px;
 
     font-weight:900;
+
 }
+
 
 #bestRecord p{
 
@@ -1730,7 +1835,9 @@ input::placeholder{
     font-size:20px;
 
     line-height:1.3;
+
 }
+
 
 #bestRecord p:first-of-type{
 
@@ -1743,6 +1850,7 @@ input::placeholder{
     text-shadow:
         0 3px 7px
         rgba(255,193,7,.35);
+
 }
 
 
@@ -1759,6 +1867,7 @@ input::placeholder{
         transform:
             scale(.82)
             translateY(30px);
+
     }
 
     70%{
@@ -1766,6 +1875,7 @@ input::placeholder{
         transform:
             scale(1.02)
             translateY(-3px);
+
     }
 
     100%{
@@ -1775,8 +1885,11 @@ input::placeholder{
         transform:
             scale(1)
             translateY(0);
+
     }
+
 }
+
 
 @keyframes imageGlow{
 
@@ -1792,6 +1905,7 @@ input::placeholder{
 
             0 10px 25px
             rgba(0,0,0,.3);
+
     }
 
     50%{
@@ -1806,8 +1920,11 @@ input::placeholder{
 
             0 12px 30px
             rgba(0,0,0,.35);
+
     }
+
 }
+
 
 @keyframes starsPop{
 
@@ -1817,12 +1934,14 @@ input::placeholder{
 
         transform:
             scale(.5);
+
     }
 
     70%{
 
         transform:
             scale(1.12);
+
     }
 
     100%{
@@ -1831,8 +1950,11 @@ input::placeholder{
 
         transform:
             scale(1);
+
     }
+
 }
+
 
 @keyframes confettiFall{
 
@@ -1848,6 +1970,7 @@ input::placeholder{
 
         transform:
             rotate(0deg);
+
     }
 
     50%{
@@ -1862,6 +1985,7 @@ input::placeholder{
 
         transform:
             rotate(2deg);
+
     }
 
     100%{
@@ -1876,8 +2000,11 @@ input::placeholder{
 
         transform:
             rotate(0deg);
+
     }
+
 }
+
 
 @keyframes confettiFallReverse{
 
@@ -1890,6 +2017,7 @@ input::placeholder{
             40px -180px,
             -20px -140px,
             60px -120px;
+
     }
 
     50%{
@@ -1901,6 +2029,7 @@ input::placeholder{
             -30px 180px,
             30px 220px,
             10px 170px;
+
     }
 
     100%{
@@ -1912,7 +2041,9 @@ input::placeholder{
             40px 500px,
             -20px 540px,
             60px 510px;
+
     }
+
 }
 
 
@@ -1926,20 +2057,25 @@ input::placeholder{
 
         background-position:
             0% 50%;
+
     }
 
     50%{
 
         background-position:
             100% 50%;
+
     }
 
     100%{
 
         background-position:
             0% 50%;
+
     }
+
 }
+
 
 @keyframes shine{
 
@@ -1947,8 +2083,11 @@ input::placeholder{
 
         transform:
             scale(1.05);
+
     }
+
 }
+
 
 @keyframes floatCard{
 
@@ -1956,14 +2095,18 @@ input::placeholder{
 
         transform:
             translateY(0);
+
     }
 
     50%{
 
         transform:
             translateY(-5px);
+
     }
+
 }
+
 
 @keyframes goldGlow{
 
@@ -1976,6 +2119,7 @@ input::placeholder{
 
             0 0 40px
             rgba(255,193,7,.60);
+
     }
 
     50%{
@@ -1990,8 +2134,11 @@ input::placeholder{
 
             0 0 80px
             rgba(255,152,0,.70);
+
     }
+
 }
+
 
 @keyframes shineMove{
 
@@ -1999,13 +2146,16 @@ input::placeholder{
 
         background-position:
             0% 50%;
+
     }
 
     100%{
 
         background-position:
             100% 50%;
+
     }
+
 }
 
 
@@ -2014,6 +2164,10 @@ input::placeholder{
    ============================================================ */
 
 @media(max-width:500px){
+
+    /* -----------------------------
+       MAIN CONTAINERS
+       ----------------------------- */
 
     .menu,
     .levels,
@@ -2027,8 +2181,13 @@ input::placeholder{
             20px auto;
 
         border-radius:25px;
+
     }
 
+
+    /* -----------------------------
+       PUZZLE BOARD
+       ----------------------------- */
 
     #puzzleBoard{
 
@@ -2042,12 +2201,18 @@ input::placeholder{
 
         margin:
             25px auto;
+
     }
 
+
+    /* -----------------------------
+       SPLASH LOGO
+       ----------------------------- */
 
     #puzzleSplash{
 
         padding:10px;
+
     }
 
 
@@ -2059,8 +2224,13 @@ input::placeholder{
         max-width:70vw;
 
         max-height:42vh;
+
     }
 
+
+    /* -----------------------------
+       MAIN MENU LOGO
+       ----------------------------- */
 
     .menu .app-logo{
 
@@ -2072,8 +2242,13 @@ input::placeholder{
 
         margin:
             0 auto 8px auto;
+
     }
 
+
+    /* -----------------------------
+       LEVEL PAGE LOGO
+       ----------------------------- */
 
     .levels .app-logo{
 
@@ -2085,27 +2260,31 @@ input::placeholder{
 
         margin:
             0 auto 8px auto;
+
     }
 
+
+    /* -----------------------------
+       GAME LOGO
+       ----------------------------- */
 
     .game .app-logo{
 
-        display:block !important;
+        width:165px;
 
-        width:155px !important;
+        max-width:55%;
 
-        max-width:58vw !important;
-
-        max-height:100px !important;
-
-        height:auto !important;
-
-        object-fit:contain !important;
+        max-height:100px;
 
         margin:
-            0 auto 4px auto !important;
+            0 auto 2px auto;
+
     }
 
+
+    /* -----------------------------
+       GAME TITLE
+       ----------------------------- */
 
     .game #levelTitle{
 
@@ -2113,8 +2292,13 @@ input::placeholder{
 
         margin:
             2px 0 6px 0;
+
     }
 
+
+    /* -----------------------------
+       GAME STATS
+       ----------------------------- */
 
     .game .stats{
 
@@ -2123,11 +2307,12 @@ input::placeholder{
         line-height:1.35;
 
         margin-bottom:5px;
+
     }
 
 
     /* -----------------------------
-       VICTORY
+       VICTORY SCREEN
        ----------------------------- */
 
     #victoryScreen{
@@ -2135,6 +2320,7 @@ input::placeholder{
         padding:14px;
 
         align-items:center;
+
     }
 
 
@@ -2155,6 +2341,7 @@ input::placeholder{
         border-radius:32px;
 
         border-width:4px;
+
     }
 
 
@@ -2169,6 +2356,7 @@ input::placeholder{
 
         margin:
             10px 0 14px 0;
+
     }
 
 
@@ -2188,6 +2376,7 @@ input::placeholder{
 
         margin:
             8px auto 14px auto;
+
     }
 
 
@@ -2199,6 +2388,7 @@ input::placeholder{
 
         margin:
             8px 0 14px 0;
+
     }
 
 
@@ -2208,6 +2398,7 @@ input::placeholder{
 
         margin:
             6px auto 12px auto;
+
     }
 
 
@@ -2215,6 +2406,7 @@ input::placeholder{
 
         margin:
             4px auto;
+
     }
 
 
@@ -2231,6 +2423,7 @@ input::placeholder{
         font-size:18px;
 
         border-radius:21px;
+
     }
 
 
@@ -2240,6 +2433,7 @@ input::placeholder{
             14px !important;
 
         padding-top:10px;
+
     }
 
 
@@ -2248,6 +2442,7 @@ input::placeholder{
         font-size:21px;
 
         margin-bottom:5px;
+
     }
 
 
@@ -2256,13 +2451,16 @@ input::placeholder{
         font-size:18px;
 
         margin:2px 0;
+
     }
 
 
     #bestRecord p:first-of-type{
 
         font-size:30px;
+
     }
+
 }
 
 
@@ -2272,9 +2470,14 @@ input::placeholder{
 
 @media(max-width:360px){
 
+    /* -----------------------------
+       SPLASH
+       ----------------------------- */
+
     #puzzleSplash{
 
         padding:8px;
+
     }
 
 
@@ -2286,8 +2489,13 @@ input::placeholder{
         max-width:68vw;
 
         max-height:38vh;
+
     }
 
+
+    /* -----------------------------
+       MAIN MENU
+       ----------------------------- */
 
     .menu .app-logo{
 
@@ -2296,8 +2504,13 @@ input::placeholder{
         max-width:62%;
 
         max-height:110px;
+
     }
 
+
+    /* -----------------------------
+       LEVELS
+       ----------------------------- */
 
     .levels .app-logo{
 
@@ -2306,34 +2519,47 @@ input::placeholder{
         max-width:58%;
 
         max-height:95px;
+
     }
 
 
+    /* -----------------------------
+       GAME
+       ----------------------------- */
+
     .game .app-logo{
 
-        width:140px !important;
+        width:150px;
 
-        max-width:55vw !important;
+        max-width:54%;
 
-        max-height:90px !important;
+        max-height:90px;
+
     }
 
 
     .game #levelTitle{
 
         font-size:24px;
+
     }
 
 
     .game .stats{
 
         font-size:13px;
+
     }
 
+
+    /* -----------------------------
+       VICTORY
+       ----------------------------- */
 
     #victoryScreen{
 
         padding:10px;
+
     }
 
 
@@ -2348,6 +2574,7 @@ input::placeholder{
             13px;
 
         border-radius:28px;
+
     }
 
 
@@ -2356,6 +2583,7 @@ input::placeholder{
         font-size:27px;
 
         margin-bottom:10px;
+
     }
 
 
@@ -2368,6 +2596,7 @@ input::placeholder{
         max-width:35vw;
 
         max-height:35vw;
+
     }
 
 
@@ -2376,12 +2605,14 @@ input::placeholder{
         font-size:31px;
 
         margin-bottom:10px;
+
     }
 
 
     .victory-box .stats{
 
         font-size:16px;
+
     }
 
 
@@ -2394,25 +2625,30 @@ input::placeholder{
         font-size:17px;
 
         margin:5px auto;
+
     }
 
 
     #bestRecord h3{
 
         font-size:19px;
+
     }
 
 
     #bestRecord p{
 
         font-size:16px;
+
     }
 
 
     #bestRecord p:first-of-type{
 
         font-size:27px;
+
     }
+
 }
 
 
@@ -2430,6 +2666,7 @@ input::placeholder{
         max-width:68vw;
 
         max-height:36vh;
+
     }
 
 
@@ -2440,6 +2677,7 @@ input::placeholder{
         max-height:90px;
 
         margin-bottom:2px;
+
     }
 
 
@@ -2448,6 +2686,7 @@ input::placeholder{
         font-size:24px;
 
         margin-bottom:4px;
+
     }
 
 
@@ -2456,7 +2695,9 @@ input::placeholder{
         line-height:1.25;
 
         margin-bottom:3px;
+
     }
+
 }
 
 
@@ -2467,12 +2708,16 @@ input::placeholder{
 .victory-box::-webkit-scrollbar{
 
     width:5px;
+
 }
+
 
 .victory-box::-webkit-scrollbar-track{
 
     background:transparent;
+
 }
+
 
 .victory-box::-webkit-scrollbar-thumb{
 
@@ -2480,12 +2725,98 @@ input::placeholder{
         rgba(124,58,237,.45);
 
     border-radius:10px;
+
+}
+
+/* ============================================================
+   PIXVINZ LOGO - PUZZLE / GAME SCREEN
+   Keeps logo visible above Level title
+   ============================================================ */
+
+.game .app-logo{
+
+    display:block !important;
+
+    width:170px !important;
+
+    max-width:65% !important;
+
+    height:auto !important;
+
+    max-height:110px !important;
+
+    object-fit:contain !important;
+
+    margin:0 auto 6px auto !important;
+
+    border:none !important;
+
+    outline:none !important;
+
+    background:transparent !important;
+
+    filter:
+        drop-shadow(
+            0 8px 15px
+            rgba(0,0,0,.35)
+        );
+
+    position:relative;
+
+    z-index:5;
+
 }
 
 
 /* ============================================================
-   ABOUT POPUP
+   MOBILE PUZZLE SCREEN LOGO
    ============================================================ */
+
+@media(max-width:500px){
+
+    .game .app-logo{
+
+        display:block !important;
+
+        width:155px !important;
+
+        max-width:58vw !important;
+
+        max-height:100px !important;
+
+        height:auto !important;
+
+        object-fit:contain !important;
+
+        margin:
+            0 auto 4px auto !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONES
+   ============================================================ */
+
+@media(max-width:360px){
+
+    .game .app-logo{
+
+        width:140px !important;
+
+        max-width:55vw !important;
+
+        max-height:90px !important;
+
+    }
+
+}
+
+/* ======================================
+   ABOUT POPUP
+   ====================================== */
 
 #aboutBox{
 
@@ -2499,13 +2830,14 @@ input::placeholder{
 
     align-items:center;
 
-    background:
-        rgba(0,0,0,0.65);
+    background:rgba(0,0,0,0.65);
 
     z-index:9999;
 
     padding:20px;
+
 }
+
 
 .about-content{
 
@@ -2521,20 +2853,20 @@ input::placeholder{
 
     border-radius:20px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #6d28d9,
-            #9333ea
-        );
+    background:linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea
+    );
 
     box-shadow:
-        0 10px 35px
-        rgba(0,0,0,0.45);
+        0 10px 35px rgba(0,0,0,0.45);
 
     color:white;
+
 }
+
 
 .about-logo{
 
@@ -2546,16 +2878,19 @@ input::placeholder{
 
     height:auto;
 
-    margin:
-        0 auto 15px;
+    margin:0 auto 15px;
+
 }
+
 
 .about-content p{
 
     margin:10px 0;
 
     line-height:1.5;
+
 }
+
 
 .about-close{
 
@@ -2575,8 +2910,7 @@ input::placeholder{
 
     border-radius:50%;
 
-    background:
-        rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
 
     color:white;
 
@@ -2595,10 +2929,10 @@ input::placeholder{
     cursor:pointer;
 
     z-index:10;
+
 }
 
 
 /* ============================================================
-   END OF PIXVINZ CSS
+   END OF PUZZLEMANIA CSS
    ============================================================ */
-```
