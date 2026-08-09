@@ -620,7 +620,36 @@ function checkWin(){
         }
 
     }
+// ======================================
+// VICTORY SOUNDS
+// ======================================
 
+if(typeof playVictorySound === "function"){
+
+    playVictorySound();
+
+}
+
+
+if(typeof playVictory === "function"){
+
+    playVictory(level);
+
+}
+
+
+// ======================================
+// SHOW VICTORY SCREEN
+// ======================================
+
+if(typeof showVictory === "function"){
+
+    showVictory(
+        starText,
+        reward
+    );
+
+}
 
     // ======================================
     // UNLOCK NEXT LEVEL
@@ -644,67 +673,6 @@ function checkWin(){
 
     }
 
-
-// ======================================
-// VICTORY SOUNDS
-// ======================================
-
-if(typeof playVictorySound === "function"){
-
-    playVictorySound();
-
-}
-
-
-if(typeof playVictory === "function"){
-
-    playVictory(level);
-
-}
-
-
-// ======================================
-// SHOW VICTORY SCREEN
-// ======================================
-
-console.log("PuzzleMania: checkWin reached victory section.");
-
-console.log(
-    "showVictory type:",
-    typeof showVictory
-);
-
-console.log(
-    "victoryScreen:",
-    document.getElementById("victoryScreen")
-);
-
-
-if(typeof showVictory === "function"){
-
-    console.log(
-        "PuzzleMania: calling showVictory..."
-    );
-
-
-    showVictory(
-        starText,
-        reward
-    );
-
-
-    console.log(
-        "PuzzleMania: showVictory finished."
-    );
-
-}
-else{
-
-    console.error(
-        "PuzzleMania ERROR: showVictory is not available."
-    );
-
-}
 
 
 // ======================================
