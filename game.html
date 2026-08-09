@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>PuzzleMania</title>
+    <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PuzzleMania</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -15,8 +17,10 @@
 
 <div class="game">
 
-    <h1>🧩 PuzzleMania</h1>
-
+    <img
+    <video class="app-logo game-logo" autoplay muted loop playsinline>
+    <source src="images/logo.webm" type="video/webm">
+</video>
     <h2 id="levelTitle"></h2>
 
     <div class="stats">
@@ -24,12 +28,12 @@
         ⏱ Time:
         <span id="timer">0</span>s
 
-        <br>
+        <br><br>
 
         🔄 Moves:
         <span id="moves">0</span>
 
-        <br>
+        <br><br>
 
         ⭐ Score:
         <span id="stars">⭐⭐⭐</span>
@@ -47,39 +51,76 @@
     </button>
 
 </div>
+
+<!-- ==============================
+     Victory Screen
+================================ -->
+
 <div id="victoryScreen" class="hidden">
 
     <div class="victory-box">
 
         <h1>🎉 LEVEL COMPLETE!</h1>
 
+        <img
+            id="completedImage"
+            src=""
+            alt="Solved Puzzle">
+
         <div id="starsDisplay">⭐⭐⭐</div>
 
         <div class="stats">
 
-            <p>⏱ Time: <span id="finalTime">00:00</span></p>
+            <p>
+                ⏱ Time:
+                <span id="finalTime">00:00</span>
+            </p>
 
-            <p>🔄 Moves: <span id="finalMoves">0</span></p>
+            <p>
+                🔄 Moves:
+                <span id="finalMoves">0</span>
+            </p>
 
-            <p>🪙 Reward: +<span id="rewardCoins">40</span> Coins</p>
+            <p>
+                🪙 Reward:
+                +<span id="rewardCoins">40</span> Coins
+            </p>
 
         </div>
 
-        <button id="nextBtn">➡ Next Level</button>
+        <button id="nextBtn">
+            ➡ Next Level
+        </button>
 
-        <button id="retryBtn">🔄 Play Again</button>
+        <button id="retryBtn">
+            🔄 Play Again
+        </button>
 
-        <button id="homeBtn">🏠 Home</button>
+        <button id="homeBtn">
+            🏠 Home
+        </button>
 
     </div>
 
 </div>
-<!-- Audio Manager MUST load first -->
-<script src="audio.js"></script>
+    
 
-<!-- Puzzle Logic -->
-<script src="puzzle.js"></script>
+<script src="audio.js"></script>
+<script src="auth.js"></script>
+<script src="save.js"></script>
+
+<script src="js/helpers.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/timer.js"></script>
+
+<script src="js/board.js"></script>
+<script src="js/game.js"></script>
+
+<script src="js/records.js"></script>
+<script src="js/victory.js"></script>
+
+<script src="js/puzzle.js"></script>
+<script src="js/main.js"></script>
 
 </body>
-
 </html>
