@@ -1,451 +1,908 @@
-<!DOCTYPE html>
-<html lang="en">
+// ======================================
+// PixVZinz
+// AUTHENTICATION SYSTEM
+// ======================================
+//
+// Handles:
+// - Sign Up
+// - Log In
+// - Log Out
+// - Login / Signup screen switching
+// - Current player session
+// - Welcome username
+//
+// Storage:
+// - pixvz_user
+// - pixvz_password
+// - pixvz_loggedIn
+//
+// ======================================
 
-<head>
 
-    <meta charset="UTF-8">
+// ======================================
+// AUTH ELEMENTS
+// ======================================
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+const loginScreen =
+    document.getElementById("loginScreen");
 
-    <title>PixVZinz</title>
+const signupScreen =
+    document.getElementById("signupScreen");
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+const loginUsername =
+    document.getElementById("loginUsername");
 
-</head>
+const loginPassword =
+    document.getElementById("loginPassword");
 
-<body>
+const signupUsername =
+    document.getElementById("signupUsername");
 
+const signupPassword =
+    document.getElementById("signupPassword");
 
-<!-- =========================================================
-     OPENING SPLASH
-     ========================================================= -->
+const signupConfirmPassword =
+    document.getElementById(
+        "signupConfirmPassword"
+    );
 
-<div id="puzzleSplash">
+const loginBtn =
+    document.getElementById("loginBtn");
 
-    <video
-        class="app-logo"
-        autoplay
-        muted
-        playsinline
-        loop
-    >
-        <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
-    </video>
+const signupBtn =
+    document.getElementById("signupBtn");
 
-</div>
+const showSignupBtn =
+    document.getElementById(
+        "showSignupBtn"
+    );
 
+const showLoginBtn =
+    document.getElementById(
+        "showLoginBtn"
+    );
 
-<!-- =========================================================
-     LOGIN / SIGNUP AREA
-     ========================================================= -->
+const logoutBtn =
+    document.getElementById("logoutBtn");
 
-<div class="menu" id="authContainer">
+const authMessage =
+    document.getElementById("authMessage");
 
+const authContainer =
+    document.getElementById(
+        "authContainer"
+    );
 
-    <!-- ==========================
-         LOGO
-         ========================== -->
+const mainMenu =
+    document.getElementById("mainMenu");
 
-    <video
-        class="app-logo"
-        autoplay
-        muted
-        playsinline
-        loop
-    >
-        <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
-    </video>
+const welcomeText =
+    document.getElementById(
+        "welcomeText"
+    );
 
+const usernameDisplay =
+    document.getElementById(
+        "usernameDisplay"
+    );
 
-    <!-- ==========================
-         LOGIN
-         ========================== -->
 
-    <div id="loginScreen">
+// ======================================
+// STORAGE KEYS
+// ======================================
 
-        <h2>Welcome Back!</h2>
+const AUTH_USERNAME_KEY =
+    "pixvz_user";
 
-        <p>
-            Log in to continue playing.
-        </p>
+const AUTH_PASSWORD_KEY =
+    "pixvz_password";
 
+const AUTH_LOGGED_IN_KEY =
+    "pixvz_loggedIn";
 
-        <input
-            type="text"
-            id="loginUsername"
-            placeholder="Username"
-            autocomplete="username"
-        >
 
+// ======================================
+// SHOW MESSAGE
+// ======================================
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password"
-            autocomplete="current-password"
-        >
+function showAuthMessage(
+    message,
+    isError = true
+){
 
+    if(!authMessage){
 
-        <button
-            type="button"
-            id="loginBtn"
-        >
-            Log In
-        </button>
+        return;
 
+    }
 
-        <button
-            type="button"
-            id="showSignupBtn"
-        >
-            Create Account
-        </button>
 
-    </div>
+    authMessage.textContent =
+        message;
 
 
-    <!-- ==========================
-         SIGN UP
-         ========================== -->
+    authMessage.style.display =
+        "block";
 
-    <div
-        id="signupScreen"
-        style="display:none;"
-    >
 
-        <h2>Create Account</h2>
+    if(isError){
 
-        <p>
-            Start your PixVZinz journey.
-        </p>
+        authMessage.classList.add(
+            "error"
+        );
 
+    }
+    else{
 
-        <input
-            type="text"
-            id="signupUsername"
-            placeholder="Choose a username"
-            autocomplete="username"
-        >
+        authMessage.classList.remove(
+            "error"
+        );
 
+    }
 
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="Create a password"
-            autocomplete="new-password"
-        >
+}
 
 
-        <input
-            type="password"
-            id="signupConfirmPassword"
-            placeholder="Confirm password"
-            autocomplete="new-password"
-        >
+// ======================================
+// CLEAR MESSAGE
+// ======================================
 
+function clearAuthMessage(){
 
-        <button
-            type="button"
-            id="signupBtn"
-        >
-            Sign Up
-        </button>
+    if(!authMessage){
 
+        return;
 
-        <button
-            type="button"
-            id="showLoginBtn"
-        >
-            Back to Log In
-        </button>
+    }
 
-    </div>
 
+    authMessage.textContent = "";
 
-    <!-- ==========================
-         AUTH MESSAGE
-         ========================== -->
+    authMessage.classList.remove(
+        "error"
+    );
 
-    <p
-        id="authMessage"
-        aria-live="polite"
-    ></p>
+}
 
 
-</div>
+// ======================================
+// SHOW LOGIN
+// ======================================
 
+function showLogin(){
 
-<!-- =========================================================
-     MAIN MENU
-     ========================================================= -->
+    if(loginScreen){
 
-<div
-    class="menu"
-    id="mainMenu"
-    style="display:none;"
->
+        loginScreen.style.display =
+            "block";
 
+    }
 
-    <!-- ==========================
-         LOGO
-         ========================== -->
 
-    <video
-        class="app-logo"
-        autoplay
-        muted
-        playsinline
-        loop
-    >
-        <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
-    </video>
+    if(signupScreen){
 
+        signupScreen.style.display =
+            "none";
 
-    <!-- ==========================
-         PLAYER PROFILE
-         ========================== -->
+    }
 
-    <div id="playerProfile">
 
-        <h3 id="welcomeText">
-            Welcome!
-        </h3>
+    clearAuthMessage();
 
-        <p id="usernameDisplay"></p>
+}
 
-    </div>
 
+// ======================================
+// SHOW SIGNUP
+// ======================================
 
-    <!-- ==========================
-         TAGLINE
-         ========================== -->
+function showSignup(){
 
-    <p>
-        Piece Together The Fun!
-    </p>
+    if(loginScreen){
 
+        loginScreen.style.display =
+            "none";
 
-    <!-- ==========================
-         COINS
-         ========================== -->
+    }
 
-    <div class="coins">
 
-        🪙
-        <span id="coinDisplay">
-            0
-        </span>
+    if(signupScreen){
 
-    </div>
+        signupScreen.style.display =
+            "block";
 
+    }
 
-    <!-- ==========================
-         START GAME
-         ========================== -->
 
-    <button
-        type="button"
-        id="startGameBtn"
-    >
-        Play Game
-    </button>
+    clearAuthMessage();
 
+}
 
-    <!-- ==========================
-         LEVELS
-         ========================== -->
 
-    <button
-        type="button"
-        id="levelsBtn"
-    >
-        Levels
-    </button>
+// ======================================
+// GET SAVED USERNAME
+// ======================================
 
+function getSavedUsername(){
 
-    <!-- ==========================
-         SETTINGS
-         ========================== -->
+    return localStorage.getItem(
+        AUTH_USERNAME_KEY
+    ) || "";
 
-    <button
-        type="button"
-        id="settingsBtn"
-    >
-        Settings
-    </button>
+}
 
 
-    <!-- ==========================
-         ABOUT
-         ========================== -->
+// ======================================
+// CHECK IF ACCOUNT EXISTS
+// ======================================
 
-    <button
-        type="button"
-        id="aboutBtn"
-    >
-        About PixVZinz
-    </button>
+function accountExists(){
 
+    return(
+        localStorage.getItem(
+            AUTH_USERNAME_KEY
+        ) !== null &&
+        localStorage.getItem(
+            AUTH_PASSWORD_KEY
+        ) !== null
+    );
 
-    <!-- ==========================
-         LOGOUT
-         ========================== -->
+}
 
-    <button
-        type="button"
-        class="logout-btn"
-        id="logoutBtn"
-    >
-        Log Out
-    </button>
 
+// ======================================
+// CHECK LOGIN STATUS
+// ======================================
 
-</div>
+function isLoggedIn(){
 
+    return(
+        localStorage.getItem(
+            AUTH_LOGGED_IN_KEY
+        ) === "true"
+    );
 
-<!-- =========================================================
-     SETTINGS POPUP
-     ========================================================= -->
+}
 
-<div
-    class="popup"
-    id="settingsPopup"
-    style="display:none;"
->
 
-    <div class="popup-box">
+// ======================================
+// SIGN UP
+// ======================================
 
-        <h2>Settings</h2>
+function signup(){
 
+    if(
+        !signupUsername ||
+        !signupPassword ||
+        !signupConfirmPassword
+    ){
 
-        <div class="setting-row">
+        return;
 
-            <span>
-                Sound
-            </span>
+    }
 
-            <input
-                type="checkbox"
-                id="soundToggle"
-                checked
-            >
 
-        </div>
+    const username =
+        signupUsername.value.trim();
 
+    const password =
+        signupPassword.value;
 
-        <div class="setting-row">
+    const confirmPassword =
+        signupConfirmPassword.value;
 
-            <span>
-                Music
-            </span>
 
-            <input
-                type="checkbox"
-                id="musicToggle"
-                checked
-            >
+    // ------------------------------
+    // Username
+    // ------------------------------
 
-        </div>
+    if(username === ""){
 
+        showAuthMessage(
+            "Please choose a username."
+        );
 
-        <button
-            type="button"
-            id="closeSettingsBtn"
-        >
-            Close
-        </button>
+        signupUsername.focus();
 
-    </div>
+        return;
 
-</div>
+    }
 
 
-<!-- =========================================================
-     ABOUT POPUP
-     ========================================================= -->
+    // ------------------------------
+    // Username length
+    // ------------------------------
 
-<div
-    id="aboutBox"
-    style="display:none;"
->
+    if(username.length < 3){
 
-    <div class="about-content">
+        showAuthMessage(
+            "Username must be at least 3 characters."
+        );
 
+        signupUsername.focus();
 
-        <button
-            type="button"
-            class="about-close"
-            id="closeAboutBtn"
-        >
-            ×
-        </button>
+        return;
 
+    }
 
-        <video
-            class="about-logo"
-            autoplay
-            muted
-            playsinline
-            loop
-        >
-            <source
-                src="image/logo.webm"
-                type="video/webm"
-            >
-        </video>
 
+    // ------------------------------
+    // Password
+    // ------------------------------
 
-        <h2>
-            PixVZinz
-        </h2>
+    if(password === ""){
 
+        showAuthMessage(
+            "Please create a password."
+        );
 
-        <p>
-            Piece Together The Fun!
-        </p>
+        signupPassword.focus();
 
+        return;
 
-        <p>
-            Challenge yourself,
-            complete puzzles,
-            earn stars,
-            and collect coins.
-        </p>
+    }
 
-    </div>
 
-</div>
+    // ------------------------------
+    // Password length
+    // ------------------------------
 
+    if(password.length < 4){
 
-<!-- =========================================================
-     SCRIPTS
-     ========================================================= -->
+        showAuthMessage(
+            "Password must be at least 4 characters."
+        );
 
-<script src="audio.js"></script>
+        signupPassword.focus();
 
-<script src="auth.js"></script>
+        return;
 
-<script src="save.js"></script>
+    }
 
-<script src="script.js"></script>
 
+    // ------------------------------
+    // Confirm password
+    // ------------------------------
 
-</body>
+    if(password !== confirmPassword){
 
-</html>
+        showAuthMessage(
+            "Passwords do not match."
+        );
 
+        signupConfirmPassword.focus();
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Existing account
+    // ------------------------------
+
+    if(accountExists()){
+
+        showAuthMessage(
+            "An account already exists on this device."
+        );
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Save account
+    // ------------------------------
+
+    localStorage.setItem(
+        AUTH_USERNAME_KEY,
+        username
+    );
+
+
+    localStorage.setItem(
+        AUTH_PASSWORD_KEY,
+        password
+    );
+
+
+    // ------------------------------
+    // Log user in
+    // ------------------------------
+
+    localStorage.setItem(
+        AUTH_LOGGED_IN_KEY,
+        "true"
+    );
+
+
+    // ------------------------------
+    // Clear signup fields
+    // ------------------------------
+
+    signupUsername.value = "";
+
+    signupPassword.value = "";
+
+    signupConfirmPassword.value = "";
+
+
+    // ------------------------------
+    // Open main menu
+    // ------------------------------
+
+    showMainMenu(username);
+
+}
+
+
+// ======================================
+// LOGIN
+// ======================================
+
+function login(){
+
+    if(
+        !loginUsername ||
+        !loginPassword
+    ){
+
+        return;
+
+    }
+
+
+    const username =
+        loginUsername.value.trim();
+
+    const password =
+        loginPassword.value;
+
+
+    // ------------------------------
+    // Empty username
+    // ------------------------------
+
+    if(username === ""){
+
+        showAuthMessage(
+            "Please enter your username."
+        );
+
+        loginUsername.focus();
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Empty password
+    // ------------------------------
+
+    if(password === ""){
+
+        showAuthMessage(
+            "Please enter your password."
+        );
+
+        loginPassword.focus();
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Check account
+    // ------------------------------
+
+    if(!accountExists()){
+
+        showAuthMessage(
+            "No account found. Please create an account first."
+        );
+
+        return;
+
+    }
+
+
+    const savedUsername =
+        getSavedUsername();
+
+    const savedPassword =
+        localStorage.getItem(
+            AUTH_PASSWORD_KEY
+        ) || "";
+
+
+    // ------------------------------
+    // Validate credentials
+    // ------------------------------
+
+    if(
+        username !== savedUsername ||
+        password !== savedPassword
+    ){
+
+        showAuthMessage(
+            "Incorrect username or password."
+        );
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Save login state
+    // ------------------------------
+
+    localStorage.setItem(
+        AUTH_LOGGED_IN_KEY,
+        "true"
+    );
+
+
+    // ------------------------------
+    // Clear fields
+    // ------------------------------
+
+    loginUsername.value = "";
+
+    loginPassword.value = "";
+
+
+    // ------------------------------
+    // Open main menu
+    // ------------------------------
+
+    showMainMenu(
+        savedUsername
+    );
+
+}
+
+
+// ======================================
+// SHOW MAIN MENU
+// ======================================
+
+function showMainMenu(username){
+
+    if(authContainer){
+
+        authContainer.style.display =
+            "none";
+
+    }
+
+
+    if(mainMenu){
+
+        mainMenu.style.display =
+            "block";
+
+    }
+
+
+    if(welcomeText){
+
+        welcomeText.textContent =
+            "Welcome!";
+
+    }
+
+
+    if(usernameDisplay){
+
+        usernameDisplay.textContent =
+            username;
+
+    }
+
+
+    clearAuthMessage();
+
+
+    // Update coins if available
+
+    if(
+        typeof updateCoinDisplay ===
+        "function"
+    ){
+
+        updateCoinDisplay();
+
+    }
+
+
+    // Main menu music
+
+    if(
+        typeof playMainMusic ===
+        "function"
+    ){
+
+        playMainMusic();
+
+    }
+
+}
+
+
+// ======================================
+// SHOW LOGIN SCREEN
+// ======================================
+
+function showLoginScreen(){
+
+    if(mainMenu){
+
+        mainMenu.style.display =
+            "none";
+
+    }
+
+
+    if(authContainer){
+
+        authContainer.style.display =
+            "block";
+
+    }
+
+
+    showLogin();
+
+}
+
+
+// ======================================
+// LOG OUT
+// ======================================
+
+function logout(){
+
+    localStorage.setItem(
+        AUTH_LOGGED_IN_KEY,
+        "false"
+    );
+
+
+    if(
+        typeof stopAllAudio ===
+        "function"
+    ){
+
+        stopAllAudio();
+
+    }
+
+
+    if(loginUsername){
+
+        loginUsername.value = "";
+
+    }
+
+
+    if(loginPassword){
+
+        loginPassword.value = "";
+
+    }
+
+
+    showLoginScreen();
+
+}
+
+
+// ======================================
+// LOGIN BUTTON
+// ======================================
+
+if(loginBtn){
+
+    loginBtn.addEventListener(
+        "click",
+        function(){
+
+            login();
+
+        }
+    );
+
+}
+
+
+// ======================================
+// SIGNUP BUTTON
+// ======================================
+
+if(signupBtn){
+
+    signupBtn.addEventListener(
+        "click",
+        function(){
+
+            signup();
+
+        }
+    );
+
+}
+
+
+// ======================================
+// SHOW SIGNUP BUTTON
+// ======================================
+
+if(showSignupBtn){
+
+    showSignupBtn.addEventListener(
+        "click",
+        function(){
+
+            showSignup();
+
+        }
+    );
+
+}
+
+
+// ======================================
+// SHOW LOGIN BUTTON
+// ======================================
+
+if(showLoginBtn){
+
+    showLoginBtn.addEventListener(
+        "click",
+        function(){
+
+            showLogin();
+
+        }
+    );
+
+}
+
+
+// ======================================
+// LOGOUT BUTTON
+// ======================================
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener(
+        "click",
+        function(){
+
+            logout();
+
+        }
+    );
+
+}
+
+
+// ======================================
+// ENTER KEY
+// ======================================
+
+if(loginPassword){
+
+    loginPassword.addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                login();
+
+            }
+
+        }
+    );
+
+}
+
+
+if(signupConfirmPassword){
+
+    signupConfirmPassword.addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                signup();
+
+            }
+
+        }
+    );
+
+}
+
+
+// ======================================
+// INITIAL AUTH STATE
+// ======================================
+
+function initializeAuth(){
+
+    if(isLoggedIn()){
+
+        const username =
+            getSavedUsername();
+
+
+        if(username){
+
+            showMainMenu(
+                username
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    // Default:
+    // Show login screen
+
+    if(mainMenu){
+
+        mainMenu.style.display =
+            "none";
+
+    }
+
+
+    if(authContainer){
+
+        authContainer.style.display =
+            "block";
+
+    }
+
+
+    showLogin();
+
+}
+
+
+// ======================================
+// INITIALIZE
+// ======================================
+
+if(
+    document.readyState ===
+    "loading"
+){
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeAuth
+    );
+
+}
+else{
+
+    initializeAuth();
+
+}
+
+
+// ======================================
+// END OF AUTH SYSTEM
+// ======================================
