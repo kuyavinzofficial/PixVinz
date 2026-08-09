@@ -1,2925 +1,731 @@
 /* ============================================================
-   PUZZLEMANIA / PIXVINZ PREMIUM GAME UI
-   CLEAN FINAL CSS
+   PUZZLEMANIA / PIXVINZ PREMIUM GAME UI - POLISHED CSS
    ============================================================ */
 
-
-/* ============================================================
-   GLOBAL RESET
-   ============================================================ */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:'Arial',sans-serif;
-}
-
-
-html{
-    width:100%;
-    min-height:100%;
-}
-
-
-body{
-
-    min-height:100vh;
-
-    width:100%;
-
-    color:white;
-
-    text-align:center;
-
-    overflow-x:hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #6d28d9,
-            #9333ea,
-            #2563eb
-        );
-
-    background-size:400% 400%;
-
-    animation:
-        backgroundMove 15s ease infinite;
-
-}
-
-
-/* ============================================================
-   MAIN CONTAINERS
-   ============================================================ */
-
-.menu,
-.levels,
-.game{
-
-    width:90%;
-
-    max-width:520px;
-
-    margin:40px auto;
-
-    padding:35px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    backdrop-filter:
-        blur(15px);
-
-    border-radius:30px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.35);
-
-}
-
-
-/* ============================================================
-   TITLES
-   ============================================================ */
-
-h1{
-
-    font-size:48px;
-
-    margin-bottom:15px;
-
-    text-shadow:
-        0 5px 15px
-        rgba(0,0,0,.4);
-
-}
-
-
-h2{
-
-    font-size:30px;
-
-    margin-bottom:20px;
-
-}
-
-
-p{
-
-    font-size:20px;
-
-}
-
-
-/* ============================================================
-   PREMIUM BUTTONS
-   ============================================================ */
-
-button{
-
-    width:270px;
-
-    max-width:90%;
-
-    padding:18px;
-
-    margin:14px auto;
-
-    display:block;
-
-    border:none;
-
-    border-radius:22px;
-
-    cursor:pointer;
-
-    font-size:20px;
-
-    font-weight:700;
-
-    letter-spacing:.5px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            145deg,
-            #8b5cf6,
-            #6366f1
-        );
-
-    box-shadow:
-
-        0 10px 20px
-        rgba(0,0,0,.30),
-
-        inset 0 2px 2px
-        rgba(255,255,255,.30),
-
-        inset 0 -5px 8px
-        rgba(0,0,0,.20),
-
-        0 0 20px
-        rgba(139,92,246,.30);
-
-    transition:
-        all .30s ease;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-
-button:hover{
-
-    transform:
-        translateY(-6px)
-        scale(1.04);
-
-    box-shadow:
-
-        0 18px 35px
-        rgba(0,0,0,.35),
-
-        0 0 30px
-        rgba(139,92,246,.55);
-
-}
-
-
-button:active{
-
-    transform:scale(.96);
-
-}
-
-
-button::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-100%;
-
-    left:-40%;
-
-    width:40%;
-
-    height:300%;
-
-    background:
-        rgba(255,255,255,.35);
-
-    transform:
-        rotate(25deg);
-
-    transition:.7s;
-
-}
-
-
-button:hover::before{
-
-    left:120%;
-
-}
-
-
-/* ============================================================
-   COINS
-   ============================================================ */
-
-.coins{
-
-    margin:20px;
-
-    padding:12px;
-
-    border-radius:15px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    font-size:22px;
-
-}
-
-
-/* ============================================================
-   LEVEL GRID
-   ============================================================ */
-
-.level-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,130px);
-
-    justify-content:center;
-
-    gap:22px;
-
-    margin-top:20px;
-
-}
-
-
-/* ============================================================
-   LEVEL CARD
-   ============================================================ */
-
-.level-card{
-
-    width:130px;
-
-    height:125px;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-    color:white;
-
-    cursor:pointer;
-
-    position:relative;
-
-    overflow:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:4px;
-
-    text-shadow:
-        0 2px 6px
-        rgba(0,0,0,.45);
-
-    transition:
-        transform .35s,
-        box-shadow .35s;
-
-    transform-style:preserve-3d;
-
-    box-shadow:
-
-        0 18px 28px
-        rgba(0,0,0,.35),
-
-        inset 0 2px 2px
-        rgba(255,255,255,.30),
-
-        inset 0 -8px 12px
-        rgba(0,0,0,.28);
-
-    background-size:
-        200% 200%;
-
-    animation:
-        floatCard 4s ease-in-out infinite;
-
-}
-
-
-/* Level Card Shine */
-
-.level-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:-50%;
-
-    left:-60%;
-
-    width:70%;
-
-    height:220%;
-
-    background:
-        rgba(255,255,255,.18);
-
-    transform:
-        rotate(30deg);
-
-    transition:.7s;
-
-}
-
-
-.level-card:hover{
-
-    transform:
-        perspective(700px)
-        rotateX(10deg)
-        translateY(-8px)
-        scale(1.06);
-
-}
-
-
-.level-card:active{
-
-    transform:
-        perspective(700px)
-        scale(.94);
-
-}
-
-
-/* ============================================================
-   UNLOCKED LEVEL
-   ============================================================ */
-
-.unlocked{
-
-    background:
-        linear-gradient(
-            145deg,
-            #7c3aed,
-            #4f46e5
-        );
-
-    color:white;
-
-    box-shadow:
-
-        0 8px 20px
-        rgba(79,70,229,.5),
-
-        inset 0 2px 3px
-        rgba(255,255,255,.25),
-
-        inset 0 -4px 8px
-        rgba(0,0,0,.25);
-
-}
-
-
-.unlocked:hover{
-
-    box-shadow:
-
-        0 0 20px
-        #7c3aed,
-
-        0 0 40px
-        #6d28d9,
-
-        0 0 60px
-        rgba(124,58,237,.55);
-
-}
-
-
-/* ============================================================
-   COMPLETED LEVEL
-   ============================================================ */
-
-.completed{
-
-    background:
-        linear-gradient(
-            135deg,
-            #FFD54F,
-            #FFC107,
-            #FF9800,
-            #F57C00
-        );
-
-    background-size:
-        300% 300%;
-
-    color:white;
-
-    box-shadow:
-
-        0 0 18px
-        #FFC107,
-
-        0 0 40px
-        rgba(255,193,7,.75),
-
-        inset 0 2px 3px
-        rgba(255,255,255,.45),
-
-        inset 0 -8px 10px
-        rgba(0,0,0,.20);
-
-    animation:
-        floatCard 4s ease-in-out infinite,
-        goldGlow 1s ease-in-out infinite,
-        shineMove 2s linear infinite;
-
-}
-
-
-/* ============================================================
-   LOCKED LEVEL
-   ============================================================ */
-
-.locked{
-
-    background:
-        linear-gradient(
-            145deg,
-            #3f3f46,
-            #18181b
-        );
-
-    color:#bcbcbc;
-
-    box-shadow:
-
-        inset 0 2px 4px
-        rgba(255,255,255,.08),
-
-        inset 0 -4px 10px
-        rgba(0,0,0,.6);
-
-    cursor:not-allowed;
-
-    opacity:.8;
-
-}
-
-
-/* ============================================================
-   STATS
-   ============================================================ */
-
-.stats{
-
-    font-size:12px;
-
-    line-height:1.8;
-
-}
-
-
-/* ============================================================
-   PUZZLE BOARD
-   ============================================================ */
-
-#puzzleBoard{
-
-    width:360px;
-
-    height:360px;
-
-    max-width:90vw;
-
-    max-height:90vw;
-
-    margin:25px auto;
-
-    padding:0;
-
-    display:grid;
-
-    overflow:hidden;
-
-    border-radius:25px;
-
-    background:
-        rgba(255,255,255,.2);
-
-    box-shadow:
-        0 15px 35px
-        rgba(0,0,0,.4);
-
-}
-
-
-/* ============================================================
-   PUZZLE PIECES
-   ============================================================ */
-
-.piece{
-
-    border-radius:10px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.35);
-
-    transition:.2s;
-
-    overflow:hidden;
-
-}
-
-
-.piece:hover{
-
-    filter:
-        brightness(1.15);
-
-}
-
-
-.selected{
-
-    border:
-        4px solid
-        yellow;
-
-    transform:
-        scale(.93);
-
-    box-shadow:
-        0 0 20px
-        yellow;
-
-}
-
-
-/* ============================================================
-   STARS DISPLAY
-   ============================================================ */
-
-#starsDisplay{
-
-    font-size:30px;
-
-    color:gold;
-
-}
-
-
-/* ============================================================
-   HIDDEN
-   ============================================================ */
-
-.hidden{
-
-    display:none!important;
-
-}
-
-
-/* ============================================================
-   ============================================================
-   LOGO SYSTEM
-   ============================================================
-   ============================================================ */
-
-
-/* ============================================================
-   OPENING SPLASH SCREEN
-   ============================================================ */
-
-#puzzleSplash{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #6d28d9,
-            #9333ea,
-            #2563eb
-        );
-
-    z-index:99999;
-
-    overflow:hidden;
-
-    opacity:1;
-
-    visibility:visible;
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease;
-
-}
-
-
-/* ============================================================
-   OPENING LOGO
-   IMPORTANT:
-   SMALL ENOUGH TO FIT MOBILE
-   ============================================================ */
-
-#puzzleSplash .app-logo{
-
-    display:block;
-
-    width:240px;
-
-    height:auto;
-
-    max-width:70vw;
-
-    max-height:42vh;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    margin:auto;
-
-    padding:0;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 10px 20px
-            rgba(0,0,0,.40)
-        );
-
-    animation:
-        splashLogoIntro
-        3s
-        ease-in-out
-        forwards;
-
-}
-
-
-/* Compatibility if splash uses .splash-logo */
-
-#puzzleSplash .splash-logo{
-
-    display:block;
-
-    width:240px;
-
-    height:auto;
-
-    max-width:70vw;
-
-    max-height:42vh;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    margin:auto;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 10px 20px
-            rgba(0,0,0,.40)
-        );
-
-}
-
-
-/* ============================================================
-   SPLASH EXIT
-   ============================================================ */
-
-#puzzleSplash.splashHidden{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
-}
-
-
-/* ============================================================
-   SPLASH ANIMATION
-   ============================================================ */
-
-@keyframes splashLogoIntro{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.78)
-            translateY(15px);
-
-    }
-
-    20%{
-
-        opacity:1;
-
-        transform:
-            scale(1.02)
-            translateY(0);
-
-    }
-
-    40%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-    }
-
-    70%{
-
-        opacity:1;
-
-        transform:
-            scale(1.015)
-            translateY(-3px);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-    }
-
-}
-
-
-/* ============================================================
-   MAIN MENU LOGO
-   ============================================================ */
-
-.menu .app-logo{
-
-    display:block;
-
-    width:190px;
-
-    height:auto;
-
-    max-width:65%;
-
-    max-height:130px;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    margin:
-        0 auto 10px auto;
-
-    padding:0;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        menuLogoFloat
-        4s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* Compatibility for .menu-logo */
-
-.menu-logo{
-
-    display:block;
-
-    width:190px;
-
-    height:auto;
-
-    max-width:65%;
-
-    max-height:130px;
-
-    object-fit:contain;
-
-    margin:
-        0 auto 10px auto;
-
-}
-
-
-/* ============================================================
-   LEVELS PAGE LOGO
-   ============================================================ */
-
-.levels .app-logo{
-
-    display:block;
-
-    width:200px;
-
-    height:auto;
-
-    max-width:75%;
-
-    max-height:125px;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    margin:
-        0 auto 8px auto;
-
-    padding:0;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        menuLogoFloat
-        4s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ============================================================
-   GAME / LEVEL 1 LOGO
-   ============================================================ */
-
-.game .app-logo{
-
-    display:block !important;
-
-    visibility:visible !important;
-
-    opacity:1 !important;
-
-    width:165px;
-
-    height:auto;
-
-    max-width:58%;
-
-    max-height:100px;
-
-    object-fit:contain;
-
-    object-position:center;
-
-    margin:
-        0 auto 2px auto;
-
-    padding:0;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    animation:
-        gameLogoFloat
-        4s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ============================================================
-   GAME LEVEL TITLE
-   ============================================================ */
-
-.game #levelTitle{
-
-    font-size:30px;
-
-    margin:
-        3px 0 8px 0;
-
-    line-height:1.2;
-
-}
-
-
-/* ============================================================
-   GAME STATISTICS
-   ============================================================ */
-
-.game .stats{
-
-    font-size:15px;
-
-    line-height:1.45;
-
-    margin-bottom:8px;
-
-}
-
-
-/* ============================================================
-   LOGO FLOAT ANIMATION
-   ============================================================ */
-
-@keyframes menuLogoFloat{
-
-    0%,100%{
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-5px)
-            scale(1.02);
-
-    }
-
-}
-
-
-@keyframes gameLogoFloat{
-
-    0%,100%{
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-4px)
-            scale(1.015);
-
-    }
-
-}
-
-
-/* ============================================================
-   SETTINGS POPUP
-   ============================================================ */
-
-.popup{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(0,0,0,.7);
-
-    display:none;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:9999;
-
-}
-
-
-.popup-box{
-
-    width:90%;
-
-    max-width:400px;
-
-    background:white;
-
-    color:#333;
-
-    padding:30px;
-
-    border-radius:25px;
-
-    box-shadow:
-        0 20px 50px
-        black;
-
-}
-
-
-.setting-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin:20px 0;
-
-    font-size:20px;
-
-}
-
-
-.setting-row input{
-
-    width:25px;
-
-    height:25px;
-
-}
-
-
-/* ============================================================
-   INPUTS / LOGIN / SIGNUP
-   ============================================================ */
-
-input{
-
-    width:270px;
-
-    max-width:90%;
-
-    padding:16px;
-
-    margin:8px auto;
-
-    display:block;
-
-    border:none;
-
-    border-radius:18px;
-
-    outline:none;
-
-    font-size:18px;
-
-    text-align:center;
-
-    background:
-        rgba(255,255,255,.95);
-
-    color:#222;
-
-    box-shadow:
-        0 8px 18px
-        rgba(0,0,0,.25);
-
-    transition:.3s;
-
-}
-
-
-input:focus{
-
-    transform:
-        scale(1.03);
-
-    box-shadow:
-        0 0 18px
-        #8b5cf6;
-
-}
-
-
-input::placeholder{
-
-    color:#666;
-
-}
-
-
-/* ============================================================
-   PLAYER PROFILE
-   ============================================================ */
-
-#playerProfile{
-
-    margin:20px auto;
-
-    padding:15px;
-
-    width:90%;
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.15);
-
-    backdrop-filter:
-        blur(10px);
-
-}
-
-
-#playerProfile h3{
-
-    margin-bottom:8px;
-
-    font-size:22px;
-
-}
-
-
-/* ============================================================
-   PIXVINZ WELCOME TEXT - PREMIUM GLOW
-   ============================================================ */
-
-#welcomeText{
-
-    font-size:32px;
-
-    font-weight:900;
-
-    color:#FFD21C;
-
-    letter-spacing:1px;
-
-    margin-bottom:8px;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.35),
-        0 0 8px rgba(255,255,255,.55),
-        0 0 16px rgba(216,180,254,.60),
-        0 0 28px rgba(139,92,246,.45);
-
-}
-
-
-/* ============================================================
-   PIXVINZ USERNAME - PREMIUM GLOW
-   ============================================================ */
-
-#usernameDisplay{
-
-    font-size:24px;
-
-    font-weight:700;
-
-    color:#ffffff;
-
-    letter-spacing:1px;
-
-    margin-bottom:15px;
-
-    opacity:1;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.35),
-        0 0 6px rgba(255,255,255,.60),
-        0 0 14px rgba(216,180,254,.70),
-        0 0 26px rgba(139,92,246,.55);
-
-}
-
-
-
-/* ============================================================
-   LOGOUT
-   ============================================================ */
-
-.logout-btn{
-
-    margin:
-        70px auto 20px auto;
-
-    width:220px;
-
-    opacity:.85;
-
-}
-
-
-/* ============================================================
-   ============================================================
-   VICTORY SCREEN
-   ============================================================
-   ============================================================ */
-
-#victoryScreen{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(124,58,237,.25),
-            rgba(0,0,0,.82)
-        );
-
-    backdrop-filter:
-        blur(6px);
-
-    z-index:99999;
-
-    overflow-y:auto;
-
-}
-
-
-/* ============================================================
-   VICTORY BOX
-   ============================================================ */
-
-.victory-box{
-
-    position:relative;
-
-    width:92%;
-
-    max-width:500px;
-
-    max-height:90vh;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    padding:
-        24px 22px 22px 22px;
-
-    margin:auto;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fffdf7
-        );
-
-    color:#222;
-
-    border-radius:38px;
-
-    border:
-        5px solid
-        #FFD21C;
-
-    box-shadow:
-
-        0 0 12px
-        rgba(255,215,0,.8),
-
-        0 0 30px
-        rgba(255,193,7,.65),
-
-        0 20px 60px
-        rgba(0,0,0,.65);
-
-    text-align:center;
-
-    animation:
-        victoryAppear
-        .55s
-        cubic-bezier(.2,.8,.2,1);
-
-}
-
-
-/* ============================================================
-   VICTORY CONFETTI LAYER
-   ============================================================ */
-
-.victory-box::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:34px;
-
-    pointer-events:none;
-
-    z-index:1;
-
-    opacity:.65;
-
-    background-image:
-
-        linear-gradient(
-            135deg,
-            #ff4d6d 0 8px,
-            transparent 8px 100%
-        ),
-
-        linear-gradient(
-            45deg,
-            #ffd21c 0 7px,
-            transparent 7px 100%
-        ),
-
-        linear-gradient(
-            120deg,
-            #22c55e 0 8px,
-            transparent 8px 100%
-        ),
-
-        linear-gradient(
-            60deg,
-            #3b82f6 0 7px,
-            transparent 7px 100%
-        ),
-
-        linear-gradient(
-            160deg,
-            #a855f7 0 8px,
-            transparent 8px 100%
-        );
-
-    background-size:
-
-        75px 95px,
-        95px 120px,
-        110px 100px,
-        85px 130px,
-        120px 110px;
-
-    animation:
-        confettiFall
-        5s
-        linear
-        infinite;
-
-}
-
-
-/* ============================================================
-   SECOND CONFETTI
-   ============================================================ */
-
-.victory-box::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20px;
-
-    border-radius:40px;
-
-    pointer-events:none;
-
-    z-index:1;
-
-    opacity:.45;
-
-    background-image:
-
-        radial-gradient(
-            circle,
-            #ffd21c 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #ff4d6d 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #3b82f6 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #22c55e 0 4px,
-            transparent 5px
-        ),
-
-        radial-gradient(
-            circle,
-            #a855f7 0 4px,
-            transparent 5px
-        );
-
-    background-size:
-
-        90px 110px,
-        120px 140px,
-        100px 130px,
-        130px 100px,
-        110px 120px;
-
-    animation:
-        confettiFallReverse
-        7s
-        linear
-        infinite;
-
-}
-
-
-/* ============================================================
-   KEEP VICTORY CONTENT ABOVE CONFETTI
-   ============================================================ */
-
-.victory-box > *{
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-
-/* ============================================================
-   VICTORY TITLE
-   ============================================================ */
-
-.victory-box h1{
-
-    position:relative;
-
-    z-index:2;
-
-    margin:
-        12px 0 18px 0;
-
-    font-size:
-        clamp(
-            30px,
-            7vw,
-            48px
-        );
-
-    line-height:1.05;
-
-    font-weight:900;
-
-    color:#222;
-
-    text-shadow:
-
-        0 3px 0
-        #ffffff,
-
-        0 6px 15px
-        rgba(0,0,0,.20);
-
-}
-
-
-/* ============================================================
-   COMPLETED PUZZLE IMAGE
-   ============================================================ */
-
-#completedImage{
-
-    position:relative;
-
-    z-index:2;
-
-    width:165px;
-
-    height:165px;
-
-    max-width:47vw;
-
-    max-height:47vw;
-
-    display:block;
-
-    margin:
-        10px auto 16px auto;
-
-    object-fit:cover;
-
-    border-radius:27px;
-
-    border:
-        6px solid
-        #FFD21C;
-
-    background:white;
-
-    box-shadow:
-
-        0 0 12px
-        rgba(255,215,0,.95),
-
-        0 0 30px
-        rgba(255,193,7,.65),
-
-        0 10px 25px
-        rgba(0,0,0,.30);
-
-    animation:
-        imageGlow
-        2s
-        ease-in-out
-        infinite;
-
-}
-
-
-/* ============================================================
-   VICTORY STARS
-   ============================================================ */
-
-#starsDisplay{
-
-    position:relative;
-
-    z-index:2;
-
-    font-size:42px;
-
-    line-height:1;
-
-    margin:
-        10px 0 18px 0;
-
-    color:#FFD21C;
-
-    letter-spacing:4px;
-
-    text-shadow:
-        0 3px 8px
-        rgba(255,193,7,.45);
-
-    animation:
-        starsPop
-        .7s
-        ease-out;
-
-}
-
-
-/* ============================================================
-   VICTORY STATS
-   ============================================================ */
-
-.victory-box .stats{
-
-    position:relative;
-
-    z-index:2;
-
-    width:100%;
-
-    max-width:360px;
-
-    margin:
-        8px auto 16px auto;
-
-    font-size:20px;
-
-    line-height:1.5;
-
-}
-
-
-.victory-box .stats p{
-
-    margin:
-        7px auto;
-
-    padding:
-        5px 10px;
-
-    border-radius:15px;
-
-}
-
-
-/* ============================================================
-   VICTORY BUTTONS
-   ============================================================ */
-
-#victoryScreen button{
-
-    position:relative;
-
-    z-index:3;
-
-    width:85%;
-
-    max-width:360px;
-
-    padding:
-        15px 18px;
-
-    margin:
-        8px auto;
-
-    border:none;
-
-    border-radius:24px;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            145deg,
-            #8b5cf6,
-            #6366f1
-        );
-
-    box-shadow:
-
-        0 10px 20px
-        rgba(0,0,0,.25),
-
-        inset 0 2px 2px
-        rgba(255,255,255,.35),
-
-        inset 0 -6px 8px
-        rgba(0,0,0,.18),
-
-        0 0 18px
-        rgba(124,58,237,.25);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-
-}
-
-
-#victoryScreen button:hover{
-
-    transform:
-        translateY(-3px)
-        scale(1.02);
-
-    box-shadow:
-
-        0 15px 28px
-        rgba(0,0,0,.30),
-
-        0 0 25px
-        rgba(124,58,237,.55);
-
-}
-
-
-#victoryScreen button:active{
-
-    transform:
-        scale(.96);
-
-}
-
-
-/* ============================================================
-   BEST RECORD
-   ============================================================ */
-
-#bestRecord{
-
-    position:relative;
-
-    z-index:2;
-
-    margin:
-        18px auto 0 auto !important;
-
-    padding-top:12px;
-
-    width:90%;
-
-    border-top:
-        2px solid
-        rgba(100,70,130,.30);
-
-    color:#222;
-
-}
-
-
-#bestRecord h3{
-
-    margin:
-        0 0 8px 0;
-
-    font-size:24px;
-
-    font-weight:900;
-
-}
-
-
-#bestRecord p{
-
-    margin:
-        4px 0;
-
-    font-size:20px;
-
-    line-height:1.3;
-
-}
-
-
-#bestRecord p:first-of-type{
-
-    color:#FFD21C;
-
-    font-size:34px;
-
-    line-height:1;
-
-    text-shadow:
-        0 3px 7px
-        rgba(255,193,7,.35);
-
-}
-
-
-/* ============================================================
-   VICTORY ANIMATIONS
-   ============================================================ */
-
-@keyframes victoryAppear{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.82)
-            translateY(30px);
-
-    }
-
-    70%{
-
-        transform:
-            scale(1.02)
-            translateY(-3px);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-    }
-
-}
-
-
-@keyframes imageGlow{
-
-    0%,100%{
-
-        box-shadow:
-
-            0 0 12px
-            rgba(255,215,0,.8),
-
-            0 0 28px
-            rgba(255,193,7,.5),
-
-            0 10px 25px
-            rgba(0,0,0,.3);
-
-    }
-
-    50%{
-
-        box-shadow:
-
-            0 0 20px
-            rgba(255,215,0,1),
-
-            0 0 42px
-            rgba(255,193,7,.75),
-
-            0 12px 30px
-            rgba(0,0,0,.35);
-
-    }
-
-}
-
-
-@keyframes starsPop{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            scale(.5);
-
-    }
-
-    70%{
-
-        transform:
-            scale(1.12);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            scale(1);
-
-    }
-
-}
-
-
-@keyframes confettiFall{
-
-    0%{
-
-        background-position:
-
-            0 -80px,
-            20px -120px,
-            -30px -100px,
-            50px -140px,
-            -20px -130px;
-
-        transform:
-            rotate(0deg);
-
-    }
-
-    50%{
-
-        background-position:
-
-            15px 140px,
-            -20px 220px,
-            30px 160px,
-            10px 210px,
-            30px 170px;
-
-        transform:
-            rotate(2deg);
-
-    }
-
-    100%{
-
-        background-position:
-
-            0 450px,
-            20px 500px,
-            -30px 470px,
-            50px 520px,
-            -20px 490px;
-
-        transform:
-            rotate(0deg);
-
-    }
-
-}
-
-
-@keyframes confettiFallReverse{
-
-    0%{
-
-        background-position:
-
-            10px -100px,
-            -30px -140px,
-            40px -180px,
-            -20px -140px,
-            60px -120px;
-
-    }
-
-    50%{
-
-        background-position:
-
-            -20px 160px,
-            20px 200px,
-            -30px 180px,
-            30px 220px,
-            10px 170px;
-
-    }
-
-    100%{
-
-        background-position:
-
-            10px 480px,
-            -30px 520px,
-            40px 500px,
-            -20px 540px,
-            60px 510px;
-
-    }
-
-}
-
-
-/* ============================================================
-   GENERAL ANIMATIONS
-   ============================================================ */
-
-@keyframes backgroundMove{
-
-    0%{
-
-        background-position:
-            0% 50%;
-
-    }
-
-    50%{
-
-        background-position:
-            100% 50%;
-
-    }
-
-    100%{
-
-        background-position:
-            0% 50%;
-
-    }
-
-}
-
-
-@keyframes shine{
-
-    50%{
-
-        transform:
-            scale(1.05);
-
-    }
-
-}
-
-
-@keyframes floatCard{
-
-    0%,100%{
-
-        transform:
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-5px);
-
-    }
-
-}
-
-
-@keyframes goldGlow{
-
-    0%,100%{
-
-        box-shadow:
-
-            0 0 18px
-            #FFC107,
-
-            0 0 40px
-            rgba(255,193,7,.60);
-
-    }
-
-    50%{
-
-        box-shadow:
-
-            0 0 30px
-            #FFD54F,
-
-            0 0 60px
-            #FF9800,
-
-            0 0 80px
-            rgba(255,152,0,.70);
-
-    }
-
-}
-
-
-@keyframes shineMove{
-
-    0%{
-
-        background-position:
-            0% 50%;
-
-    }
-
-    100%{
-
-        background-position:
-            100% 50%;
-
-    }
-
-}
-
-
-/* ============================================================
-   MOBILE DEVICES
-   ============================================================ */
-
-@media(max-width:500px){
-
-    /* -----------------------------
-       MAIN CONTAINERS
-       ----------------------------- */
-
-    .menu,
-    .levels,
-    .game{
-
-        width:95%;
-
-        padding:15px;
-
-        margin:
-            20px auto;
-
-        border-radius:25px;
-
-    }
-
-
-    /* -----------------------------
-       PUZZLE BOARD
-       ----------------------------- */
-
-    #puzzleBoard{
-
-        width:90vw;
-
-        height:90vw;
-
-        max-width:360px;
-
-        max-height:360px;
-
-        margin:
-            25px auto;
-
-    }
-
-
-    /* -----------------------------
-       SPLASH LOGO
-       ----------------------------- */
-
-    #puzzleSplash{
-
-        padding:10px;
-
-    }
-
-
-    #puzzleSplash .app-logo,
-    #puzzleSplash .splash-logo{
-
-        width:240px;
-
-        max-width:70vw;
-
-        max-height:42vh;
-
-    }
-
-
-    /* -----------------------------
-       MAIN MENU LOGO
-       ----------------------------- */
-
-    .menu .app-logo{
-
-        width:180px;
-
-        max-width:64%;
-
-        max-height:120px;
-
-        margin:
-            0 auto 8px auto;
-
-    }
-
-
-    /* -----------------------------
-       LEVEL PAGE LOGO
-       ----------------------------- */
-
-    .levels .app-logo{
-
-        width:165px;
-
-        max-width:58%;
-
-        max-height:105px;
-
-        margin:
-            0 auto 8px auto;
-
-    }
-
-
-    /* -----------------------------
-       GAME LOGO
-       ----------------------------- */
-
-    .game .app-logo{
-
-        width:165px;
-
-        max-width:55%;
-
-        max-height:100px;
-
-        margin:
-            0 auto 2px auto;
-
-    }
-
-
-    /* -----------------------------
-       GAME TITLE
-       ----------------------------- */
-
-    .game #levelTitle{
-
-        font-size:26px;
-
-        margin:
-            2px 0 6px 0;
-
-    }
-
-
-    /* -----------------------------
-       GAME STATS
-       ----------------------------- */
-
-    .game .stats{
-
-        font-size:14px;
-
-        line-height:1.35;
-
-        margin-bottom:5px;
-
-    }
-
-
-    /* -----------------------------
-       VICTORY SCREEN
-       ----------------------------- */
-
-    #victoryScreen{
-
-        padding:14px;
-
-        align-items:center;
-
-    }
-
-
-    .victory-box{
-
-        width:94%;
-
-        max-width:430px;
-
-        max-height:88vh;
-
-        padding:
-            20px
-            16px
-            18px
-            16px;
-
-        border-radius:32px;
-
-        border-width:4px;
-
-    }
-
-
-    .victory-box h1{
-
-        font-size:
-            clamp(
-                28px,
-                8vw,
-                38px
-            );
-
-        margin:
-            10px 0 14px 0;
-
-    }
-
-
-    #completedImage{
-
-        width:135px;
-
-        height:135px;
-
-        max-width:38vw;
-
-        max-height:38vw;
-
-        border-width:5px;
-
-        border-radius:23px;
-
-        margin:
-            8px auto 14px auto;
-
-    }
-
-
-    #starsDisplay{
-
-        font-size:36px;
-
-        letter-spacing:2px;
-
-        margin:
-            8px 0 14px 0;
-
-    }
-
-
-    .victory-box .stats{
-
-        font-size:18px;
-
-        margin:
-            6px auto 12px auto;
-
-    }
-
-
-    .victory-box .stats p{
-
-        margin:
-            4px auto;
-
-    }
-
-
-    #victoryScreen button{
-
-        width:88%;
-
-        padding:
-            13px 15px;
-
-        margin:
-            7px auto;
-
-        font-size:18px;
-
-        border-radius:21px;
-
-    }
-
-
-    #bestRecord{
-
-        margin-top:
-            14px !important;
-
-        padding-top:10px;
-
-    }
-
-
-    #bestRecord h3{
-
-        font-size:21px;
-
-        margin-bottom:5px;
-
-    }
-
-
-    #bestRecord p{
-
-        font-size:18px;
-
-        margin:2px 0;
-
-    }
-
-
-    #bestRecord p:first-of-type{
-
-        font-size:30px;
-
-    }
-
-}
-
-
-/* ============================================================
-   VERY SMALL PHONES
-   ============================================================ */
-
-@media(max-width:360px){
-
-    /* -----------------------------
-       SPLASH
-       ----------------------------- */
-
-    #puzzleSplash{
-
-        padding:8px;
-
-    }
-
-
-    #puzzleSplash .app-logo,
-    #puzzleSplash .splash-logo{
-
-        width:210px;
-
-        max-width:68vw;
-
-        max-height:38vh;
-
-    }
-
-
-    /* -----------------------------
-       MAIN MENU
-       ----------------------------- */
-
-    .menu .app-logo{
-
-        width:165px;
-
-        max-width:62%;
-
-        max-height:110px;
-
-    }
-
-
-    /* -----------------------------
-       LEVELS
-       ----------------------------- */
-
-    .levels .app-logo{
-
-        width:150px;
-
-        max-width:58%;
-
-        max-height:95px;
-
-    }
-
-
-    /* -----------------------------
-       GAME
-       ----------------------------- */
-
-    .game .app-logo{
-
-        width:150px;
-
-        max-width:54%;
-
-        max-height:90px;
-
-    }
-
-
-    .game #levelTitle{
-
-        font-size:24px;
-
-    }
-
-
-    .game .stats{
-
-        font-size:13px;
-
-    }
-
-
-    /* -----------------------------
-       VICTORY
-       ----------------------------- */
-
-    #victoryScreen{
-
-        padding:10px;
-
-    }
-
-
-    .victory-box{
-
-        max-height:90vh;
-
-        padding:
-            17px
-            13px
-            15px
-            13px;
-
-        border-radius:28px;
-
-    }
-
-
-    .victory-box h1{
-
-        font-size:27px;
-
-        margin-bottom:10px;
-
-    }
-
-
-    #completedImage{
-
-        width:120px;
-
-        height:120px;
-
-        max-width:35vw;
-
-        max-height:35vw;
-
-    }
-
-
-    #starsDisplay{
-
-        font-size:31px;
-
-        margin-bottom:10px;
-
-    }
-
-
-    .victory-box .stats{
-
-        font-size:16px;
-
-    }
-
-
-    #victoryScreen button{
-
-        width:92%;
-
-        padding:11px;
-
-        font-size:17px;
-
-        margin:5px auto;
-
-    }
-
-
-    #bestRecord h3{
-
-        font-size:19px;
-
-    }
-
-
-    #bestRecord p{
-
-        font-size:16px;
-
-    }
-
-
-    #bestRecord p:first-of-type{
-
-        font-size:27px;
-
-    }
-
-}
-
-
-/* ============================================================
-   SMALL HEIGHT PHONES
-   ============================================================ */
-
-@media(max-width:500px) and (max-height:700px){
-
-    #puzzleSplash .app-logo,
-    #puzzleSplash .splash-logo{
-
-        width:210px;
-
-        max-width:68vw;
-
-        max-height:36vh;
-
-    }
-
-
-    .game .app-logo{
-
-        width:150px;
-
-        max-height:90px;
-
-        margin-bottom:2px;
-
-    }
-
-
-    .game #levelTitle{
-
-        font-size:24px;
-
-        margin-bottom:4px;
-
-    }
-
-
-    .game .stats{
-
-        line-height:1.25;
-
-        margin-bottom:3px;
-
-    }
-
-}
-
-
-/* ============================================================
-   VICTORY SCROLLBAR
-   ============================================================ */
-
-.victory-box::-webkit-scrollbar{
-
-    width:5px;
-
-}
-
-
-.victory-box::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-
-.victory-box::-webkit-scrollbar-thumb{
-
-    background:
-        rgba(124,58,237,.45);
-
-    border-radius:10px;
-
-}
-
-/* ============================================================
-   PIXVINZ LOGO - PUZZLE / GAME SCREEN
-   Keeps logo visible above Level title
-   ============================================================ */
-
-.game .app-logo{
-
-    display:block !important;
-
-    width:170px !important;
-
-    max-width:65% !important;
-
-    height:auto !important;
-
-    max-height:110px !important;
-
-    object-fit:contain !important;
-
-    margin:0 auto 6px auto !important;
-
-    border:none !important;
-
-    outline:none !important;
-
-    background:transparent !important;
-
-    filter:
-        drop-shadow(
-            0 8px 15px
-            rgba(0,0,0,.35)
-        );
-
-    position:relative;
-
-    z-index:5;
-
-}
-
-
-/* ============================================================
-   MOBILE PUZZLE SCREEN LOGO
-   ============================================================ */
-
-@media(max-width:500px){
-
-    .game .app-logo{
-
-        display:block !important;
-
-        width:155px !important;
-
-        max-width:58vw !important;
-
-        max-height:100px !important;
-
-        height:auto !important;
-
-        object-fit:contain !important;
-
-        margin:
-            0 auto 4px auto !important;
-
-    }
-
-}
-
-
-/* ============================================================
-   VERY SMALL PHONES
-   ============================================================ */
-
-@media(max-width:360px){
-
-    .game .app-logo{
-
-        width:140px !important;
-
-        max-width:55vw !important;
-
-        max-height:90px !important;
-
-    }
-
-}
-
-/* ======================================
-   ABOUT POPUP
-   ====================================== */
-
-#aboutBox{
-
-    position:fixed;
-
-    inset:0;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:rgba(0,0,0,0.65);
-
-    z-index:9999;
-
-    padding:20px;
-
-}
-
-
-.about-content{
-
-    position:relative;
-
-    width:90%;
-
-    max-width:360px;
-
-    padding:25px 20px;
-
-    text-align:center;
-
-    border-radius:20px;
-
-    background:linear-gradient(
-        135deg,
-        #312e81,
-        #6d28d9,
-        #9333ea
-    );
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,0.45);
-
-    color:white;
-
-}
-
-
-.about-logo{
-
-    display:block;
-
-    width:180px;
-
-    max-width:70%;
-
-    height:auto;
-
-    margin:0 auto 15px;
-
-}
-
-
-.about-content p{
-
-    margin:10px 0;
-
-    line-height:1.5;
-
+/* GLOBAL RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #312e81, #6d28d9, #9333ea, #2563eb);
+    background-size: 400% 400%;
+    animation: backgroundMove 15s ease infinite;
+}
+
+/* MAIN CONTAINERS */
+.menu, .levels, .game {
+    width: 90%;
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* TYPOGRAPHY */
+h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 20px;
+}
+
+/* PREMIUM BUTTONS */
+button {
+    width: 270px;
+    max-width: 90%;
+    padding: 18px;
+    margin: 14px auto;
+    display: block;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: linear-gradient(145deg, #8b5cf6, #6366f1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.30), inset 0 2px 2px rgba(255,255,255,0.30), inset 0 -5px 8px rgba(0,0,0,0.20), 0 0 20px rgba(139,92,246,0.30);
+    transition: all 0.30s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.35), 0 0 30px rgba(139,92,246,0.55);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -40%;
+    width: 40%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(25deg);
+    transition: 0.7s;
+}
+
+button:hover::before {
+    left: 120%;
+}
+
+/* COINS & INPUTS */
+.coins {
+    margin: 20px;
+    padding: 12px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    font-size: 22px;
+}
+
+input {
+    width: 270px;
+    max-width: 90%;
+    padding: 16px;
+    margin: 8px auto;
+    display: block;
+    border: none;
+    border-radius: 18px;
+    outline: none;
+    font-size: 18px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    color: #222;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+
+input:focus {
+    transform: scale(1.03);
+    box-shadow: 0 0 18px #8b5cf6;
+}
+
+input::placeholder {
+    color: #666;
+}
+
+/* LEVEL GRID & CARDS */
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 130px);
+    justify-content: center;
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.level-card {
+    width: 130px;
+    height: 125px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    transition: transform 0.35s, box-shadow 0.35s;
+    transform-style: preserve-3d;
+    box-shadow: 0 18px 28px rgba(0,0,0,0.35), inset 0 2px 2px rgba(255,255,255,0.30), inset 0 -8px 12px rgba(0,0,0,0.28);
+    background-size: 200% 200%;
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.level-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 70%;
+    height: 220%;
+    background: rgba(255, 255, 255, 0.18);
+    transform: rotate(30deg);
+    transition: 0.7s;
+}
+
+.level-card:hover {
+    transform: perspective(700px) rotateX(10deg) translateY(-8px) scale(1.06);
+}
+
+.level-card:active {
+    transform: perspective(700px) scale(0.94);
+}
+
+.unlocked {
+    background: linear-gradient(145deg, #7c3aed, #4f46e5);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.25), inset 0 -4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.unlocked:hover {
+    box-shadow: 0 0 20px #7c3aed, 0 0 40px #6d28d9, 0 0 60px rgba(124, 58, 237, 0.55);
+}
+
+.completed {
+    background: linear-gradient(135deg, #FFD54F, #FFC107, #FF9800, #F57C00);
+    background-size: 300% 300%;
+    color: #fff;
+    box-shadow: 0 0 18px #FFC107, 0 0 40px rgba(255, 193, 7, 0.75), inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -8px 10px rgba(0, 0, 0, 0.20);
+    animation: floatCard 4s ease-in-out infinite, goldGlow 1s ease-in-out infinite, shineMove 2s linear infinite;
+}
+
+.locked {
+    background: linear-gradient(145deg, #3f3f46, #18181b);
+    color: #bcbcbc;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.08), inset 0 -4px 10px rgba(0, 0, 0, 0.6);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.stats {
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* PUZZLE BOARD & PIECES */
+#puzzleBoard {
+    width: 360px;
+    height: 360px;
+    max-width: 90vw;
+    max-height: 90vw;
+    margin: 25px auto;
+    padding: 0;
+    display: grid;
+    overflow: hidden;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.piece {
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+.piece:hover {
+    filter: brightness(1.15);
+}
+
+.selected {
+    border: 4px solid yellow;
+    transform: scale(0.93);
+    box-shadow: 0 0 20px yellow;
+}
+
+/* LOGO SYSTEM */
+.app-logo, .splash-logo, .menu-logo {
+    display: block;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border: none;
+    outline: none;
+    background: transparent;
+    margin: 0 auto;
+}
+
+#puzzleSplash .app-logo, #puzzleSplash .splash-logo {
+    width: 240px;
+    max-width: 70vw;
+    max-height: 42vh;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.40));
+    animation: splashLogoIntro 3s ease-in-out forwards;
+}
+
+.menu .app-logo, .menu-logo, .levels .app-logo {
+    width: 190px;
+    max-width: 65%;
+    max-height: 130px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.35));
+    animation: menuLogoFloat 4s ease-in-out infinite;
+}
+
+.game .app-logo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 170px !important;
+    max-width: 65% !important;
+    max-height: 110px !important;
+    margin: 0 auto 6px auto !important;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.35));
+    position: relative;
+    z-index: 5;
+    animation: gameLogoFloat 4s ease-in-out infinite;
+}
+
+.game #levelTitle {
+    font-size: 30px;
+    margin: 3px 0 8px 0;
+    line-height: 1.2;
+}
+
+.game .stats {
+    font-size: 15px;
+    line-height: 1.45;
+    margin-bottom: 8px;
+}
+
+/* USER PROFILE & WELCOME */
+#playerProfile {
+    margin: 20px auto;
+    padding: 15px;
+    width: 90%;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+#playerProfile h3 {
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+#welcomeText {
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFD21C;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 5px rgba(0,0,0,.35), 0 0 8px rgba(255,255,255,.55), 0 0 16px rgba(216,180,254,.60), 0 0 28px rgba(139,92,246,.45);
+}
+
+#usernameDisplay {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0,0,0,.35), 0 0 6px rgba(255,255,255,.60), 0 0 14px rgba(216,180,254,.70), 0 0 26px rgba(139,92,246,.55);
+}
+
+.logout-btn {
+    margin: 70px auto 20px auto;
+    width: 220px;
+    opacity: 0.85;
+}
+
+/* OVERLAYS & POPUPS */
+.hidden {
+    display: none !important;
+}
+
+#puzzleSplash {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #312e81, #6d28d9, #9333ea, #2563eb);
+    z-index: 99999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#puzzleSplash.splashHidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.popup, #aboutBox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.popup-box {
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    color: #333;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px #000;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.setting-row input {
+    width: 25px;
+    height: 25px;
+}
+
+.about-content {
+    position: relative;
+    width: 90%;
+    max-width: 360px;
+    padding: 25px 20px;
+    text-align: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #312e81, #6d28d9, #9333ea);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+    color: #fff;
+}
+
+.about-logo {
+    display: block;
+    width: 180px;
+    max-width: 70%;
+    height: auto;
+    margin: 0 auto 15px;
+}
+
+.about-content p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.about-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 25px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+/* VICTORY SCREEN */
+#victoryScreen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, rgba(124,58,237,.25), rgba(0,0,0,.82));
+    backdrop-filter: blur(6px);
+    z-index: 99999;
+    overflow-y: auto;
+}
+
+.victory-box {
+    position: relative;
+    width: 92%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px 22px 22px 22px;
+    margin: auto;
+    background: linear-gradient(145deg, #ffffff, #fffdf7);
+    color: #222;
+    border-radius: 38px;
+    border: 5px solid #FFD21C;
+    box-shadow: 0 0 12px rgba(255,215,0,.8), 0 0 30px rgba(255,193,7,.65), 0 20px 60px rgba(0,0,0,.65);
+    text-align: center;
+    animation: victoryAppear 0.55s cubic-bezier(.2,.8,.2,1);
+}
+
+.victory-box::-webkit-scrollbar {
+    width: 5px;
+}
+
+.victory-box::-webkit-scrollbar-thumb {
+    background: rgba(124,58,237,.45);
+    border-radius: 10px;
+}
+
+.victory-box::before, .victory-box::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.victory-box::before {
+    inset: 0;
+    border-radius: 34px;
+    opacity: 0.65;
+    background-image: 
+        linear-gradient(135deg, #ff4d6d 0 8px, transparent 8px 100%),
+        linear-gradient(45deg, #ffd21c 0 7px, transparent 7px 100%),
+        linear-gradient(120deg, #22c55e 0 8px, transparent 8px 100%),
+        linear-gradient(60deg, #3b82f6 0 7px, transparent 7px 100%),
+        linear-gradient(160deg, #a855f7 0 8px, transparent 8px 100%);
+    background-size: 75px 95px, 95px 120px, 110px 100px, 85px 130px, 120px 110px;
+    animation: confettiFall 5s linear infinite;
+}
+
+.victory-box::after {
+    inset: -20px;
+    border-radius: 40px;
+    opacity: 0.45;
+    background-image: 
+        radial-gradient(circle, #ffd21c 0 4px, transparent 5px),
+        radial-gradient(circle, #ff4d6d 0 4px, transparent 5px),
+        radial-gradient(circle, #3b82f6 0 4px, transparent 5px),
+        radial-gradient(circle, #22c55e 0 4px, transparent 5px),
+        radial-gradient(circle, #a855f7 0 4px, transparent 5px);
+    background-size: 90px 110px, 120px 140px, 100px 130px, 130px 100px, 110px 120px;
+    animation: confettiFallReverse 7s linear infinite;
+}
+
+.victory-box > * {
+    position: relative;
+    z-index: 2;
+}
+
+.victory-box h1 {
+    margin: 12px 0 18px 0;
+    font-size: clamp(30px, 7vw, 48px);
+    line-height: 1.05;
+    font-weight: 900;
+    color: #222;
+    text-shadow: 0 3px 0 #ffffff, 0 6px 15px rgba(0,0,0,.20);
+}
+
+#completedImage {
+    width: 165px;
+    height: 165px;
+    max-width: 47vw;
+    max-height: 47vw;
+    display: block;
+    margin: 10px auto 16px auto;
+    object-fit: cover;
+    border-radius: 27px;
+    border: 6px solid #FFD21C;
+    background: #fff;
+    box-shadow: 0 0 12px rgba(255,215,0,.95), 0 0 30px rgba(255,193,7,.65), 0 10px 25px rgba(0,0,0,.30);
+    animation: imageGlow 2s ease-in-out infinite;
+}
+
+#starsDisplay {
+    font-size: 42px;
+    line-height: 1;
+    margin: 10px 0 18px 0;
+    color: #FFD21C;
+    letter-spacing: 4px;
+    text-shadow: 0 3px 8px rgba(255,193,7,.45);
+    animation: starsPop 0.7s ease-out;
+}
+
+.victory-box .stats {
+    width: 100%;
+    max-width: 360px;
+    margin: 8px auto 16px auto;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.victory-box .stats p {
+    margin: 7px auto;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+#victoryScreen button {
+    z-index: 3;
+    width: 85%;
+    max-width: 360px;
+    padding: 15px 18px;
+    margin: 8px auto;
+    border-radius: 24px;
+}
+
+#bestRecord {
+    margin: 18px auto 0 auto !important;
+    padding-top: 12px;
+    width: 90%;
+    border-top: 2px solid rgba(100,70,130,.30);
+    color: #222;
+}
+
+#bestRecord h3 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+#bestRecord p {
+    margin: 4px 0;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+#bestRecord p:first-of-type {
+    color: #FFD21C;
+    font-size: 34px;
+    line-height: 1;
+    text-shadow: 0 3px 7px rgba(255,193,7,.35);
+}
+
+/* ANIMATIONS */
+@keyframes splashLogoIntro {
+    0% { opacity: 0; transform: scale(0.78) translateY(15px); }
+    20%, 40%, 70%, 100% { opacity: 1; }
+    20% { transform: scale(1.02) translateY(0); }
+    40% { transform: scale(1) translateY(0); }
+    70% { transform: scale(1.015) translateY(-3px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes menuLogoFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes gameLogoFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-4px) scale(1.015); }
+}
+
+@keyframes victoryAppear {
+    0% { opacity: 0; transform: scale(0.82) translateY(30px); }
+    70% { transform: scale(1.02) translateY(-3px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes imageGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(255,215,0,.8), 0 0 28px rgba(255,193,7,.5), 0 10px 25px rgba(0,0,0,.3); }
+    50% { box-shadow: 0 0 20px rgba(255,215,0,1), 0 0 42px rgba(255,193,7,.75), 0 12px 30px rgba(0,0,0,.35); }
+}
+
+@keyframes starsPop {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes confettiFall {
+    0% { background-position: 0 -80px, 20px -120px, -30px -100px, 50px -140px, -20px -130px; transform: rotate(0deg); }
+    50% { background-position: 15px 140px, -20px 220px, 30px 160px, 10px 210px, 30px 170px; transform: rotate(2deg); }
+    100% { background-position: 0 450px, 20px 500px, -30px 470px, 50px 520px, -20px 490px; transform: rotate(0deg); }
+}
+
+@keyframes confettiFallReverse {
+    0% { background-position: 10px -100px, -30px -140px, 40px -180px, -20px -140px, 60px -120px; }
+    50% { background-position: -20px 160px, 20px 200px, -30px 180px, 30px 220px, 10px 170px; }
+    100% { background-position: 10px 480px, -30px 520px, 40px 500px, -20px 540px, 60px 510px; }
+}
+
+@keyframes backgroundMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes goldGlow {
+    0%, 100% { box-shadow: 0 0 18px #FFC107, 0 0 40px rgba(255,193,7,.60); }
+    50% { box-shadow: 0 0 30px #FFD54F, 0 0 60px #FF9800, 0 0 80px rgba(255,152,0,.70); }
+}
+
+@keyframes shineMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 500px) {
+    .menu, .levels, .game { width: 95%; padding: 15px; margin: 20px auto; border-radius: 25px; }
+    #puzzleBoard { width: 90vw; height: 90vw; max-width: 360px; max-height: 360px; margin: 25px auto; }
+    #puzzleSplash { padding: 10px; }
+    #puzzleSplash .app-logo, #puzzleSplash .splash-logo { width: 240px; max-width: 70vw; max-height: 42vh; }
+    .menu .app-logo { width: 180px; max-width: 64%; max-height: 120px; margin: 0 auto 8px auto; }
+    .levels .app-logo { width: 165px; max-width: 58%; max-height: 105px; margin: 0 auto 8px auto; }
+    .game .app-logo { width: 155px !important; max-width: 58vw !important; max-height: 100px !important; margin: 0 auto 4px auto !important; }
+    .game #levelTitle { font-size: 26px; margin: 2px 0 6px 0; }
+    .game .stats { font-size: 14px; line-height: 1.35; margin-bottom: 5px; }
+    #victoryScreen { padding: 14px; }
+    .victory-box { width: 94%; max-width: 430px; max-height: 88vh; padding: 20px 16px 18px 16px; border-radius: 32px; border-width: 4px; }
+    .victory-box h1 { font-size: clamp(28px, 8vw, 38px); margin: 10px 0 14px 0; }
+    #completedImage { width: 135px; height: 135px; max-width: 38vw; max-height: 38vw; border-width: 5px; border-radius: 23px; margin: 8px auto 14px auto; }
+    #starsDisplay { font-size: 36px; letter-spacing: 2px; margin: 8px 0 14px 0; }
+    .victory-box .stats { font-size: 18px; margin: 6px auto 12px auto; }
+    .victory-box .stats p { margin: 4px auto; }
+    #victoryScreen button { width: 88%; padding: 13px 15px; margin: 7px auto; font-size: 18px; border-radius: 21px; }
+    #bestRecord { margin-top: 14px !important; padding-top: 10px; }
+    #bestRecord h3 { font-size: 21px; margin-bottom: 5px; }
+    #bestRecord p { font-size: 18px; margin: 2px 0; }
+    #bestRecord p:first-of-type { font-size: 30px; }
+}
+
+@media (max-width: 360px) {
+    #puzzleSplash .app-logo, #puzzleSplash .splash-logo { width: 210px; max-width: 68vw; max-height: 38vh; }
+    .menu .app-logo { width: 165px; max-width: 62%; max-height: 110px; }
+    .levels .app-logo { width: 150px; max-width: 58%; max-height: 95px; }
+    .game .app-logo { width: 140px !important; max-width: 55vw !important; max-height: 90px !important; }
+    .game #levelTitle { font-size: 24px; }
+    .game .stats { font-size: 13px; }
+    #victoryScreen { padding: 10px; }
+    .victory-box { max-height: 90vh; padding: 17px 13px 15px 13px; border-radius: 28px; }
+    .victory-box h1 { font-size: 27px; margin-bottom: 10px; }
+    #completedImage { width: 120px; height: 120px; max-width: 35vw; max-height: 35vw; }
+    #starsDisplay { font-size: 31px; margin-bottom: 10px; }
+    .victory-box .stats { font-size: 16px; }
+    #victoryScreen button { width: 92%; padding: 11px; font-size: 17px; margin: 5px auto; }
+    #bestRecord h3 { font-size: 19px; }
+    #bestRecord p { font-size: 16px; }
+    #bestRecord p:first-of-type { font-size: 27px; }
+}
+
+@media (max-width: 500px) and (max-height: 700px) {
+    #puzzleSplash .app-logo, #puzzleSplash .splash-logo { width: 210px; max-width: 68vw; max-height: 36vh; }
+    .game .app-logo { width: 150px; max-height: 90px; margin-bottom: 2px; }
+    .game #levelTitle { font-size: 24px; margin-bottom: 4px; }
+    .game .stats { line-height: 1.25; margin-bottom: 3px; }
 }
-
-
-.about-close{
-
-    position:absolute;
-
-    top:8px;
-
-    right:12px;
-
-    width:35px;
-
-    height:35px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,0.15);
-
-    color:white;
-
-    font-size:25px;
-
-    line-height:30px;
-
-    cursor:pointer;
-
-}
-
-/* ============================================================
-   END OF PUZZLEMANIA CSS
-   ============================================================ */
