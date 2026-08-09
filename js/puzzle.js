@@ -1,7 +1,19 @@
-
 // ======================================
-// PuzzleMania
+// PixVZinz
 // CORE PUZZLE CONTROLLER
+// ======================================
+//
+// Handles:
+// - Game setup
+// - Piece creation
+// - Puzzle shuffling
+// - Game statistics reset
+// - Timer startup
+// - Board drawing
+// - Shuffle sound
+//
+// Piece movement and victory detection
+// are handled by the game-control system.
 // ======================================
 
 
@@ -26,7 +38,7 @@ function setup(){
     // Level Title
     // ------------------------------
 
-    let levelTitle =
+    const levelTitle =
         document.getElementById("levelTitle");
 
 
@@ -55,7 +67,7 @@ function setup(){
 
 
 // ======================================
-// CREATE PIECES
+// CREATE PUZZLE PIECES
 // ======================================
 
 function createPieces(){
@@ -77,7 +89,7 @@ function createPieces(){
 
 
 // ======================================
-// RESET GAME STATS
+// RESET GAME STATISTICS
 // ======================================
 
 function resetStats(){
@@ -88,10 +100,10 @@ function resetStats(){
 
 
     // ------------------------------
-    // Reset Moves
+    // Reset Moves Display
     // ------------------------------
 
-    let moveDisplay =
+    const moveDisplay =
         document.getElementById("moves");
 
 
@@ -114,10 +126,10 @@ function resetStats(){
 
 
     // ------------------------------
-    // Reset Stars
+    // Reset Stars Display
     // ------------------------------
 
-    let stars =
+    const stars =
         document.getElementById("stars");
 
 
@@ -144,7 +156,7 @@ function shufflePuzzle(){
 
 
     // ------------------------------
-    // Shuffle
+    // Shuffle Pieces
     // ------------------------------
 
     for(
@@ -159,14 +171,20 @@ function shufflePuzzle(){
             );
 
 
-        [pieces[i], pieces[j]] =
-        [pieces[j], pieces[i]];
+        [
+            pieces[i],
+            pieces[j]
+        ] =
+        [
+            pieces[j],
+            pieces[i]
+        ];
 
     }
 
 
     // ------------------------------
-    // Prevent Solved Puzzle
+    // Prevent Already-Solved Puzzle
     // ------------------------------
 
     let solved = true;
@@ -189,13 +207,24 @@ function shufflePuzzle(){
     }
 
 
+    // ------------------------------
+    // If accidentally solved,
+    // swap the first two pieces
+    // ------------------------------
+
     if(
         solved &&
         pieces.length > 1
     ){
 
-        [pieces[0], pieces[1]] =
-        [pieces[1], pieces[0]];
+        [
+            pieces[0],
+            pieces[1]
+        ] =
+        [
+            pieces[1],
+            pieces[0]
+        ];
 
     }
 
@@ -219,7 +248,7 @@ function shufflePuzzle(){
 
 
     // ------------------------------
-    // Draw Puzzle
+    // Draw Puzzle Board
     // ------------------------------
 
     if(typeof drawPuzzle === "function"){
@@ -240,5 +269,3 @@ function shufflePuzzle(){
     }
 
 }
-
-
