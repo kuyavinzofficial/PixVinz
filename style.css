@@ -1593,13 +1593,14 @@ input::placeholder{
 
     z-index:2;
 
-    width:240px;
+    width:165px;
 
-    height:240px;
+    height:165px;
 
-    max-width:70vw;
+    max-width:47vw;
 
-    max-height:40vh;
+    max-height:47vw;
+
     display:block;
 
     margin:
@@ -2358,16 +2359,17 @@ input::placeholder{
 
     }
 
-#completedImage{
 
-      width:220px;
+    #completedImage{
 
-      height:220px;
+        width:135px;
 
-       max-width:70vw;
+        height:135px;
 
-       max-height:40vh;
-    
+        max-width:38vw;
+
+        max-height:38vw;
+
         border-width:5px;
 
         border-radius:23px;
