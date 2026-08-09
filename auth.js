@@ -1,261 +1,451 @@
-// ======================================
-// PuzzleMania Authentication System
-// Version 2.0
-// ======================================
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 
-// ------------------------------
-// CREATE ACCOUNT
-// ------------------------------
+    <meta charset="UTF-8">
 
-function signup(){
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    const displayName =
-        document.getElementById("displayName").value.trim();
+    <title>PixVZinz</title>
 
-    const username =
-        document.getElementById("signupUsername").value.trim();
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
-    const password =
-        document.getElementById("signupPassword").value;
+</head>
 
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
+<body>
 
 
-    // Check empty fields
+<!-- =========================================================
+     OPENING SPLASH
+     ========================================================= -->
 
-    if(
-        displayName === "" ||
-        username === "" ||
-        password === "" ||
-        confirmPassword === ""
-    ){
+<div id="puzzleSplash">
 
-        alert("Please complete all fields.");
+    <video
+        class="app-logo"
+        autoplay
+        muted
+        playsinline
+        loop
+    >
+        <source
+            src="image/logo.webm"
+            type="video/webm"
+        >
+    </video>
 
-        return;
+</div>
 
-    }
 
+<!-- =========================================================
+     LOGIN / SIGNUP AREA
+     ========================================================= -->
 
-    // Passwords must match
+<div class="menu" id="authContainer">
 
-    if(password !== confirmPassword){
 
-        alert("Passwords do not match.");
+    <!-- ==========================
+         LOGO
+         ========================== -->
 
-        return;
+    <video
+        class="app-logo"
+        autoplay
+        muted
+        playsinline
+        loop
+    >
+        <source
+            src="image/logo.webm"
+            type="video/webm"
+        >
+    </video>
 
-    }
 
+    <!-- ==========================
+         LOGIN
+         ========================== -->
 
-    // Username already exists
+    <div id="loginScreen">
 
-    if(localStorage.getItem("user_" + username)){
+        <h2>Welcome Back!</h2>
 
-        alert("Username already exists.");
+        <p>
+            Log in to continue playing.
+        </p>
 
-        return;
 
-    }
+        <input
+            type="text"
+            id="loginUsername"
+            placeholder="Username"
+            autocomplete="username"
+        >
 
 
-    // Create player
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
 
-    const user = {
 
-        displayName: displayName,
+        <button
+            type="button"
+            id="loginBtn"
+        >
+            Log In
+        </button>
 
-        username: username,
 
-        password: password,
+        <button
+            type="button"
+            id="showSignupBtn"
+        >
+            Create Account
+        </button>
 
-        coins: 0,
+    </div>
 
-        unlockedLevel: 1,
 
-        totalStars: 0,
+    <!-- ==========================
+         SIGN UP
+         ========================== -->
 
-        createdAt: Date.now()
+    <div
+        id="signupScreen"
+        style="display:none;"
+    >
 
-    };
+        <h2>Create Account</h2>
 
+        <p>
+            Start your PixVZinz journey.
+        </p>
 
-    localStorage.setItem(
-        "user_" + username,
-        JSON.stringify(user)
-    );
 
+        <input
+            type="text"
+            id="signupUsername"
+            placeholder="Choose a username"
+            autocomplete="username"
+        >
 
-    // Automatically log in
 
-    localStorage.setItem(
-        "currentUser",
-        username
-    );
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+            autocomplete="new-password"
+        >
 
 
-    alert("Account created successfully!");
+        <input
+            type="password"
+            id="signupConfirmPassword"
+            placeholder="Confirm password"
+            autocomplete="new-password"
+        >
 
 
-    window.location = "index.html";
+        <button
+            type="button"
+            id="signupBtn"
+        >
+            Sign Up
+        </button>
 
-}
 
+        <button
+            type="button"
+            id="showLoginBtn"
+        >
+            Back to Log In
+        </button>
 
+    </div>
 
-// ------------------------------
-// LOGIN
-// ------------------------------
 
-function login(){
+    <!-- ==========================
+         AUTH MESSAGE
+         ========================== -->
 
-    const username =
-        document.getElementById("loginUsername").value.trim();
+    <p
+        id="authMessage"
+        aria-live="polite"
+    ></p>
 
-    const password =
-        document.getElementById("loginPassword").value;
 
+</div>
 
-    if(username === "" || password === ""){
 
-        alert("Please enter your username and password.");
+<!-- =========================================================
+     MAIN MENU
+     ========================================================= -->
 
-        return;
+<div
+    class="menu"
+    id="mainMenu"
+    style="display:none;"
+>
 
-    }
 
+    <!-- ==========================
+         LOGO
+         ========================== -->
 
-    const data =
-        localStorage.getItem("user_" + username);
+    <video
+        class="app-logo"
+        autoplay
+        muted
+        playsinline
+        loop
+    >
+        <source
+            src="image/logo.webm"
+            type="video/webm"
+        >
+    </video>
 
 
-    if(!data){
+    <!-- ==========================
+         PLAYER PROFILE
+         ========================== -->
 
-        alert("Account not found.");
+    <div id="playerProfile">
 
-        return;
+        <h3 id="welcomeText">
+            Welcome!
+        </h3>
 
-    }
+        <p id="usernameDisplay"></p>
 
+    </div>
 
-    const user =
-        JSON.parse(data);
 
+    <!-- ==========================
+         TAGLINE
+         ========================== -->
 
-    if(user.password !== password){
+    <p>
+        Piece Together The Fun!
+    </p>
 
-        alert("Incorrect password.");
 
-        return;
+    <!-- ==========================
+         COINS
+         ========================== -->
 
-    }
+    <div class="coins">
 
+        🪙
+        <span id="coinDisplay">
+            0
+        </span>
 
-    localStorage.setItem(
-        "currentUser",
-        username
-    );
+    </div>
 
 
-    window.location = "index.html";
+    <!-- ==========================
+         START GAME
+         ========================== -->
 
-}
+    <button
+        type="button"
+        id="startGameBtn"
+    >
+        Play Game
+    </button>
 
 
+    <!-- ==========================
+         LEVELS
+         ========================== -->
 
-// ------------------------------
-// LOGOUT
-// ------------------------------
+    <button
+        type="button"
+        id="levelsBtn"
+    >
+        Levels
+    </button>
 
-function logout(){
 
-    if(confirm("Logout from PuzzleMania?")){
+    <!-- ==========================
+         SETTINGS
+         ========================== -->
 
-        localStorage.removeItem(
-            "currentUser"
-        );
+    <button
+        type="button"
+        id="settingsBtn"
+    >
+        Settings
+    </button>
 
-        window.location =
-        "login.html";
 
-    }
+    <!-- ==========================
+         ABOUT
+         ========================== -->
 
-}
+    <button
+        type="button"
+        id="aboutBtn"
+    >
+        About PixVZinz
+    </button>
 
 
+    <!-- ==========================
+         LOGOUT
+         ========================== -->
 
-// ------------------------------
-// GET CURRENT USER
-// ------------------------------
+    <button
+        type="button"
+        class="logout-btn"
+        id="logoutBtn"
+    >
+        Log Out
+    </button>
 
-function getCurrentUser(){
 
-    const username =
-        localStorage.getItem(
-            "currentUser"
-        );
+</div>
 
-    if(!username){
 
-        return null;
+<!-- =========================================================
+     SETTINGS POPUP
+     ========================================================= -->
 
-    }
+<div
+    class="popup"
+    id="settingsPopup"
+    style="display:none;"
+>
 
+    <div class="popup-box">
 
-    const data =
-        localStorage.getItem(
-            "user_" + username
-        );
+        <h2>Settings</h2>
 
-    if(!data){
 
-        return null;
+        <div class="setting-row">
 
-    }
+            <span>
+                Sound
+            </span>
 
+            <input
+                type="checkbox"
+                id="soundToggle"
+                checked
+            >
 
-    return JSON.parse(data);
+        </div>
 
-}
 
+        <div class="setting-row">
 
+            <span>
+                Music
+            </span>
 
-// ------------------------------
-// SAVE CURRENT USER
-// ------------------------------
+            <input
+                type="checkbox"
+                id="musicToggle"
+                checked
+            >
 
-function saveCurrentUser(user){
+        </div>
 
-    localStorage.setItem(
 
-        "user_" + user.username,
+        <button
+            type="button"
+            id="closeSettingsBtn"
+        >
+            Close
+        </button>
 
-        JSON.stringify(user)
+    </div>
 
-    );
+</div>
 
-}
 
+<!-- =========================================================
+     ABOUT POPUP
+     ========================================================= -->
 
+<div
+    id="aboutBox"
+    style="display:none;"
+>
 
-// ------------------------------
-// REQUIRE LOGIN
-// ------------------------------
+    <div class="about-content">
 
-function requireLogin(){
 
-    const username =
-        localStorage.getItem(
-            "currentUser"
-        );
+        <button
+            type="button"
+            class="about-close"
+            id="closeAboutBtn"
+        >
+            ×
+        </button>
 
-    if(!username){
 
-        window.location =
-        "login.html";
+        <video
+            class="about-logo"
+            autoplay
+            muted
+            playsinline
+            loop
+        >
+            <source
+                src="image/logo.webm"
+                type="video/webm"
+            >
+        </video>
 
-    }
 
-}
+        <h2>
+            PixVZinz
+        </h2>
+
+
+        <p>
+            Piece Together The Fun!
+        </p>
+
+
+        <p>
+            Challenge yourself,
+            complete puzzles,
+            earn stars,
+            and collect coins.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     SCRIPTS
+     ========================================================= -->
+
+<script src="audio.js"></script>
+
+<script src="auth.js"></script>
+
+<script src="save.js"></script>
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
+
