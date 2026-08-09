@@ -1,17 +1,29 @@
 // ======================================
-// PixVinz
+// PuzzleMania
 // VICTORY SYSTEM
 // ======================================
+//
+// Handles:
+// - Victory screen
+// - Final time
+// - Final moves
+// - Star display
+// - Coin reward
+// - Completed image
+// - Best record
+// - Restart
+// - Home
+// ======================================
 
 
 // ======================================
-// VICTORY SCREEN
+// SHOW VICTORY SCREEN
 // ======================================
 
 function showVictory(stars, reward){
 
     // ------------------------------
-    // GET VICTORY ELEMENTS
+    // Get victory elements directly
     // ------------------------------
 
     const victoryScreen =
@@ -29,21 +41,28 @@ function showVictory(stars, reward){
     const starsDisplay =
         document.getElementById("starsDisplay");
 
+    const completedImage =
+        document.getElementById("completedImage");
+
 
     // ------------------------------
-    // SAFETY CHECK
+    // Safety check
     // ------------------------------
 
     if(!victoryScreen){
+
+        console.error(
+            "PuzzleMania: victoryScreen was not found."
+        );
 
         return;
 
     }
 
 
-    // ------------------------------
+    // ======================================
     // FINAL RESULTS
-    // ------------------------------
+    // ======================================
 
     if(finalTime){
 
@@ -77,13 +96,9 @@ function showVictory(stars, reward){
     }
 
 
-    // ------------------------------
-    // SHOW COMPLETED PUZZLE IMAGE
-    // ------------------------------
-
-    const completedImage =
-        document.getElementById("completedImage");
-
+    // ======================================
+    // COMPLETED PUZZLE IMAGE
+    // ======================================
 
     if(
         completedImage &&
@@ -97,9 +112,9 @@ function showVictory(stars, reward){
     }
 
 
-    // ------------------------------
+    // ======================================
     // BEST RECORD
-    // ------------------------------
+    // ======================================
 
     let bestRecord =
         document.getElementById("bestRecord");
@@ -113,10 +128,6 @@ function showVictory(stars, reward){
 
         bestRecord.id =
             "bestRecord";
-
-
-        bestRecord.style.marginTop =
-            "20px";
 
 
         const victoryBox =
@@ -134,9 +145,9 @@ function showVictory(stars, reward){
     }
 
 
-    // ------------------------------
+    // ======================================
     // GET BEST RECORDS
-    // ------------------------------
+    // ======================================
 
     const bestTime =
         localStorage.getItem(
@@ -158,9 +169,9 @@ function showVictory(stars, reward){
         ) || 1;
 
 
-    // ------------------------------
+    // ======================================
     // BEST STAR DISPLAY
-    // ------------------------------
+    // ======================================
 
     let bestStarText =
         "⭐";
@@ -182,9 +193,9 @@ function showVictory(stars, reward){
     }
 
 
-    // ------------------------------
+    // ======================================
     // DISPLAY BEST RECORD
-    // ------------------------------
+    // ======================================
 
     if(bestRecord){
 
@@ -205,16 +216,31 @@ function showVictory(stars, reward){
     }
 
 
-    // ------------------------------
+    // ======================================
     // SHOW VICTORY SCREEN
-    // ------------------------------
+    // ======================================
 
     victoryScreen.classList.remove(
         "hidden"
     );
 
-}
 
+    // Make absolutely sure it is visible
+    victoryScreen.style.display =
+        "flex";
+
+
+    // Prevent the game underneath
+    // from being interacted with
+    victoryScreen.style.pointerEvents =
+        "auto";
+
+
+    console.log(
+        "PuzzleMania: Victory screen shown."
+    );
+
+}
 
 
 // ======================================
@@ -236,7 +262,6 @@ function backHome(){
 }
 
 
-
 // ======================================
 // RESTART CURRENT LEVEL
 // ======================================
@@ -244,7 +269,7 @@ function backHome(){
 function restartLevel(){
 
     // ------------------------------
-    // HIDE VICTORY SCREEN
+    // Get victory screen directly
     // ------------------------------
 
     const victoryScreen =
@@ -253,17 +278,36 @@ function restartLevel(){
         );
 
 
+    // ------------------------------
+    // Hide victory screen
+    // ------------------------------
+
     if(victoryScreen){
 
         victoryScreen.classList.add(
             "hidden"
         );
 
+
+        victoryScreen.style.display =
+            "none";
+
     }
 
 
     // ------------------------------
-    // STOP CURRENT TIMER
+    // Reset selected piece
+    // ------------------------------
+
+    if(typeof selectedPiece !== "undefined"){
+
+        selectedPiece = null;
+
+    }
+
+
+    // ------------------------------
+    // Stop current timer
     // ------------------------------
 
     if(typeof stopTimer === "function"){
@@ -271,7 +315,9 @@ function restartLevel(){
         stopTimer();
 
     }
-    else if(typeof timer !== "undefined"){
+    else if(
+        typeof timer !== "undefined"
+    ){
 
         clearInterval(timer);
 
@@ -279,7 +325,7 @@ function restartLevel(){
 
 
     // ------------------------------
-    // SHUFFLE AGAIN
+    // Shuffle current puzzle
     // ------------------------------
 
     if(typeof shufflePuzzle === "function"){
