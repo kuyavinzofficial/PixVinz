@@ -481,29 +481,206 @@ function(e){
 
 
 
-
 // ======================================
 // ABOUT
 // ======================================
 
-
 function showAbout(){
 
+    let aboutBox =
+        document.createElement("div");
 
-    alert(
 
-`🧩 PuzzleMania
+    aboutBox.id =
+        "aboutBox";
 
-Version 2.0
 
-Developer:
-Kuya Vinz Official
+    aboutBox.innerHTML = `
 
-Made with HTML, CSS & JavaScript
+        <div class="about-content">
 
-© 2026`
+            <button
+                class="about-close"
+                onclick="closeAbout()"
+            >
+                ×
+            </button>
 
+
+            <video
+                class="about-logo"
+                autoplay
+                muted
+                loop
+                playsinline
+            >
+
+                <source
+                    src="images/logo.webm"
+                    type="video/webm"
+                >
+
+            </video>
+
+
+            <p>
+                Version 2.0
+            </p>
+
+
+            <p>
+                Developer:<br>
+                Kuya Vinz Official
+            </p>
+
+
+            <p>
+                Made with HTML, CSS & JavaScript
+            </p>
+
+
+            <p>
+                © 2026
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        aboutBox
     );
 
 
+    let logo =
+        aboutBox.querySelector(
+            ".about-logo"
+        );
+
+
+    if(logo){
+
+        logo.play().catch(
+            function(){}
+        );
+
+    }
+
 }
+
+
+// ======================================
+// CLOSE ABOUT
+// ======================================
+
+function closeAbout(){
+
+    let aboutBox =
+        document.getElementById(
+            "aboutBox"
+        );
+
+
+    if(aboutBox){
+
+        aboutBox.remove();
+
+    }
+
+}
+
+
+// ======================================
+// PLAYER ACCOUNT
+// ======================================
+
+window.addEventListener("load", function () {
+
+    const currentUser = localStorage.getItem("currentUser");
+
+    // If no user is logged in
+    if (!currentUser) {
+
+        window.location.href = "login.html";
+        return;
+
+    }
+
+    // Load user list
+    const users =
+        JSON.parse(localStorage.getItem("users")) || [];
+
+    // Find logged in user
+    const user =
+        users.find(function(u){
+
+            return u.username === currentUser;
+
+        });
+
+    // Display player information
+    if(user){
+
+        const welcome =
+            document.getElementById("welcomeText");
+
+        const username =
+            document.getElementById("usernameDisplay");
+
+        if(welcome){
+
+            welcome.textContent =
+                "Welcome, " + user.displayName + "!";
+
+        }
+
+        if(username){
+
+            username.textContent =
+                "@" + user.username;
+
+        }
+
+    }
+
+});
+
+
+// ======================================
+// LOGOUT
+// ======================================
+
+function logout(){
+
+    if(confirm("Are you sure you want to logout?")){
+
+        localStorage.removeItem("currentUser");
+
+        window.location.href = "login.html";
+
+    }
+
+}
+
+
+
+// ======================================
+// DISPLAY PLAYER NAME
+// ======================================
+
+window.addEventListener("load", function(){
+
+    const user = getCurrentUser();
+
+    const usernameDisplay =
+        document.getElementById("usernameDisplay");
+
+    if(user && usernameDisplay){
+
+        usernameDisplay.textContent =
+            user.displayName;
+
+    }
+
+});
