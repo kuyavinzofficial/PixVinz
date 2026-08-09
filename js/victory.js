@@ -68,6 +68,35 @@ function showVictory(stars, reward) {
 }
 
 // ======================================
+// SHOW VICTORY MODAL
+// ======================================
+
+function showVictory(starText, reward) {
+    const victoryScreen = document.getElementById("victoryScreen");
+    const starsDisplay = document.getElementById("starsDisplay");
+    const finalTime = document.getElementById("finalTime");
+    const finalMoves = document.getElementById("finalMoves");
+    const rewardCoins = document.getElementById("rewardCoins");
+    const completedImage = document.getElementById("completedImage");
+
+    // Populate Modal Content
+    if (starsDisplay) starsDisplay.textContent = starText || "⭐⭐⭐";
+    if (finalTime) finalTime.textContent = (typeof seconds !== "undefined" ? seconds : 0) + "s";
+    if (finalMoves) finalMoves.textContent = typeof moves !== "undefined" ? moves : 0;
+    if (rewardCoins) rewardCoins.textContent = reward || 0;
+    
+    if (completedImage && typeof getCurrentImage === "function") {
+        completedImage.src = getCurrentImage();
+    }
+
+    // Unhide Victory Screen
+    if (victoryScreen) {
+        victoryScreen.classList.remove("hidden");
+    }
+}
+
+
+// ======================================
 // BACK TO HOME
 // ======================================
 
