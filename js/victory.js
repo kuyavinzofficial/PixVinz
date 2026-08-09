@@ -22,12 +22,51 @@
 
 function showVictory(stars, reward){
 
+    console.log("PuzzleMania: showVictory() called");
+
+
     // ------------------------------
-    // Get victory elements directly
+    // Get victory screen
     // ------------------------------
 
     const victoryScreen =
         document.getElementById("victoryScreen");
+
+
+    // ------------------------------
+    // Safety check
+    // ------------------------------
+
+    if(!victoryScreen){
+
+        console.error(
+            "PuzzleMania: #victoryScreen not found."
+        );
+
+        return;
+
+    }
+
+
+    // ======================================
+    // SHOW SCREEN IMMEDIATELY
+    // ======================================
+
+    victoryScreen.classList.remove("hidden");
+
+    victoryScreen.style.setProperty(
+        "display",
+        "flex",
+        "important"
+    );
+
+    victoryScreen.style.pointerEvents =
+        "auto";
+
+
+    // ======================================
+    // GET VICTORY ELEMENTS
+    // ======================================
 
     const finalTime =
         document.getElementById("finalTime");
@@ -45,23 +84,8 @@ function showVictory(stars, reward){
         document.getElementById("completedImage");
 
 
-    // ------------------------------
-    // Safety check
-    // ------------------------------
-
-    if(!victoryScreen){
-
-        console.error(
-            "PuzzleMania: victoryScreen was not found."
-        );
-
-        return;
-
-    }
-
-
     // ======================================
-    // FINAL RESULTS
+    // FINAL TIME
     // ======================================
 
     if(finalTime){
@@ -72,6 +96,10 @@ function showVictory(stars, reward){
     }
 
 
+    // ======================================
+    // FINAL MOVES
+    // ======================================
+
     if(finalMoves){
 
         finalMoves.textContent =
@@ -80,6 +108,10 @@ function showVictory(stars, reward){
     }
 
 
+    // ======================================
+    // COIN REWARD
+    // ======================================
+
     if(rewardCoins){
 
         rewardCoins.textContent =
@@ -87,6 +119,10 @@ function showVictory(stars, reward){
 
     }
 
+
+    // ======================================
+    // STARS
+    // ======================================
 
     if(starsDisplay){
 
@@ -97,7 +133,7 @@ function showVictory(stars, reward){
 
 
     // ======================================
-    // COMPLETED PUZZLE IMAGE
+    // COMPLETED IMAGE
     // ======================================
 
     if(
@@ -131,7 +167,9 @@ function showVictory(stars, reward){
 
 
         const victoryBox =
-            document.querySelector(".victory-box");
+            document.querySelector(
+                ".victory-box"
+            );
 
 
         if(victoryBox){
@@ -170,7 +208,7 @@ function showVictory(stars, reward){
 
 
     // ======================================
-    // BEST STAR DISPLAY
+    // BEST STAR TEXT
     // ======================================
 
     let bestStarText =
@@ -217,27 +255,11 @@ function showVictory(stars, reward){
 
 
     // ======================================
-    // SHOW VICTORY SCREEN
+    // FINAL CONFIRMATION
     // ======================================
 
-    victoryScreen.classList.remove(
-        "hidden"
-    );
-
-
-    // Make absolutely sure it is visible
-    victoryScreen.style.display =
-        "flex";
-
-
-    // Prevent the game underneath
-    // from being interacted with
-    victoryScreen.style.pointerEvents =
-        "auto";
-
-
     console.log(
-        "PuzzleMania: Victory screen shown."
+        "PuzzleMania: Victory screen displayed."
     );
 
 }
@@ -269,7 +291,7 @@ function backHome(){
 function restartLevel(){
 
     // ------------------------------
-    // Get victory screen directly
+    // Get victory screen
     // ------------------------------
 
     const victoryScreen =
@@ -287,7 +309,6 @@ function restartLevel(){
         victoryScreen.classList.add(
             "hidden"
         );
-
 
         victoryScreen.style.display =
             "none";
@@ -307,7 +328,7 @@ function restartLevel(){
 
 
     // ------------------------------
-    // Stop current timer
+    // Stop timer
     // ------------------------------
 
     if(typeof stopTimer === "function"){
