@@ -1,111 +1,180 @@
-// ==============================
-// PixVinz Audio Manager
-// ==============================
-
-
-// ==============================
-// User Audio Settings
-// ==============================
-
-let musicEnabled =
-    localStorage.getItem("music") !== "off";
-
-let soundEnabled =
-    localStorage.getItem("sound") !== "off";
-
-
-// ==============================
-// MAIN BACKGROUND MUSIC
-// ==============================
-// Used on:
-// - Loading page
-// - Main menu
-// - Level selection
+// ======================================
+// PixVZinz
+// AUDIO SYSTEM
+// ======================================
 //
-// File:
-// sounds/main.mp3
-// ==============================
+// Handles:
+//
+// MAIN MUSIC
+// - main.mp3
+//   • Loading / splash screen
+//   • Main menu
+//   • Levels screen
+//
+// PUZZLE MUSIC
+// - bgmusic.mp3
+//   • Puzzle board / game screen
+//
+// BUTTON
+// - click.mp3
+//   • All buttons
+//
+// PUZZLE SOUNDS
+// - select.mp3
+//   • Selecting a puzzle tile
+//
+// - exchange.mp3
+//   • Exchanging two puzzle tiles
+//
+// - shuffle.mp3
+//   • Shuffling the puzzle
+//
+// VICTORY
+// - victory1.mp3 → victory10.mp3
+//   • Victory sounds cycle every 10 levels
+//
+// Example:
+//
+// Level 1  → victory1.mp3
+// Level 2  → victory2.mp3
+// ...
+// Level 10 → victory10.mp3
+// Level 11 → victory1.mp3
+// Level 12 → victory2.mp3
+//
+// Level 20 → victory10.mp3
+// Level 21 → victory1.mp3
+//
+// ======================================
+
+
+// ======================================
+// MUSIC
+// ======================================
 
 const mainMusic =
-    new Audio("sounds/main.mp3");
+    new Audio("sound/main.mp3");
 
-mainMusic.loop = true;
-
-mainMusic.volume = 0.6;
-
-
-// ==============================
-// PUZZLE BOARD MUSIC
-// ==============================
-// Used only while playing
-// the actual puzzle.
-//
-// File:
-// sounds/bgmusic.mp3
-// ==============================
-
-const bgMusic =
-    new Audio("sounds/bgmusic.mp3");
-
-bgMusic.loop = true;
-
-bgMusic.volume = 0.5;
+const puzzleMusic =
+    new Audio("sound/bgmusic.mp3");
 
 
-// ==============================
+// ======================================
 // SOUND EFFECTS
-// ==============================
+// ======================================
 
 const clickSound =
-    new Audio("sounds/click.mp3");
-
-clickSound.volume = 0.7;
-
+    new Audio("sound/click.mp3");
 
 const selectSound =
-    new Audio("sounds/select.mp3");
-
-selectSound.volume = 0.7;
-
+    new Audio("sound/select.mp3");
 
 const exchangeSound =
-    new Audio("sounds/exchange.mp3");
-
-exchangeSound.volume = 0.7;
-
+    new Audio("sound/exchange.mp3");
 
 const shuffleSound =
-    new Audio("sounds/shuffle.mp3");
-
-shuffleSound.volume = 0.7;
+    new Audio("sound/shuffle.mp3");
 
 
-// ==============================
-// MAIN MUSIC
-// ==============================
+// ======================================
+// VICTORY SOUNDS
+// ======================================
 
-function startMainMusic(){
+const victorySounds = [];
 
-    if(!musicEnabled) return;
+for(let i = 1; i <= 10; i++){
 
-
-    // Stop puzzle music
-
-    bgMusic.pause();
-
-    bgMusic.currentTime = 0;
-
-
-    // Start main menu music
-
-    if(mainMusic.paused){
-
-        mainMusic.play().catch(() => {});
-
-    }
+    victorySounds.push(
+        new Audio(
+            "sound/victory" + i + ".mp3"
+        )
+    );
 
 }
 
+
+// ======================================
+// VOLUME SETTINGS
+// ======================================
+
+mainMusic.volume = 0.45;
+
+puzzleMusic.volume = 0.35;
+
+clickSound.volume = 0.65;
+
+selectSound.volume = 0.60;
+
+exchangeSound.volume = 0.60;
+
+shuffleSound.volume = 0.60;
+
+
+// Victory volume
+
+victorySounds.forEach(
+    function(sound){
+
+        sound.volume = 0.75;
+
+    }
+);
+
+
+// ======================================
+// LOOP SETTINGS
+// ======================================
+
+// Main music loops continuously
+// on splash/menu/levels.
+
+mainMusic.loop = true;
+
+
+// Puzzle music loops continuously
+// during every puzzle.
+
+puzzleMusic.loop = true;
+
+
+// ======================================
+// PLAY MAIN MUSIC
+// ======================================
+//
+// Used by:
+// - Splash/loading
+// - Main menu
+// - Levels
+//
+// ======================================
+
+function playMainMusic(){
+
+    // Stop puzzle music
+
+    puzzleMusic.pause();
+
+    puzzleMusic.currentTime = 0;
+
+
+    // Start main music
+
+    mainMusic.play().catch(
+        function(){
+
+            console.log(
+                "PixVZinz: Main music waiting for interaction."
+            );
+
+        }
+    );
+
+}
+
+
+// ======================================
+// STOP MAIN MUSIC
+// ======================================
 
 function stopMainMusic(){
 
@@ -114,28 +183,19 @@ function stopMainMusic(){
     mainMusic.currentTime = 0;
 
 }
+
+
 // ======================================
-// AUTO START MAIN MUSIC
+// PLAY PUZZLE MUSIC
+// ======================================
+//
+// Used only on game.html.
+//
 // ======================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function playPuzzleMusic(){
 
-        startMainMusic();
-
-    }
-);
-
-// ==============================
-// PUZZLE MUSIC
-// ==============================
-
-function startMusic(){
-
-    if(!musicEnabled) return;
-
-    // Stop main menu music
+    // Stop main music
 
     mainMusic.pause();
 
@@ -144,202 +204,299 @@ function startMusic(){
 
     // Start puzzle music
 
-    bgMusic.play().catch(() => {});
+    puzzleMusic.play().catch(
+        function(){
 
-}
+            console.log(
+                "PixVZinz: Puzzle music waiting for interaction."
+            );
 
-
-function stopMusic(){
-
-    bgMusic.pause();
-
-    bgMusic.currentTime = 0;
-
-}
-
-
-// ==============================
-// MUSIC TOGGLE
-// ==============================
-
-function toggleMusic(){
-
-    musicEnabled = !musicEnabled;
-
-
-    localStorage.setItem(
-        "music",
-        musicEnabled ? "on" : "off"
+        }
     );
 
+}
 
-    if(!musicEnabled){
 
-        stopMainMusic();
+// ======================================
+// STOP PUZZLE MUSIC
+// ======================================
 
-        stopMusic();
+function stopPuzzleMusic(){
 
-    }
+    puzzleMusic.pause();
+
+    puzzleMusic.currentTime = 0;
 
 }
 
 
-// ==============================
-// SOUND EFFECTS
-// ==============================
+// ======================================
+// BUTTON CLICK
+// ======================================
+//
+// Used for every button.
+//
+// ======================================
 
 function playClick(){
 
-    if(!soundEnabled) return;
-
-
     clickSound.currentTime = 0;
 
-    clickSound.play().catch(() => {});
+    clickSound.play().catch(
+        function(){
+
+            console.log(
+                "PixVZinz: Click sound blocked."
+            );
+
+        }
+    );
 
 }
 
+
+// ======================================
+// TILE SELECT
+// ======================================
+//
+// Used when the player selects
+// a puzzle tile.
+//
+// ======================================
 
 function playSelect(){
 
-    if(!soundEnabled) return;
-
-
     selectSound.currentTime = 0;
 
-    selectSound.play().catch(() => {});
+    selectSound.play().catch(
+        function(){
+
+            console.log(
+                "PixVZinz: Select sound blocked."
+            );
+
+        }
+    );
 
 }
 
+
+// ======================================
+// TILE EXCHANGE
+// ======================================
+//
+// Used when two puzzle tiles
+// exchange positions.
+//
+// ======================================
 
 function playExchange(){
 
-    if(!soundEnabled) return;
-
-
     exchangeSound.currentTime = 0;
 
-    exchangeSound.play().catch(() => {});
+    exchangeSound.play().catch(
+        function(){
+
+            console.log(
+                "PixVZinz: Exchange sound blocked."
+            );
+
+        }
+    );
 
 }
 
+
+// ======================================
+// PUZZLE SHUFFLE
+// ======================================
+//
+// Used whenever a puzzle is shuffled.
+//
+// ======================================
 
 function playShuffle(){
 
-    if(!soundEnabled) return;
-
-
     shuffleSound.currentTime = 0;
 
-    shuffleSound.play().catch(() => {});
+    shuffleSound.play().catch(
+        function(){
 
-}
+            console.log(
+                "PixVZinz: Shuffle sound blocked."
+            );
 
-
-function playVictory(level){
-
-    if(!soundEnabled) return;
-
-
-    const victory =
-        new Audio(
-            "sounds/victory" +
-            level +
-            ".mp3"
-        );
-
-
-    victory.volume = 1.2;
-
-
-    victory.play().catch(() => {});
-
-}
-
-
-// ==============================
-// SETTINGS
-// ==============================
-
-function setMusic(enabled){
-
-    musicEnabled = enabled;
-
-
-    localStorage.setItem(
-        "music",
-        enabled ? "on" : "off"
+        }
     );
 
+}
 
-    if(!enabled){
 
-        stopMainMusic();
+// ======================================
+// VICTORY SOUND
+// ======================================
+//
+// Cycles through victory1.mp3
+// through victory10.mp3.
+//
+// The cycle repeats forever.
+//
+// ======================================
 
-        stopMusic();
+function playVictorySound(levelNumber){
+
+    // Safety
+
+    if(
+        typeof levelNumber !== "number" ||
+        levelNumber < 1
+    ){
+
+        levelNumber = 1;
 
     }
 
-}
+
+    // Convert level to 0-9
+
+    const index =
+        (levelNumber - 1) % 10;
 
 
-// ==============================
-// SET SOUND
-// ==============================
-
-function setSound(enabled){
-
-    soundEnabled = enabled;
+    const victorySound =
+        victorySounds[index];
 
 
-    localStorage.setItem(
-        "sound",
-        enabled ? "on" : "off"
+    if(!victorySound){
+
+        return;
+
+    }
+
+
+    // Stop puzzle background music
+
+    puzzleMusic.pause();
+
+
+    // Reset victory sound
+
+    victorySound.currentTime = 0;
+
+
+    // Play victory sound
+
+    victorySound.play().catch(
+        function(){
+
+            console.log(
+                "PixVZinz: Victory sound waiting for interaction."
+            );
+
+        }
     );
 
 }
 
 
-// ==============================
-// AUTO CLICK SOUNDS
-// ==============================
+// ======================================
+// STOP ALL VICTORY SOUNDS
+// ======================================
+
+function stopVictorySounds(){
+
+    victorySounds.forEach(
+        function(sound){
+
+            sound.pause();
+
+            sound.currentTime = 0;
+
+        }
+    );
+
+}
+
+
+// ======================================
+// STOP ALL AUDIO
+// ======================================
+//
+// Useful when changing pages.
+//
+// ======================================
+
+function stopAllAudio(){
+
+    // Main music
+
+    mainMusic.pause();
+
+    mainMusic.currentTime = 0;
+
+
+    // Puzzle music
+
+    puzzleMusic.pause();
+
+    puzzleMusic.currentTime = 0;
+
+
+    // Victory sounds
+
+    stopVictorySounds();
+
+}
+
+
+// ======================================
+// AUTOMATIC BUTTON SOUND
+// ======================================
+//
+// Every HTML <button> automatically
+// plays click.mp3.
+//
+// This prevents us from having to
+// manually add playClick() to every
+// button.
+//
+// ======================================
 
 document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest("button");
 
 
-        // ------------------------------
-        // All buttons
-        // ------------------------------
+        if(!button){
 
-        document
-        .querySelectorAll("button")
-        .forEach(button => {
+            return;
 
-            button.addEventListener(
-                "click",
-                playClick
-            );
-
-        });
+        }
 
 
-        // ------------------------------
-        // Level cards
-        // ------------------------------
-
-        document
-        .querySelectorAll(".level-card")
-        .forEach(card => {
-
-            card.addEventListener(
-                "click",
-                playClick
-            );
-
-        });
-
+        playClick();
 
     }
 );
+
+
+// ======================================
+// INITIAL STATE
+// ======================================
+//
+// Start with all audio stopped.
+//
+// Individual pages will start the
+// appropriate music.
+//
+// ======================================
+
+stopAllAudio();
+
+
+// ======================================
+// END OF AUDIO SYSTEM
+// ======================================
