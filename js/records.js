@@ -1,198 +1,314 @@
 // ======================================
-// PuzzleMania
-// RECORD SYSTEM
+// PixVZinz
+// RECORDS SYSTEM
+// ======================================
+//
+// Handles:
+// - Best time
+// - Best moves
+// - Best stars
+// - Level completion records
+// - Reading saved records
 // ======================================
 
 
 // ======================================
-// LEVEL VALIDATION
+// SAVE BEST TIME
 // ======================================
 
-function validateLevel(){
+function saveBestTime(levelNumber, time){
 
-    if(level < 1){
-
-        level = 1;
-
-    }
-
-
-    if(level > 60){
-
-        level = 60;
-
-    }
+    const key =
+        "level" +
+        levelNumber +
+        "BestTime";
 
 
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-}
+    const previous =
+        Number(
+            localStorage.getItem(key)
+        ) || 0;
 
 
+    // Save if there is no record
+    // or the new time is better
 
-// ======================================
-// SAFE LEVEL IMAGE CHECK
-// ======================================
-
-function getCurrentImage(){
-
-    if(images[level - 1]){
-
-        return images[level - 1];
-
-    }
-
-
-    return images[0];
-
-}
-
-
-
-// ======================================
-// CHECK IF PUZZLE IS SOLVED
-// ======================================
-
-function isSolved(){
-
-    if(!pieces || pieces.length === 0){
-
-        return false;
-
-    }
-
-
-    for(
-        let i = 0;
-        i < pieces.length;
-        i++
+    if(
+        previous === 0 ||
+        time < previous
     ){
 
-        if(pieces[i] !== i){
+        localStorage.setItem(
+            key,
+            time
+        );
 
-            return false;
-
-        }
+        return true;
 
     }
 
 
-    return true;
+    return false;
 
 }
 
 
 // ======================================
-// RECORD HELPERS
+// SAVE BEST MOVES
 // ======================================
 
+function saveBestMoves(
+    levelNumber,
+    moveCount
+){
 
-// Get best time of a level
+    const key =
+        "level" +
+        levelNumber +
+        "BestMoves";
+
+
+    const previous =
+        Number(
+            localStorage.getItem(key)
+        ) || 0;
+
+
+    // Save if there is no record
+    // or the new result uses fewer moves
+
+    if(
+        previous === 0 ||
+        moveCount < previous
+    ){
+
+        localStorage.setItem(
+            key,
+            moveCount
+        );
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+// ======================================
+// SAVE BEST STARS
+// ======================================
+
+function saveBestStars(
+    levelNumber,
+    starCount
+){
+
+    const key =
+        "level" +
+        levelNumber +
+        "BestStars";
+
+
+    const previous =
+        Number(
+            localStorage.getItem(key)
+        ) || 0;
+
+
+    // Save only when the new result
+    // has more stars
+
+    if(
+        starCount > previous
+    ){
+
+        localStorage.setItem(
+            key,
+            starCount
+        );
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+// ======================================
+// GET BEST TIME
+// ======================================
 
 function getBestTime(levelNumber){
 
     return Number(
-
         localStorage.getItem(
             "level" +
             levelNumber +
             "BestTime"
         )
-
     ) || 0;
 
 }
 
 
-
-// Get best moves of a level
+// ======================================
+// GET BEST MOVES
+// ======================================
 
 function getBestMoves(levelNumber){
 
     return Number(
-
         localStorage.getItem(
             "level" +
             levelNumber +
             "BestMoves"
         )
-
     ) || 0;
 
 }
 
 
-
-// Get best stars of a level
+// ======================================
+// GET BEST STARS
+// ======================================
 
 function getBestStars(levelNumber){
 
     return Number(
-
         localStorage.getItem(
             "level" +
             levelNumber +
             "BestStars"
         )
-
     ) || 0;
 
 }
 
 
-
 // ======================================
-// TOTAL PLAYER STATISTICS
+// CHECK LEVEL COMPLETION
 // ======================================
 
-function getTotalStars(){
+function isLevelCompleted(levelNumber){
 
-    let total = 0;
-
-
-    for(
-        let i = 1;
-        i <= 60;
-        i++
-    ){
-
-        total +=
-            getBestStars(i);
-
-    }
-
-
-    return total;
+    return(
+        localStorage.getItem(
+            "level" +
+            levelNumber
+        ) === "completed"
+    );
 
 }
 
 
+// ======================================
+// SAVE LEVEL COMPLETION
+// ======================================
+
+function saveLevelCompletion(
+    levelNumber
+){
+
+    localStorage.setItem(
+        "level" +
+        levelNumber,
+        "completed"
+    );
+
+}
+
 
 // ======================================
-// COMPLETED LEVELS
+// GET LEVEL RECORD
+// ======================================
+
+function getLevelRecord(levelNumber){
+
+    return {
+
+        completed:
+            isLevelCompleted(
+                levelNumber
+            ),
+
+        bestTime:
+            getBestTime(
+                levelNumber
+            ),
+
+        bestMoves:
+            getBestMoves(
+                levelNumber
+            ),
+
+        bestStars:
+            getBestStars(
+                levelNumber
+            )
+
+    };
+
+}
+
+
+// ======================================
+// GET STAR TEXT
+// ======================================
+
+function getStarText(starCount){
+
+    if(starCount >= 3){
+
+        return "⭐⭐⭐";
+
+    }
+
+
+    if(starCount === 2){
+
+        return "⭐⭐";
+
+    }
+
+
+    if(starCount === 1){
+
+        return "⭐";
+
+    }
+
+
+    return "";
+
+}
+
+
+// ======================================
+// GET ALL COMPLETED LEVELS
 // ======================================
 
 function getCompletedLevels(){
 
-    let completed = 0;
+    const completed = [];
 
 
     for(
         let i = 1;
-        i <= 60;
+        i <= totalLevels;
         i++
     ){
 
         if(
-            localStorage.getItem(
-                "level" + i
-            ) === "completed"
+            isLevelCompleted(i)
         ){
 
-            completed++;
+            completed.push(i);
 
         }
 
@@ -204,88 +320,39 @@ function getCompletedLevels(){
 }
 
 
-
 // ======================================
-// TOTAL COINS
-// ======================================
-
-function getTotalCoins(){
-
-    return Number(
-
-        localStorage.getItem(
-            "coins"
-        )
-
-    ) || 0;
-
-}
-
-
-
-// ======================================
-// RESET CURRENT DISPLAY
+// GET HIGHEST UNLOCKED LEVEL
 // ======================================
 
-function resetBoardDisplay(){
+function getHighestUnlockedLevel(){
 
-    let movesDisplay =
-        document.getElementById("moves");
-
-
-    let timerDisplay =
-        document.getElementById("timer");
+    let highest = 1;
 
 
-    if(movesDisplay){
+    for(
+        let i = 1;
+        i <= totalLevels;
+        i++
+    ){
 
-        movesDisplay.textContent =
-            moves;
+        if(
+            isLevelCompleted(i)
+        ){
+
+            highest = i + 1;
+
+        }
 
     }
 
 
-    if(timerDisplay){
+    if(highest > totalLevels){
 
-        timerDisplay.textContent =
-            seconds;
-
-    }
-
-}
-
-
-
-// ======================================
-// CHANGE LEVEL
-// ======================================
-
-function changeLevel(newLevel){
-
-    if(newLevel < 1){
-
-        return;
+        highest = totalLevels;
 
     }
 
 
-    if(newLevel > images.length){
-
-        return;
-
-    }
-
-
-    level =
-        newLevel;
-
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-
-    location.reload();
+    return highest;
 
 }
