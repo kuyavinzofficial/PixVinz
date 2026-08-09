@@ -2814,7 +2814,111 @@ input::placeholder{
 
 }
 
+/* ======================================
+   ABOUT POPUP
+   ====================================== */
 
+#aboutBox{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,0.65);
+
+    z-index:9999;
+
+    padding:20px;
+
+}
+
+
+.about-content{
+
+    position:relative;
+
+    width:90%;
+
+    max-width:360px;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        135deg,
+        #312e81,
+        #6d28d9,
+        #9333ea
+    );
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.45);
+
+    color:white;
+
+}
+
+
+.about-logo{
+
+    display:block;
+
+    width:180px;
+
+    max-width:70%;
+
+    height:auto;
+
+    margin:0 auto 15px;
+
+}
+
+
+.about-content p{
+
+    margin:10px 0;
+
+    line-height:1.5;
+
+}
+
+
+.about-close{
+
+    position:absolute;
+
+    top:8px;
+
+    right:12px;
+
+    width:35px;
+
+    height:35px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+
+    font-size:25px;
+
+    line-height:30px;
+
+    cursor:pointer;
+
+}
 
 /* ============================================================
    END OF PUZZLEMANIA CSS
