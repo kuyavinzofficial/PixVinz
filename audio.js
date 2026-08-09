@@ -31,7 +31,7 @@ const mainMusic =
 
 mainMusic.loop = true;
 
-mainMusic.volume = 0.3;
+mainMusic.volume = 0.6;
 
 
 // ==============================
@@ -49,7 +49,7 @@ const bgMusic =
 
 bgMusic.loop = true;
 
-bgMusic.volume = 0.3;
+bgMusic.volume = 0.5;
 
 
 // ==============================
@@ -88,6 +88,7 @@ function startMainMusic(){
 
     if(!musicEnabled) return;
 
+
     // Stop puzzle music
 
     bgMusic.pause();
@@ -95,7 +96,13 @@ function startMainMusic(){
     bgMusic.currentTime = 0;
 
 
-    mainMusic.play().catch(() => {});
+    // Start main menu music
+
+    if(mainMusic.paused){
+
+        mainMusic.play().catch(() => {});
+
+    }
 
 }
 
@@ -107,7 +114,18 @@ function stopMainMusic(){
     mainMusic.currentTime = 0;
 
 }
+// ======================================
+// AUTO START MAIN MUSIC
+// ======================================
 
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        startMainMusic();
+
+    }
+);
 
 // ==============================
 // PUZZLE MUSIC
@@ -231,7 +249,7 @@ function playVictory(level){
         );
 
 
-    victory.volume = 0.8;
+    victory.volume = 1.2;
 
 
     victory.play().catch(() => {});
