@@ -5,15 +5,21 @@
 //
 // Handles:
 // - Player coins
-// - Current/unlocked level
+// - Current / unlocked level
 // - Level completion
 // - Best stars
 // - Best time
 // - Best moves
 // - Level coin rewards
 //
-// Authentication is handled by:
+// Authentication:
 // auth.js
+//
+// Main menu:
+// script.js
+//
+// Audio:
+// audio.js
 //
 // ======================================
 
@@ -33,8 +39,6 @@ const SAVE_LEVEL_KEY =
 // COINS
 // ======================================
 
-// Get total player coins
-
 function getCoins(){
 
     return Number(
@@ -46,8 +50,6 @@ function getCoins(){
 }
 
 
-// Save total player coins
-
 function setCoins(amount){
 
     amount =
@@ -56,19 +58,15 @@ function setCoins(amount){
             Number(amount) || 0
         );
 
-
     localStorage.setItem(
         SAVE_COINS_KEY,
         String(amount)
     );
 
-
     updateCoinDisplay();
 
 }
 
-
-// Add coins
 
 function addCoins(amount){
 
@@ -78,22 +76,17 @@ function addCoins(amount){
             Number(amount) || 0
         );
 
-
     const current =
         getCoins();
-
 
     setCoins(
         current + amount
     );
 
-
     return amount;
 
 }
 
-
-// Remove coins
 
 function removeCoins(amount){
 
@@ -103,10 +96,8 @@ function removeCoins(amount){
             Number(amount) || 0
         );
 
-
     const current =
         getCoins();
-
 
     if(amount > current){
 
@@ -114,18 +105,14 @@ function removeCoins(amount){
 
     }
 
-
     setCoins(
         current - amount
     );
-
 
     return true;
 
 }
 
-
-// Update coin display
 
 function updateCoinDisplay(){
 
@@ -134,13 +121,11 @@ function updateCoinDisplay(){
             "coinDisplay"
         );
 
-
     if(!coinDisplay){
 
         return;
 
     }
-
 
     coinDisplay.textContent =
         getCoins();
@@ -151,8 +136,6 @@ function updateCoinDisplay(){
 // ======================================
 // CURRENT / UNLOCKED LEVEL
 // ======================================
-
-// Get highest unlocked level
 
 function getUnlockedLevel(){
 
@@ -188,11 +171,7 @@ function getUnlockedLevel(){
 }
 
 
-// Save unlocked level
-
-function setUnlockedLevel(
-    levelNumber
-){
+function setUnlockedLevel(levelNumber){
 
     levelNumber =
         Number(levelNumber);
@@ -222,21 +201,6 @@ function setUnlockedLevel(
         );
 
 
-    const current =
-        getUnlockedLevel();
-
-
-    // Never move progress backwards
-
-    if(
-        levelNumber <= current
-    ){
-
-        return;
-
-    }
-
-
     if(
         typeof totalLevels !==
         "undefined"
@@ -247,6 +211,19 @@ function setUnlockedLevel(
                 levelNumber,
                 totalLevels
             );
+
+    }
+
+
+    const current =
+        getUnlockedLevel();
+
+
+    // Never move progress backwards
+
+    if(levelNumber <= current){
+
+        return;
 
     }
 
@@ -263,11 +240,7 @@ function setUnlockedLevel(
 // LEVEL COMPLETION
 // ======================================
 
-// Get completion status
-
-function isLevelCompleted(
-    levelNumber
-){
+function isLevelCompleted(levelNumber){
 
     return(
         localStorage.getItem(
@@ -279,11 +252,7 @@ function isLevelCompleted(
 }
 
 
-// Save level completion
-
-function saveLevelCompletion(
-    levelNumber
-){
+function saveLevelCompletion(levelNumber){
 
     levelNumber =
         Number(levelNumber);
@@ -309,12 +278,19 @@ function saveLevelCompletion(
 
     // Unlock next level
 
-    const nextLevel =
-        levelNumber + 1;
+    if(
+        typeof totalLevels !==
+        "undefined" &&
+        levelNumber >= totalLevels
+    ){
+
+        return;
+
+    }
 
 
     setUnlockedLevel(
-        nextLevel
+        levelNumber + 1
     );
 
 }
@@ -324,9 +300,7 @@ function saveLevelCompletion(
 // BEST STARS
 // ======================================
 
-function getBestStars(
-    levelNumber
-){
+function getBestStars(levelNumber){
 
     return Number(
         localStorage.getItem(
@@ -346,7 +320,6 @@ function saveBestStars(
 
     levelNumber =
         Number(levelNumber);
-
 
     stars =
         Number(stars);
@@ -381,7 +354,6 @@ function saveBestStars(
             String(stars)
         );
 
-
         return true;
 
     }
@@ -396,9 +368,7 @@ function saveBestStars(
 // BEST TIME
 // ======================================
 
-function getBestTime(
-    levelNumber
-){
+function getBestTime(levelNumber){
 
     return Number(
         localStorage.getItem(
@@ -418,7 +388,6 @@ function saveBestTime(
 
     levelNumber =
         Number(levelNumber);
-
 
     time =
         Number(time);
@@ -456,7 +425,6 @@ function saveBestTime(
             String(time)
         );
 
-
         return true;
 
     }
@@ -471,9 +439,7 @@ function saveBestTime(
 // BEST MOVES
 // ======================================
 
-function getBestMoves(
-    levelNumber
-){
+function getBestMoves(levelNumber){
 
     return Number(
         localStorage.getItem(
@@ -493,7 +459,6 @@ function saveBestMoves(
 
     levelNumber =
         Number(levelNumber);
-
 
     moves =
         Number(moves);
@@ -531,7 +496,6 @@ function saveBestMoves(
             String(moves)
         );
 
-
         return true;
 
     }
@@ -546,19 +510,19 @@ function saveBestMoves(
 // LEVEL COINS
 // ======================================
 //
-// Each level can earn a maximum
-// of 15 coins.
+// Maximum per level:
+// 15 coins
 //
-// Stars:
 // 1 star = 5 coins
 // 2 stars = 10 coins
 // 3 stars = 15 coins
 //
+// Currently applies to:
+// Levels 1-30
+//
 // ======================================
 
-function getLevelCoins(
-    levelNumber
-){
+function getLevelCoins(levelNumber){
 
     return Number(
         localStorage.getItem(
@@ -571,8 +535,6 @@ function getLevelCoins(
 }
 
 
-// Add level reward safely
-
 function awardLevelCoins(
     levelNumber,
     stars
@@ -580,7 +542,6 @@ function awardLevelCoins(
 
     levelNumber =
         Number(levelNumber);
-
 
     stars =
         Number(stars);
@@ -600,17 +561,10 @@ function awardLevelCoins(
     }
 
 
-    // Only levels 1-30 use
-    // the current coin reward system.
-
-    if(levelNumber < 1){
-
-        return 0;
-
-    }
-
-
-    if(levelNumber > 30){
+    if(
+        levelNumber < 1 ||
+        levelNumber > 30
+    ){
 
         return 0;
 
@@ -684,9 +638,7 @@ function awardLevelCoins(
 // LEVEL RECORD
 // ======================================
 
-function getLevelRecord(
-    levelNumber
-){
+function getLevelRecord(levelNumber){
 
     return {
 
