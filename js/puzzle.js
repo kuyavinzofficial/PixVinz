@@ -1,87 +1,162 @@
 // ======================================
 // PixVZinz
-// CORE PUZZLE CONTROLLER
+// GAME CONTROL SYSTEM
 // ======================================
 //
 // Handles:
-// - Game setup
-// - Piece creation
-// - Puzzle shuffling
-// - Game statistics reset
-// - Timer startup
-// - Board drawing
-// - Shuffle sound
+// - Piece selection
+// - Piece swapping
+// - Move counting
+// - Victory detection
+// - Star calculation
+// - Coin rewards
+// - Best records
+// - Level completion
+// - Level unlocking
+// - Victory screen
+// - Restart
+// - Home
 //
-// Piece movement and victory detection
-// are handled by the game-control system.
+// Board drawing belongs to board.js
+// Timer belongs to timer.js
+// Audio belongs to audio.js
 // ======================================
 
 
 // ======================================
-// GAME VARIABLES
+// ONE-TIME COIN SYSTEM MIGRATION
 // ======================================
 
-let pieces = [];
+function migrateOldCoins(){
 
-let moves = 0;
+    // Already migrated?
+    if(
+        localStorage.getItem(
+            "pixVZinzCoinMigration"
+        ) === "done"
+    ){
 
-let selectedPiece = null;
-
-
-// ======================================
-// SETUP
-// ======================================
-
-function setup(){
-
-    // ------------------------------
-    // Level Title
-    // ------------------------------
-
-    const levelTitle =
-        document.getElementById("levelTitle");
-
-
-    if(levelTitle){
-
-        levelTitle.textContent =
-            "Level " + level;
+        return;
 
     }
 
 
-    // ------------------------------
-    // Create Puzzle
-    // ------------------------------
-
-    createPieces();
+    let correctedCoins = 0;
 
 
-    // ------------------------------
-    // Shuffle Puzzle
-    // ------------------------------
-
-    shufflePuzzle();
-
-}
-
-
-// ======================================
-// CREATE PUZZLE PIECES
-// ======================================
-
-function createPieces(){
-
-    pieces = [];
-
-
+    // Check completed levels
     for(
-        let i = 0;
-        i < size * size;
+        let i = 1;
+        i <= images.length;
         i++
     ){
 
-        pieces.push(i);
+        // Only completed levels count
+        if(
+            localStorage.getItem(
+                "level" + i
+            ) !== "completed"
+        ){
+
+            continue;
+
+        }
+
+
+        // Get player's best stars
+        const stars =
+            Number(
+                localStorage.getItem(
+                    "level" + i + "BestStars"
+                )
+            ) || 0;
+
+
+        // Current coin system
+        if(stars >= 3){
+
+            correctedCoins += 15;
+
+        }
+        else if(stars === 2){
+
+            correctedCoins += 10;
+
+        }
+        else if(stars === 1){
+
+            correctedCoins += 5;
+
+        }
+
+    }
+
+
+    // Update total coins
+    localStorage.setItem(
+        "coins",
+        correctedCoins
+    );
+
+
+    // Mark migration complete
+    localStorage.setItem(
+        "pixVZinzCoinMigration",
+        "done"
+    );
+
+}
+
+
+// Run migration once
+migrateOldCoins();
+
+
+// ======================================
+// PIECE SELECTION
+// ======================================
+
+function selectPiece(index){
+
+    const allPieces =
+        document.querySelectorAll(".piece");
+
+
+    // ------------------------------
+    // First piece selected
+    // ------------------------------
+
+    if(selectedPiece === null){
+
+        selectedPiece = index;
+
+
+        if(allPieces[index]){
+
+            allPieces[index]
+                .classList.add("selected");
+
+        }
+
+
+        if(typeof playSelect === "function"){
+
+            playSelect();
+
+        }
+
+    }
+
+    // ------------------------------
+    // Second piece selected
+    // ------------------------------
+
+    else{
+
+        swapPieces(
+            selectedPiece,
+            index
+        );
 
     }
 
@@ -89,19 +164,69 @@ function createPieces(){
 
 
 // ======================================
-// RESET GAME STATISTICS
+// SWAP PIECES
 // ======================================
 
-function resetStats(){
+function swapPieces(first, second){
 
-    moves = 0;
+    const allPieces =
+        document.querySelectorAll(".piece");
+
+
+    // ------------------------------
+    // Remove selection
+    // ------------------------------
+
+    if(allPieces[first]){
+
+        allPieces[first]
+            .classList.remove("selected");
+
+    }
+
+
+    // ------------------------------
+    // Same piece selected
+    // ------------------------------
+
+    if(first === second){
+
+        selectedPiece = null;
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Swap pieces
+    // ------------------------------
+
+    const temp =
+        pieces[first];
+
+
+    pieces[first] =
+        pieces[second];
+
+
+    pieces[second] =
+        temp;
+
+
+    // ------------------------------
+    // Clear selection
+    // ------------------------------
 
     selectedPiece = null;
 
 
     // ------------------------------
-    // Reset Moves Display
+    // Increase moves
     // ------------------------------
+
+    moves++;
+
 
     const moveDisplay =
         document.getElementById("moves");
@@ -109,146 +234,25 @@ function resetStats(){
 
     if(moveDisplay){
 
-        moveDisplay.textContent = "0";
+        moveDisplay.textContent =
+            moves;
 
     }
 
 
     // ------------------------------
-    // Reset Timer
+    // Exchange sound
     // ------------------------------
 
-    if(typeof resetTimer === "function"){
+    if(typeof playExchange === "function"){
 
-        resetTimer();
+        playExchange();
 
     }
 
 
     // ------------------------------
-    // Reset Stars Display
-    // ------------------------------
-
-    const stars =
-        document.getElementById("stars");
-
-
-    if(stars){
-
-        stars.textContent = "⭐⭐⭐";
-
-    }
-
-}
-
-
-// ======================================
-// SHUFFLE PUZZLE
-// ======================================
-
-function shufflePuzzle(){
-
-    // ------------------------------
-    // Create Fresh Pieces
-    // ------------------------------
-
-    createPieces();
-
-
-    // ------------------------------
-    // Shuffle Pieces
-    // ------------------------------
-
-    for(
-        let i = pieces.length - 1;
-        i > 0;
-        i--
-    ){
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
-
-
-        [
-            pieces[i],
-            pieces[j]
-        ] =
-        [
-            pieces[j],
-            pieces[i]
-        ];
-
-    }
-
-
-    // ------------------------------
-    // Prevent Already-Solved Puzzle
-    // ------------------------------
-
-    let solved = true;
-
-
-    for(
-        let i = 0;
-        i < pieces.length;
-        i++
-    ){
-
-        if(pieces[i] !== i){
-
-            solved = false;
-
-            break;
-
-        }
-
-    }
-
-
-    // ------------------------------
-    // If accidentally solved,
-    // swap the first two pieces
-    // ------------------------------
-
-    if(
-        solved &&
-        pieces.length > 1
-    ){
-
-        [
-            pieces[0],
-            pieces[1]
-        ] =
-        [
-            pieces[1],
-            pieces[0]
-        ];
-
-    }
-
-
-    // ------------------------------
-    // Reset Statistics
-    // ------------------------------
-
-    resetStats();
-
-
-    // ------------------------------
-    // Start Timer
-    // ------------------------------
-
-    if(typeof startTimer === "function"){
-
-        startTimer();
-
-    }
-
-
-    // ------------------------------
-    // Draw Puzzle Board
+    // Redraw board
     // ------------------------------
 
     if(typeof drawPuzzle === "function"){
@@ -259,13 +263,498 @@ function shufflePuzzle(){
 
 
     // ------------------------------
-    // Shuffle Sound
+    // Check victory
     // ------------------------------
 
-    if(typeof playShuffle === "function"){
+    checkWin();
 
-        playShuffle();
+}
+
+
+// ======================================
+// CHECK PLAYER MOVE
+// ======================================
+
+function checkMove(){
+
+    return;
+
+}
+
+
+// ======================================
+// CHECK IF PUZZLE IS SOLVED
+// ======================================
+
+function isSolved(){
+
+    if(
+        !pieces ||
+        pieces.length === 0
+    ){
+
+        return false;
 
     }
+
+
+    for(
+        let i = 0;
+        i < pieces.length;
+        i++
+    ){
+
+        if(pieces[i] !== i){
+
+            return false;
+
+        }
+
+    }
+
+
+    return true;
+
+}
+
+
+// ======================================
+// CHECK WIN
+// ======================================
+
+function checkWin(){
+
+    // ------------------------------
+    // Puzzle not solved
+    // ------------------------------
+
+    if(!isSolved()){
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Stop timer
+    // ------------------------------
+
+    if(typeof stopTimer === "function"){
+
+        stopTimer();
+
+    }
+    else if(
+        typeof timer !== "undefined"
+    ){
+
+        clearInterval(timer);
+
+    }
+
+
+    // ======================================
+    // CALCULATE STARS
+    // ======================================
+
+    let stars = 1;
+
+
+    // Levels 1-30
+    //
+    // ⭐⭐⭐ = 30 seconds AND 30 moves
+    // ⭐⭐   = 60 seconds AND 60 moves
+    // ⭐     = everything else
+
+    if(level <= 30){
+
+        if(
+            seconds <= 30 &&
+            moves <= 30
+        ){
+
+            stars = 3;
+
+        }
+        else if(
+            seconds <= 60 &&
+            moves <= 60
+        ){
+
+            stars = 2;
+
+        }
+        else{
+
+            stars = 1;
+
+        }
+
+    }
+
+
+    // ======================================
+    // STAR TEXT
+    // ======================================
+
+    let starText = "⭐";
+
+
+    if(stars === 2){
+
+        starText = "⭐⭐";
+
+    }
+
+
+    if(stars === 3){
+
+        starText = "⭐⭐⭐";
+
+    }
+
+
+    // ------------------------------
+    // Update game star display
+    // ------------------------------
+
+    const starsElement =
+        document.getElementById("stars");
+
+
+    if(starsElement){
+
+        starsElement.textContent =
+            starText;
+
+    }
+
+
+    // ======================================
+    // SAVE LEVEL COMPLETION
+    // ======================================
+
+    localStorage.setItem(
+        "level" + level,
+        "completed"
+    );
+
+
+    // ======================================
+    // SAVE BEST STARS
+    // ======================================
+
+    const previousBestStars =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestStars"
+            )
+        ) || 0;
+
+
+    if(stars > previousBestStars){
+
+        localStorage.setItem(
+            "level" + level + "BestStars",
+            stars
+        );
+
+    }
+
+
+    // ======================================
+    // SAVE BEST TIME
+    // ======================================
+
+    const previousBestTime =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestTime"
+            )
+        ) || 0;
+
+
+    if(
+        previousBestTime === 0 ||
+        seconds < previousBestTime
+    ){
+
+        localStorage.setItem(
+            "level" + level + "BestTime",
+            seconds
+        );
+
+    }
+
+
+    // ======================================
+    // SAVE BEST MOVES
+    // ======================================
+
+    const previousBestMoves =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestMoves"
+            )
+        ) || 0;
+
+
+    if(
+        previousBestMoves === 0 ||
+        moves < previousBestMoves
+    ){
+
+        localStorage.setItem(
+            "level" + level + "BestMoves",
+            moves
+        );
+
+    }
+
+
+    // ======================================
+    // COIN REWARD SYSTEM
+    // ======================================
+    //
+    // ⭐    = 5 coins
+    // ⭐⭐   = 10 coins
+    // ⭐⭐⭐  = 15 coins
+    //
+    // Maximum earned per level = 15 coins
+    // ======================================
+
+    let reward = 0;
+
+
+    if(level <= 30){
+
+        // ------------------------------
+        // Star reward
+        // ------------------------------
+
+        const starReward =
+            stars * 5;
+
+
+        // ------------------------------
+        // Coins already earned
+        // ------------------------------
+
+        let levelCoins =
+            Number(
+                localStorage.getItem(
+                    "level" + level + "Coins"
+                )
+            ) || 0;
+
+
+        // ------------------------------
+        // Remaining possible coins
+        // ------------------------------
+
+        const remainingCoins =
+            15 - levelCoins;
+
+
+        // ------------------------------
+        // Calculate actual reward
+        // ------------------------------
+
+        if(remainingCoins > 0){
+
+            reward =
+                Math.min(
+                    starReward,
+                    remainingCoins
+                );
+
+        }
+
+
+        // ------------------------------
+        // Save level coins
+        // ------------------------------
+
+        levelCoins += reward;
+
+
+        localStorage.setItem(
+            "level" + level + "Coins",
+            levelCoins
+        );
+
+
+        // ------------------------------
+        // Add to total coins
+        // ------------------------------
+
+        if(reward > 0){
+
+            let totalCoins =
+                Number(
+                    localStorage.getItem(
+                        "coins"
+                    )
+                ) || 0;
+
+
+            totalCoins += reward;
+
+
+            localStorage.setItem(
+                "coins",
+                totalCoins
+            );
+
+        }
+
+    }
+
+
+    // ======================================
+    // VICTORY SOUND
+    // ======================================
+
+    if(typeof playVictorySound === "function"){
+
+        playVictorySound();
+
+    }
+
+
+    if(typeof playVictory === "function"){
+
+        playVictory(level);
+
+    }
+
+
+    // ======================================
+    // SHOW VICTORY SCREEN
+    // ======================================
+
+    if(typeof showVictory === "function"){
+
+        showVictory(
+            starText,
+            reward
+        );
+
+    }
+    else{
+
+        console.error(
+            "PixVZinz: showVictory() is not available."
+        );
+
+    }
+
+
+    // ======================================
+    // UNLOCK NEXT LEVEL
+    // ======================================
+
+    const unlockedLevel =
+        Number(
+            localStorage.getItem("level")
+        ) || 1;
+
+
+    if(
+        level + 1 > unlockedLevel &&
+        level < images.length
+    ){
+
+        localStorage.setItem(
+            "level",
+            level + 1
+        );
+
+    }
+
+}
+
+
+// ======================================
+// RESTART CURRENT LEVEL
+// ======================================
+
+function restartLevel(){
+
+    // ------------------------------
+    // Hide victory screen
+    // ------------------------------
+
+    const victoryScreen =
+        document.getElementById(
+            "victoryScreen"
+        );
+
+
+    if(victoryScreen){
+
+        victoryScreen.classList.add(
+            "hidden"
+        );
+
+        victoryScreen.style.display =
+            "none";
+
+    }
+
+
+    // ------------------------------
+    // Reset selected piece
+    // ------------------------------
+
+    selectedPiece = null;
+
+
+    // ------------------------------
+    // Stop current timer
+    // ------------------------------
+
+    if(typeof stopTimer === "function"){
+
+        stopTimer();
+
+    }
+    else if(
+        typeof timer !== "undefined"
+    ){
+
+        clearInterval(timer);
+
+    }
+
+
+    // ------------------------------
+    // Shuffle current puzzle
+    // ------------------------------
+
+    if(typeof shufflePuzzle === "function"){
+
+        shufflePuzzle();
+
+    }
+
+}
+
+
+// ======================================
+// BACK TO HOME
+// ======================================
+
+function backHome(){
+
+    if(typeof playClick === "function"){
+
+        playClick();
+
+    }
+
+
+    window.location =
+        "index.html";
 
 }
