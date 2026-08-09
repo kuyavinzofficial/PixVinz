@@ -1,2 +1,2 @@
-# PuzzleMania
-Exciting game for everyone
+# PixVinz
+Exciting puzzle game for everyone
