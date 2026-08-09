@@ -2896,13 +2896,15 @@ input::placeholder{
 
     position:absolute;
 
-    top:8px;
+    top:15px;
 
-    right:12px;
+    right:15px;
 
-    width:35px;
+    width:40px;
 
-    height:35px;
+    height:40px;
+
+    padding:0;
 
     border:none;
 
@@ -2914,11 +2916,22 @@ input::placeholder{
 
     font-size:25px;
 
-    line-height:30px;
+    line-height:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
 
     cursor:pointer;
 
+    z-index:10;
+
 }
+
 
 /* ============================================================
    END OF PUZZLEMANIA CSS
