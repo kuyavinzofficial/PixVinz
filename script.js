@@ -14,6 +14,12 @@ function startGame(){
 
     playClick();
 
+    if(typeof startMainMusic === "function"){
+
+        startMainMusic();
+
+    }
+
     let nextLevel = 1;
 
     for(let i = 1; i <= totalLevels; i++){
@@ -48,10 +54,15 @@ function openLevels(){
 
     playClick();
 
+    if(typeof startMainMusic === "function"){
+
+        startMainMusic();
+
+    }
+
     window.location.href="levels.html";
 
 }
-
 
 function backHome(){
 
