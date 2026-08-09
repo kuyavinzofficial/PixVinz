@@ -1,64 +1,59 @@
 // ======================================
-// PuzzleMania
+// PixVZinz
 // MAIN GAME STARTUP
 // ======================================
+//
+// Handles:
+// - Starting the game
+// - Connecting victory buttons
+// - Starting the puzzle
+// - Starting background music
+// - Hiding the victory screen initially
+//
+// ======================================
 
 
 // ======================================
-// START GAME
+// WAIT FOR PAGE TO LOAD
 // ======================================
 
 window.addEventListener("load", function(){
 
-    // ------------------------------
-    // Victory Elements
-    // ------------------------------
+    console.log("PixVZinz: Game loaded.");
 
-    victoryScreen =
+
+
+    // ==================================
+    // VICTORY SCREEN
+    // ==================================
+
+    const victoryScreen =
         document.getElementById("victoryScreen");
 
-    finalTime =
-        document.getElementById("finalTime");
-
-    finalMoves =
-        document.getElementById("finalMoves");
-
-    rewardCoins =
-        document.getElementById("rewardCoins");
-
-    starsDisplay =
-        document.getElementById("starsDisplay");
-
-
-    nextBtn =
-        document.getElementById("nextBtn");
-
-    retryBtn =
-        document.getElementById("retryBtn");
-
-    homeBtn =
-        document.getElementById("homeBtn");
-
-
-    // ------------------------------
-    // Hide Victory Screen
-    // ------------------------------
 
     if(victoryScreen){
 
         victoryScreen.classList.add("hidden");
 
+        victoryScreen.style.display = "none";
+
     }
 
 
-    // ------------------------------
-    // NEXT BUTTON
-    // ------------------------------
+
+    // ==================================
+    // NEXT LEVEL BUTTON
+    // ==================================
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
 
     if(nextBtn){
 
         nextBtn.onclick = function(){
 
+            // Button sound
             if(typeof playClick === "function"){
 
                 playClick();
@@ -66,23 +61,36 @@ window.addEventListener("load", function(){
             }
 
 
-            let next =
-                level + 1;
+            // Current level
+            const currentLevel =
+                Number(level) || 1;
 
 
-            if(next <= images.length){
+            // Next level
+            const nextLevel =
+                currentLevel + 1;
 
+
+            // Make sure the next level exists
+            if(
+                typeof images !== "undefined" &&
+                nextLevel <= images.length
+            ){
+
+                // Save next level
                 localStorage.setItem(
                     "level",
-                    next
+                    nextLevel
                 );
 
 
-                location.reload();
+                // Reload game
+                window.location.reload();
 
             }
             else{
 
+                // No more levels
                 backHome();
 
             }
@@ -92,9 +100,14 @@ window.addEventListener("load", function(){
     }
 
 
-    // ------------------------------
+
+    // ==================================
     // RETRY BUTTON
-    // ------------------------------
+    // ==================================
+
+    const retryBtn =
+        document.getElementById("retryBtn");
+
 
     if(retryBtn){
 
@@ -107,20 +120,36 @@ window.addEventListener("load", function(){
             }
 
 
-            restartLevel();
+            if(typeof restartLevel === "function"){
+
+                restartLevel();
+
+            }
 
         };
 
     }
 
 
-    // ------------------------------
+
+    // ==================================
     // HOME BUTTON
-    // ------------------------------
+    // ==================================
+
+    const homeBtn =
+        document.getElementById("homeBtn");
+
 
     if(homeBtn){
 
         homeBtn.onclick = function(){
+
+            if(typeof playClick === "function"){
+
+                playClick();
+
+            }
+
 
             backHome();
 
@@ -129,20 +158,29 @@ window.addEventListener("load", function(){
     }
 
 
-    // ------------------------------
+
+    // ==================================
     // START PUZZLE
-    // ------------------------------
+    // ==================================
 
     if(typeof setup === "function"){
 
         setup();
 
     }
+    else{
+
+        console.error(
+            "PixVZinz: setup() was not found."
+        );
+
+    }
 
 
-    // ------------------------------
+
+    // ==================================
     // BACKGROUND MUSIC
-    // ------------------------------
+    // ==================================
 
     if(typeof startMusic === "function"){
 
@@ -150,4 +188,23 @@ window.addEventListener("load", function(){
 
     }
 
+
+
+    console.log(
+        "PixVZinz: Game startup complete."
+    );
+
 });
+
+
+
+// ======================================
+// BACK TO HOME
+// ======================================
+
+function backHome(){
+
+    window.location.href =
+        "index.html";
+
+}
