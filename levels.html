@@ -1,62 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
-    <title>PuzzleMania Levels</title>
-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>PixVinz Levels</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <div class="levels">
 
-
-    <!-- ==================================
-         PUZZLEMANIA LOGO
-         ================================== -->
-
+    <!-- PIXVINZ LOGO -->
     <video class="app-logo level-logo" autoplay muted loop playsinline>
-    <source src="images/logo.webm" type="video/webm">
-</video>
+        <source src="images/logo.webm" type="video/webm">
+    </video>
 
     <h2>Select Level</h2>
 
-
     <div class="coins">
-
-        🪙 Coins:
-        <span id="coins">0</span>
-
+        🪙 Coins: <span id="coins">0</span>
     </div>
 
-
-    <div
-        class="level-grid"
-        id="levelContainer">
-
-    </div>
-
+    <div class="level-grid" id="levelContainer"></div>
 
     <button onclick="playClick(); backHome()">
-
         ⬅ Back
-
     </button>
-
 
 </div>
 
-
+<!-- JavaScript Dependencies -->
 <script src="js/audio.js"></script>
-
+<script src="js/auth.js"></script>
+<script src="js/save.js"></script>
+<script src="js/record.js"></script>
+<script src="js/levels.js"></script>
 <script src="js/script.js"></script>
 
-
 </body>
-
 </html>
