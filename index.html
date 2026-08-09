@@ -1,86 +1,305 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>PuzzleMania</title>
+    <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixVinz</title>
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
 <body>
 
-<div class="menu">
 
-    <h1>🧩</h1>
+<!-- ======================================
+     PIXVINZ OPENING SPLASH
+     ====================================== -->
 
-    <h2>PuzzleMania</h2>
+<div id="puzzleSplash">
 
-    <p>Piece Together The Fun!</p>
+    <video
+        class="splash-logo"
+        autoplay
+        muted
+        playsinline>
 
-    <button onclick="playClick(); startGame()">
-        ▶ PLAY
-    </button>
+        <source
+            src="images/logo.webm"
+            type="video/webm">
 
-    <button onclick="playClick(); openLevels()">
-        🏆 LEVELS
-    </button>
-
-    <button onclick="playClick(); openSettings()">
-    ⚙ SETTINGS
-</button>
+    </video>
 
 </div>
-<div id="settingsPopup" class="popup">
+
+
+<!-- ======================================
+     MAIN MENU
+     ====================================== -->
+
+<div class="menu">
+
+
+    <!-- ==================================
+         PIXVINZ ANIMATED LOGO
+         ================================== -->
+
+    <video
+        class="app-logo"
+        autoplay
+        muted
+        loop
+        playsinline>
+
+        <source
+            src="images/logo.webm"
+            type="video/webm">
+
+    </video>
+
+
+    <!-- ==========================
+         PLAYER PROFILE
+         ========================== -->
+
+    <div id="playerProfile">
+
+        <h3 id="welcomeText">
+            Welcome!
+        </h3>
+
+        <p id="usernameDisplay"></p>
+
+    </div>
+
+
+    <!-- ==========================
+         TAGLINE
+         ========================== -->
+
+    <p>
+        Piece Together The Fun!
+    </p>
+
+
+    <!-- ==========================
+         PLAY
+         ========================== -->
+
+    <button
+        onclick="playClick(); startGame()">
+
+        ▶ PLAY
+
+    </button>
+
+
+    <!-- ==========================
+         LEVELS
+         ========================== -->
+
+    <button
+        onclick="playClick(); openLevels()">
+
+        🏆 LEVELS
+
+    </button>
+
+
+    <!-- ==========================
+         SETTINGS
+         ========================== -->
+
+    <button
+        onclick="playClick(); openSettings()">
+
+        ⚙ SETTINGS
+
+    </button>
+
+
+    <!-- ==========================
+         LOGOUT
+         ========================== -->
+
+    <button
+        class="logout-btn"
+        onclick="logout()">
+
+        🚪 Logout
+
+    </button>
+
+
+</div>
+
+
+<!-- ======================================
+     SETTINGS POPUP
+     ====================================== -->
+
+<div
+    id="settingsPopup"
+    class="popup">
+
 
     <div class="popup-box">
 
-        <h2>⚙ Settings</h2>
+
+        <h2>
+            ⚙ Settings
+        </h2>
+
+
+        <!-- ==========================
+             MUSIC
+             ========================== -->
 
         <div class="setting-row">
 
-            <span>🎵 Music</span>
+            <span>
+                🎵 Music
+            </span>
 
-            <input type="checkbox" id="musicToggle">
+            <input
+                type="checkbox"
+                id="musicToggle">
 
         </div>
+
+
+        <!-- ==========================
+             SOUND
+             ========================== -->
 
         <div class="setting-row">
 
-            <span>🔊 Sound Effects</span>
+            <span>
+                🔊 Sound Effects
+            </span>
 
-            <input type="checkbox" id="soundToggle">
+            <input
+                type="checkbox"
+                id="soundToggle">
 
         </div>
+
+
+        <!-- ==========================
+             ANIMATIONS
+             ========================== -->
 
         <div class="setting-row">
 
-            <span>✨ Animations</span>
+            <span>
+                ✨ Animations
+            </span>
 
-            <input type="checkbox" id="animationToggle">
+            <input
+                type="checkbox"
+                id="animationToggle">
 
         </div>
 
-        <button onclick="resetProgress()">
+
+        <!-- ==========================
+             RESET PROGRESS
+             ========================== -->
+
+        <button
+            onclick="resetProgress()">
+
             🗑 Reset Progress
+
         </button>
 
-        <button onclick="showAbout()">
+
+        <!-- ==========================
+             ABOUT
+             ========================== -->
+
+        <button
+            onclick="showAbout()">
+
             ℹ About
+
         </button>
 
-        <button onclick="closeSettings()">
+
+        <!-- ==========================
+             CLOSE
+             ========================== -->
+
+        <button
+            onclick="closeSettings()">
+
             ❌ Close
+
         </button>
+
 
     </div>
 
 </div>
+
+
+<!-- ======================================
+     JAVASCRIPT
+     ====================================== -->
+
 <script src="audio.js"></script>
+
+<script src="auth.js"></script>
+
+<script src="save.js"></script>
+
 <script src="script.js"></script>
+
+
+<!-- ======================================
+     SPLASH CONTROL
+     ====================================== -->
+
+<script>
+
+window.addEventListener("load", function(){
+
+    const splash =
+        document.getElementById("puzzleSplash");
+
+
+    if(!splash){
+
+        return;
+
+    }
+
+
+    /*
+       Let the PixVinz logo play first.
+       Adjust this number later if needed.
+    */
+
+    setTimeout(function(){
+
+        splash.classList.add(
+            "splashHidden"
+        );
+
+    }, 4000);
+
+});
+
+</script>
+
 
 </body>
 
