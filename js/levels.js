@@ -1,82 +1,43 @@
+
 // ======================================
-// PuzzleMania
+// PixVZinz
 // LEVEL SYSTEM
 // ======================================
+//
+// Supports up to 200 levels.
+//
+// Image naming:
+// image/level1.jpeg
+// image/level2.jpeg
+// ...
+// image/level200.jpeg
+//
+// To add future levels:
+// Just upload the next image.
+// No need to edit this file.
+// ======================================
 
 
 // ======================================
-// IMAGE LIST
+// TOTAL LEVELS
 // ======================================
 
-let images = [
+const totalLevels = 200;
 
-    "images/level1.jpeg",
-    "images/level2.jpeg",
-    "images/level3.jpeg",
-    "images/level4.jpeg",
-    "images/level5.jpeg",
-    "images/level6.jpeg",
-    "images/level7.jpeg",
-    "images/level8.jpeg",
-    "images/level9.jpeg",
-    "images/level10.jpeg",
 
-    "images/level11.jpeg",
-    "images/level12.jpeg",
-    "images/level13.jpeg",
-    "images/level14.jpeg",
-    "images/level15.jpeg",
-    "images/level16.jpeg",
-    "images/level17.jpeg",
-    "images/level18.jpeg",
-    "images/level19.jpeg",
-    "images/level20.jpeg",
+// ======================================
+// LEVEL IMAGES
+// ======================================
 
-    "images/level21.jpeg",
-    "images/level22.jpeg",
-    "images/level23.jpeg",
-    "images/level24.jpeg",
-    "images/level25.jpeg",
-    "images/level26.jpeg",
-    "images/level27.jpeg",
-    "images/level28.jpeg",
-    "images/level29.jpeg",
-    "images/level30.jpeg",
+const images = [];
 
-    "images/level31.jpeg",
-    "images/level32.jpeg",
-    "images/level33.jpeg",
-    "images/level34.jpeg",
-    "images/level35.jpeg",
-    "images/level36.jpeg",
-    "images/level37.jpeg",
-    "images/level38.jpeg",
-    "images/level39.jpeg",
-    "images/level40.jpeg",
+for(let i = 1; i <= totalLevels; i++){
 
-    "images/level41.jpeg",
-    "images/level42.jpeg",
-    "images/level43.jpeg",
-    "images/level44.jpeg",
-    "images/level45.jpeg",
-    "images/level46.jpeg",
-    "images/level47.jpeg",
-    "images/level48.jpeg",
-    "images/level49.jpeg",
-    "images/level50.jpeg",
+    images.push(
+        "image/level" + i + ".jpeg"
+    );
 
-    "images/level51.jpeg",
-    "images/level52.jpeg",
-    "images/level53.jpeg",
-    "images/level54.jpeg",
-    "images/level55.jpeg",
-    "images/level56.jpeg",
-    "images/level57.jpeg",
-    "images/level58.jpeg",
-    "images/level59.jpeg",
-    "images/level60.jpeg"
-
-];
+}
 
 
 // ======================================
@@ -84,12 +45,13 @@ let images = [
 // ======================================
 
 let level =
-Number(localStorage.getItem("level")) || 1;
-
+    Number(
+        localStorage.getItem("level")
+    ) || 1;
 
 
 // ======================================
-// LEVEL VALIDATION
+// KEEP LEVEL WITHIN RANGE
 // ======================================
 
 if(level < 1){
@@ -98,23 +60,27 @@ if(level < 1){
 
 }
 
+if(level > totalLevels){
 
-if(level > images.length){
-
-    level = images.length;
+    level = totalLevels;
 
 }
 
 
-localStorage.setItem(
-    "level",
-    level
-);
-
-
-
 // ======================================
-// DIFFICULTY SYSTEM
+// DIFFICULTY
+// ======================================
+//
+// Levels 1-10   = 3 x 3
+// Levels 11-20  = 4 x 4
+// Levels 21-35  = 5 x 5
+// Levels 36-50  = 6 x 6
+// Levels 51-75  = 7 x 7
+// Levels 76-100 = 8 x 8
+// Levels 101-125 = 9 x 9
+// Levels 126-150 = 10 x 10
+// Levels 151-175 = 11 x 11
+// Levels 176-200 = 12 x 12
 // ======================================
 
 let size;
@@ -140,83 +106,165 @@ else if(level <= 50){
     size = 6;
 
 }
-else{
+else if(level <= 75){
 
     size = 7;
 
 }
+else if(level <= 100){
 
+    size = 8;
+
+}
+else if(level <= 125){
+
+    size = 9;
+
+}
+else if(level <= 150){
+
+    size = 10;
+
+}
+else if(level <= 175){
+
+    size = 11;
+
+}
+else{
+
+    size = 12;
+
+}
 
 
 // ======================================
-// GET CURRENT IMAGE
+// GET CURRENT LEVEL IMAGE
 // ======================================
 
 function getCurrentImage(){
 
-    let index =
-    level - 1;
-
-
-    if(images[index]){
-
-        return images[index];
-
-    }
-
-
-    return images[0];
+    return images[level - 1];
 
 }
 
 
-
 // ======================================
-// NEXT LEVEL
-// ======================================
-
-function nextLevel(){
-
-    if(level < images.length){
-
-        level++;
-
-
-        localStorage.setItem(
-            "level",
-            level
-        );
-
-
-        location.reload();
-
-    }
-    else{
-
-        window.location =
-        "index.html";
-
-    }
-
-}
-
-
-
-// ======================================
-// RESET GAME PROGRESS
+// CHECK IF LEVEL EXISTS
 // ======================================
 
-function resetLevel(){
+function levelExists(levelNumber){
 
-    level = 1;
-
-
-    localStorage.setItem(
-        "level",
-        level
+    return(
+        levelNumber >= 1 &&
+        levelNumber <= totalLevels
     );
 
+}
 
-    location.reload();
+
+// ======================================
+// GET NEXT LEVEL
+// ======================================
+
+function getNextLevel(){
+
+    if(level < totalLevels){
+
+        return level + 1;
+
+    }
+
+    return null;
 
 }
+
+
+// ======================================
+// GET LEVEL SIZE
+// ======================================
+
+function getLevelSize(levelNumber){
+
+    if(levelNumber <= 10){
+
+        return 3;
+
+    }
+    else if(levelNumber <= 20){
+
+        return 4;
+
+    }
+    else if(levelNumber <= 35){
+
+        return 5;
+
+    }
+    else if(levelNumber <= 50){
+
+        return 6;
+
+    }
+    else if(levelNumber <= 75){
+
+        return 7;
+
+    }
+    else if(levelNumber <= 100){
+
+        return 8;
+
+    }
+    else if(levelNumber <= 125){
+
+        return 9;
+
+    }
+    else if(levelNumber <= 150){
+
+        return 10;
+
+    }
+    else if(levelNumber <= 175){
+
+        return 11;
+
+    }
+
+    return 12;
+
+}
+
+
+// ======================================
+// UPDATE LEVEL SIZE
+// ======================================
+
+size =
+    getLevelSize(level);
+
+
+// ======================================
+// DEBUG INFORMATION
+// ======================================
+
+console.log(
+    "PixVZinz: Level " +
+    level +
+    " / " +
+    totalLevels
+);
+
+console.log(
+    "PixVZinz: Puzzle size " +
+    size +
+    "x" +
+    size
+);
+
+console.log(
+    "PixVZinz: Image " +
+    getCurrentImage()
+);
+
