@@ -1,222 +1,54 @@
 // ======================================
 // PuzzleMania
-// LEVEL SYSTEM
+// LEVEL CONFIGURATION & PROGRESSION
 // ======================================
 
+// Dynamic 60-Level Image Registry (.jpeg)
+var images = Array.from({ length: 60 }, (_, i) => `images/level${i + 1}.jpeg`);
+
+// Safe Level Index Retrieval
+var level = Number(localStorage.getItem("level")) || 1;
+
+// Validate Level Bounds
+if (level < 1) level = 1;
+if (level > images.length) level = images.length;
+localStorage.setItem("level", level);
 
 // ======================================
-// IMAGE LIST
+// GRID DIFFICULTY PROPORTIONS
 // ======================================
 
-let images = [
-
-    "images/level1.jpeg",
-    "images/level2.jpeg",
-    "images/level3.jpeg",
-    "images/level4.jpeg",
-    "images/level5.jpeg",
-    "images/level6.jpeg",
-    "images/level7.jpeg",
-    "images/level8.jpeg",
-    "images/level9.jpeg",
-    "images/level10.jpeg",
-
-    "images/level11.jpeg",
-    "images/level12.jpeg",
-    "images/level13.jpeg",
-    "images/level14.jpeg",
-    "images/level15.jpeg",
-    "images/level16.jpeg",
-    "images/level17.jpeg",
-    "images/level18.jpeg",
-    "images/level19.jpeg",
-    "images/level20.jpeg",
-
-    "images/level21.jpeg",
-    "images/level22.jpeg",
-    "images/level23.jpeg",
-    "images/level24.jpeg",
-    "images/level25.jpeg",
-    "images/level26.jpeg",
-    "images/level27.jpeg",
-    "images/level28.jpeg",
-    "images/level29.jpeg",
-    "images/level30.jpeg",
-
-    "images/level31.jpeg",
-    "images/level32.jpeg",
-    "images/level33.jpeg",
-    "images/level34.jpeg",
-    "images/level35.jpeg",
-    "images/level36.jpeg",
-    "images/level37.jpeg",
-    "images/level38.jpeg",
-    "images/level39.jpeg",
-    "images/level40.jpeg",
-
-    "images/level41.jpeg",
-    "images/level42.jpeg",
-    "images/level43.jpeg",
-    "images/level44.jpeg",
-    "images/level45.jpeg",
-    "images/level46.jpeg",
-    "images/level47.jpeg",
-    "images/level48.jpeg",
-    "images/level49.jpeg",
-    "images/level50.jpeg",
-
-    "images/level51.jpeg",
-    "images/level52.jpeg",
-    "images/level53.jpeg",
-    "images/level54.jpeg",
-    "images/level55.jpeg",
-    "images/level56.jpeg",
-    "images/level57.jpeg",
-    "images/level58.jpeg",
-    "images/level59.jpeg",
-    "images/level60.jpeg"
-
-];
-
-
-// ======================================
-// CURRENT LEVEL
-// ======================================
-
-let level =
-Number(localStorage.getItem("level")) || 1;
-
-
-
-// ======================================
-// LEVEL VALIDATION
-// ======================================
-
-if(level < 1){
-
-    level = 1;
-
+function getGridSize(lvl) {
+    if (lvl <= 10) return 3;      // Levels 1-10: 3x3
+    if (lvl <= 20) return 4;      // Levels 11-20: 4x4
+    if (lvl <= 35) return 5;      // Levels 21-35: 5x5
+    if (lvl <= 50) return 6;      // Levels 36-50: 6x6
+    return 7;                     // Levels 51-60: 7x7
 }
 
-
-if(level > images.length){
-
-    level = images.length;
-
-}
-
-
-localStorage.setItem(
-    "level",
-    level
-);
-
-
+var size = getGridSize(level);
 
 // ======================================
-// DIFFICULTY SYSTEM
+// HELPERS & NAVIGATION
 // ======================================
 
-let size;
-
-
-if(level <= 10){
-
-    size = 3;
-
-}
-else if(level <= 20){
-
-    size = 4;
-
-}
-else if(level <= 35){
-
-    size = 5;
-
-}
-else if(level <= 50){
-
-    size = 6;
-
-}
-else{
-
-    size = 7;
-
+function getCurrentImage() {
+    const index = level - 1;
+    return images[index] ? images[index] : images[0];
 }
 
-
-
-// ======================================
-// GET CURRENT IMAGE
-// ======================================
-
-function getCurrentImage(){
-
-    let index =
-    level - 1;
-
-
-    if(images[index]){
-
-        return images[index];
-
-    }
-
-
-    return images[0];
-
-}
-
-
-
-// ======================================
-// NEXT LEVEL
-// ======================================
-
-function nextLevel(){
-
-    if(level < images.length){
-
+function nextLevel() {
+    if (level < images.length) {
         level++;
-
-
-        localStorage.setItem(
-            "level",
-            level
-        );
-
-
+        localStorage.setItem("level", level);
         location.reload();
-
+    } else {
+        window.location.href = "index.html";
     }
-    else{
-
-        window.location =
-        "index.html";
-
-    }
-
 }
 
-
-
-// ======================================
-// RESET GAME PROGRESS
-// ======================================
-
-function resetLevel(){
-
+function resetLevel() {
     level = 1;
-
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-
+    localStorage.setItem("level", level);
     location.reload();
-
 }
