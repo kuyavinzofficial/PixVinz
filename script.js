@@ -1,697 +1,369 @@
 // ======================================
-// PuzzleMania Script v2.1
-// Level System + Records
+// PixVZinz
+// MAIN MENU SYSTEM
 // ======================================
-
-const totalLevels = 60;
-
-
-// ==============================
-// Main Menu
-// ==============================
-
-function startGame(){
-
-    playClick();
-
-    if(typeof startMainMusic === "function"){
-
-        startMainMusic();
-
-    }
-
-    let nextLevel = 1;
-
-    for(let i = 1; i <= totalLevels; i++){
-
-        if(localStorage.getItem("level"+i) === "completed"){
-
-            nextLevel = i + 1;
-
-        }
-
-    }
-
-    if(nextLevel > totalLevels){
-
-        nextLevel = totalLevels;
-
-    }
-
-    localStorage.setItem("level", nextLevel);
-
-    window.location.href="game.html";
-
-}
-
-
-
-// ==============================
-// Navigation
-// ==============================
-
-function openLevels(){
-
-    playClick();
-
-    if(typeof startMainMusic === "function"){
-
-        startMainMusic();
-
-    }
-
-    window.location.href="levels.html";
-
-}
-
-function backHome(){
-
-    playClick();
-
-    window.location.href="index.html";
-
-}
-
-
-
-function playLevel(level){
-
-    playClick();
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-    window.location.href="game.html";
-
-}
-
-
-
-// ==============================
-// Load Levels
-// ==============================
-
-function loadLevels(){
-
-    const container =
-    document.getElementById("levelContainer");
-
-
-    if(!container) return;
-
-
-    container.innerHTML="";
-
-
-    const coins =
-    Number(localStorage.getItem("coins")) || 0;
-
-
-    const coinDisplay =
-    document.getElementById("coins");
-
-
-    if(coinDisplay){
-
-        coinDisplay.textContent = coins;
-
-    }
-
-
-
-    for(let i=1;i<=totalLevels;i++){
-
-
-        const button =
-        document.createElement("button");
-
-
-        button.className="level-card";
-
-
-
-        const completed =
-        localStorage.getItem(
-            "level"+i
-        )==="completed";
-
-
-
-        const unlocked =
-        i===1 ||
-        localStorage.getItem(
-            "level"+(i-1)
-        )==="completed";
-
-
-
-        const bestTime =
-        localStorage.getItem(
-            "level"+i+"BestTime"
-        ) || "--";
-
-
-
-        const bestMoves =
-        localStorage.getItem(
-            "level"+i+"BestMoves"
-        ) || "--";
-
-
-
-        const bestStars =
-        Number(
-            localStorage.getItem(
-                "level"+i+"BestStars"
-            )
-        ) || 0;
-
-
-
-        let stars="";
-
-
-        if(bestStars===3){
-
-            stars="⭐⭐⭐";
-
-        }
-        else if(bestStars===2){
-
-            stars="⭐⭐";
-
-        }
-        else if(bestStars===1){
-
-            stars="⭐";
-
-        }
-
-
-
-        // COMPLETED
-
-        if(completed){
-
-
-            button.classList.add(
-                "completed"
-            );
-
-
-            button.innerHTML=
-
-            `
-            ⭐ Level ${i}<br>
-            ${stars}<br>
-            ⏱ ${bestTime}s<br>
-            🔄 ${bestMoves} Moves
-            `;
-
-
-            button.onclick=function(){
-
-                playLevel(i);
-
-            };
-
-
-        }
-
-
-
-        // UNLOCKED
-
-        else if(unlocked){
-
-
-            button.classList.add(
-                "unlocked"
-            );
-
-
-            button.innerHTML=
-
-            `
-            Level ${i}<br>
-            ▶ Play
-            `;
-
-
-            button.onclick=function(){
-
-                playLevel(i);
-
-            };
-
-
-        }
-
-
-
-        // LOCKED
-
-        else{
-
-
-            button.classList.add(
-                "locked"
-            );
-
-
-            button.innerHTML=
-
-            `
-            🔒<br>
-            Level ${i}
-            `;
-
-
-        }
-
-
-        container.appendChild(button);
-
-
-    }
-
-
-}
-
-
-
-// ==============================
-// Auto Load
-// ==============================
-
-window.addEventListener(
-"DOMContentLoaded",
-function(){
-
-
-    if(
-    window.location.pathname.includes("levels")
-    ){
-
-        loadLevels();
-
-    }
-
-
-    const coins =
-    document.getElementById("coins");
-
-
-    if(coins){
-
-        coins.textContent =
-        Number(localStorage.getItem("coins")) || 0;
-
-    }
-
-
-});
-
-
-
-
-// ==============================
-// Reset Progress
-// ==============================
-
-function resetProgress(){
-
-
-    const answer =
-    confirm(
-    "Reset all progress?\n\n"+
-    "This removes:\n"+
-    "• Levels\n"+
-    "• Coins\n"+
-    "• Records\n"+
-    "• Stars"
-    );
-
-
-    if(!answer)return;
-
-
-    localStorage.clear();
-
-
-    localStorage.setItem(
-        "level",
-        1
-    );
-
-
-    localStorage.setItem(
-        "coins",
-        0
-    );
-
-
-    alert(
-        "Progress Reset!"
-    );
-
-
-    window.location.href="index.html";
-
-
-}
-// ======================================
-// SETTINGS SYSTEM
+//
+// Handles only:
+// - Opening the main menu
+// - Splash screen
+// - Play Game button
+// - Levels button
+// - Settings popup
+// - About popup
+// - Logout button
+// - Main menu music
+//
+// Does NOT handle:
+// - Login / signup        → auth.js
+// - Save data             → save.js
+// - Audio functions       → audio.js
+// - Puzzle                → puzzle.js
+// - Board                 → board.js
+// - Timer                 → timer.js
+// - Victory               → victory.js
 // ======================================
 
 
-function openSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-
-    if(!popup) return;
-
-
-    popup.style.display = "flex";
-
-
-    loadSettings();
-
-}
-
-
-
-function closeSettings(){
-
-    const popup =
-    document.getElementById("settingsPopup");
-
-
-    if(!popup) return;
-
-
-    popup.style.display = "none";
-
-}
-
-
-
-
-function loadSettings(){
-
-
-    const music =
-    document.getElementById("musicToggle");
-
-
-    const sound =
-    document.getElementById("soundToggle");
-
-
-    const animation =
-    document.getElementById("animationToggle");
-
-
-
-    if(music){
-
-        music.checked =
-        localStorage.getItem("music") !== "off";
-
-    }
-
-
-    if(sound){
-
-        sound.checked =
-        localStorage.getItem("sound") !== "off";
-
-    }
-
-
-    if(animation){
-
-        animation.checked =
-        localStorage.getItem("animation") !== "off";
-
-    }
-
-}
-
-
-
+// ======================================
+// WAIT FOR PAGE LOAD
+// ======================================
 
 document.addEventListener(
-"change",
-function(e){
+    "DOMContentLoaded",
+    function(){
 
-
-    if(e.target.id==="musicToggle"){
-
-
-        localStorage.setItem(
-            "music",
-            e.target.checked ? "on":"off"
+        console.log(
+            "PixVZinz: Main menu loaded."
         );
 
 
-    }
+        // ==================================
+        // SPLASH SCREEN
+        // ==================================
 
+        const splash =
+            document.getElementById(
+                "puzzleSplash"
+            );
 
 
-    if(e.target.id==="soundToggle"){
+        if(splash){
 
+            setTimeout(
+                function(){
 
-        localStorage.setItem(
-            "sound",
-            e.target.checked ? "on":"off"
-        );
+                    splash.classList.add(
+                        "hidden"
+                    );
 
+                    splash.style.display =
+                        "none";
 
-    }
-
-
-
-    if(e.target.id==="animationToggle"){
-
-
-        localStorage.setItem(
-            "animation",
-            e.target.checked ? "on":"off"
-        );
-
-
-    }
-
-
-});
-
-
-
-// ======================================
-// ABOUT
-// ======================================
-
-function showAbout(){
-
-    let aboutBox =
-        document.createElement("div");
-
-
-    aboutBox.id =
-        "aboutBox";
-
-
-    aboutBox.innerHTML = `
-
-        <div class="about-content">
-
-            <button
-                class="about-close"
-                onclick="closeAbout()"
-            >
-                ×
-            </button>
-
-
-            <video
-                class="about-logo"
-                autoplay
-                muted
-                loop
-                playsinline
-            >
-
-                <source
-                    src="images/logo.webm"
-                    type="video/webm"
-                >
-
-            </video>
-
-
-            <p>
-                Version 2.0
-            </p>
-
-
-            <p>
-                Developer:<br>
-                Kuya Vinz Official
-            </p>
-
-
-            <p>
-                Made with HTML, CSS & JavaScript
-            </p>
-
-
-            <p>
-                © 2026
-            </p>
-
-        </div>
-
-    `;
-
-
-    document.body.appendChild(
-        aboutBox
-    );
-
-
-    let logo =
-        aboutBox.querySelector(
-            ".about-logo"
-        );
-
-
-    if(logo){
-
-        logo.play().catch(
-            function(){}
-        );
-
-    }
-
-}
-
-
-// ======================================
-// CLOSE ABOUT
-// ======================================
-
-function closeAbout(){
-
-    let aboutBox =
-        document.getElementById(
-            "aboutBox"
-        );
-
-
-    if(aboutBox){
-
-        aboutBox.remove();
-
-    }
-
-}
-
-
-// ======================================
-// PLAYER ACCOUNT
-// ======================================
-
-window.addEventListener("load", function () {
-
-    const currentUser = localStorage.getItem("currentUser");
-
-    // If no user is logged in
-    if (!currentUser) {
-
-        window.location.href = "login.html";
-        return;
-
-    }
-
-    // Load user list
-    const users =
-        JSON.parse(localStorage.getItem("users")) || [];
-
-    // Find logged in user
-    const user =
-        users.find(function(u){
-
-            return u.username === currentUser;
-
-        });
-
-    // Display player information
-    if(user){
-
-        const welcome =
-            document.getElementById("welcomeText");
-
-        const username =
-            document.getElementById("usernameDisplay");
-
-        if(welcome){
-
-            welcome.textContent =
-                "Welcome, " + user.displayName + "!";
+                },
+                1800
+            );
 
         }
 
-        if(username){
 
-            username.textContent =
-                "@" + user.username;
+        // ==================================
+        // MAIN MENU
+        // ==================================
+
+        const mainMenu =
+            document.getElementById(
+                "mainMenu"
+            );
+
+
+        // ==================================
+        // PLAY GAME
+        // ==================================
+
+        const startGameBtn =
+            document.getElementById(
+                "startGameBtn"
+            );
+
+
+        if(startGameBtn){
+
+            startGameBtn.onclick =
+                function(){
+
+                    console.log(
+                        "PixVZinz: Starting game."
+                    );
+
+
+                    window.location.href =
+                        "game.html";
+
+                };
 
         }
 
+
+        // ==================================
+        // LEVELS
+        // ==================================
+
+        const levelsBtn =
+            document.getElementById(
+                "levelsBtn"
+            );
+
+
+        if(levelsBtn){
+
+            levelsBtn.onclick =
+                function(){
+
+                    console.log(
+                        "PixVZinz: Opening levels."
+                    );
+
+
+                    window.location.href =
+                        "levels.html";
+
+                };
+
+        }
+
+
+        // ==================================
+        // SETTINGS
+        // ==================================
+
+        const settingsBtn =
+            document.getElementById(
+                "settingsBtn"
+            );
+
+
+        const settingsPopup =
+            document.getElementById(
+                "settingsPopup"
+            );
+
+
+        const closeSettingsBtn =
+            document.getElementById(
+                "closeSettingsBtn"
+            );
+
+
+        if(
+            settingsBtn &&
+            settingsPopup
+        ){
+
+            settingsBtn.onclick =
+                function(){
+
+                    settingsPopup.style.display =
+                        "flex";
+
+                };
+
+        }
+
+
+        if(
+            closeSettingsBtn &&
+            settingsPopup
+        ){
+
+            closeSettingsBtn.onclick =
+                function(){
+
+                    settingsPopup.style.display =
+                        "none";
+
+                };
+
+        }
+
+
+        // ==================================
+        // CLOSE SETTINGS WHEN
+        // CLICKING OUTSIDE THE BOX
+        // ==================================
+
+        if(settingsPopup){
+
+            settingsPopup.addEventListener(
+                "click",
+                function(event){
+
+                    if(
+                        event.target ===
+                        settingsPopup
+                    ){
+
+                        settingsPopup.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // ==================================
+        // ABOUT
+        // ==================================
+
+        const aboutBtn =
+            document.getElementById(
+                "aboutBtn"
+            );
+
+
+        const aboutBox =
+            document.getElementById(
+                "aboutBox"
+            );
+
+
+        const closeAboutBtn =
+            document.getElementById(
+                "closeAboutBtn"
+            );
+
+
+        if(
+            aboutBtn &&
+            aboutBox
+        ){
+
+            aboutBtn.onclick =
+                function(){
+
+                    aboutBox.style.display =
+                        "flex";
+
+                };
+
+        }
+
+
+        if(
+            closeAboutBtn &&
+            aboutBox
+        ){
+
+            closeAboutBtn.onclick =
+                function(){
+
+                    aboutBox.style.display =
+                        "none";
+
+                };
+
+        }
+
+
+        // ==================================
+        // CLOSE ABOUT WHEN
+        // CLICKING OUTSIDE
+        // ==================================
+
+        if(aboutBox){
+
+            aboutBox.addEventListener(
+                "click",
+                function(event){
+
+                    if(
+                        event.target ===
+                        aboutBox
+                    ){
+
+                        aboutBox.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // ==================================
+        // LOGOUT
+        // ==================================
+
+        const logoutBtn =
+            document.getElementById(
+                "logoutBtn"
+            );
+
+
+        if(logoutBtn){
+
+            logoutBtn.onclick =
+                function(){
+
+                    console.log(
+                        "PixVZinz: Logging out."
+                    );
+
+
+                    // auth.js is responsible
+                    // for the actual logout.
+
+                    if(
+                        typeof logoutUser ===
+                        "function"
+                    ){
+
+                        logoutUser();
+
+                    }
+                    else{
+
+                        // Safe fallback
+
+                        localStorage.removeItem(
+                            "loggedInUser"
+                        );
+
+                        localStorage.removeItem(
+                            "currentUser"
+                        );
+
+                        window.location.href =
+                            "index.html";
+
+                    }
+
+                };
+
+        }
+
+
+        // ==================================
+        // MAIN MUSIC
+        // ==================================
+
+        if(
+            typeof playMainMusic ===
+            "function"
+        ){
+
+            playMainMusic();
+
+        }
+
+
+        console.log(
+            "PixVZinz: Main menu ready."
+        );
+
     }
-
-});
-
-
-// ======================================
-// LOGOUT
-// ======================================
-
-function logout(){
-
-    if(confirm("Are you sure you want to logout?")){
-
-        localStorage.removeItem("currentUser");
-
-        window.location.href = "login.html";
-
-    }
-
-}
-
-
-
-// ======================================
-// DISPLAY PLAYER NAME
-// ======================================
-
-window.addEventListener("load", function(){
-
-    const user = getCurrentUser();
-
-    const usernameDisplay =
-        document.getElementById("usernameDisplay");
-
-    if(user && usernameDisplay){
-
-        usernameDisplay.textContent =
-            user.displayName;
-
-    }
-
-});
+);
