@@ -7,7 +7,7 @@
 // - Starting the game
 // - Connecting victory buttons
 // - Starting the puzzle
-// - Starting background music
+// - Starting puzzle background music
 // - Hiding the victory screen initially
 //
 // ======================================
@@ -20,7 +20,6 @@
 window.addEventListener("load", function(){
 
     console.log("PixVZinz: Game loaded.");
-
 
 
     // ==================================
@@ -40,7 +39,6 @@ window.addEventListener("load", function(){
     }
 
 
-
     // ==================================
     // NEXT LEVEL BUTTON
     // ==================================
@@ -52,14 +50,6 @@ window.addEventListener("load", function(){
     if(nextBtn){
 
         nextBtn.onclick = function(){
-
-            // Button sound
-            if(typeof playClick === "function"){
-
-                playClick();
-
-            }
-
 
             // Current level
             const currentLevel =
@@ -77,7 +67,17 @@ window.addEventListener("load", function(){
                 nextLevel <= images.length
             ){
 
+                // Stop current audio
+
+                if(typeof stopAllAudio === "function"){
+
+                    stopAllAudio();
+
+                }
+
+
                 // Save next level
+
                 localStorage.setItem(
                     "level",
                     nextLevel
@@ -85,12 +85,14 @@ window.addEventListener("load", function(){
 
 
                 // Reload game
+
                 window.location.reload();
 
             }
             else{
 
                 // No more levels
+
                 backHome();
 
             }
@@ -98,7 +100,6 @@ window.addEventListener("load", function(){
         };
 
     }
-
 
 
     // ==================================
@@ -113,9 +114,9 @@ window.addEventListener("load", function(){
 
         retryBtn.onclick = function(){
 
-            if(typeof playClick === "function"){
+            if(typeof stopAllAudio === "function"){
 
-                playClick();
+                stopAllAudio();
 
             }
 
@@ -131,7 +132,6 @@ window.addEventListener("load", function(){
     }
 
 
-
     // ==================================
     // HOME BUTTON
     // ==================================
@@ -144,9 +144,9 @@ window.addEventListener("load", function(){
 
         homeBtn.onclick = function(){
 
-            if(typeof playClick === "function"){
+            if(typeof stopAllAudio === "function"){
 
-                playClick();
+                stopAllAudio();
 
             }
 
@@ -156,7 +156,6 @@ window.addEventListener("load", function(){
         };
 
     }
-
 
 
     // ==================================
@@ -177,17 +176,21 @@ window.addEventListener("load", function(){
     }
 
 
-
     // ==================================
-    // BACKGROUND MUSIC
+    // PUZZLE MUSIC
+    // ==================================
+    //
+    // The puzzle page uses bgmusic.mp3.
+    //
+    // main.mp3 is NOT started here.
+    //
     // ==================================
 
-    if(typeof startMusic === "function"){
+    if(typeof playPuzzleMusic === "function"){
 
-        startMusic();
+        playPuzzleMusic();
 
     }
-
 
 
     console.log(
@@ -195,7 +198,6 @@ window.addEventListener("load", function(){
     );
 
 });
-
 
 
 // ======================================
