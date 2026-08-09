@@ -28,11 +28,15 @@ function getCurrentImage() {
 // ======================================
 
 function isSolved() {
-    if (typeof pieces === "undefined" || !pieces || pieces.length === 0) {
-        return false;
+    if (!pieces || pieces.length === 0) return false;
+
+    for (let i = 0; i < pieces.length; i++) {
+        if (Number(pieces[i]) !== i) {
+            return false;
+        }
     }
 
-    return pieces.every((piece, index) => piece === index);
+    return true;
 }
 
 // ======================================
