@@ -1,550 +1,177 @@
 // ======================================
 // PuzzleMania
-// RECORD SYSTEM
+// RECORD & LEVEL SYSTEM
 // ======================================
 
+const MAX_LEVELS = 60;
 
 // ======================================
-// LEVEL VALIDATION
+// LEVEL VALIDATION & IMAGE GETTER
 // ======================================
 
-function validateLevel(){
+function validateLevel() {
+    if (typeof level === "undefined" || level < 1) level = 1;
+    if (level > MAX_LEVELS) level = MAX_LEVELS;
 
-    if(level < 1){
-
-        level = 1;
-
-    }
-
-
-    if(level > 60){
-
-        level = 60;
-
-    }
-
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
+    localStorage.setItem("level", level);
 }
 
-
-
-// ======================================
-// SAFE LEVEL IMAGE CHECK
-// ======================================
-
-function getCurrentImage(){
-
-    if(images[level - 1]){
-
+function getCurrentImage() {
+    if (typeof images !== "undefined" && images[level - 1]) {
         return images[level - 1];
-
     }
-
-
-    return images[0];
-
+    return `images/level${level || 1}.jpg`;
 }
 
-
-
 // ======================================
-// CHECK IF PUZZLE IS SOLVED
+// SOLVED PUZZLE CHECK
 // ======================================
 
-function isSolved(){
-
-    if(!pieces || pieces.length === 0){
-
+function isSolved() {
+    if (typeof pieces === "undefined" || !pieces || pieces.length === 0) {
         return false;
-
     }
 
-
-    for(
-        let i = 0;
-        i < pieces.length;
-        i++
-    ){
-
-        if(pieces[i] !== i){
-
-            return false;
-
-        }
-
-    }
-
-
-    return true;
-
+    return pieces.every((piece, index) => piece === index);
 }
 
-
-
 // ======================================
-// CHECK WIN
+// MAIN WIN EVALUATION
 // ======================================
 
-function checkWin(){
+function checkWin() {
+    if (!isSolved()) return;
 
-    // ------------------------------
-    // Make sure puzzle is solved
-    // ------------------------------
-
-    if(!isSolved()){
-
-        return;
-
-    }
-
-
-    // ------------------------------
-    // Stop Timer
-    // ------------------------------
-
-    if(typeof stopTimer === "function"){
-
+    // 1. Stop Timer
+    if (typeof stopTimer === "function") {
         stopTimer();
-
-    }
-    else{
-
+    } else if (typeof timer !== "undefined") {
         clearInterval(timer);
-
     }
 
+    const currentLevel = typeof level !== "undefined" ? level : 1;
+    const currentSeconds = typeof seconds !== "undefined" ? seconds : 0;
+    const currentMoves = typeof moves !== "undefined" ? moves : 0;
 
-    // ------------------------------
-    // Calculate Stars
-    // ------------------------------
-
+    // 2. Calculate Stars
     let stars = 1;
-
-
-    if(
-        seconds < 60 &&
-        moves < 50
-    ){
-
+    if (currentSeconds < 60 && currentMoves < 50) {
         stars = 3;
-
-    }
-    else if(
-        seconds < 120 &&
-        moves < 100
-    ){
-
+    } else if (currentSeconds < 120 && currentMoves < 100) {
         stars = 2;
-
     }
 
+    let starText = "⭐".repeat(stars);
 
-    // ------------------------------
-    // Star Text
-    // ------------------------------
-
-    let starText = "⭐";
-
-
-    if(stars === 2){
-
-        starText = "⭐⭐";
-
+    // 3. Update UI Stars Display
+    const starDisplay = document.getElementById("stars");
+    if (starDisplay) {
+        starDisplay.textContent = starText;
     }
 
+    // 4. Update Level Completion State
+    localStorage.setItem("level" + currentLevel, "completed");
 
-    if(stars === 3){
-
-        starText = "⭐⭐⭐";
-
+    // 5. Unlock Next Level
+    const unlocked = Number(localStorage.getItem("level")) || 1;
+    if (currentLevel + 1 > unlocked && currentLevel < MAX_LEVELS) {
+        localStorage.setItem("level", currentLevel + 1);
     }
 
+    // 6. Update Best Records
+    const bestStarsKey = "level" + currentLevel + "BestStars";
+    const bestTimeKey = "level" + currentLevel + "BestTime";
+    const bestMovesKey = "level" + currentLevel + "BestMoves";
 
-    // ------------------------------
-    // Update Star Display
-    // ------------------------------
-
-    const starDisplay =
-        document.getElementById("stars");
-
-
-    if(starDisplay){
-
-        starDisplay.textContent =
-            starText;
-
+    const prevBestStars = Number(localStorage.getItem(bestStarsKey)) || 0;
+    if (stars > prevBestStars) {
+        localStorage.setItem(bestStarsKey, stars);
     }
 
-
-    // ------------------------------
-    // Mark Level Completed
-    // ------------------------------
-
-    localStorage.setItem(
-        "level" + level,
-        "completed"
-    );
-
-
-    // ------------------------------
-    // Unlock Next Level
-    // ------------------------------
-
-    let unlocked =
-        Number(
-            localStorage.getItem("level")
-        ) || 1;
-
-
-    if(
-        level + 1 > unlocked &&
-        level < 60
-    ){
-
-        localStorage.setItem(
-            "level",
-            level + 1
-        );
-
+    const prevBestTime = Number(localStorage.getItem(bestTimeKey)) || 0;
+    if (prevBestTime === 0 || currentSeconds < prevBestTime) {
+        localStorage.setItem(bestTimeKey, currentSeconds);
     }
 
-
-    // ------------------------------
-    // BEST STARS
-    // ------------------------------
-
-    let bestStars =
-        Number(
-            localStorage.getItem(
-                "level" + level + "BestStars"
-            )
-        ) || 0;
-
-
-    if(stars > bestStars){
-
-        localStorage.setItem(
-            "level" + level + "BestStars",
-            stars
-        );
-
+    const prevBestMoves = Number(localStorage.getItem(bestMovesKey)) || 0;
+    if (prevBestMoves === 0 || currentMoves < prevBestMoves) {
+        localStorage.setItem(bestMovesKey, currentMoves);
     }
 
-
-    // ------------------------------
-    // BEST TIME
-    // ------------------------------
-
-    let bestTime =
-        Number(
-            localStorage.getItem(
-                "level" + level + "BestTime"
-            )
-        ) || 0;
-
-
-    if(
-        bestTime === 0 ||
-        seconds < bestTime
-    ){
-
-        localStorage.setItem(
-            "level" + level + "BestTime",
-            seconds
-        );
-
-    }
-
-
-    // ------------------------------
-    // BEST MOVES
-    // ------------------------------
-
-    let bestMoves =
-        Number(
-            localStorage.getItem(
-                "level" + level + "BestMoves"
-            )
-        ) || 0;
-
-
-    if(
-        bestMoves === 0 ||
-        moves < bestMoves
-    ){
-
-        localStorage.setItem(
-            "level" + level + "BestMoves",
-            moves
-        );
-
-    }
-
-
-    // ------------------------------
-    // COIN REWARD
-    // ------------------------------
-
-    let coins =
-        Number(
-            localStorage.getItem("coins")
-        ) || 0;
-
-
-    let reward =
-        level * 20;
-
-
+    // 7. Calculate Coin Reward
+    let coins = Number(localStorage.getItem("coins")) || 0;
+    const reward = currentLevel * 20;
     coins += reward;
+    localStorage.setItem("coins", coins);
 
-
-    localStorage.setItem(
-        "coins",
-        coins
-    );
-
-
-    // ------------------------------
-    // VICTORY SOUNDS
-    // ------------------------------
-
-    if(typeof playVictorySound === "function"){
-
-        playVictorySound();
-
+    // 8. Trigger Audio
+    if (typeof playSound === "function") {
+        playSound("win");
+    }
+    if (typeof playVictory === "function") {
+        playVictory(currentLevel);
     }
 
-
-    if(typeof playVictory === "function"){
-
-        playVictory(level);
-
+    // 9. Display Victory Modal
+    if (typeof showVictory === "function") {
+        showVictory(starText, reward);
     }
-
-
-    // ------------------------------
-    // SHOW VICTORY SCREEN
-    // ------------------------------
-
-    if(typeof showVictory === "function"){
-
-        showVictory(
-            starText,
-            reward
-        );
-
-    }
-
 }
 
-
-
 // ======================================
-// RECORD HELPERS
+// RECORD HELPERS & STATS
 // ======================================
 
-
-// Get best time of a level
-
-function getBestTime(levelNumber){
-
-    return Number(
-
-        localStorage.getItem(
-            "level" +
-            levelNumber +
-            "BestTime"
-        )
-
-    ) || 0;
-
+function getBestTime(levelNumber) {
+    return Number(localStorage.getItem("level" + levelNumber + "BestTime")) || 0;
 }
 
-
-
-// Get best moves of a level
-
-function getBestMoves(levelNumber){
-
-    return Number(
-
-        localStorage.getItem(
-            "level" +
-            levelNumber +
-            "BestMoves"
-        )
-
-    ) || 0;
-
+function getBestMoves(levelNumber) {
+    return Number(localStorage.getItem("level" + levelNumber + "BestMoves")) || 0;
 }
 
-
-
-// Get best stars of a level
-
-function getBestStars(levelNumber){
-
-    return Number(
-
-        localStorage.getItem(
-            "level" +
-            levelNumber +
-            "BestStars"
-        )
-
-    ) || 0;
-
+function getBestStars(levelNumber) {
+    return Number(localStorage.getItem("level" + levelNumber + "BestStars")) || 0;
 }
 
-
-
-// ======================================
-// TOTAL PLAYER STATISTICS
-// ======================================
-
-function getTotalStars(){
-
+function getTotalStars() {
     let total = 0;
-
-
-    for(
-        let i = 1;
-        i <= 60;
-        i++
-    ){
-
-        total +=
-            getBestStars(i);
-
+    for (let i = 1; i <= MAX_LEVELS; i++) {
+        total += getBestStars(i);
     }
-
-
     return total;
-
 }
 
-
-
-// ======================================
-// COMPLETED LEVELS
-// ======================================
-
-function getCompletedLevels(){
-
+function getCompletedLevels() {
     let completed = 0;
-
-
-    for(
-        let i = 1;
-        i <= 60;
-        i++
-    ){
-
-        if(
-            localStorage.getItem(
-                "level" + i
-            ) === "completed"
-        ){
-
+    for (let i = 1; i <= MAX_LEVELS; i++) {
+        if (localStorage.getItem("level" + i) === "completed") {
             completed++;
-
         }
-
     }
-
-
     return completed;
-
 }
 
-
-
-// ======================================
-// TOTAL COINS
-// ======================================
-
-function getTotalCoins(){
-
-    return Number(
-
-        localStorage.getItem(
-            "coins"
-        )
-
-    ) || 0;
-
+function getTotalCoins() {
+    return Number(localStorage.getItem("coins")) || 0;
 }
 
-
-
 // ======================================
-// RESET CURRENT DISPLAY
+// UI & LEVEL CONTROLS
 // ======================================
 
-function resetBoardDisplay(){
+function resetBoardDisplay() {
+    const movesDisplay = document.getElementById("moves");
+    const timerDisplay = document.getElementById("timer");
 
-    let movesDisplay =
-        document.getElementById("moves");
-
-
-    let timerDisplay =
-        document.getElementById("timer");
-
-
-    if(movesDisplay){
-
-        movesDisplay.textContent =
-            moves;
-
-    }
-
-
-    if(timerDisplay){
-
-        timerDisplay.textContent =
-            seconds;
-
-    }
-
+    if (movesDisplay) movesDisplay.textContent = typeof moves !== "undefined" ? moves : 0;
+    if (timerDisplay) timerDisplay.textContent = typeof seconds !== "undefined" ? seconds : 0;
 }
 
+function changeLevel(newLevel) {
+    if (newLevel < 1 || newLevel > MAX_LEVELS) return;
 
-
-// ======================================
-// CHANGE LEVEL
-// ======================================
-
-function changeLevel(newLevel){
-
-    if(newLevel < 1){
-
-        return;
-
-    }
-
-
-    if(newLevel > images.length){
-
-        return;
-
-    }
-
-
-    level =
-        newLevel;
-
-
-    localStorage.setItem(
-        "level",
-        level
-    );
-
-
+    level = newLevel;
+    localStorage.setItem("level", level);
     location.reload();
-
 }
