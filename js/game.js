@@ -1,4 +1,3 @@
-
 // ======================================
 // PuzzleMania
 // GAME CONTROL SYSTEM
@@ -21,6 +20,7 @@
 // Timer belongs to timer.js
 // Audio belongs to audio.js
 // ======================================
+
 
 // ======================================
 // PixVZinz
@@ -146,6 +146,7 @@ function selectPiece(index){
         }
 
     }
+
 
     // ------------------------------
     // Second piece selected
@@ -520,10 +521,6 @@ function checkWin(){
     // Maximum accumulated coins per level:
     // 15 coins
     //
-    // The player can replay the level
-    // while the level has earned less
-    // than 15 coins.
-    //
     // ======================================
 
     let reward = 0;
@@ -543,8 +540,8 @@ function checkWin(){
 
 
         // ------------------------------
-        // Coins already earned from
-        // this specific level
+        // Coins already earned
+        // from this level
         // ------------------------------
 
         let levelCoins =
@@ -597,15 +594,16 @@ function checkWin(){
 
 
         // ------------------------------
-        // Add coins to player's
-        // total balance
+        // Add coins to total balance
         // ------------------------------
 
         if(reward > 0){
 
             let totalCoins =
                 Number(
-                    localStorage.getItem("coins")
+                    localStorage.getItem(
+                        "coins"
+                    )
                 ) || 0;
 
 
@@ -620,36 +618,7 @@ function checkWin(){
         }
 
     }
-// ======================================
-// VICTORY SOUNDS
-// ======================================
 
-if(typeof playVictorySound === "function"){
-
-    playVictorySound();
-
-}
-
-
-if(typeof playVictory === "function"){
-
-    playVictory(level);
-
-}
-
-
-// ======================================
-// SHOW VICTORY SCREEN
-// ======================================
-
-if(typeof showVictory === "function"){
-
-    showVictory(
-        starText,
-        reward
-    );
-
-}
 
     // ======================================
     // UNLOCK NEXT LEVEL
@@ -674,6 +643,40 @@ if(typeof showVictory === "function"){
     }
 
 
+    // ======================================
+    // VICTORY SOUNDS
+    // ======================================
+
+    if(typeof playVictorySound === "function"){
+
+        playVictorySound();
+
+    }
+
+
+    if(typeof playVictory === "function"){
+
+        playVictory(level);
+
+    }
+
+
+    // ======================================
+    // SHOW VICTORY SCREEN
+    // ======================================
+
+    if(typeof showVictory === "function"){
+
+        showVictory(
+            starText,
+            reward
+        );
+
+    }
+
+
+} // <-- IMPORTANT: closes checkWin()
+
 
 // ======================================
 // RESTART CURRENT LEVEL
@@ -685,13 +688,17 @@ function restartLevel(){
     // Hide victory screen
     // ------------------------------
 
-    if(
-        typeof victoryScreen !== "undefined" &&
-        victoryScreen
-    ){
+    const victoryScreen =
+        document.getElementById(
+            "victoryScreen"
+        );
 
-        victoryScreen
-            .classList.add("hidden");
+
+    if(victoryScreen){
+
+        victoryScreen.classList.add(
+            "hidden"
+        );
 
     }
 
@@ -705,11 +712,18 @@ function restartLevel(){
         stopTimer();
 
     }
-    else{
+    else if(typeof timer !== "undefined"){
 
         clearInterval(timer);
 
     }
+
+
+    // ------------------------------
+    // Reset selection
+    // ------------------------------
+
+    selectedPiece = null;
 
 
     // ------------------------------
