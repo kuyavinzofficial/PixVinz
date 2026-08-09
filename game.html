@@ -5,122 +5,220 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>PuzzleMania</title>
+    <title>PixVinz - Puzzle Game</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
+
 <body>
+
+
+<!-- ============================================================
+     GAME SCREEN
+============================================================ -->
 
 <div class="game">
 
-    
-    <video class="app-logo game-logo" autoplay muted loop playsinline>
-    <source src="images/logo.webm" type="video/webm">
-</video>
-    <h2 id="levelTitle"></h2>
+
+    <!-- ========================================================
+         LOGO
+    ========================================================= -->
+
+    <video
+        class="app-logo"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
+        <source
+            src="image/logo.webm"
+            type="video/webm"
+        >
+    </video>
+
+
+    <!-- ========================================================
+         LEVEL TITLE
+    ========================================================= -->
+
+    <h2 id="levelTitle">
+        Level 1
+    </h2>
+
+
+    <!-- ========================================================
+         GAME STATISTICS
+    ========================================================= -->
 
     <div class="stats">
 
-        ⏱ Time:
-        <span id="timer">0</span>s
+        <p>
+            ⏱ Time:
+            <span id="timer">0</span>s
+        </p>
 
-        <br><br>
+        <p>
+            🔄 Moves:
+            <span id="moves">0</span>
+        </p>
 
-        🔄 Moves:
-        <span id="moves">0</span>
-
-        <br><br>
-
-        ⭐ Score:
-        <span id="stars">⭐⭐⭐</span>
+        <p>
+            <span id="stars">
+                ⭐⭐⭐
+            </span>
+        </p>
 
     </div>
+
+
+    <!-- ========================================================
+         PUZZLE BOARD
+    ========================================================= -->
 
     <div id="puzzleBoard"></div>
 
-    <button onclick="playClick(); shufflePuzzle()">
-        🔀 Shuffle
-    </button>
 
-    <button onclick="playClick(); backHome()">
-        ⬅ Menu
-    </button>
+    <!-- ========================================================
+         VICTORY SCREEN
+============================================================ -->
 
-</div>
+    <div
+        id="victoryScreen"
+        class="hidden"
+    >
 
-<!-- ==============================
-     Victory Screen
-================================ -->
+        <div class="victory-box">
 
-<div id="victoryScreen" class="hidden">
 
-    <div class="victory-box">
+            <!-- ==================================================
+                 VICTORY TITLE
+            ================================================== -->
 
-        <h1>🎉 LEVEL COMPLETE!</h1>
+            <h1>
+                Puzzle Complete!
+            </h1>
 
-        <img
-            id="completedImage"
-            src=""
-            alt="Solved Puzzle">
 
-        <div id="starsDisplay">⭐⭐⭐</div>
+            <!-- ==================================================
+                 COMPLETED IMAGE
+            ================================================== -->
 
-        <div class="stats">
+            <img
+                id="completedImage"
+                src=""
+                alt="Completed Puzzle"
+            >
 
-            <p>
-                ⏱ Time:
-                <span id="finalTime">00:00</span>
-            </p>
 
-            <p>
-                🔄 Moves:
-                <span id="finalMoves">0</span>
-            </p>
+            <!-- ==================================================
+                 STARS
+            ================================================== -->
 
-            <p>
-                🪙 Reward:
-                +<span id="rewardCoins">40</span> Coins
-            </p>
+            <div id="starsDisplay">
+                ⭐⭐⭐
+            </div>
+
+
+            <!-- ==================================================
+                 FINAL RESULTS
+            ================================================== -->
+
+            <div class="stats">
+
+                <p>
+                    ⏱ Time:
+                    <span id="finalTime">
+                        0s
+                    </span>
+                </p>
+
+                <p>
+                    🔄 Moves:
+                    <span id="finalMoves">
+                        0
+                    </span>
+                </p>
+
+                <p>
+                    🪙 Coins:
+                    <span id="rewardCoins">
+                        0
+                    </span>
+                </p>
+
+            </div>
+
+
+            <!-- ==================================================
+                 VICTORY BUTTONS
+            ================================================== -->
+
+            <button
+                id="nextBtn"
+                type="button"
+            >
+                Next Level
+            </button>
+
+
+            <button
+                id="retryBtn"
+                type="button"
+            >
+                Retry
+            </button>
+
+
+            <button
+                id="homeBtn"
+                type="button"
+            >
+                Home
+            </button>
+
 
         </div>
 
-        <button id="nextBtn">
-            ➡ Next Level
-        </button>
-
-        <button id="retryBtn">
-            🔄 Play Again
-        </button>
-
-        <button id="homeBtn">
-            🏠 Home
-        </button>
-
     </div>
 
-</div>
-    
 
-<script src="audio.js"></script>
-<script src="auth.js"></script>
-<script src="save.js"></script>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
 
 <script src="js/helpers.js"></script>
+
 <script src="js/levels.js"></script>
+
 <script src="js/timer.js"></script>
 
 <script src="js/board.js"></script>
+
 <script src="js/game.js"></script>
 
 <script src="js/records.js"></script>
+
 <script src="js/victory.js"></script>
 
 <script src="js/puzzle.js"></script>
+
 <script src="js/main.js"></script>
 
+
 </body>
+
 </html>
