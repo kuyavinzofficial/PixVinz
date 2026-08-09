@@ -31,7 +31,7 @@ const mainMusic =
 
 mainMusic.loop = true;
 
-mainMusic.volume = 0.3;
+mainMusic.volume = 0.6;
 
 
 // ==============================
@@ -49,7 +49,7 @@ const bgMusic =
 
 bgMusic.loop = true;
 
-bgMusic.volume = 0.3;
+bgMusic.volume = 0.5;
 
 
 // ==============================
@@ -249,7 +249,7 @@ function playVictory(level){
         );
 
 
-    victory.volume = 0.8;
+    victory.volume = 1.2;
 
 
     victory.play().catch(() => {});
