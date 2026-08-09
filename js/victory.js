@@ -3,16 +3,11 @@
 // VICTORY SYSTEM
 // ======================================
 
-
 // ======================================
 // VICTORY SCREEN
 // ======================================
 
 function showVictory(stars, reward){
-
-    // ------------------------------
-    // Safety Check
-    // ------------------------------
 
     if(!victoryScreen){
 
@@ -20,174 +15,102 @@ function showVictory(stars, reward){
 
     }
 
+  
+    finalTime.textContent =
+        seconds + "s";
 
-    // ------------------------------
-    // Final Results
-    // ------------------------------
+    finalMoves.textContent =
+        moves;
 
-    if(finalTime){
+    rewardCoins.textContent =
+        reward;
 
-        finalTime.textContent =
-            seconds + "s";
+    starsDisplay.textContent =
+        stars;
 
-    }
+// ------------------------------
+// SHOW COMPLETED PUZZLE IMAGE
+// ------------------------------
 
-
-    if(finalMoves){
-
-        finalMoves.textContent =
-            moves;
-
-    }
-
-
-    if(rewardCoins){
-
-        rewardCoins.textContent =
-            reward;
-
-    }
+let completedImage =
+document.getElementById("completedImage");
 
 
-    if(starsDisplay){
+if(completedImage && images[level - 1]){
 
-        starsDisplay.textContent =
-            stars;
+    completedImage.src =
+    images[level - 1];
 
-    }
-
-
-    // ------------------------------
-    // SHOW COMPLETED PUZZLE IMAGE
-    // ------------------------------
-
-    const completedImage =
-        document.getElementById("completedImage");
-
-
-    if(completedImage && images[level - 1]){
-
-        completedImage.src =
-            images[level - 1];
-
-    }
-
-
-    // ------------------------------
-    // BEST RECORD
-    // ------------------------------
+}
+    
+    // Add best record display
 
     let bestRecord =
-        document.getElementById("bestRecord");
-
+    document.getElementById("bestRecord");
 
     if(!bestRecord){
 
         bestRecord =
-            document.createElement("div");
-
+        document.createElement("div");
 
         bestRecord.id =
-            "bestRecord";
-
+        "bestRecord";
 
         bestRecord.style.marginTop =
-            "20px";
+        "20px";
 
-
-        const victoryBox =
-            document.querySelector(".victory-box");
-
-
-        if(victoryBox){
-
-            victoryBox.appendChild(
-                bestRecord
-            );
-
-        }
+        document.querySelector(".victory-box")
+        .appendChild(bestRecord);
 
     }
 
-
-    // ------------------------------
-    // GET BEST RECORDS
-    // ------------------------------
-
     const bestTime =
-        localStorage.getItem(
-            "level" + level + "BestTime"
-        );
-
+    localStorage.getItem(
+        "level" + level + "BestTime"
+    );
 
     const bestMoves =
-        localStorage.getItem(
-            "level" + level + "BestMoves"
-        );
-
+    localStorage.getItem(
+        "level" + level + "BestMoves"
+    );
 
     const bestStars =
-        Number(
-            localStorage.getItem(
-                "level" + level + "BestStars"
-            )
-        ) || 1;
+    Number(
+        localStorage.getItem(
+            "level" + level + "BestStars"
+        )
+    ) || 1;
 
-
-    // ------------------------------
-    // BEST STAR DISPLAY
-    // ------------------------------
-
-    let bestStarText =
-        "⭐";
-
+    let bestStarText = "⭐";
 
     if(bestStars === 2){
 
-        bestStarText =
-            "⭐⭐";
+        bestStarText = "⭐⭐";
 
     }
 
+    if(bestStars === 3){
 
-    if(bestStars >= 3){
-
-        bestStarText =
-            "⭐⭐⭐";
+        bestStarText = "⭐⭐⭐";
 
     }
 
+    bestRecord.innerHTML = `
 
-    // ------------------------------
-    // DISPLAY BEST RECORD
-    // ------------------------------
+        <hr>
 
-    if(bestRecord){
+        <h3>🏆 Best Record</h3>
 
-        bestRecord.innerHTML = `
+        <p>${bestStarText}</p>
 
-            <hr>
+        <p>⏱ ${bestTime}s</p>
 
-            <h3>🏆 Best Record</h3>
+        <p>🔄 ${bestMoves} moves</p>
 
-            <p>${bestStarText}</p>
+    `;
 
-            <p>⏱ ${bestTime || 0}s</p>
-
-            <p>🔄 ${bestMoves || 0} moves</p>
-
-        `;
-
-    }
-
-
-    // ------------------------------
-    // SHOW VICTORY SCREEN
-    // ------------------------------
-
-    victoryScreen.classList.remove(
-        "hidden"
-    );
+    victoryScreen
+    .classList.remove("hidden");
 
 }
 
@@ -205,9 +128,8 @@ function backHome(){
 
     }
 
-
     window.location =
-        "index.html";
+    "index.html";
 
 }
 
@@ -219,38 +141,14 @@ function backHome(){
 
 function restartLevel(){
 
-    // ------------------------------
-    // Hide Victory Screen
-    // ------------------------------
-
     if(victoryScreen){
 
-        victoryScreen.classList.add(
-            "hidden"
-        );
+        victoryScreen
+        .classList.add("hidden");
 
     }
 
-
-    // ------------------------------
-    // Stop Current Timer
-    // ------------------------------
-
-    if(typeof stopTimer === "function"){
-
-        stopTimer();
-
-    }
-    else{
-
-        clearInterval(timer);
-
-    }
-
-
-    // ------------------------------
-    // Shuffle Again
-    // ------------------------------
+    clearInterval(timer);
 
     shufflePuzzle();
 
