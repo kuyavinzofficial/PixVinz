@@ -1,9 +1,9 @@
 
-
 // ======================================
 // PuzzleMania
 // CORE PUZZLE CONTROLLER
 // ======================================
+
 
 // ======================================
 // GAME VARIABLES
@@ -15,44 +15,44 @@ let moves = 0;
 
 let selectedPiece = null;
 
+
 // ======================================
 // SETUP
 // ======================================
 
 function setup(){
 
-```
-// ------------------------------
-// Level Title
-// ------------------------------
+    // ------------------------------
+    // Level Title
+    // ------------------------------
 
-let levelTitle =
-    document.getElementById("levelTitle");
-
-
-if(levelTitle){
-
-    levelTitle.textContent =
-        "Level " + level;
-
-}
+    let levelTitle =
+        document.getElementById("levelTitle");
 
 
-// ------------------------------
-// Create Puzzle
-// ------------------------------
+    if(levelTitle){
 
-createPieces();
+        levelTitle.textContent =
+            "Level " + level;
+
+    }
 
 
-// ------------------------------
-// Shuffle Puzzle
-// ------------------------------
+    // ------------------------------
+    // Create Puzzle
+    // ------------------------------
 
-shufflePuzzle();
-```
+    createPieces();
+
+
+    // ------------------------------
+    // Shuffle Puzzle
+    // ------------------------------
+
+    shufflePuzzle();
 
 }
+
 
 // ======================================
 // CREATE PIECES
@@ -60,22 +60,21 @@ shufflePuzzle();
 
 function createPieces(){
 
-```
-pieces = [];
+    pieces = [];
 
 
-for(
-    let i = 0;
-    i < size * size;
-    i++
-){
+    for(
+        let i = 0;
+        i < size * size;
+        i++
+    ){
 
-    pieces.push(i);
+        pieces.push(i);
 
-}
-```
+    }
 
 }
+
 
 // ======================================
 // RESET GAME STATS
@@ -83,54 +82,53 @@ for(
 
 function resetStats(){
 
-```
-moves = 0;
+    moves = 0;
 
-selectedPiece = null;
-
-
-// ------------------------------
-// Reset Moves
-// ------------------------------
-
-let moveDisplay =
-    document.getElementById("moves");
+    selectedPiece = null;
 
 
-if(moveDisplay){
+    // ------------------------------
+    // Reset Moves
+    // ------------------------------
 
-    moveDisplay.textContent = "0";
-
-}
-
-
-// ------------------------------
-// Reset Timer
-// ------------------------------
-
-if(typeof resetTimer === "function"){
-
-    resetTimer();
-
-}
+    let moveDisplay =
+        document.getElementById("moves");
 
 
-// ------------------------------
-// Reset Stars
-// ------------------------------
+    if(moveDisplay){
 
-let stars =
-    document.getElementById("stars");
+        moveDisplay.textContent = "0";
+
+    }
 
 
-if(stars){
+    // ------------------------------
+    // Reset Timer
+    // ------------------------------
 
-    stars.textContent = "⭐⭐⭐";
+    if(typeof resetTimer === "function"){
 
-}
-```
+        resetTimer();
+
+    }
+
+
+    // ------------------------------
+    // Reset Stars
+    // ------------------------------
+
+    let stars =
+        document.getElementById("stars");
+
+
+    if(stars){
+
+        stars.textContent = "⭐⭐⭐";
+
+    }
 
 }
+
 
 // ======================================
 // SHUFFLE PUZZLE
@@ -138,109 +136,166 @@ if(stars){
 
 function shufflePuzzle(){
 
-```
-// ------------------------------
-// Create Fresh Pieces
-// ------------------------------
+    // ------------------------------
+    // Create Fresh Pieces
+    // ------------------------------
 
-createPieces();
-
-
-// ------------------------------
-// Shuffle
-// ------------------------------
-
-for(
-    let i = pieces.length - 1;
-    i > 0;
-    i--
-){
-
-    const j =
-        Math.floor(
-            Math.random() * (i + 1)
-        );
+    createPieces();
 
 
-    [pieces[i], pieces[j]] =
-    [pieces[j], pieces[i]];
+    // ------------------------------
+    // Shuffle
+    // ------------------------------
 
-}
+    for(
+        let i = pieces.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
 
 
-// ------------------------------
-// Prevent Solved Puzzle
-// ------------------------------
+        [pieces[i], pieces[j]] =
+        [pieces[j], pieces[i]];
 
-let solved = true;
+    }
 
 
-for(
-    let i = 0;
-    i < pieces.length;
-    i++
-){
+    // ------------------------------
+    // Prevent Solved Puzzle
+    // ------------------------------
 
-    if(pieces[i] !== i){
+    let solved = true;
 
-        solved = false;
 
-        break;
+    for(
+        let i = 0;
+        i < pieces.length;
+        i++
+    ){
+
+        if(pieces[i] !== i){
+
+            solved = false;
+
+            break;
+
+        }
+
+    }
+
+
+    if(
+        solved &&
+        pieces.length > 1
+    ){
+
+        [pieces[0], pieces[1]] =
+        [pieces[1], pieces[0]];
+
+    }
+
+
+    // ------------------------------
+    // Reset Statistics
+    // ------------------------------
+
+    resetStats();
+
+
+    // ------------------------------
+    // Start Timer
+    // ------------------------------
+
+    if(typeof startTimer === "function"){
+
+        startTimer();
+
+    }
+
+
+    // ------------------------------
+    // Draw Puzzle
+    // ------------------------------
+
+    if(typeof drawPuzzle === "function"){
+
+        drawPuzzle();
+
+    }
+
+
+    // ------------------------------
+    // Shuffle Sound
+    // ------------------------------
+
+    if(typeof playShuffle === "function"){
+
+        playShuffle();
 
     }
 
 }
 
+// ======================================
+// MAIN BACKGROUND MUSIC
+// ======================================
 
-if(
-    solved &&
-    pieces.length > 1
-){
+const mainMusic =
+    document.getElementById("mainMusic");
 
-    [pieces[0], pieces[1]] =
-    [pieces[1], pieces[0]];
+
+// ------------------------------
+// Start Main Music
+// ------------------------------
+
+function startMainMusic(){
+
+    if(!mainMusic){
+
+        return;
+
+    }
+
+
+    mainMusic.loop = true;
+
+
+    mainMusic.play().catch(() => {
+
+        // Browser blocked autoplay.
+        // Music will start after user interaction.
+
+    });
 
 }
 
 
 // ------------------------------
-// Reset Statistics
+// Try Music On Page Load
 // ------------------------------
 
-resetStats();
+window.addEventListener("load", function(){
 
+    startMainMusic();
 
-// ------------------------------
-// Start Timer
-// ------------------------------
-
-if(typeof startTimer === "function"){
-
-    startTimer();
-
-}
+});
 
 
 // ------------------------------
-// Draw Puzzle
+// Start Music After First Interaction
 // ------------------------------
 
-if(typeof drawPuzzle === "function"){
+document.addEventListener(
+    "click",
+    function(){
 
-    drawPuzzle();
+        startMainMusic();
 
-}
-
-
-// ------------------------------
-// Shuffle Sound
-// ------------------------------
-
-if(typeof playShuffle === "function"){
-
-    playShuffle();
-
-}
-```
-
-}
+    },
+    { once: true }
+);
