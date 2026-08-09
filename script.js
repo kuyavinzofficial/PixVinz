@@ -481,32 +481,115 @@ function(e){
 
 
 
-
 // ======================================
 // ABOUT
 // ======================================
 
-
 function showAbout(){
 
+    let aboutBox =
+        document.createElement("div");
 
-    alert(
 
-`🧩 PuzzleMania
+    aboutBox.id =
+        "aboutBox";
 
-Version 2.0
 
-Developer:
-Kuya Vinz Official
+    aboutBox.innerHTML = `
 
-Made with HTML, CSS & JavaScript
+        <div class="about-content">
 
-© 2026`
+            <button
+                class="about-close"
+                onclick="closeAbout()"
+            >
+                ×
+            </button>
 
+
+            <video
+                class="about-logo"
+                autoplay
+                muted
+                loop
+                playsinline
+            >
+
+                <source
+                    src="images/logo.webm"
+                    type="video/webm"
+                >
+
+            </video>
+
+
+            <p>
+                Version 2.0
+            </p>
+
+
+            <p>
+                Developer:<br>
+                Kuya Vinz Official
+            </p>
+
+
+            <p>
+                Made with HTML, CSS & JavaScript
+            </p>
+
+
+            <p>
+                © 2026
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        aboutBox
     );
 
 
+    let logo =
+        aboutBox.querySelector(
+            ".about-logo"
+        );
+
+
+    if(logo){
+
+        logo.play().catch(
+            function(){}
+        );
+
+    }
+
 }
+
+
+// ======================================
+// CLOSE ABOUT
+// ======================================
+
+function closeAbout(){
+
+    let aboutBox =
+        document.getElementById(
+            "aboutBox"
+        );
+
+
+    if(aboutBox){
+
+        aboutBox.remove();
+
+    }
+
+}
+
 
 // ======================================
 // PLAYER ACCOUNT
