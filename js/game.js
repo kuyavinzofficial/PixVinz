@@ -1,39 +1,266 @@
 // ======================================
-// PuzzleMania
+// PixVZinz
 // GAME CONTROL SYSTEM
 // ======================================
 //
 // Handles:
-//
 // - Piece selection
 // - Piece swapping
 // - Move counting
 // - Victory detection
-// - Star calculation
-// - Coin rewards
-// - Best records
-// - Level completion
-// - Level unlocking
-// - Victory screen
 //
-// Board drawing belongs to board.js
-// Timer belongs to timer.js
-// Audio belongs to audio.js
+// Board drawing:
+// js/board.js
+//
+// Timer:
+// js/timer.js
+//
+// Victory screen:
+// js/victory.js
 // ======================================
 
 
 // ======================================
-// PixVZinz
-// ONE-TIME COIN SYSTEM MIGRATION
+// GAME VARIABLES
 // ======================================
 
-function migrateOldCoins(){
+let pieces = [];
 
-    // Already migrated?
+let moves = 0;
+
+let selectedPiece = null;
+
+let gameFinished = false;
+
+
+// ======================================
+// CREATE PUZZLE PIECES
+// ======================================
+
+function createPieces(){
+
+    pieces = [];
+
+
+    for(
+        let i = 0;
+        i < size * size;
+        i++
+    ){
+
+        pieces.push(i);
+
+    }
+
+}
+
+
+// ======================================
+// RESET GAME STATS
+// ======================================
+
+function resetStats(){
+
+    moves = 0;
+
+    selectedPiece = null;
+
+    gameFinished = false;
+
+
+    // ------------------------------
+    // Reset moves display
+    // ------------------------------
+
+    const moveDisplay =
+        document.getElementById("moves");
+
+
+    if(moveDisplay){
+
+        moveDisplay.textContent =
+            "0";
+
+    }
+
+
+    // ------------------------------
+    // Reset timer
+    // ------------------------------
+
     if(
-        localStorage.getItem(
-            "pixVZinzCoinMigration"
-        ) === "done"
+        typeof resetTimer === "function"
+    ){
+
+        resetTimer();
+
+    }
+
+
+    // ------------------------------
+    // Reset stars
+    // ------------------------------
+
+    const starsDisplay =
+        document.getElementById("stars");
+
+
+    if(starsDisplay){
+
+        starsDisplay.textContent =
+            "⭐⭐⭐";
+
+    }
+
+}
+
+
+// ======================================
+// SHUFFLE PUZZLE
+// ======================================
+
+function shufflePuzzle(){
+
+    // ------------------------------
+    // Create fresh pieces
+    // ------------------------------
+
+    createPieces();
+
+
+    // ------------------------------
+    // Shuffle
+    // ------------------------------
+
+    for(
+        let i = pieces.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            pieces[i],
+            pieces[j]
+        ] = [
+            pieces[j],
+            pieces[i]
+        ];
+
+    }
+
+
+    // ------------------------------
+    // Prevent solved puzzle
+    // ------------------------------
+
+    let solved = true;
+
+
+    for(
+        let i = 0;
+        i < pieces.length;
+        i++
+    ){
+
+        if(pieces[i] !== i){
+
+            solved = false;
+
+            break;
+
+        }
+
+    }
+
+
+    if(
+        solved &&
+        pieces.length > 1
+    ){
+
+        [
+            pieces[0],
+            pieces[1]
+        ] = [
+            pieces[1],
+            pieces[0]
+        ];
+
+    }
+
+
+    // ------------------------------
+    // Reset statistics
+    // ------------------------------
+
+    resetStats();
+
+
+    // ------------------------------
+    // Draw puzzle
+    // ------------------------------
+
+    if(
+        typeof drawPuzzle === "function"
+    ){
+
+        drawPuzzle();
+
+    }
+
+
+    // ------------------------------
+    // Start timer
+    // ------------------------------
+
+    if(
+        typeof startTimer === "function"
+    ){
+
+        startTimer();
+
+    }
+
+
+    // ------------------------------
+    // Shuffle sound
+    // ------------------------------
+
+    if(
+        typeof playShuffle === "function"
+    ){
+
+        playShuffle();
+
+    }
+
+}
+
+
+// ======================================
+// SELECT PIECE
+// ======================================
+
+function selectPiece(index){
+
+    // Do nothing after victory
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    // Safety check
+    if(
+        index < 0 ||
+        index >= pieces.length
     ){
 
         return;
@@ -41,125 +268,55 @@ function migrateOldCoins(){
     }
 
 
-    let correctedCoins = 0;
-
-
-    // Check completed levels
-    for(
-        let i = 1;
-        i <= images.length;
-        i++
-    ){
-
-        // Only completed levels count
-        if(
-            localStorage.getItem(
-                "level" + i
-            ) !== "completed"
-        ){
-
-            continue;
-
-        }
-
-
-        // Get player's best stars
-        let stars =
-            Number(
-                localStorage.getItem(
-                    "level" + i + "BestStars"
-                )
-            ) || 0;
-
-
-        // Current coin system
-        if(stars >= 3){
-
-            correctedCoins += 15;
-
-        }
-        else if(stars === 2){
-
-            correctedCoins += 10;
-
-        }
-        else if(stars === 1){
-
-            correctedCoins += 5;
-
-        }
-
-    }
-
-
-    // Update total coins
-    localStorage.setItem(
-        "coins",
-        correctedCoins
-    );
-
-
-    // Mark migration complete
-    localStorage.setItem(
-        "pixVZinzCoinMigration",
-        "done"
-    );
-
-}
-
-
-// Run migration once
-migrateOldCoins();
-
-
-// ======================================
-// PIECE SELECTION
-// ======================================
-
-function selectPiece(index){
-
     const allPieces =
-        document.querySelectorAll(".piece");
+        document.querySelectorAll(
+            ".piece"
+        );
 
 
-    // ------------------------------
-    // First piece selected
-    // ------------------------------
+    // ======================================
+    // FIRST PIECE
+    // ======================================
 
     if(selectedPiece === null){
 
-        selectedPiece = index;
+        selectedPiece =
+            index;
 
 
         if(allPieces[index]){
 
             allPieces[index]
-                .classList.add("selected");
+                .classList.add(
+                    "selected"
+                );
 
         }
 
 
-        if(typeof playSelect === "function"){
+        // Selection sound
+        if(
+            typeof playSelect === "function"
+        ){
 
             playSelect();
 
         }
 
-    }
 
-
-    // ------------------------------
-    // Second piece selected
-    // ------------------------------
-
-    else{
-
-        swapPieces(
-            selectedPiece,
-            index
-        );
+        return;
 
     }
+
+
+    // ======================================
+    // SECOND PIECE
+    // ======================================
+
+    swapPieces(
+        selectedPiece,
+        index
+    );
 
 }
 
@@ -168,10 +325,40 @@ function selectPiece(index){
 // SWAP PIECES
 // ======================================
 
-function swapPieces(first, second){
+function swapPieces(
+    first,
+    second
+){
+
+    // ------------------------------
+    // Safety
+    // ------------------------------
+
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    if(
+        first < 0 ||
+        second < 0 ||
+        first >= pieces.length ||
+        second >= pieces.length
+    ){
+
+        selectedPiece = null;
+
+        return;
+
+    }
+
 
     const allPieces =
-        document.querySelectorAll(".piece");
+        document.querySelectorAll(
+            ".piece"
+        );
 
 
     // ------------------------------
@@ -181,13 +368,15 @@ function swapPieces(first, second){
     if(allPieces[first]){
 
         allPieces[first]
-            .classList.remove("selected");
+            .classList.remove(
+                "selected"
+            );
 
     }
 
 
     // ------------------------------
-    // Same piece selected
+    // Same piece
     // ------------------------------
 
     if(first === second){
@@ -200,19 +389,16 @@ function swapPieces(first, second){
 
 
     // ------------------------------
-    // Swap pieces
+    // Swap
     // ------------------------------
 
-    const temp =
-        pieces[first];
-
-
-    pieces[first] =
-        pieces[second];
-
-
-    pieces[second] =
-        temp;
+    [
+        pieces[first],
+        pieces[second]
+    ] = [
+        pieces[second],
+        pieces[first]
+    ];
 
 
     selectedPiece = null;
@@ -226,7 +412,9 @@ function swapPieces(first, second){
 
 
     const moveDisplay =
-        document.getElementById("moves");
+        document.getElementById(
+            "moves"
+        );
 
 
     if(moveDisplay){
@@ -241,7 +429,9 @@ function swapPieces(first, second){
     // Exchange sound
     // ------------------------------
 
-    if(typeof playExchange === "function"){
+    if(
+        typeof playExchange === "function"
+    ){
 
         playExchange();
 
@@ -252,7 +442,9 @@ function swapPieces(first, second){
     // Redraw board
     // ------------------------------
 
-    if(typeof drawPuzzle === "function"){
+    if(
+        typeof drawPuzzle === "function"
+    ){
 
         drawPuzzle();
 
@@ -269,23 +461,15 @@ function swapPieces(first, second){
 
 
 // ======================================
-// CHECK PLAYER MOVE
-// ======================================
-
-function checkMove(){
-
-    return;
-
-}
-
-
-// ======================================
 // CHECK IF PUZZLE IS SOLVED
 // ======================================
 
 function isSolved(){
 
-    if(!pieces || pieces.length === 0){
+    if(
+        !pieces ||
+        pieces.length === 0
+    ){
 
         return false;
 
@@ -319,7 +503,18 @@ function isSolved(){
 function checkWin(){
 
     // ------------------------------
-    // Puzzle not solved
+    // Already finished
+    // ------------------------------
+
+    if(gameFinished){
+
+        return;
+
+    }
+
+
+    // ------------------------------
+    // Not solved
     // ------------------------------
 
     if(!isSolved()){
@@ -330,94 +525,82 @@ function checkWin(){
 
 
     // ------------------------------
+    // Mark finished
+    // ------------------------------
+
+    gameFinished = true;
+
+
+    // ------------------------------
     // Stop timer
     // ------------------------------
 
-    if(typeof stopTimer === "function"){
+    if(
+        typeof stopTimer === "function"
+    ){
 
         stopTimer();
 
     }
-    else{
-
-        clearInterval(timer);
-
-    }
 
 
-    // ======================================
-    // CALCULATE STARS
-    // ======================================
-    //
-    // Levels 1-30:
-    //
-    // ⭐⭐⭐ = 30 seconds or less
-    //          AND 30 moves or less
-    //
-    // ⭐⭐   = 60 seconds or less
-    //          AND 60 moves or less
-    //
-    // ⭐     = everything else
-    //
-    // ======================================
+    // ------------------------------
+    // Calculate stars
+    // ------------------------------
 
     let stars = 1;
 
 
-    if(level <= 30){
+    if(
+        seconds <= 30 &&
+        moves <= 30
+    ){
 
-        if(
-            seconds <= 30 &&
-            moves <= 30
-        ){
+        stars = 3;
 
-            stars = 3;
+    }
+    else if(
+        seconds <= 60 &&
+        moves <= 60
+    ){
 
-        }
-        else if(
-            seconds <= 60 &&
-            moves <= 60
-        ){
-
-            stars = 2;
-
-        }
-        else{
-
-            stars = 1;
-
-        }
+        stars = 2;
 
     }
 
 
-    // ======================================
-    // STAR TEXT
-    // ======================================
+    // ------------------------------
+    // Star text
+    // ------------------------------
 
-    let starText = "⭐";
+    let starText =
+        "⭐";
 
 
     if(stars === 2){
 
-        starText = "⭐⭐";
+        starText =
+            "⭐⭐";
 
     }
 
 
     if(stars === 3){
 
-        starText = "⭐⭐⭐";
+        starText =
+            "⭐⭐⭐";
 
     }
 
 
     // ------------------------------
-    // Update game star display
+    // Update game stars
     // ------------------------------
 
     const starsElement =
-        document.getElementById("stars");
+        document.getElementById(
+            "stars"
+        );
 
 
     if(starsElement){
@@ -428,9 +611,9 @@ function checkWin(){
     }
 
 
-    // ======================================
-    // SAVE LEVEL COMPLETION
-    // ======================================
+    // ------------------------------
+    // Save completion
+    // ------------------------------
 
     localStorage.setItem(
         "level" + level,
@@ -438,36 +621,44 @@ function checkWin(){
     );
 
 
-    // ======================================
-    // SAVE BEST STARS
-    // ======================================
+    // ------------------------------
+    // Save best stars
+    // ------------------------------
 
     const previousBestStars =
         Number(
             localStorage.getItem(
-                "level" + level + "BestStars"
+                "level" +
+                level +
+                "BestStars"
             )
         ) || 0;
 
 
-    if(stars > previousBestStars){
+    if(
+        stars > previousBestStars
+    ){
 
         localStorage.setItem(
-            "level" + level + "BestStars",
+            "level" +
+            level +
+            "BestStars",
             stars
         );
 
     }
 
 
-    // ======================================
-    // SAVE BEST TIME
-    // ======================================
+    // ------------------------------
+    // Save best time
+    // ------------------------------
 
     const previousBestTime =
         Number(
             localStorage.getItem(
-                "level" + level + "BestTime"
+                "level" +
+                level +
+                "BestTime"
             )
         ) || 0;
 
@@ -478,21 +669,25 @@ function checkWin(){
     ){
 
         localStorage.setItem(
-            "level" + level + "BestTime",
+            "level" +
+            level +
+            "BestTime",
             seconds
         );
 
     }
 
 
-    // ======================================
-    // SAVE BEST MOVES
-    // ======================================
+    // ------------------------------
+    // Save best moves
+    // ------------------------------
 
     const previousBestMoves =
         Number(
             localStorage.getItem(
-                "level" + level + "BestMoves"
+                "level" +
+                level +
+                "BestMoves"
             )
         ) || 0;
 
@@ -503,7 +698,9 @@ function checkWin(){
     ){
 
         localStorage.setItem(
-            "level" + level + "BestMoves",
+            "level" +
+            level +
+            "BestMoves",
             moves
         );
 
@@ -511,58 +708,31 @@ function checkWin(){
 
 
     // ======================================
-    // COIN REWARD SYSTEM
-    // ======================================
-    //
-    // ⭐   = 5 coins
-    // ⭐⭐  = 10 coins
-    // ⭐⭐⭐ = 15 coins
-    //
-    // Maximum accumulated coins per level:
-    // 15 coins
-    //
+    // COIN REWARD
     // ======================================
 
     let reward = 0;
 
 
-    // This coin system applies to
-    // Levels 1 through 30.
-
     if(level <= 30){
-
-        // ------------------------------
-        // Star value
-        // ------------------------------
 
         const starReward =
             stars * 5;
 
 
-        // ------------------------------
-        // Coins already earned
-        // from this level
-        // ------------------------------
-
         let levelCoins =
             Number(
                 localStorage.getItem(
-                    "level" + level + "Coins"
+                    "level" +
+                    level +
+                    "Coins"
                 )
             ) || 0;
 
 
-        // ------------------------------
-        // Maximum remaining coins
-        // ------------------------------
-
         const remainingCoins =
             15 - levelCoins;
 
-
-        // ------------------------------
-        // Calculate actual reward
-        // ------------------------------
 
         if(remainingCoins > 0){
 
@@ -573,29 +743,18 @@ function checkWin(){
                 );
 
         }
-        else{
 
-            reward = 0;
-
-        }
-
-
-        // ------------------------------
-        // Save accumulated level coins
-        // ------------------------------
 
         levelCoins += reward;
 
 
         localStorage.setItem(
-            "level" + level + "Coins",
+            "level" +
+            level +
+            "Coins",
             levelCoins
         );
 
-
-        // ------------------------------
-        // Add coins to total balance
-        // ------------------------------
 
         if(reward > 0){
 
@@ -621,18 +780,66 @@ function checkWin(){
 
 
     // ======================================
+    // VICTORY SOUND
+    // ======================================
+
+    if(
+        typeof playVictorySound ===
+        "function"
+    ){
+
+        playVictorySound();
+
+    }
+    else if(
+        typeof playVictory ===
+        "function"
+    ){
+
+        playVictory();
+
+    }
+
+
+    // ======================================
+    // SHOW VICTORY SCREEN
+    // ======================================
+
+    if(
+        typeof showVictory ===
+        "function"
+    ){
+
+        showVictory(
+            starText,
+            reward
+        );
+
+    }
+    else{
+
+        console.error(
+            "PixVZinz: showVictory() is not available."
+        );
+
+    }
+
+
+    // ======================================
     // UNLOCK NEXT LEVEL
     // ======================================
 
-    let unlockedLevel =
+    const unlockedLevel =
         Number(
-            localStorage.getItem("level")
+            localStorage.getItem(
+                "level"
+            )
         ) || 1;
 
 
     if(
         level + 1 > unlockedLevel &&
-        level < images.length
+        level < totalLevels
     ){
 
         localStorage.setItem(
@@ -642,117 +849,5 @@ function checkWin(){
 
     }
 
-
-    // ======================================
-    // VICTORY SOUNDS
-    // ======================================
-
-    if(typeof playVictorySound === "function"){
-
-        playVictorySound();
-
-    }
-
-
-    if(typeof playVictory === "function"){
-
-        playVictory(level);
-
-    }
-
-
-    // ======================================
-    // SHOW VICTORY SCREEN
-    // ======================================
-
-    if(typeof showVictory === "function"){
-
-        showVictory(
-            starText,
-            reward
-        );
-
-    }
-
-
-} // <-- IMPORTANT: closes checkWin()
-
-
-// ======================================
-// RESTART CURRENT LEVEL
-// ======================================
-
-function restartLevel(){
-
-    // ------------------------------
-    // Hide victory screen
-    // ------------------------------
-
-    const victoryScreen =
-        document.getElementById(
-            "victoryScreen"
-        );
-
-
-    if(victoryScreen){
-
-        victoryScreen.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    // ------------------------------
-    // Stop current timer
-    // ------------------------------
-
-    if(typeof stopTimer === "function"){
-
-        stopTimer();
-
-    }
-    else if(typeof timer !== "undefined"){
-
-        clearInterval(timer);
-
-    }
-
-
-    // ------------------------------
-    // Reset selection
-    // ------------------------------
-
-    selectedPiece = null;
-
-
-    // ------------------------------
-    // Shuffle again
-    // ------------------------------
-
-    if(typeof shufflePuzzle === "function"){
-
-        shufflePuzzle();
-
-    }
-
 }
 
-
-// ======================================
-// BACK TO HOME
-// ======================================
-
-function backHome(){
-
-    if(typeof playClick === "function"){
-
-        playClick();
-
-    }
-
-
-    window.location =
-        "index.html";
-
-}
