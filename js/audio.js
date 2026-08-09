@@ -1,345 +1,156 @@
-// ==============================
+// ======================================
 // PixVinz Audio Manager
-// ==============================
+// Unified Sound & Music Controller
+// ======================================
 
+// User Settings State
+let musicEnabled = localStorage.getItem("music") !== "off";
+let soundEnabled = localStorage.getItem("sound") !== "off";
 
-// ==============================
-// User Audio Settings
-// ==============================
-
-let musicEnabled =
-    localStorage.getItem("music") !== "off";
-
-let soundEnabled =
-    localStorage.getItem("sound") !== "off";
-
-
-// ==============================
-// MAIN BACKGROUND MUSIC
-// ==============================
-// Used on:
-// - Loading page
-// - Main menu
-// - Level selection
-//
-// File:
-// sounds/main.mp3
-// ==============================
-
-const mainMusic =
-    new Audio("sounds/main.mp3");
-
+// Background Music Objects
+const mainMusic = new Audio("sounds/main.mp3");
 mainMusic.loop = true;
-
 mainMusic.volume = 0.6;
 
-
-// ==============================
-// PUZZLE BOARD MUSIC
-// ==============================
-// Used only while playing
-// the actual puzzle.
-//
-// File:
-// sounds/bgmusic.mp3
-// ==============================
-
-const bgMusic =
-    new Audio("sounds/bgmusic.mp3");
-
+const bgMusic = new Audio("sounds/bgmusic.mp3");
 bgMusic.loop = true;
-
 bgMusic.volume = 0.5;
 
+// Sound Effects Cache
+const soundEffects = {
+    click: new Audio("sounds/click.mp3"),
+    select: new Audio("sounds/select.mp3"),
+    exchange: new Audio("sounds/exchange.mp3"),
+    shuffle: new Audio("sounds/shuffle.mp3")
+};
 
-// ==============================
-// SOUND EFFECTS
-// ==============================
+// Set default volumes for SFX
+Object.values(soundEffects).forEach(sound => {
+    sound.volume = 0.7;
+});
 
-const clickSound =
-    new Audio("sounds/click.mp3");
-
-clickSound.volume = 0.7;
-
-
-const selectSound =
-    new Audio("sounds/select.mp3");
-
-selectSound.volume = 0.7;
-
-
-const exchangeSound =
-    new Audio("sounds/exchange.mp3");
-
-exchangeSound.volume = 0.7;
-
-
-const shuffleSound =
-    new Audio("sounds/shuffle.mp3");
-
-shuffleSound.volume = 0.7;
-
-
-// ==============================
-// MAIN MUSIC
-// ==============================
-
-function startMainMusic(){
-
-    if(!musicEnabled) return;
-
-
-    // Stop puzzle music
-
-    bgMusic.pause();
-
-    bgMusic.currentTime = 0;
-
-
-    // Start main menu music
-
-    if(mainMusic.paused){
-
-        mainMusic.play().catch(() => {});
-
-    }
-
-}
-
-
-function stopMainMusic(){
-
-    mainMusic.pause();
-
-    mainMusic.currentTime = 0;
-
-}
 // ======================================
-// AUTO START MAIN MUSIC
+// MUSIC CONTROLLERS
 // ======================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        startMainMusic();
-
-    }
-);
-
-// ==============================
-// PUZZLE MUSIC
-// ==============================
-
-function startMusic(){
-
-    if(!musicEnabled) return;
-
-    // Stop main menu music
-
-    mainMusic.pause();
-
-    mainMusic.currentTime = 0;
-
-
-    // Start puzzle music
-
-    bgMusic.play().catch(() => {});
-
-}
-
-
-function stopMusic(){
+function startMainMusic() {
+    if (!musicEnabled) return;
 
     bgMusic.pause();
-
     bgMusic.currentTime = 0;
 
-}
-
-
-// ==============================
-// MUSIC TOGGLE
-// ==============================
-
-function toggleMusic(){
-
-    musicEnabled = !musicEnabled;
-
-
-    localStorage.setItem(
-        "music",
-        musicEnabled ? "on" : "off"
-    );
-
-
-    if(!musicEnabled){
-
-        stopMainMusic();
-
-        stopMusic();
-
+    if (mainMusic.paused) {
+        mainMusic.play().catch(() => {
+            // Unlocks audio if blocked by browser autoplay rules
+            const unlockAudio = () => {
+                if (musicEnabled && mainMusic.paused) {
+                    mainMusic.play().catch(() => {});
+                }
+                document.removeEventListener("click", unlockAudio);
+                document.removeEventListener("touchstart", unlockAudio);
+            };
+            document.addEventListener("click", unlockAudio, { once: true });
+            document.addEventListener("touchstart", unlockAudio, { once: true });
+        });
     }
-
 }
 
-
-// ==============================
-// SOUND EFFECTS
-// ==============================
-
-function playClick(){
-
-    if(!soundEnabled) return;
-
-
-    clickSound.currentTime = 0;
-
-    clickSound.play().catch(() => {});
-
+function stopMainMusic() {
+    mainMusic.pause();
+    mainMusic.currentTime = 0;
 }
 
+function startMusic() {
+    if (!musicEnabled) return;
 
-function playSelect(){
+    mainMusic.pause();
+    mainMusic.currentTime = 0;
 
-    if(!soundEnabled) return;
-
-
-    selectSound.currentTime = 0;
-
-    selectSound.play().catch(() => {});
-
+    if (bgMusic.paused) {
+        bgMusic.play().catch(() => {});
+    }
 }
 
-
-function playExchange(){
-
-    if(!soundEnabled) return;
-
-
-    exchangeSound.currentTime = 0;
-
-    exchangeSound.play().catch(() => {});
-
+function stopMusic() {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
 }
 
-
-function playShuffle(){
-
-    if(!soundEnabled) return;
-
-
-    shuffleSound.currentTime = 0;
-
-    shuffleSound.play().catch(() => {});
-
+function toggleMusic() {
+    setMusic(!musicEnabled);
 }
 
-
-function playVictory(level){
-
-    if(!soundEnabled) return;
-
-
-    const victory =
-        new Audio(
-            "sounds/victory" +
-            level +
-            ".mp3"
-        );
-
-
-    victory.volume = 1.2;
-
-
-    victory.play().catch(() => {});
-
-}
-
-
-// ==============================
-// SETTINGS
-// ==============================
-
-function setMusic(enabled){
-
+function setMusic(enabled) {
     musicEnabled = enabled;
+    localStorage.setItem("music", enabled ? "on" : "off");
 
-
-    localStorage.setItem(
-        "music",
-        enabled ? "on" : "off"
-    );
-
-
-    if(!enabled){
-
+    if (!enabled) {
         stopMainMusic();
-
         stopMusic();
-
     }
-
 }
 
-
-// ==============================
-// SET SOUND
-// ==============================
-
-function setSound(enabled){
-
+function setSound(enabled) {
     soundEnabled = enabled;
-
-
-    localStorage.setItem(
-        "sound",
-        enabled ? "on" : "off"
-    );
-
+    localStorage.setItem("sound", enabled ? "on" : "off");
 }
 
+// ======================================
+// SOUND EFFECT PLAYERS
+// ======================================
 
-// ==============================
-// AUTO CLICK SOUNDS
-// ==============================
+function playSoundEffect(audioObj) {
+    if (!soundEnabled || !audioObj) return;
+    audioObj.currentTime = 0;
+    audioObj.play().catch(() => {});
+}
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+function playClick() { playSoundEffect(soundEffects.click); }
+function playSelect() { playSoundEffect(soundEffects.select); }
+function playExchange() { playSoundEffect(soundEffects.exchange); }
+function playShuffle() { playSoundEffect(soundEffects.shuffle); }
 
+function playVictory(level) {
+    if (!soundEnabled) return;
 
-        // ------------------------------
-        // All buttons
-        // ------------------------------
+    const lvl = level || 1;
+    const victory = new Audio(`sounds/victory${lvl}.mp3`);
+    victory.volume = 1.0; // Clamped to valid maximum limit (0.0 - 1.0)
+    
+    victory.play().catch(() => {
+        // Fallback sound if level-specific sound is missing
+        playSoundEffect(soundEffects.select);
+    });
+}
 
-        document
-        .querySelectorAll("button")
-        .forEach(button => {
+// Unified dispatcher matching script.js / board.js / victory.js calls
+function playSound(type) {
+    if (!soundEnabled) return;
 
-            button.addEventListener(
-                "click",
-                playClick
-            );
-
-        });
-
-
-        // ------------------------------
-        // Level cards
-        // ------------------------------
-
-        document
-        .querySelectorAll(".level-card")
-        .forEach(card => {
-
-            card.addEventListener(
-                "click",
-                playClick
-            );
-
-        });
-
-
+    switch (type) {
+        case "click": playClick(); break;
+        case "select": playSelect(); break;
+        case "exchange": playExchange(); break;
+        case "shuffle": playShuffle(); break;
+        case "win":
+        case "victory": playVictory(); break;
+        default: break;
     }
-);
+}
+
+// ======================================
+// EVENT DELEGATION & AUTO INITIALIZATION
+// ======================================
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Attempt starting background music
+    startMainMusic();
+
+    // Event Delegation: Plays click sound for static and dynamically injected buttons
+    document.addEventListener("click", function (e) {
+        const target = e.target.closest("button, .level-card, .clickable");
+        if (target) {
+            playClick();
+        }
+    });
+});
