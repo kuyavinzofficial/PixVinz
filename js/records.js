@@ -286,28 +286,7 @@ function checkWin(){
     }
 
 
-    // ------------------------------
-    // COIN REWARD
-    // ------------------------------
-
-    let coins =
-        Number(
-            localStorage.getItem("coins")
-        ) || 0;
-
-
-    let reward =
-        level * 20;
-
-
-    coins += reward;
-
-
-    localStorage.setItem(
-        "coins",
-        coins
-    );
-
+    
 
     // ------------------------------
     // VICTORY SOUNDS
