@@ -88,6 +88,7 @@ function startMainMusic(){
 
     if(!musicEnabled) return;
 
+
     // Stop puzzle music
 
     bgMusic.pause();
@@ -95,7 +96,13 @@ function startMainMusic(){
     bgMusic.currentTime = 0;
 
 
-    mainMusic.play().catch(() => {});
+    // Start main menu music
+
+    if(mainMusic.paused){
+
+        mainMusic.play().catch(() => {});
+
+    }
 
 }
 
@@ -107,7 +114,18 @@ function stopMainMusic(){
     mainMusic.currentTime = 0;
 
 }
+// ======================================
+// AUTO START MAIN MUSIC
+// ======================================
 
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        startMainMusic();
+
+    }
+);
 
 // ==============================
 // PUZZLE MUSIC
