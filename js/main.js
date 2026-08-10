@@ -1,105 +1,188 @@
-/* ======================================
-PixVZinz
-MAIN GAME STARTUP
-=================
-
-Handles:
-
-* Starting the game
-* Hiding the victory screen
-* Starting the puzzle
-* Starting puzzle background music
-
-Victory buttons are handled by:
-js/victory.js
-
-Audio is handled by:
-audio.js
-====================================== */
-
 // ======================================
-// WAIT FOR PAGE TO LOAD
+// PuzzleMania
+// MAIN GAME STARTUP
 // ======================================
 
-window.addEventListener(
-"load",
-function(){
 
-```
-    console.log(
-        "PixVZinz: Game loaded."
-    );
+// ======================================
+// START GAME
+// ======================================
+
+window.addEventListener("load", function(){
 
 
-    // ==================================
-    // HIDE VICTORY SCREEN
-    // ==================================
+// ------------------------------
+// Victory Elements
+// ------------------------------
 
-    const victoryScreen =
-        document.getElementById(
-            "victoryScreen"
-        );
+victoryScreen =
+document.getElementById("victoryScreen");
 
 
-    if(victoryScreen){
-
-        victoryScreen.classList.add(
-            "hidden"
-        );
-
-        victoryScreen.style.display =
-            "none";
-
-        victoryScreen.style.pointerEvents =
-            "none";
-
-    }
+finalTime =
+document.getElementById("finalTime");
 
 
-    // ==================================
-    // START PUZZLE
-    // ==================================
-
-    if(
-        typeof setup ===
-        "function"
-    ){
-
-        setup();
-
-    }
-    else{
-
-        console.error(
-            "PixVZinz: setup() was not found."
-        );
-
-    }
+finalMoves =
+document.getElementById("finalMoves");
 
 
-    // ==================================
-    // START PUZZLE MUSIC
-    // ==================================
-    //
-    // bgmusic.mp3 plays only while
-    // the puzzle board is active.
-    //
-
-    if(
-        typeof playPuzzleMusic ===
-        "function"
-    ){
-
-        playPuzzleMusic();
-
-    }
+rewardCoins =
+document.getElementById("rewardCoins");
 
 
-    console.log(
-        "PixVZinz: Game startup complete."
-    );
+starsDisplay =
+document.getElementById("starsDisplay");
+
+
+
+nextBtn =
+document.getElementById("nextBtn");
+
+
+retryBtn =
+document.getElementById("retryBtn");
+
+
+homeBtn =
+document.getElementById("homeBtn");
+
+
+
+
+// ------------------------------
+// Hide Victory Screen
+// ------------------------------
+
+if(victoryScreen){
+
+    victoryScreen.classList.add("hidden");
 
 }
-```
 
-);
+
+
+
+// ------------------------------
+// NEXT BUTTON
+// ------------------------------
+
+if(nextBtn){
+
+    nextBtn.onclick = function(){
+
+
+        if(typeof playClick === "function"){
+
+            playClick();
+
+        }
+
+
+
+        let next =
+        level + 1;
+
+
+
+        if(next <= images.length){
+
+
+            localStorage.setItem(
+                "level",
+                next
+            );
+
+
+            location.reload();
+
+
+        }
+        else{
+
+
+            backHome();
+
+
+        }
+
+
+    };
+
+}
+
+
+
+
+// ------------------------------
+// RETRY BUTTON
+// ------------------------------
+
+if(retryBtn){
+
+    retryBtn.onclick = function(){
+
+
+        if(typeof playClick === "function"){
+
+            playClick();
+
+        }
+
+
+        restartLevel();
+
+
+    };
+
+}
+
+
+
+
+// ------------------------------
+// HOME BUTTON
+// ------------------------------
+
+if(homeBtn){
+
+    homeBtn.onclick = function(){
+
+
+        backHome();
+
+
+    };
+
+}
+
+
+
+
+// ------------------------------
+// START PUZZLE
+// ------------------------------
+
+if(typeof setup === "function"){
+
+    setup();
+
+}
+
+
+
+
+// ------------------------------
+// BACKGROUND MUSIC
+// ------------------------------
+
+if(typeof startMusic === "function"){
+
+    startMusic();
+
+}
+
+
+
+});
+```
