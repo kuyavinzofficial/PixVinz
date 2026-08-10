@@ -127,3 +127,40 @@ function restartLevel() {
         drawPuzzle();
     }
 }
+// ======================================
+// PuzzleMania
+// VICTORY SCREEN CONTROLLER
+// ======================================
+
+function showVictory(starText, reward) {
+    const victoryScreen = document.getElementById("victoryScreen");
+    if (!victoryScreen) return;
+
+    // DOM Elements
+    const starsDisplay = document.getElementById("starsDisplay");
+    const finalTime = document.getElementById("finalTime");
+    const finalMoves = document.getElementById("finalMoves");
+    const rewardCoins = document.getElementById("rewardCoins");
+    const completedImage = document.getElementById("completedImage");
+
+    // Populate Modal Data
+    if (starsDisplay) starsDisplay.textContent = starText || "⭐⭐⭐";
+    if (finalTime) finalTime.textContent = (typeof seconds !== "undefined" ? seconds : 0) + "s";
+    if (finalMoves) finalMoves.textContent = typeof moves !== "undefined" ? moves : 0;
+    if (rewardCoins) rewardCoins.textContent = reward || 0;
+
+    if (completedImage && typeof getCurrentImage === "function") {
+        completedImage.src = getCurrentImage();
+    }
+
+    // Unhide Victory Screen
+    victoryScreen.classList.remove("hidden");
+}
+
+function hideVictory() {
+    const victoryScreen = document.getElementById("victoryScreen");
+    if (victoryScreen) {
+        victoryScreen.classList.add("hidden");
+    }
+}
+
