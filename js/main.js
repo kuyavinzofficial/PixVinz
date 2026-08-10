@@ -185,4 +185,3 @@ if(typeof startMusic === "function"){
 
 
 });
-```
