@@ -1,13 +1,6 @@
 // ======================================
-// PixVZinz
-// PUZZLE BOARD SYSTEM
-// ======================================
-//
-// Handles:
-// - Creating the puzzle board
-// - Drawing puzzle pieces
-// - Displaying the correct image
-// - Mobile-friendly piece selection
+// PuzzleMania
+// BOARD SYSTEM
 // ======================================
 
 
@@ -18,195 +11,82 @@
 function drawPuzzle(){
 
     const board =
-        document.getElementById("puzzleBoard");
+    document.getElementById("puzzleBoard");
 
 
-    // Safety check
     if(!board){
-
-        console.error(
-            "PixVZinz: #puzzleBoard not found."
-        );
 
         return;
 
     }
 
 
-    // Clear existing pieces
     board.innerHTML = "";
 
 
-    // Set grid size
+    board.style.display = "grid";
+
+
     board.style.gridTemplateColumns =
-        `repeat(${size}, 1fr)`;
-
-    board.style.gridTemplateRows =
-        `repeat(${size}, 1fr)`;
+    `repeat(${size},1fr)`;
 
 
-    // Current puzzle image
-    const image =
-        images[level - 1];
+
+    pieces.forEach(function(piece,index){
 
 
-    if(!image){
-
-        console.error(
-            "PixVZinz: Image not found for level " +
-            level
-        );
-
-        return;
-
-    }
+        const tile =
+        document.createElement("div");
 
 
-    // ======================================
-    // CREATE PIECES
-    // ======================================
-
-    for(
-        let position = 0;
-        position < pieces.length;
-        position++
-    ){
-
-        const piece =
-            document.createElement("div");
+        tile.className =
+        "piece";
 
 
-        piece.className =
-            "piece";
+
+        const row =
+        Math.floor(piece / size);
 
 
-        // Store position
-        piece.dataset.index =
-            position;
+        const col =
+        piece % size;
 
 
-        // Piece's original image position
-        const originalIndex =
-            pieces[position];
+
+        // Current level image
+
+        tile.style.backgroundImage =
+        `url("${images[level - 1]}")`;
 
 
-        // Calculate original row/column
-        const originalRow =
-            Math.floor(
-                originalIndex / size
-            );
+
+        // Image scaling
+
+        tile.style.backgroundSize =
+        `${size * 100}% ${size * 100}%`;
 
 
-        const originalColumn =
-            originalIndex % size;
+
+        // Image position
+
+        tile.style.backgroundPosition =
+        `${col * 100 / (size - 1)}% ${row * 100 / (size - 1)}%`;
 
 
-        // ======================================
-        // PIECE IMAGE
-        // ======================================
 
-        piece.style.backgroundImage =
-            `url("${image}")`;
+        // Click event
 
+        tile.onclick = function(){
 
-        piece.style.backgroundSize =
-            `${size * 100}% ${size * 100}%`;
+            selectPiece(index);
+
+        };
 
 
-        piece.style.backgroundPosition =
-            `${getBackgroundPosition(
-                originalColumn,
-                originalRow
-            )}`;
+
+        board.appendChild(tile);
 
 
-        piece.style.backgroundRepeat =
-            "no-repeat";
-
-
-        // ======================================
-        // MOBILE TOUCH
-        // ======================================
-
-        piece.addEventListener(
-            "click",
-            function(){
-
-                selectPiece(position);
-
-            }
-        );
-
-
-        piece.addEventListener(
-            "touchend",
-            function(event){
-
-                event.preventDefault();
-
-                selectPiece(position);
-
-            },
-            {
-                passive:false
-            }
-        );
-
-
-        // ======================================
-        // ADD PIECE
-        // ======================================
-
-        board.appendChild(piece);
-
-    }
-
-}
-
-
-// ======================================
-// BACKGROUND POSITION
-// ======================================
-
-function getBackgroundPosition(
-    column,
-    row
-){
-
-    const percentageX =
-        size === 1
-            ? 0
-            : (column / (size - 1)) * 100;
-
-
-    const percentageY =
-        size === 1
-            ? 0
-            : (row / (size - 1)) * 100;
-
-
-    return (
-        percentageX +
-        "% " +
-        percentageY +
-        "%"
-    );
-
-}
-
-
-// ======================================
-// REFRESH BOARD
-// ======================================
-
-function refreshBoard(){
-
-    if(
-        typeof drawPuzzle === "function"
-    ){
-
-        drawPuzzle();
-
-    }
+    });
 
 }
