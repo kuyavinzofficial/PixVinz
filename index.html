@@ -5,214 +5,64 @@
 
     <meta charset="UTF-8">
 
+    <title>PixVinz</title>
+
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>PixVZinz</title>
+        content="width=device-width, initial-scale=1.0">
 
     <link
         rel="stylesheet"
-        href="css/style.css"
-    >
+        href="style.css">
 
 </head>
 
 <body>
 
 
-<!-- =========================================================
-     OPENING SPLASH
-     ========================================================= -->
+<!-- ======================================
+     PIXVINZ OPENING SPLASH
+     ====================================== -->
 
 <div id="puzzleSplash">
 
     <video
-        class="app-logo"
+        class="splash-logo"
         autoplay
         muted
-        playsinline
-        loop
-    >
+        playsinline>
+
         <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
+            src="images/logo.webm"
+            type="video/webm">
+
     </video>
 
 </div>
 
 
-<!-- =========================================================
-     LOGIN / SIGNUP AREA
-     ========================================================= -->
-
-<div class="menu" id="authContainer">
-
-
-    <!-- ==========================
-         LOGO
-         ========================== -->
-
-    <video
-        class="app-logo"
-        autoplay
-        muted
-        playsinline
-        loop
-    >
-        <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
-    </video>
-
-
-    <!-- ==========================
-         LOGIN
-         ========================== -->
-
-    <div id="loginScreen">
-
-        <h2>Welcome Back!</h2>
-
-        <p>
-            Log in to continue playing.
-        </p>
-
-
-        <input
-            type="text"
-            id="loginUsername"
-            placeholder="Username"
-            autocomplete="username"
-        >
-
-
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Password"
-            autocomplete="current-password"
-        >
-
-
-        <button
-            type="button"
-            id="loginBtn"
-        >
-            Log In
-        </button>
-
-
-        <button
-            type="button"
-            id="showSignupBtn"
-        >
-            Create Account
-        </button>
-
-    </div>
-
-
-    <!-- ==========================
-         SIGN UP
-         ========================== -->
-
-    <div
-        id="signupScreen"
-        style="display:none;"
-    >
-
-        <h2>Create Account</h2>
-
-        <p>
-            Start your PixVZinz journey.
-        </p>
-
-
-        <input
-            type="text"
-            id="signupUsername"
-            placeholder="Choose a username"
-            autocomplete="username"
-        >
-
-
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="Create a password"
-            autocomplete="new-password"
-        >
-
-
-        <input
-            type="password"
-            id="signupConfirmPassword"
-            placeholder="Confirm password"
-            autocomplete="new-password"
-        >
-
-
-        <button
-            type="button"
-            id="signupBtn"
-        >
-            Sign Up
-        </button>
-
-
-        <button
-            type="button"
-            id="showLoginBtn"
-        >
-            Back to Log In
-        </button>
-
-    </div>
-
-
-    <!-- ==========================
-         AUTH MESSAGE
-         ========================== -->
-
-    <p
-        id="authMessage"
-        aria-live="polite"
-    ></p>
-
-
-</div>
-
-
-<!-- =========================================================
+<!-- ======================================
      MAIN MENU
-     ========================================================= -->
+     ====================================== -->
 
-<div
-    class="menu"
-    id="mainMenu"
-    style="display:none;"
->
+<div class="menu">
 
 
-    <!-- ==========================
-         LOGO
-         ========================== -->
+    <!-- ==================================
+         PIXVINZ ANIMATED LOGO
+         ================================== -->
 
     <video
         class="app-logo"
         autoplay
         muted
-        playsinline
         loop
-    >
+        playsinline>
+
         <source
-            src="image/logo.webm"
-            type="video/webm"
-        >
+            src="images/logo.webm"
+            type="video/webm">
+
     </video>
 
 
@@ -241,28 +91,14 @@
 
 
     <!-- ==========================
-         COINS
-         ========================== -->
-
-    <div class="coins">
-
-        🪙
-        <span id="coinDisplay">
-            0
-        </span>
-
-    </div>
-
-
-    <!-- ==========================
-         START GAME
+         PLAY
          ========================== -->
 
     <button
-        type="button"
-        id="startGameBtn"
-    >
-        Play Game
+        onclick="playClick(); startGame()">
+
+        ▶ PLAY
+
     </button>
 
 
@@ -271,10 +107,10 @@
          ========================== -->
 
     <button
-        type="button"
-        id="levelsBtn"
-    >
-        Levels
+        onclick="playClick(); openLevels()">
+
+        🏆 LEVELS
+
     </button>
 
 
@@ -283,22 +119,10 @@
          ========================== -->
 
     <button
-        type="button"
-        id="settingsBtn"
-    >
-        Settings
-    </button>
+        onclick="playClick(); openSettings()">
 
+        ⚙ SETTINGS
 
-    <!-- ==========================
-         ABOUT
-         ========================== -->
-
-    <button
-        type="button"
-        id="aboutBtn"
-    >
-        About PixVZinz
     </button>
 
 
@@ -307,134 +131,129 @@
          ========================== -->
 
     <button
-        type="button"
         class="logout-btn"
-        id="logoutBtn"
-    >
-        Log Out
+        onclick="logout()">
+
+        🚪 Logout
+
     </button>
 
 
 </div>
 
 
-<!-- =========================================================
+<!-- ======================================
      SETTINGS POPUP
-     ========================================================= -->
+     ====================================== -->
 
 <div
-    class="popup"
     id="settingsPopup"
-    style="display:none;"
->
+    class="popup">
+
 
     <div class="popup-box">
 
-        <h2>Settings</h2>
-
-
-        <div class="setting-row">
-
-            <span>
-                Sound
-            </span>
-
-            <input
-                type="checkbox"
-                id="soundToggle"
-                checked
-            >
-
-        </div>
-
-
-        <div class="setting-row">
-
-            <span>
-                Music
-            </span>
-
-            <input
-                type="checkbox"
-                id="musicToggle"
-                checked
-            >
-
-        </div>
-
-
-        <button
-            type="button"
-            id="closeSettingsBtn"
-        >
-            Close
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     ABOUT POPUP
-     ========================================================= -->
-
-<div
-    id="aboutBox"
-    style="display:none;"
->
-
-    <div class="about-content">
-
-
-        <button
-            type="button"
-            class="about-close"
-            id="closeAboutBtn"
-        >
-            ×
-        </button>
-
-
-        <video
-            class="about-logo"
-            autoplay
-            muted
-            playsinline
-            loop
-        >
-            <source
-                src="image/logo.webm"
-                type="video/webm"
-            >
-        </video>
-
 
         <h2>
-            PixVZinz
+            ⚙ Settings
         </h2>
 
 
-        <p>
-            Piece Together The Fun!
-        </p>
+        <!-- ==========================
+             MUSIC
+             ========================== -->
+
+        <div class="setting-row">
+
+            <span>
+                🎵 Music
+            </span>
+
+            <input
+                type="checkbox"
+                id="musicToggle">
+
+        </div>
 
 
-        <p>
-            Challenge yourself,
-            complete puzzles,
-            earn stars,
-            and collect coins.
-        </p>
+        <!-- ==========================
+             SOUND
+             ========================== -->
+
+        <div class="setting-row">
+
+            <span>
+                🔊 Sound Effects
+            </span>
+
+            <input
+                type="checkbox"
+                id="soundToggle">
+
+        </div>
+
+
+        <!-- ==========================
+             ANIMATIONS
+             ========================== -->
+
+        <div class="setting-row">
+
+            <span>
+                ✨ Animations
+            </span>
+
+            <input
+                type="checkbox"
+                id="animationToggle">
+
+        </div>
+
+
+        <!-- ==========================
+             RESET PROGRESS
+             ========================== -->
+
+        <button
+            onclick="resetProgress()">
+
+            🗑 Reset Progress
+
+        </button>
+
+
+        <!-- ==========================
+             ABOUT
+             ========================== -->
+
+        <button
+            onclick="showAbout()">
+
+            ℹ About
+
+        </button>
+
+
+        <!-- ==========================
+             CLOSE
+             ========================== -->
+
+        <button
+            onclick="closeSettings()">
+
+            ❌ Close
+
+        </button>
+
 
     </div>
 
 </div>
 
 
-<!-- =========================================================
-     SCRIPTS
-     ========================================================= -->
+<!-- ======================================
+     JAVASCRIPT
+     ====================================== -->
 
 <script src="audio.js"></script>
 
@@ -443,6 +262,43 @@
 <script src="save.js"></script>
 
 <script src="script.js"></script>
+
+
+<!-- ======================================
+     SPLASH CONTROL
+     ====================================== -->
+
+<script>
+
+window.addEventListener("load", function(){
+
+    const splash =
+        document.getElementById("puzzleSplash");
+
+
+    if(!splash){
+
+        return;
+
+    }
+
+
+    /*
+       Let the PixVinz logo play first.
+       Adjust this number later if needed.
+    */
+
+    setTimeout(function(){
+
+        splash.classList.add(
+            "splashHidden"
+        );
+
+    }, 4000);
+
+});
+
+</script>
 
 
 </body>
