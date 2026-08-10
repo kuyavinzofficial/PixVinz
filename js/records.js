@@ -1,76 +1,224 @@
 // ======================================
 // PuzzleMania
-// TIMER SYSTEM
+// RECORD SYSTEM
 // ======================================
 
-
 // ======================================
-// START TIMER
+// LEVEL VALIDATION
 // ======================================
 
-function startTimer(){
+function validateLevel(){
 
-    clearInterval(timer);
+    if(level < 1){
 
+        level = 1;
 
-    timer = setInterval(function(){
+    }
 
+    if(level > 60){
 
-        seconds++;
+        level = 60;
 
+    }
 
-        updateTimer();
-
-
-    },1000);
+    localStorage.setItem(
+        "level",
+        level
+    );
 
 }
 
 
 
 // ======================================
-// STOP TIMER
+// SAFE LEVEL IMAGE CHECK
 // ======================================
 
-function stopTimer(){
+function getCurrentImage(){
 
-    clearInterval(timer);
+    if(images[level - 1]){
 
-    timer = null;
+        return images[level - 1];
+
+    }
+
+    return images[0];
 
 }
 
 
 
 // ======================================
-// RESET TIMER
+// RECORD HELPERS
 // ======================================
 
-function resetTimer(){
+// Get best time of a level
 
-    seconds = 0;
+function getBestTime(levelNumber){
 
-    updateTimer();
+    return Number(
+
+        localStorage.getItem(
+            "level" + levelNumber + "BestTime"
+        )
+
+    ) || 0;
+
+}
+
+
+
+// Get best moves of a level
+
+function getBestMoves(levelNumber){
+
+    return Number(
+
+        localStorage.getItem(
+            "level" + levelNumber + "BestMoves"
+        )
+
+    ) || 0;
+
+}
+
+
+
+// Get best stars of a level
+
+function getBestStars(levelNumber){
+
+    return Number(
+
+        localStorage.getItem(
+            "level" + levelNumber + "BestStars"
+        )
+
+    ) || 0;
 
 }
 
 
 
 // ======================================
-// UPDATE TIMER DISPLAY
+// TOTAL PLAYER STATISTICS
 // ======================================
 
-function updateTimer(){
+function getTotalStars(){
 
-    let display =
+    let total = 0;
+
+    for(let i = 1; i <= 60; i++){
+
+        total += getBestStars(i);
+
+    }
+
+    return total;
+
+}
+
+
+
+function getCompletedLevels(){
+
+    let completed = 0;
+
+    for(let i = 1; i <= 60; i++){
+
+        if(
+
+            localStorage.getItem(
+                "level" + i
+            ) === "completed"
+
+        ){
+
+            completed++;
+
+        }
+
+    }
+
+    return completed;
+
+}
+
+
+
+function getTotalCoins(){
+
+    return Number(
+
+        localStorage.getItem(
+            "coins"
+        )
+
+    ) || 0;
+
+}
+
+
+
+// ======================================
+// RESET CURRENT DISPLAY
+// ======================================
+
+function resetBoardDisplay(){
+
+    let movesDisplay =
+    document.getElementById("moves");
+
+
+    let timerDisplay =
     document.getElementById("timer");
 
 
-    if(display){
 
-        display.textContent =
+    if(movesDisplay){
+
+        movesDisplay.textContent =
+        moves;
+
+    }
+
+
+    if(timerDisplay){
+
+        timerDisplay.textContent =
         seconds;
 
     }
+
+}
+
+
+
+// ======================================
+// CHANGE LEVEL
+// ======================================
+
+function changeLevel(newLevel){
+
+    if(newLevel < 1){
+
+        return;
+
+    }
+
+    if(newLevel > images.length){
+
+        return;
+
+    }
+
+    level = newLevel;
+
+    localStorage.setItem(
+        "level",
+        level
+    );
+
+    location.reload();
 
 }
