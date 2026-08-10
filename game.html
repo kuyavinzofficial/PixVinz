@@ -2,125 +2,127 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PuzzleMania</title>
-
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
-<div class="game">
+    <!-- ==============================
+         GAME VIEW
+    ================================ -->
+    <main class="game">
 
+        <!-- Animated Logo -->
+        <video class="app-logo game-logo" autoplay muted loop playsinline aria-label="PuzzleMania logo animation">
+            <source src="images/logo.webm" type="video/webm">
+        </video>
 
-    <video class="app-logo game-logo" autoplay muted loop playsinline>
-    <source src="images/logo.webm" type="video/webm">
-</video>
-    <h2 id="levelTitle"></h2>
+        <!-- Level Title -->
+        <h1 id="levelTitle"></h1>
 
-    <div class="stats">
+        <!-- Stats Bar -->
+        <ul class="stats-list">
+            <li>
+                <span aria-hidden="true">⏱</span> Time:
+                <span id="timer">0</span>s
+            </li>
+            <li>
+                <span aria-hidden="true">🔄</span> Moves:
+                <span id="moves">0</span>
+            </li>
+            <li>
+                <span aria-hidden="true">⭐</span> Score:
+                <span id="stars">⭐⭐⭐</span>
+            </li>
+        </ul>
 
-        ⏱ Time:
-        <span id="timer">0</span>s
+        <!-- Puzzle Board -->
+        <div id="puzzleBoard" role="region" aria-label="Puzzle Board"></div>
 
-        <br><br>
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button type="button" onclick="playClick(); shufflePuzzle()">
+                <span aria-hidden="true">🔀</span> Shuffle
+            </button>
 
-        🔄 Moves:
-        <span id="moves">0</span>
+            <button type="button" onclick="playClick(); backHome()">
+                <span aria-hidden="true">⬅</span> Menu
+            </button>
+        </div>
 
-        <br><br>
+    </main>
 
-        ⭐ Score:
-        <span id="stars">⭐⭐⭐</span>
+    <!-- ==============================
+         VICTORY SCREEN (MODAL)
+    ================================ -->
+    <div id="victoryScreen" class="popup hidden" role="dialog" aria-modal="true" aria-labelledby="victoryTitle" hidden>
 
-    </div>
+        <div class="victory-box">
 
-    <div id="puzzleBoard"></div>
+            <h2 id="victoryTitle">
+                <span aria-hidden="true">🎉</span> LEVEL COMPLETE!
+            </h2>
 
-    <button onclick="playClick(); shufflePuzzle()">
-        🔀 Shuffle
-    </button>
+            <!-- Image dynamic src handled via JS -->
+            <img id="completedImage" alt="Completed puzzle preview">
 
-    <button onclick="playClick(); backHome()">
-        ⬅ Menu
-    </button>
+            <div id="starsDisplay">⭐⭐⭐</div>
 
-</div>
+            <div class="stats">
+                <p>
+                    <span aria-hidden="true">⏱</span> Time:
+                    <span id="finalTime">00:00</span>
+                </p>
+                <p>
+                    <span aria-hidden="true">🔄</span> Moves:
+                    <span id="finalMoves">0</span>
+                </p>
+                <p>
+                    <span aria-hidden="true">🪙</span> Reward:
+                    +<span id="rewardCoins">40</span> Coins
+                </p>
+            </div>
 
-<!-- ==============================
-     Victory Screen
-================================ -->
+            <div class="victory-actions">
+                <button type="button" id="nextBtn">
+                    <span aria-hidden="true">➡</span> Next Level
+                </button>
 
-<div id="victoryScreen" class="hidden">
+                <button type="button" id="retryBtn">
+                    <span aria-hidden="true">🔄</span> Play Again
+                </button>
 
-    <div class="victory-box">
-
-        <h1>🎉 LEVEL COMPLETE!</h1>
-
-        <img
-            id="completedImage"
-            src=""
-            alt="Solved Puzzle">
-
-        <div id="starsDisplay">⭐⭐⭐</div>
-
-        <div class="stats">
-
-            <p>
-                ⏱ Time:
-                <span id="finalTime">00:00</span>
-            </p>
-
-            <p>
-                🔄 Moves:
-                <span id="finalMoves">0</span>
-            </p>
-
-            <p>
-                🪙 Reward:
-                +<span id="rewardCoins">40</span> Coins
-            </p>
+                <button type="button" id="homeBtn">
+                    <span aria-hidden="true">🏠</span> Home
+                </button>
+            </div>
 
         </div>
 
-        <button id="nextBtn">
-            ➡ Next Level
-        </button>
-
-        <button id="retryBtn">
-            🔄 Play Again
-        </button>
-
-        <button id="homeBtn">
-            🏠 Home
-        </button>
-
     </div>
 
-</div>
-    
+    <!-- ==============================
+         JAVASCRIPT
+    ================================ -->
+    <script src="audio.js"></script>
+    <script src="auth.js"></script>
+    <script src="save.js"></script>
 
-<script src="audio.js"></script>
-<script src="auth.js"></script>
-<script src="save.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/timer.js"></script>
 
-<script src="js/helpers.js"></script>
-<script src="js/levels.js"></script>
-<script src="js/timer.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/game.js"></script>
 
-<script src="js/board.js"></script>
-<script src="js/game.js"></script>
+    <script src="js/records.js"></script>
+    <script src="js/victory.js"></script>
 
-<script src="js/records.js"></script>
-<script src="js/victory.js"></script>
-
-<script src="js/puzzle.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/puzzle.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
