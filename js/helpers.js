@@ -1,128 +1,135 @@
 // ======================================
-// PixVinz
-// HELPER SYSTEM
-// ======================================
-//
-// Shared utility functions.
-// This file contains only safe helper
-// functions and does not control the puzzle.
+// PuzzleMania
+// HELPER FUNCTIONS
 // ======================================
 
-
 // ======================================
-// SAFE ELEMENT GETTER
+// PREVENT DOUBLE CLICK ISSUES
 // ======================================
 
-function getElement(id){
+let inputLocked = false;
 
-    return document.getElementById(id);
+function lockInput(){
+
+    inputLocked = true;
+
+    setTimeout(function(){
+
+        inputLocked = false;
+
+    },200);
 
 }
 
 
+
 // ======================================
-// SHOW ELEMENT
+// UPDATED SELECT CHECK
 // ======================================
 
-function showElement(element){
+const oldSelectPiece = selectPiece;
 
-    if(!element){
+selectPiece = function(index){
+
+    if(inputLocked){
+
         return;
-    }
-
-    element.classList.remove("hidden");
-
-}
-
-
-// ======================================
-// HIDE ELEMENT
-// ======================================
-
-function hideElement(element){
-
-    if(!element){
-        return;
-    }
-
-    element.classList.add("hidden");
-
-}
-
-
-// ======================================
-// SAFE NUMBER
-// ======================================
-
-function safeNumber(value, fallback = 0){
-
-    const number = Number(value);
-
-    if(Number.isNaN(number)){
-        return fallback;
-    }
-
-    return number;
-
-}
-
-
-// ======================================
-// LOCAL STORAGE NUMBER
-// ======================================
-
-function getStorageNumber(key, fallback = 0){
-
-    const value =
-        localStorage.getItem(key);
-
-    if(value === null){
-        return fallback;
-    }
-
-    return safeNumber(
-        value,
-        fallback
-    );
-
-}
-
-
-// ======================================
-// SAVE NUMBER
-// ======================================
-
-function setStorageNumber(key, value){
-
-    localStorage.setItem(
-        key,
-        String(value)
-    );
-
-}
-
-
-// ======================================
-// PLAY CLICK SOUND SAFELY
-// ======================================
-
-function safePlayClick(){
-
-    if(typeof playClick === "function"){
-
-        playClick();
 
     }
 
-}
+    lockInput();
+
+    oldSelectPiece(index);
+
+};
+
 
 
 // ======================================
-// PAGE NAVIGATION
+// KEYBOARD SHORTCUTS
 // ======================================
 
-function goToPage(page){
+document.addEventListener(
+"keydown",
+function(event){
 
-    window.location.href = page;
+    let key =
+    event.key.toLowerCase();
 
-}
+    switch(key){
+
+        case "r":
+
+            restartLevel();
+
+            break;
+
+        case "s":
+
+            shufflePuzzle();
+
+            break;
+
+        case "escape":
+
+            if(victoryScreen){
+
+                victoryScreen
+                .classList.add("hidden");
+
+            }
+
+            break;
+
+    }
+
+});
+
+
+
+// ======================================
+// MOBILE SWIPE PREPARATION
+// ======================================
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener(
+"touchstart",
+function(e){
+
+    if(e.touches.length > 0){
+
+        touchStartX =
+        e.touches[0].clientX;
+
+        touchStartY =
+        e.touches[0].clientY;
+
+    }
+
+});
+
+document.addEventListener(
+"touchend",
+function(e){
+
+    if(e.changedTouches.length > 0){
+
+        let endX =
+        e.changedTouches[0].clientX;
+
+        let endY =
+        e.changedTouches[0].clientY;
+
+        let diffX =
+        endX - touchStartX;
+
+        let diffY =
+        endY - touchStartY;
+
+        // Reserved for future swipe controls
+
+    }
+
+});
