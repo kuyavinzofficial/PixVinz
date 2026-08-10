@@ -2,304 +2,134 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <title>PixVinz</title>
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <link
-        rel="stylesheet"
-        href="css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-
-<!-- ======================================
-     PIXVINZ OPENING SPLASH
-     ====================================== -->
-
-<div id="puzzleSplash">
-
-    <video
-        class="splash-logo"
-        autoplay
-        muted
-        playsinline>
-
-        <source
-            src="images/logo.webm"
-            type="video/webm">
-
-    </video>
-
-</div>
-
-
-<!-- ======================================
-     MAIN MENU
-     ====================================== -->
-
-<div class="menu">
-
-
-    <!-- ==================================
-         PIXVINZ ANIMATED LOGO
-         ================================== -->
-
-    <video
-        class="app-logo"
-        autoplay
-        muted
-        loop
-        playsinline>
-
-        <source
-            src="images/logo.webm"
-            type="video/webm">
-
-    </video>
-
-
-    <!-- ==========================
-         PLAYER PROFILE
-         ========================== -->
-
-    <div id="playerProfile">
-
-        <h3 id="welcomeText">
-            Welcome!
-        </h3>
-
-        <p id="usernameDisplay"></p>
-
+    <!-- ======================================
+         PIXVINZ OPENING SPLASH
+         ====================================== -->
+    <div id="puzzleSplash" aria-hidden="true">
+        <video class="splash-logo" autoplay muted playsinline aria-label="PixVinz splash intro">
+            <source src="images/logo.webm" type="video/webm">
+        </video>
     </div>
 
+    <!-- ======================================
+         MAIN MENU
+         ====================================== -->
+    <main class="menu">
 
-    <!-- ==========================
-         TAGLINE
-         ========================== -->
+        <!-- Animated Logo -->
+        <video class="app-logo" autoplay muted loop playsinline aria-label="PixVinz logo animation">
+            <source src="images/logo.webm" type="video/webm">
+        </video>
 
-    <p>
-        Piece Together The Fun!
-    </p>
+        <!-- Player Profile -->
+        <section id="playerProfile">
+            <h1 id="welcomeText">Welcome!</h1>
+            <p id="usernameDisplay"></p>
+        </section>
 
+        <!-- Tagline -->
+        <p class="tagline">Piece Together The Fun!</p>
 
-    <!-- ==========================
-         PLAY
-         ========================== -->
+        <!-- Navigation Actions -->
+        <nav class="menu-actions" aria-label="Main Menu">
+            <button type="button" onclick="playClick(); startGame()">
+                <span aria-hidden="true">▶</span> Play
+            </button>
 
-    <button
-        onclick="playClick(); startGame()">
+            <button type="button" onclick="playClick(); openLevels()">
+                <span aria-hidden="true">🏆</span> Levels
+            </button>
 
-        ▶ PLAY
+            <button type="button" onclick="playClick(); openSettings()">
+                <span aria-hidden="true">⚙</span> Settings
+            </button>
 
-    </button>
+            <button type="button" class="logout-btn" onclick="logout()">
+                <span aria-hidden="true">🚪</span> Logout
+            </button>
+        </nav>
 
+    </main>
 
-    <!-- ==========================
-         LEVELS
-         ========================== -->
+    <!-- ======================================
+         SETTINGS POPUP
+         ====================================== -->
+    <div id="settingsPopup" class="popup" role="dialog" aria-labelledby="settingsTitle" aria-modal="true" hidden>
+        <div class="popup-box">
 
-    <button
-        onclick="playClick(); openLevels()">
+            <h2 id="settingsTitle">
+                <span aria-hidden="true">⚙</span> Settings
+            </h2>
 
-        🏆 LEVELS
+            <!-- Music -->
+            <div class="setting-row">
+                <label for="musicToggle">
+                    <span aria-hidden="true">🎵</span> Music
+                </label>
+                <input type="checkbox" id="musicToggle">
+            </div>
 
-    </button>
+            <!-- Sound -->
+            <div class="setting-row">
+                <label for="soundToggle">
+                    <span aria-hidden="true">🔊</span> Sound Effects
+                </label>
+                <input type="checkbox" id="soundToggle">
+            </div>
 
+            <!-- Animations -->
+            <div class="setting-row">
+                <label for="animationToggle">
+                    <span aria-hidden="true">✨</span> Animations
+                </label>
+                <input type="checkbox" id="animationToggle">
+            </div>
 
-    <!-- ==========================
-         SETTINGS
-         ========================== -->
+            <!-- Settings Actions -->
+            <button type="button" onclick="resetProgress()">
+                <span aria-hidden="true">🗑</span> Reset Progress
+            </button>
 
-    <button
-        onclick="playClick(); openSettings()">
+            <button type="button" onclick="showAbout()">
+                <span aria-hidden="true">ℹ</span> About
+            </button>
 
-        ⚙ SETTINGS
-
-    </button>
-
-
-    <!-- ==========================
-         LOGOUT
-         ========================== -->
-
-    <button
-        class="logout-btn"
-        onclick="logout()">
-
-        🚪 Logout
-
-    </button>
-
-
-</div>
-
-
-<!-- ======================================
-     SETTINGS POPUP
-     ====================================== -->
-
-<div
-    id="settingsPopup"
-    class="popup">
-
-
-    <div class="popup-box">
-
-
-        <h2>
-            ⚙ Settings
-        </h2>
-
-
-        <!-- ==========================
-             MUSIC
-             ========================== -->
-
-        <div class="setting-row">
-
-            <span>
-                🎵 Music
-            </span>
-
-            <input
-                type="checkbox"
-                id="musicToggle">
+            <button type="button" onclick="closeSettings()">
+                <span aria-hidden="true">❌</span> Close
+            </button>
 
         </div>
-
-
-        <!-- ==========================
-             SOUND
-             ========================== -->
-
-        <div class="setting-row">
-
-            <span>
-                🔊 Sound Effects
-            </span>
-
-            <input
-                type="checkbox"
-                id="soundToggle">
-
-        </div>
-
-
-        <!-- ==========================
-             ANIMATIONS
-             ========================== -->
-
-        <div class="setting-row">
-
-            <span>
-                ✨ Animations
-            </span>
-
-            <input
-                type="checkbox"
-                id="animationToggle">
-
-        </div>
-
-
-        <!-- ==========================
-             RESET PROGRESS
-             ========================== -->
-
-        <button
-            onclick="resetProgress()">
-
-            🗑 Reset Progress
-
-        </button>
-
-
-        <!-- ==========================
-             ABOUT
-             ========================== -->
-
-        <button
-            onclick="showAbout()">
-
-            ℹ About
-
-        </button>
-
-
-        <!-- ==========================
-             CLOSE
-             ========================== -->
-
-        <button
-            onclick="closeSettings()">
-
-            ❌ Close
-
-        </button>
-
-
     </div>
 
-</div>
+    <!-- ======================================
+         JAVASCRIPT
+         ====================================== -->
+    <script src="audio.js"></script>
+    <script src="auth.js"></script>
+    <script src="save.js"></script>
+    <script src="script.js"></script>
 
+    <!-- Splash Control -->
+    <script>
+        window.addEventListener("load", function () {
+            const splash = document.getElementById("puzzleSplash");
 
-<!-- ======================================
-     JAVASCRIPT
-     ====================================== -->
+            if (!splash) return;
 
-<script src="audio.js"></script>
-
-<script src="auth.js"></script>
-
-<script src="save.js"></script>
-
-<script src="script.js"></script>
-
-
-<!-- ======================================
-     SPLASH CONTROL
-     ====================================== -->
-
-<script>
-
-window.addEventListener("load", function(){
-
-    const splash =
-        document.getElementById("puzzleSplash");
-
-
-    if(!splash){
-
-        return;
-
-    }
-
-
-    /*
-       Let the PixVinz logo play first.
-       Adjust this number later if needed.
-    */
-
-    setTimeout(function(){
-
-        splash.classList.add(
-            "splashHidden"
-        );
-
-    }, 4000);
-
-});
-
-</script>
-
+            /* Hide splash after video delay */
+            setTimeout(function () {
+                splash.classList.add("splashHidden");
+            }, 4000);
+        });
+    </script>
 
 </body>
 
