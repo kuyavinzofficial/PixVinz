@@ -179,3 +179,92 @@ function changeLevel(newLevel) {
     localStorage.setItem("level", level);
     location.reload();
 }
+
+// ======================================
+// PuzzleMania
+// RECORDS & WIN DETECTION
+// ======================================
+
+function isSolved() {
+    if (typeof pieces === "undefined" || !pieces || pieces.length === 0) {
+        return false;
+    }
+    for (let i = 0; i < pieces.length; i++) {
+        if (Number(pieces[i]) !== i) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkWin() {
+    if (!isSolved()) return;
+
+    // Stop timer
+    if (typeof stopTimer === "function") {
+        stopTimer();
+    } else if (typeof timer !== "undefined") {
+        clearInterval(timer);
+    }
+
+    // Star calculation
+    let currentLevel = typeof level !== "undefined" ? level : 1;
+    let currentSecs = typeof seconds !== "undefined" ? seconds : 0;
+    let currentMoves = typeof moves !== "undefined" ? moves : 0;
+    let stars = 1;
+
+    if (currentLevel <= 30) {
+        if (currentSecs <= 30 && currentMoves <= 30) {
+            stars = 3;
+        } else if (currentSecs <= 60 && currentMoves <= 60) {
+            stars = 2;
+        }
+    }
+
+    let starText = "⭐".repeat(stars);
+
+    // Save level completion & best records
+    localStorage.setItem("level" + currentLevel, "completed");
+
+    let prevBestStars = Number(localStorage.getItem("level" + currentLevel + "BestStars")) || 0;
+    if (stars > prevBestStars) {
+        localStorage.setItem("level" + currentLevel + "BestStars", stars);
+    }
+
+    let prevBestTime = Number(localStorage.getItem("level" + currentLevel + "BestTime")) || 0;
+    if (prevBestTime === 0 || currentSecs < prevBestTime) {
+        localStorage.setItem("level" + currentLevel + "BestTime", currentSecs);
+    }
+
+    let prevBestMoves = Number(localStorage.getItem("level" + currentLevel + "BestMoves")) || 0;
+    if (prevBestMoves === 0 || currentMoves < prevBestMoves) {
+        localStorage.setItem("level" + currentLevel + "BestMoves", currentMoves);
+    }
+
+    // Coin rewards (max 15 per level)
+    let reward = stars * 5;
+    let levelCoins = Number(localStorage.getItem("level" + currentLevel + "Coins")) || 0;
+    let remainingCoins = Math.max(0, 15 - levelCoins);
+    reward = Math.min(reward, remainingCoins);
+
+    if (reward > 0) {
+        localStorage.setItem("level" + currentLevel + "Coins", levelCoins + reward);
+        let totalCoins = Number(localStorage.getItem("coins")) || 0;
+        localStorage.setItem("coins", totalCoins + reward);
+    }
+
+    // Unlock next level
+    let unlockedLevel = Number(localStorage.getItem("level")) || 1;
+    let maxLevels = (typeof images !== "undefined" && Array.isArray(images)) ? images.length : 60;
+    if (currentLevel + 1 > unlockedLevel && currentLevel < maxLevels) {
+        localStorage.setItem("level", currentLevel + 1);
+    }
+
+    // Play victory audio
+    if (typeof playVictorySound === "function") playVictorySound();
+
+    // Trigger Victory Screen Overlay
+    if (typeof showVictory === "function") {
+        showVictory(starText, reward);
+    }
+}
