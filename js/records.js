@@ -1,55 +1,76 @@
 // ======================================
-// PixVZinz
-// RECORD DISPLAY SYSTEM
-// ======================================
-//
-// Handles:
-// - Star display text
-//
-// NOTE:
-// Save/progress records are handled by:
-// js/save.js
-//
-// Do NOT duplicate save functions here.
+// PuzzleMania
+// TIMER SYSTEM
 // ======================================
 
 
 // ======================================
-// GET STAR TEXT
+// START TIMER
 // ======================================
 
-function getStarText(starCount){
+function startTimer(){
 
-    starCount =
-        Number(starCount) || 0;
-
-
-    if(starCount >= 3){
-
-        return "⭐⭐⭐";
-
-    }
+    clearInterval(timer);
 
 
-    if(starCount === 2){
-
-        return "⭐⭐";
-
-    }
+    timer = setInterval(function(){
 
 
-    if(starCount === 1){
-
-        return "⭐";
-
-    }
+        seconds++;
 
 
-    return "";
+        updateTimer();
+
+
+    },1000);
 
 }
 
 
+
 // ======================================
-// END OF RECORD DISPLAY SYSTEM
+// STOP TIMER
 // ======================================
+
+function stopTimer(){
+
+    clearInterval(timer);
+
+    timer = null;
+
+}
+
+
+
+// ======================================
+// RESET TIMER
+// ======================================
+
+function resetTimer(){
+
+    seconds = 0;
+
+    updateTimer();
+
+}
+
+
+
+// ======================================
+// UPDATE TIMER DISPLAY
+// ======================================
+
+function updateTimer(){
+
+    let display =
+    document.getElementById("timer");
+
+
+    if(display){
+
+        display.textContent =
+        seconds;
+
+    }
+
+}
