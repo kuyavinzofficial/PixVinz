@@ -253,5 +253,4 @@ function restartLevel(){
     // ------------------------------
 
     shufflePuzzle();
-
-}
+        }
