@@ -1,727 +1,257 @@
-/* ======================================
-PixVZinz
-VICTORY SYSTEM
-==============
-
-Handles:
-
-* Victory screen
-* Final time
-* Final moves
-* Stars
-* Coin reward display
-* Completed image
-* Best records
-* Next level
-* Retry
-* Home
-
-Records:
-js/records.js
-
-Audio:
-audio.js
-====================================== */
-
 // ======================================
-// SHOW VICTORY SCREEN
+// PuzzleMania
+// VICTORY SYSTEM
 // ======================================
 
-function showVictory(
-stars,
-reward
-){
 
+// ======================================
+// VICTORY SCREEN
+// ======================================
 
-console.log(
-    "PixVZinz: Victory detected."
-);
+function showVictory(stars, reward){
 
+    // ------------------------------
+    // Safety Check
+    // ------------------------------
 
-// ==================================
-// GET VICTORY SCREEN
-// ==================================
+    if(!victoryScreen){
 
-const victoryScreen =
-    document.getElementById(
-        "victoryScreen"
-    );
-
-
-if(!victoryScreen){
-
-    console.error(
-        "PixVZinz: #victoryScreen not found."
-    );
-
-    return;
-
-}
-
-
-// ==================================
-// GET ELEMENTS
-// ==================================
-
-const finalTime =
-    document.getElementById(
-        "finalTime"
-    );
-
-
-const finalMoves =
-    document.getElementById(
-        "finalMoves"
-    );
-
-
-const rewardCoins =
-    document.getElementById(
-        "rewardCoins"
-    );
-
-
-const starsDisplay =
-    document.getElementById(
-        "starsDisplay"
-    );
-
-
-const completedImage =
-    document.getElementById(
-        "completedImage"
-    );
-
-
-// ==================================
-// FINAL TIME
-// ==================================
-
-if(finalTime){
-
-    if(
-        typeof formatTime ===
-        "function"
-    ){
-
-        finalTime.textContent =
-            formatTime(seconds);
+        return;
 
     }
-    else{
+
+
+    // ------------------------------
+    // Final Results
+    // ------------------------------
+
+    if(finalTime){
 
         finalTime.textContent =
             seconds + "s";
 
     }
 
-}
+
+    if(finalMoves){
+
+        finalMoves.textContent =
+            moves;
+
+    }
 
 
-// ==================================
-// FINAL MOVES
-// ==================================
+    if(rewardCoins){
 
-if(finalMoves){
+        rewardCoins.textContent =
+            reward;
 
-    finalMoves.textContent =
-        moves;
-
-}
+    }
 
 
-// ==================================
-// COIN REWARD
-// ==================================
+    if(starsDisplay){
 
-if(rewardCoins){
+        starsDisplay.textContent =
+            stars;
 
-    rewardCoins.textContent =
-        reward;
-
-}
+    }
 
 
-// ==================================
-// STARS
-// ==================================
+    // ------------------------------
+    // SHOW COMPLETED PUZZLE IMAGE
+    // ------------------------------
 
-if(starsDisplay){
-
-    starsDisplay.textContent =
-        stars;
-
-}
+    const completedImage =
+        document.getElementById("completedImage");
 
 
-// ==================================
-// COMPLETED IMAGE
-// ==================================
+    if(completedImage && images[level - 1]){
 
-if(
-    completedImage &&
-    typeof images !==
-    "undefined" &&
-    images[level - 1]
-){
+        completedImage.src =
+            images[level - 1];
 
-    completedImage.src =
-        images[level - 1];
-
-    completedImage.style.display =
-        "block";
-
-}
+    }
 
 
-// ==================================
-// UPDATE BEST RECORD
-// ==================================
+    // ------------------------------
+    // BEST RECORD
+    // ------------------------------
 
-updateVictoryBestRecord();
-
-
-// ==================================
-// SHOW SCREEN
-// ==================================
-
-victoryScreen.classList.remove(
-    "hidden"
-);
+    let bestRecord =
+        document.getElementById("bestRecord");
 
 
-victoryScreen.style.display =
-    "flex";
+    if(!bestRecord){
+
+        bestRecord =
+            document.createElement("div");
 
 
-victoryScreen.style.pointerEvents =
-    "auto";
+        bestRecord.id =
+            "bestRecord";
 
 
-victoryScreen.style.touchAction =
-    "auto";
+        bestRecord.style.marginTop =
+            "20px";
 
 
-// ==================================
-// VICTORY SOUND
-// ==================================
-
-if(
-    typeof playVictorySound ===
-    "function"
-){
-
-    playVictorySound(level);
-
-}
+        const victoryBox =
+            document.querySelector(".victory-box");
 
 
-console.log(
-    "PixVZinz: Victory screen displayed."
-);
-```
+        if(victoryBox){
 
-}
+            victoryBox.appendChild(
+                bestRecord
+            );
 
-// ======================================
-// UPDATE BEST RECORD
-// ======================================
+        }
 
-function updateVictoryBestRecord(){
-
-```
-const victoryBox =
-    document.querySelector(
-        ".victory-box"
-    );
+    }
 
 
-if(!victoryBox){
+    // ------------------------------
+    // GET BEST RECORDS
+    // ------------------------------
 
-    return;
-
-}
-
-
-let bestRecord =
-    document.getElementById(
-        "bestRecord"
-    );
-
-
-// ==================================
-// CREATE RECORD AREA
-// ==================================
-
-if(!bestRecord){
-
-    bestRecord =
-        document.createElement(
-            "div"
+    const bestTime =
+        localStorage.getItem(
+            "level" + level + "BestTime"
         );
 
 
-    bestRecord.id =
-        "bestRecord";
-
-
-    victoryBox.appendChild(
-        bestRecord
-    );
-
-}
-
-
-// ==================================
-// GET RECORDS
-// ==================================
-
-const bestTime =
-    typeof getBestTime ===
-    "function"
-
-    ? getBestTime(level)
-
-    : 0;
-
-
-const bestMoves =
-    typeof getBestMoves ===
-    "function"
-
-    ? getBestMoves(level)
-
-    : 0;
-
-
-const bestStars =
-    typeof getBestStars ===
-    "function"
-
-    ? getBestStars(level)
-
-    : 0;
-
-
-// ==================================
-// STAR TEXT
-// ==================================
-
-let bestStarText =
-    "—";
-
-
-if(
-    typeof getStarText ===
-    "function"
-){
-
-    bestStarText =
-        getStarText(
-            bestStars
+    const bestMoves =
+        localStorage.getItem(
+            "level" + level + "BestMoves"
         );
 
-}
-else if(bestStars >= 3){
 
-    bestStarText =
-        "⭐⭐⭐";
+    const bestStars =
+        Number(
+            localStorage.getItem(
+                "level" + level + "BestStars"
+            )
+        ) || 1;
 
-}
-else if(bestStars === 2){
 
-    bestStarText =
-        "⭐⭐";
+    // ------------------------------
+    // BEST STAR DISPLAY
+    // ------------------------------
 
-}
-else if(bestStars === 1){
-
-    bestStarText =
+    let bestStarText =
         "⭐";
 
-}
+
+    if(bestStars === 2){
+
+        bestStarText =
+            "⭐⭐";
+
+    }
 
 
-// ==================================
-// BEST TIME TEXT
-// ==================================
+    if(bestStars >= 3){
 
-let bestTimeText =
-    bestTime || 0;
+        bestStarText =
+            "⭐⭐⭐";
 
-
-if(
-    typeof formatTime ===
-    "function"
-){
-
-    bestTimeText =
-        formatTime(
-            bestTime
-        );
-
-}
+    }
 
 
-// ==================================
-// DISPLAY RECORD
-// ==================================
+    // ------------------------------
+    // DISPLAY BEST RECORD
+    // ------------------------------
 
-bestRecord.innerHTML = `
+    if(bestRecord){
 
-    <hr>
+        bestRecord.innerHTML = `
 
-    <h3>🏆 Best Record</h3>
+            <hr>
 
-    <p>${bestStarText}</p>
+            <h3>🏆 Best Record</h3>
 
-    <p>⏱ ${bestTimeText}</p>
+            <p>${bestStarText}</p>
 
-    <p>🔄 ${bestMoves || 0} moves</p>
+            <p>⏱ ${bestTime || 0}s</p>
 
-`;
-```
+            <p>🔄 ${bestMoves || 0} moves</p>
 
-}
+        `;
 
-// ======================================
-// HIDE VICTORY SCREEN
-// ======================================
+    }
 
-function hideVictory(){
 
-```
-const victoryScreen =
-    document.getElementById(
-        "victoryScreen"
+    // ------------------------------
+    // SHOW VICTORY SCREEN
+    // ------------------------------
+
+    victoryScreen.classList.remove(
+        "hidden"
     );
 
-
-if(!victoryScreen){
-
-    return;
-
 }
 
 
-victoryScreen.classList.add(
-    "hidden"
-);
-
-
-victoryScreen.style.display =
-    "none";
-
-
-victoryScreen.style.pointerEvents =
-    "none";
-```
-
-}
 
 // ======================================
-// RETRY CURRENT LEVEL
-// ======================================
-
-function restartLevel(){
-
-```
-console.log(
-    "PixVZinz: Restarting level."
-);
-
-
-// ------------------------------
-// Hide victory screen
-// ------------------------------
-
-hideVictory();
-
-
-// ------------------------------
-// Stop timer
-// ------------------------------
-
-if(
-    typeof stopTimer ===
-    "function"
-){
-
-    stopTimer();
-
-}
-
-
-// ------------------------------
-// Stop victory sounds
-// ------------------------------
-
-if(
-    typeof stopVictorySounds ===
-    "function"
-){
-
-    stopVictorySounds();
-
-}
-
-
-// ------------------------------
-// Reset state
-// ------------------------------
-
-selectedPiece =
-    null;
-
-moves =
-    0;
-
-gameFinished =
-    false;
-
-
-// ------------------------------
-// Shuffle again
-// ------------------------------
-
-if(
-    typeof shufflePuzzle ===
-    "function"
-){
-
-    shufflePuzzle();
-
-}
-```
-
-}
-
-// ======================================
-// NEXT LEVEL
-// ======================================
-
-function nextLevel(){
-
-```
-console.log(
-    "PixVZinz: Loading next level."
-);
-
-
-// ------------------------------
-// Stop victory sound
-// ------------------------------
-
-if(
-    typeof stopVictorySounds ===
-    "function"
-){
-
-    stopVictorySounds();
-
-}
-
-
-// ------------------------------
-// Final level
-// ------------------------------
-
-if(
-    level >= totalLevels
-){
-
-    backHome();
-
-    return;
-
-}
-
-
-// ------------------------------
-// Next level
-// ------------------------------
-
-const next =
-    level + 1;
-
-
-localStorage.setItem(
-    "level",
-    next
-);
-
-
-// ------------------------------
-// Reload game
-// ------------------------------
-
-window.location.reload();
-```
-
-}
-
-// ======================================
-// BACK HOME
+// BACK TO HOME
 // ======================================
 
 function backHome(){
 
-```
-// ------------------------------
-// Stop victory sound
-// ------------------------------
+    if(typeof playClick === "function"){
 
-if(
-    typeof stopVictorySounds ===
-    "function"
-){
+        playClick();
 
-    stopVictorySounds();
+    }
+
+
+    window.location =
+        "index.html";
 
 }
 
 
-// ------------------------------
-// Stop all audio
-// ------------------------------
-
-if(
-    typeof stopAllAudio ===
-    "function"
-){
-
-    stopAllAudio();
-
-}
-
-
-// ------------------------------
-// Return home
-// ------------------------------
-
-window.location.href =
-    "index.html";
-```
-
-}
 
 // ======================================
-// VICTORY BUTTONS
+// RESTART CURRENT LEVEL
 // ======================================
 
-function setupVictoryButtons(){
+function restartLevel(){
 
-```
-const nextBtn =
-    document.getElementById(
-        "nextBtn"
-    );
+    // ------------------------------
+    // Hide Victory Screen
+    // ------------------------------
 
+    if(victoryScreen){
 
-const retryBtn =
-    document.getElementById(
-        "retryBtn"
-    );
+        victoryScreen.classList.add(
+            "hidden"
+        );
 
-
-const homeBtn =
-    document.getElementById(
-        "homeBtn"
-    );
+    }
 
 
-// ==================================
-// NEXT
-// ==================================
+    // ------------------------------
+    // Stop Current Timer
+    // ------------------------------
 
-if(nextBtn){
+    if(typeof stopTimer === "function"){
 
-    nextBtn.onclick =
-        function(){
+        stopTimer();
 
-            if(
-                typeof playClick ===
-                "function"
-            ){
+    }
+    else{
 
-                playClick();
+        clearInterval(timer);
 
-            }
+    }
 
 
-            nextLevel();
+    // ------------------------------
+    // Shuffle Again
+    // ------------------------------
 
-        };
+    shufflePuzzle();
 
 }
-
-
-// ==================================
-// RETRY
-// ==================================
-
-if(retryBtn){
-
-    retryBtn.onclick =
-        function(){
-
-            if(
-                typeof playClick ===
-                "function"
-            ){
-
-                playClick();
-
-            }
-
-
-            restartLevel();
-
-        };
-
-}
-
-
-// ==================================
-// HOME
-// ==================================
-
-if(homeBtn){
-
-    homeBtn.onclick =
-        function(){
-
-            if(
-                typeof playClick ===
-                "function"
-            ){
-
-                playClick();
-
-            }
-
-
-            backHome();
-
-        };
-
-}
-```
-
-}
-
-// ======================================
-// INITIALIZE VICTORY BUTTONS
-// ======================================
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-
-    setupVictoryButtons();
-
-}
-
-
-);
